@@ -1,83 +1,181 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- 
-	WebContent 폴더 : 프로젝트의 웹 배포 시 최상위 폴더(ContextPath, root, contextRoot)
-					보통 주소상에서 프로젝트명으로 나타남
-					http://localhost:8080/semi/ 이 주소에서
-					/semi를 나타냄.
-					
-					WebContent 하위에 존재하는 폴더/파일은 주소를 이용한 직접 요청이 가능하지만
-					WEB-INF 폴더는 직접 요청이 불가능하다.
-
-	WEB-INF 폴더 : 외부(클라이언트)로 부터 직접적인 파일 접근 요청을 차단하는 폴더
-				(파일 보호 -> 보안성 상승)
-				Servlet을 이용한 간접 접근만 가능함.
- -->
-
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-  <style>
-      .bg-image-full {
-        background: no-repeat center center scroll;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        background-size: cover;
-        -o-background-size: cover;
-      }
-
-      div.bg-image-full{
-        height: 300px;
-        text-align: center;
-      }
-
-      @font-face { font-family: 'GmarketSansBold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff'); font-weight: normal; font-style: normal; }
-      div.bg-image-full>h1{
-        color : white;
-        position: relative;
-        top : 75px;
-        font-size: 3em;
-        font-family: 'GmarketSansBold';
-        text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-      }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ensemble Studio</title>
+    <jsp:include page="common/header.jsp"></jsp:include>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/carousel/">
+    <link href="carousel.css" rel="stylesheet">
 </head>
+<style>
+    .carousel-img{
+        width: 100%; height: 50vw; 
+        background-repeat: no-repeat; 
+        background-size:cover; 
+        background-position: center;
+    }
+    .carousel-indicators > li {
+        width:7px; height: 7px;
+        margin-right: 20px;
+        border-radius: 50%;
+    }
+    .studio-view-cards{
+        width:90%; height:auto;
+        padding-bottom: 20px;
+        border: 1px solid rgb(182, 182, 182);
+        margin:auto;
+        margin-bottom: 20px;
+    }
+    .card-img{
+        width:90%; height: 300px;
+        background-repeat: no-repeat; 
+        background-size:cover; 
+        background-position: center;
+        margin : auto;
+        margin-top:15px; margin-bottom: 15px;
+    }
+    .card-text1{
+        font-family: 'Noto Serif KR', serif; 
+        font-weight: 600;
+        font-size: larger;
+        width: auto;
+        display: inline-block;
+    }
+    .btn-beige{
+        background-color: #F9F7EB;
+        padding-left: 25px; padding-right: 25px;
+        float: right;
+        margin-right: 20px;
+        padding-top : 5px; padding-bottom: 5px;
+    }
+    .card-text2{
+        font-family: 'cafe24 oneprettynight';
+        height: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .notice-img{
+        width: 100%; height: 200px;
+        border: 1px solid rgb(182, 182, 182);
+        margin-bottom: 10px;
+    }
+</style>
 <body>
-	
-	<!-- header.jsp 동적 include -->
-	<jsp:include page="common/header.jsp" />
-	
-	<!-- 메인 화면 이미지 -->
-	<div class="py-5 bg-image-full" style="background-image: url('https://iei.or.kr/resources/images/intro/intro_bg.jpg');">
-	    <h1>Framework를 이용한<br>Final Project</h1>
-	</div>
-	
-	<!-- 내용 작성 부분 -->
-	<div class="py-5">
-	  <div class="container">
-	  
-	    <h1> ${ sessionScope.loginMember.memberName }  </h1>
-	    
-	    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-	    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
-	  </div>
-	</div>
-	
-	<div class="py-5">
-	  <div class="container">
-	    <h1>Section Heading</h1>
-	    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-	    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
-	  </div>
-	</div>
-	
-	
-	<!-- footer.jsp 동적 include -->
-	<jsp:include page="common/footer.jsp"></jsp:include>
-	
-</body>
-</html>
 
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators" style="">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active"> 
+              <div class="carousel-img" style=" background-image: url('https://storage.googleapis.com/cr-resource/image/f242c0659290ab6d7b2229d63d416349/fromellapet/613e3ab169b7bb0824484eb05c3f8bdc.jpg'); "></div>
+        </div>
+          <div class="carousel-item">
+            <div class="carousel-img" style=" background-image: url('https://cdn.imweb.me/upload/S20190926a0754ded73eb5/70f20eb08c7f9.jpg'); "></div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-img" style=" background-image: url('https://storage.googleapis.com/cr-resource/image/f242c0659290ab6d7b2229d63d416349/fromellapet/915eba63f0746bb78f0ce3775025bc86.jpg'); "></div>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-img" style=" background-image: url('https://lh3.googleusercontent.com/a5dglzlgrU6gWPd0z6azm_q7uANlGaZM624qpzspm0UDCQuZyDJRt3p_2US5d8xsc3cv8R2tNw7W2JNLpcWmYUlYGVca7Z-EwxvrHxw=s0'); "></div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <div style="padding:20px;"></div>
+      <h5 style="text-align: center; font-family: 'Noto Serif KR', serif; font-weight: 600;">Studio View</h5>
+      <div style="padding:10px;"></div>
+      <div class="row" style="  display: flex; justify-content: center;">
+          <div class="col-12 col-lg-4 " > 
+                <div class="studio-view-cards">
+                    <div class="card-img" style="background-image: url('https://lh3.googleusercontent.com/3-eYJzRV_WYLfrfLj4kO6H1w171rrKegk4Jv-b3IsC5DnVBYtvX22Y4LH32qhnuzj1R-uyepMxbveJpQ11w92vU8ctf8ltPhHeiXQqmzxQ=s0');"></div>
+                    <div class="container card-text1">A ROOM</div>
+                    <a href="#" class="btn btn-beige">예약하기</a>
+                    <div style="padding:15px;"></div>
+                    <div class="container card-text2">
+                        자연광이 변하는 위치를 치밀하게 <br>
+                        계산하여 제작된 라이프 스타일의 세트장입니다. <br>
+                        반려동물 프로필 촬영 및 동반 촬영이 가능하며 <br>
+                        따뜻한 분위기를 제공합니다.
+                    </div>
+                </div>
+          </div>
+          <div class="col-12 col-lg-4 " > 
+                <div class="studio-view-cards">
+                    <div class="card-img" style="background-image: url('https://lh3.googleusercontent.com/3-eYJzRV_WYLfrfLj4kO6H1w171rrKegk4Jv-b3IsC5DnVBYtvX22Y4LH32qhnuzj1R-uyepMxbveJpQ11w92vU8ctf8ltPhHeiXQqmzxQ=s0');"></div>
+                    <div class="container card-text1">A ROOM</div>
+                    <a href="#" class="btn btn-beige">예약하기</a>
+                    <div style="padding:15px;"></div>
+                    <div class="container card-text2">
+                        자연광이 변하는 위치를 치밀하게  <br>
+                        계산하여 제작된 라이프 스타일의 세트장입니다. <br>
+                        반려동물 프로필 촬영 및 동반 촬영이 가능하며 <br>
+                        따뜻한 분위기를 제공합니다.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 " > 
+                <div class="studio-view-cards">
+                    <div class="card-img" style="background-image: url('https://lh3.googleusercontent.com/3-eYJzRV_WYLfrfLj4kO6H1w171rrKegk4Jv-b3IsC5DnVBYtvX22Y4LH32qhnuzj1R-uyepMxbveJpQ11w92vU8ctf8ltPhHeiXQqmzxQ=s0');"></div>
+                    <div class="container card-text1">A ROOM</div>
+                    <a href="#" class="btn btn-beige">예약하기</a>
+                    <div style="padding:15px;"></div>
+                    <div class="container card-text2">
+                        자연광이 변하는 위치를 치밀하게  <br>
+                        계산하여 제작된 라이프 스타일의 세트장입니다. <br>
+                        반려동물 프로필 촬영 및 동반 촬영이 가능하며 <br>
+                        따뜻한 분위기를 제공합니다.
+                    </div>
+                </div>
+            </div>
+
+
+
+      </div>
+      <div style="padding:20px"></div>
+      <hr>
+      <div style="padding:20px"></div>
+      <h5 style="text-align: center; font-family: 'Noto Serif KR', serif; font-weight: 600;">Notice</h5>
+      <div style="padding:10px"></div>
+      <div class="container">
+        <div class="notice-img" style="background-image:url('')"></div>
+        <div style="padding-bottom: 20px;">
+            <h6 style="display: inline-block;">[공지] 이벤트를 합니다...</h6>
+            <span style="float: right; color:#888">조회수 123</span>
+        </div>
+
+        <div class="notice-img" style="background-image:url('')"></div>
+        <div style="padding-bottom: 20px;">
+            <h6 style="display: inline-block;">[공지] 이벤트를 합니다...</h6>
+            <span style="float: right; color:#888">조회수 123</span>
+        </div>
+
+        <div class="notice-img" style="background-image:url('')"></div>
+        <div style="padding-bottom: 20px;">
+            <h6 style="display: inline-block;">[공지] 이벤트를 합니다...</h6>
+            <span style="float: right; color:#888">조회수 123</span>
+        </div>
+
+
+      </div>
+      <div style="padding:60px;"></div>
+      
+      <jsp:include page="common/footer.jsp"></jsp:include>
+</body>
+
+</html>
 
 
