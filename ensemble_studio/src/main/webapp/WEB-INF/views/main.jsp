@@ -6,63 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ensemble Studio</title>
-    <jsp:include page="common/header.jsp"></jsp:include>
+
+   
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/carousel/">
     <link href="carousel.css" rel="stylesheet">
 </head>
-<style>
-    .carousel-img{
-        width: 100%; height: 50vw; 
-        background-repeat: no-repeat; 
-        background-size:cover; 
-        background-position: center;
-    }
-    .carousel-indicators > li {
-        width:7px; height: 7px;
-        margin-right: 20px;
-        border-radius: 50%;
-    }
-    .studio-view-cards{
-        width:90%; height:auto;
-        padding-bottom: 20px;
-        border: 1px solid rgb(182, 182, 182);
-        margin:auto;
-        margin-bottom: 20px;
-    }
-    .card-img{
-        width:90%; height: 300px;
-        background-repeat: no-repeat; 
-        background-size:cover; 
-        background-position: center;
-        margin : auto;
-        margin-top:15px; margin-bottom: 15px;
-    }
-    .card-text1{
-        font-family: 'Noto Serif KR', serif; 
-        font-weight: 600;
-        font-size: larger;
-        width: auto;
-        display: inline-block;
-    }
-    .btn-beige{
-        background-color: #F9F7EB;
-        padding-left: 25px; padding-right: 25px;
-        float: right;
-        margin-right: 20px;
-        padding-top : 5px; padding-bottom: 5px;
-    }
-    .card-text2{
-        font-family: 'cafe24 oneprettynight';
-        height: 100px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    .notice-img{
-        width: 100%; height: 200px;
-        border: 1px solid rgb(182, 182, 182);
-        margin-bottom: 10px;
-    }
-</style>
+<jsp:include page="common/header.jsp"></jsp:include>
+<link rel="stylesheet" href="${contextPath}/resources/css/common/main.css" type="text/css">
+
 <body>
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -171,7 +122,9 @@
 
 
       </div>
-      <div style="padding:60px;"></div>
+
+      <div style="padding:30px;"></div>
+
       
       <jsp:include page="common/footer.jsp"></jsp:include>
 </body>
