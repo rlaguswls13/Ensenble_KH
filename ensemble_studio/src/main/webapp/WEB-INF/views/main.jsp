@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ensemble Studio</title>
+
    
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/carousel/">
     <link href="carousel.css" rel="stylesheet">
@@ -121,7 +122,9 @@
 
 
       </div>
+
       <div style="padding:30px;"></div>
+
       
       <jsp:include page="common/footer.jsp"></jsp:include>
 </body>
