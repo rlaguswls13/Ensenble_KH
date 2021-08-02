@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.container {
+	margin: auto;
+	box-sizing: border-box;
+}
+
+.login_body {
+	width: 40%;
+	text-align: center;
+	margin: auto;
+}
+
+.logo {
+	text-align: center;
+	margin: auto;
+}
+
+.login-btn {
+	background-color: #F9F7EB;
+	border-style: none;
+	color: black;
+	width: 70%;
+	margin: auto;
+	box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.3);
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.login-btn:active {
+	border-color: none;
+	box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.3);
+	top: 2px;
+	position: relative;
+}
+
+.login_Form {
+	width: 100%;
+	margin: auto;
+}
+
+.checkbox {
+	margin-left: 15%;
+	margin-top: 2%;
+}
+
+.form-control {
+	width: 75%;
+	height: 50px;
+	margin: auto;
+}
+
+.login_bottom {
+	color: darkgray;
+}
+
+.login_bottom:hover {
+	color: black;
+}
+
+a[class="login_bottom"] {
+	text-decoration: none;
+}
+
+.findId {
+	padding-left: 11%;
+}
+
+#naverimg {
+	padding: 0 0 0 0;
+}

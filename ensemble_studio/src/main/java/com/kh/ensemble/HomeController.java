@@ -1,4 +1,4 @@
-package kh.ensemble.fin;
+package com.kh.ensemble;
 
 import java.util.Locale;
 
