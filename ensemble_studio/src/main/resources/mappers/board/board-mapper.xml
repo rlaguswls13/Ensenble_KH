@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+  	
+  	<!-- 게시글 resultMap -->
+	<resultMap type="Board" id="board_rm">
+		<id property="boardNo" column="BOARD_NO" />
+
+		<result property="boardDT" column="BOARD_TITLE" />
+		<result property="boardMT" column="MEMBER_NM" />
+		<result property="boardStatus" column="CATEGORY_NM" />
+		<result property="boardTitle" column="READ_COUNT" />
+		<result property="boardReadCount" column="CREATE_DT" />
+
+		<result property="boardContent" column="BOARD_CONTENT" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="boardTypeNo" column="MODIFY_DT" />
+		
+		<collection property="atList" column="BOARD_NO"
+					javaType="java.util.ArrayList" ofType="Attachment" select="selectAttachment"/>
+	</resultMap>
+	
+	<!-- 파일 정보 resultMap -->
+	<resultMap type="Attachment" id="attachment_rm">
+		<id property="attachmentNo" column="FILE_NO"/>
+		<result property="attachmentLv" column="FILE_PATH"/>
+		<result property="attachmentPath" column="FILE_NM"/>
+		<result property="attachmentName" column="FILE_LEVEL"/>
+		<result property="boardNo" column="BOARD_NO"/>
+	</resultMap>
+	
+		<!-- 특정 게시글의 모든 이미지 정보 조회 -->
+	<select id="selectAttachment" parameterType="_int" resultMap="attachment_rm">
+		SELECT * FROM ATTACHMENT
+		WHERE BOARD_NO = #{boardNo}
+		ORDER BY FILE_LEVEL
+	</select>
+		
+	<!-- 게시글 목록 조회 -->
+	<select id="selectBoardList" parameterType="_int" resultMap="board_rm">
+		SELECT * FROM BOARD_LIST
+		WHERE BOARD_STATUS = 'Y'
+		AND
+		BOARD_TYPE_NO = #{boardType}
+		ORDER BY BOARD_NO DESC
+	</select>
+
+	<!-- 게시글 상세 조회 -->
+	<select id="selectBoard" parameterType="_int" resultMap="board_rm">
+		SELECT BOARD_NO, CATEGORY_NM, BOARD_TITLE, BOARD_CONTENT,
+		MEMBER_NO, MEMBER_NM, READ_COUNT, CREATE_DT, MODIFY_DT, BOARD_TYPE_NO
+		FROM BOARD
+		JOIN CATEGORY USING(CATEGORY_CD)
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE BOARD_NO = #{boardNo}
+		AND BOARD_STATUS = 'Y'
+	</select>
+	
+	<!-- 조회 수 증가 -->
+	<update id="increaseReadCount" parameterType="_int">
+		UPDATE BOARD SET
+		READ_COUNT = READ_COUNT + 1
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<!-- 게시글 카테고리 조회 -->
+	<select id="selectCategory" resultMap="category_rm">
+		SELECT * FROM CATEGORY
+	</select>
+</mapper>
