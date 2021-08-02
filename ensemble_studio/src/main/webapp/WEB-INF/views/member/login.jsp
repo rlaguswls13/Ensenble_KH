@@ -39,7 +39,7 @@
                 </div>
                 <div class="checkbox mb-2">
                     <label>
-                        <input type="checkbox" name="saveId" id="saveId"> ID 기억하기
+                        <input type="checkbox" name="saveId" id="saveId">ID 기억하기
                     </label>
                 </div>
                 <button class="btn-lg login-btn" type="submit">로그인</button>
