@@ -9,7 +9,6 @@
 
    
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/carousel/">
-    <link href="carousel.css" rel="stylesheet">
 </head>
 <jsp:include page="common/header.jsp"></jsp:include>
 <link rel="stylesheet" href="${contextPath}/resources/css/common/main.css" type="text/css">
