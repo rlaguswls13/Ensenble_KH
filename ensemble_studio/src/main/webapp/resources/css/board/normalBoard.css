@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+#list-table td{
+	padding : 0;
+  vertical-align: middle;
+}
+
+#list-table th {
+	text-align: center;
+}
+
+#list-table td:not(:nth-of-type(3)) {
+	text-align: center;
+}
+
+.list-wrapper{
+	min-height: 540px;
+}
+
+#list-table td:nth-child(3){
+	width: 50%;
+}
+
+#list-table td:nth-child(3) > a{
+	color : black;
+}
+
+.boardTitle img {
+	width: 70px;
+	padding: 10px
+}
+
+.pagination {
+	justify-content: center;
+}
+
+#searchForm {
+	position: relative;
+}
+
+#searchForm>* {
+	top: 0;
+}
