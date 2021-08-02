@@ -107,7 +107,7 @@
           </li>
           <c:if test="${empty loginMember}">
             <li class="nav-item active">
-                <a href="#" class="icon" id="user-icon" style="display: inline-block; padding-top:8px; "><img src="https://drive.google.com/uc?id=19vXoo3lrbxuLLn5YmPokmpcSovHDpXqg" style="height: 15px;"></a>
+                <a href="${contextPath}/member/login" class="icon" id="user-icon" style="display: inline-block; padding-top:8px; "><img src="https://drive.google.com/uc?id=19vXoo3lrbxuLLn5YmPokmpcSovHDpXqg" style="height: 15px;"></a>
             </li>
           </c:if>
           <c:if test="${!empty loginMember}">
