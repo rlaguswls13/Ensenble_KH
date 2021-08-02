@@ -7,6 +7,7 @@
 .container {
 	margin: auto;
 	box-sizing: border-box;
+	margin-top: 100px;
 }
 
 .login_body {
@@ -73,3 +74,4 @@ a[class="login_bottom"] {
 #naverimg {
 	padding: 0 0 0 0;
 }
+

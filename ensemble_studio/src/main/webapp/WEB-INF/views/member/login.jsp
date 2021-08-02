@@ -54,7 +54,7 @@
                     <hr>
                 </div>
                 <p class="mt-2 col-md-6 findId"><a href="#" class="login_bottom">ID/PW 찾기</a></p>
-                <p class="mt-2 col-md-6"><a href="#" class="login_bottom">회원가입</a></p>
+                <p class="mt-2 col-md-6"><a href="${contextPath}/member/signUp" class="login_bottom">회원가입</a></p>
             </form>
         </div>
     </div>
