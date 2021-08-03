@@ -1,0 +1,267 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.container {
+	margin: auto;
+	box-sizing: border-box;
+	width: 1000px;
+}
+
+div {
+	color: black;
+}
+
+h5 {
+	color: black;
+}
+
+/* 마이페이지 네비*/
+.myPage-navi {
+	height: 100px;
+	margin: auto;
+	margin-left: 90px;
+}
+
+.myPage-navi>ul>li {
+	list-style-type: none;
+	float: left;
+	margin-left: 10px;
+	font-size: 14px;
+}
+
+.myPage-btn {
+	width: 100px;
+	border: none;
+	border-radius: 10px;
+}
+
+/* 내 정보 조회*/
+.info-form {
+	width: 30%;
+	height: 400px;
+	margin: auto;
+	padding: 30px 0;
+	border: 1px solid lightgrey;
+}
+
+.user {
+	margin-right: 30px;
+}
+
+.reserve {
+	margin-left: 30px;
+}
+
+.info-form form {
+	color: #9ba5a8;
+	border-radius: 3px;
+	margin-bottom: 15px;
+	background: #fff;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+}
+
+.info-form h2 {
+	color: #333;
+	font-weight: bold;
+	margin-top: 0;
+}
+
+.info-form a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+input::placeholder {
+	font-size: 80%;
+}
+
+.myPage {
+	width: 100%;
+	margin: auto;
+}
+
+.info-image {
+	width: 130px;
+	height: 130px;
+	margin: auto;
+	border-radius: 100px;
+	border: 1px solid lightgrey;
+	line-height: 110px;
+}
+
+.info-nick {
+	margin-top: 20px;
+}
+
+.info {
+	text-align: center;
+}
+
+.info-email, .info-phone {
+	width: 100%;
+	height: 50px;
+	margin-top: 20px;
+}
+
+.info-eIcon, .info-pIcon {
+	width: 20%;
+	height: 50px;
+	float: left;
+	margin-left: 15px;
+}
+
+.info-emailView, .info-phoneView {
+	width: 70%;
+	height: 50px;
+	float: left;
+}
+
+.info-eIcon, .info-emailView {
+	margin-top: 20px;
+}
+
+/* 최근 예약 현황*/
+.reserve-title {
+	width: 93%;
+	height: 50px;
+	margin-top: -20px;
+	margin-bottom: -10px;
+	margin-left: 10px;
+}
+
+.reserve-con {
+	font-size: 18px;
+	display: inline-block;
+}
+
+.reserveNo {
+	color: lightgray;
+	font-size: 13px;
+	margin-top: 2px;
+}
+
+.reserve-form {
+	margin-bottom: 20px;
+	margin-left: 15px;
+	margin-right: 15px;
+	border: 1px solid lightgray;
+}
+
+.reserve-form>hr {
+	margin-top: 3px;
+	margin-bottom: 3px;
+	width: 90%;
+}
+
+.reserveType {
+	font-size: 19px;
+}
+
+.reserveDt {
+	width: 100%;
+	height: 30px;
+	padding-top: 3px;
+}
+
+.reserveDate {
+	width: 20%;
+	height: 100%;
+	float: left;
+	font-size: 13px;
+}
+
+.reserveTime {
+	width: 60%;
+	height: 100%;
+	float: left;
+	margin-left: 15px;
+	font-size: 13px;
+}
+
+.plus-btn {
+	font-size: 16px;
+	background: #F9F7EB;
+	border: none;
+	min-width: 80px;
+	height: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	float: right;
+}
+
+.res {
+	margin-left: 10px;
+}
+
+.vl {
+	border-left: 1px solid lightgray;
+	height: 20px;
+	float: left;
+}
+
+.pet-info {
+	width: 66%;
+	margin: auto;
+	margin-top: 30px;
+}
+
+.table {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 1px solid lightgrey;
+}
+
+.table>tr {
+	border-bottom: none;
+}
+
+.petName {
+	padding-left: 85px !important;
+	line-height: 80px;
+}
+
+.petGender, .petAge {
+	border-bottom: 1px solid white;
+}
+
+.petGender, .petType {
+	padding-left: 30px !important;
+}
+
+.petGender, .petAge {
+	padding-top: 18px !important;
+}
+
+.petType, .petKg {
+	padding-top: 0 !important;
+}
+
+.pet-info-title {
+	width: 100%;
+}
+
+.pet-info-text {
+	display: inline-block;
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+.insert-btn {
+	font-size: 16px;
+	background: #F9F7EB;
+	border: none;
+	min-width: 100px;
+	height: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	float: right;
+}
+
+.update {
+	border-right: 1px solid lightgrey;
+	padding-right: 20px;
+}

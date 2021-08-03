@@ -32,14 +32,19 @@
             <form class="row login_Form" action="login" method="POST"
                 onsubmit="return loginValidate();">
                 <div class="form-floating col-md-12">
-                    <input type="text" class="form-control" id="floatingId" name="inputId" placeholder="아이디">
+                    <input type="text" class="form-control" id="floatingId" name="memberId" placeholder="아이디" value="${cookie.saveId.value}">
                 </div>
                 <div class="form-floating col-md-12">
-                    <input type="password" class="form-control" id="floatingPassword" name="inputPw" placeholder="비밀번호">
+                    <input type="password" class="form-control" id="floatingPassword" name="memberPw" placeholder="비밀번호">
                 </div>
+                
+                <%-- 이전에 저장해둔 아이디가 존재한다면 변수 선언--%>
+                <c:if test="${!empty cookie.saveId.value}">
+                	<c:set var="ch" value="checked"/>
+                </c:if>
                 <div class="checkbox mb-2">
                     <label>
-                        <input type="checkbox" name="saveId" id="saveId">ID 기억하기
+                        <input type="checkbox" name="save" id="save" ${ch}>ID 기억하기
                     </label>
                 </div>
                 <button class="btn-lg login-btn" type="submit">로그인</button>
@@ -58,5 +63,40 @@
             </form>
         </div>
     </div>
+    
+    <script>
+    	// 로그인 수행 시 아이디/비밀번호가 작성되었는지 확인하는 유효성 검사
+    	function loginValidate(){
+    		
+	    	// 아이디가 입력되지 않았을 경우
+	    	if($("#memberId").val().trim().length == 0){
+	    		swal({
+	    			"icon" : "warning",
+	    			"title" : "아이디를 입력해주세요."
+	    		}).then(function()){
+	    			$("#memberId").focus();
+	    		});
+	    		
+	    		// 제출되지 않도록 submit 기본 이벤트 제거
+	    		return false;
+	    		
+	    	}
+	    	
+	    	// 비밀번호가 입력되지 않았을 경우
+	    	if($("#memberPw").val().trim().length == 0){
+	    		
+	    		swal({
+	    			"icon" : "warning",
+	    			"title" : "비밀번호를 입력해주세요."
+	    		}).then(function(){
+	    			$("#memberPw").focus();
+	    		});
+	    		
+	    		return false;
+	    	}
+    		
+    	}
+    	
+    </script>
 </body>
 </html>

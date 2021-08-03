@@ -36,4 +36,16 @@ public class MemberServiceImpl implements MemberService{
 		return dao.idDupCheck(id);
 	}
 
+	// 로그인 Service
+	@Override
+	public Member login(Member inputMember) {
+		
+		// 입력받은 비밀번호 암호화
+		String encPw = bCryptPasswordEncoder.encode(inputMember.getMemberPw());
+		
+		Member loginMember = dao.login(inputMember.getMemberId());
+		
+		return loginMember;
+	}
+
 }

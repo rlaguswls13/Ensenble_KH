@@ -1,13 +1,20 @@
 package com.kh.ensemble.member.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ensemble.member.model.service.MemberService;
@@ -28,6 +35,55 @@ public class MemberController {
 		return "member/login";
 		// /WEB-INF/views/member/login.jsp
 	}
+	
+	// 로그인 Controller
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public String memberLogin(Member inputMember, Model model, HttpServletRequest request, HttpServletResponse response,
+			RedirectAttributes ra, @RequestParam(value = "save", required = false) String save) {
+		
+		Member loginMember = service.login(inputMember);
+		
+		if(loginMember != null) { // 로그인 성공 시 
+			model.addAttribute("loginMember", loginMember);
+			
+			Cookie cookie = new Cookie("saveId", loginMember.getMemberId());
+			
+			if(save != null) { // 아이디저장 체크박스가 체크된 경우
+				
+				cookie.setMaxAge(60 * 60 * 24 * 30); // 한 달 유지
+				
+			} else { // 아이디저장 체크박스가 체크되지 않은 경우
+				
+				cookie.setMaxAge(0); // 쿠키 없애기
+				
+			}
+			
+			// 쿠키 사용 유효 경로 설정
+			cookie.setPath(request.getContextPath()); // 최상위 경로(/ensemble) 아래 모든 경로 적용
+			
+			// 응답에 Cookie를 담아서 클라이언트에게 전달
+			response.addCookie(cookie);
+			
+		} else { // 로그인 실패 시
+			
+			ra.addFlashAttribute("icon", "error");
+			ra.addFlashAttribute("icon", "로그인 실패");
+			ra.addFlashAttribute("icon", "아이디 또는 비밀번호가 일치하지 않습니다.");
+		}
+		
+		return "redirect:/";
+	}
+	
+	
+	// 로그아웃 Controller
+	@RequestMapping(value="logout", method = RequestMethod.GET)
+	public String logout(SessionStatus status, @RequestHeader("referer") String referer) {
+		
+		status.setComplete();
+		
+		return "redirect:" + referer;
+	}
+	
 	
 	// 회원가입 화면 전환 Controller
 	@RequestMapping(value="signUp", method=RequestMethod.GET)
@@ -60,6 +116,17 @@ public class MemberController {
 		
 		return result;
 	}
+	
+	
+	// 마이페이지 화면 전환 Controller
+	@RequestMapping(value="myPage", method=RequestMethod.GET)
+	public String myPage(@ModelAttribute Member inputMember) {
+		return "member/myPage";
+	}
+	
+	
+	
+	
 	
 	
 	

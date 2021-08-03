@@ -118,8 +118,8 @@
                 <img src="https://drive.google.com/uc?id=19vXoo3lrbxuLLn5YmPokmpcSovHDpXqg" style="height: 15px;">
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item noto-serif" href="#">My Page</a>
-                <a class="dropdown-item noto-serif" href="#">Logout</a>
+                <a class="dropdown-item noto-serif" href="${contextPath}/member/myPage">My Page</a>
+                <a class="dropdown-item noto-serif" href="${contextPath}/member/logout">Logout</a>
               </div>
             </li>
           </c:if>
