@@ -1,4 +1,9 @@
-.classPath
+.classpath
+target
+pom.properties
+MANIFEST.MF
+
+/target/
 /META-INF/
 
 
