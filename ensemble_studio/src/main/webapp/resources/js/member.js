@@ -3,9 +3,9 @@
 // 각 유효성 검사 결과를 저장할 객체
 const checkObj = {
 	"id": false,
+	"nickname": false,
 	"pwd1": false,
 	"pwd2": false,
-	"name": false,
 	"phone2": false,
 	"email": false
 };
@@ -26,14 +26,14 @@ $("#id").on("input", function(){
 
     // 입력된 아이디가 정규식에 일치하는 경우 == 유효한 값인 경우
     if(regExp.test(inputId)) { 
-        //$("#checkId").text("유효한 아이디 입니다.").css("color","green");
-        //checkObj.id = true;
+/*        $("#checkId").text("유효한 아이디 입니다.").css("color","green");
+        checkObj.id = true;*/
 
         // Ajax를 이용하여 비동기적으로 아이디 중복 검사를 진행
 
         // jQuery를 이용한 Ajax
         $.ajax({
-            url : "idDupCheck",  // 요청 주소(필수로 작성!)
+            url : "idDupCheck",  // 요청 주소(필수로 작성!) 상대경로
             data : {"id" : inputId},     // 전달하려는 값(파라미터)  
             type : "post",  // 데이터 전달 방식
 
@@ -65,36 +65,33 @@ $("#id").on("input", function(){
 
 
     } else{
-        $("#checkId").text("영어, 숫자 6~12글자로 작성").css("color","red");
+        $("#checkId").text("영어, 숫자 6~12글자로 작성해주세요.").css("color", "red");
 
         checkObj.id = false;
     }
 });
 
 
-// 이름 유효성 검사
-// 조건 : 한글 두 글자 이상 5글자 이하 ->  /^[가-힣]{2,5}$/;
-$("#name").on("input", function(){
-    const regExp = /^[가-힣]{2,5}$/;
-
-    // 이벤트 핸들러 내부에 작성된 this == 이벤트가 발생한 요소 == $("#name")
-    const inputName = $(this).val().trim();
-
-    if(regExp.test(inputName)){
-        $("#checkName").text("유효한 이름 형식입니다.").css("color", "green");
-
-        checkObj.name = true;
-
-    }else{
-        $("#checkName").text("한글 2~5글자").css("color", "red");
-
-        checkObj.name = false;
-
-    }
-
+// 닉네임 유효성 검사
+// 조건 : 숫자, 영어, 한국어 2~6글자 -> ^[가-힣ㄱ-ㅎa-zA-Z0-9]{2,}\$
+$("#nickname").on("input", function(){
+	const regExp = /^[가-힣ㄱ-ㅎa-zA-Z0-9]{2,6}$/;
+	
+	const inputNickname = $(this).val().trim();
+	
+	// 입력된 닉네임이 정규식에 일치하는 경우 == 유효한 값인 경우
+	if(regExp.test(inputNickname)){
+		
+		$("#checkNickname").text("유효한 닉네임입니다.").css("color", "green");
+		
+		checkObj.nickname = true;
+		
+	} else{
+		$("#checkNickname").text("숫자, 영어, 한국어 2~6글자로 작성해주세요.").css("color", "red");
+		
+		checkObj.nickname = false;
+	}
 });
-
-
 
 // 이메일 유효성 검사
 // 조건 : 아이디 4글자 이상, 이메일 형식  ->   /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
@@ -130,7 +127,7 @@ $("#pwd1").on("input", function () {
 
         checkObj.pwd1 = true;
     }else{
-        $("#checkPwd1").text("비밀번호가 유효하지 않습니다.").css("color", "red");
+        $("#checkPwd1").text("비밀번호 형식이 유효하지 않습니다.").css("color", "red");
 
         checkObj.pwd1 = false;
     }
@@ -149,12 +146,12 @@ $("#pwd1,  #pwd2").on("input", function(){
         checkObj.pwd2 = false;
 
     } else if(  pwd1 == pwd2   ){
-        $("#checkPwd2").text("비밀번호 일치").css("color", "green");
+        $("#checkPwd2").text("비밀번호가 일치합니다.").css("color", "green");
 
         checkObj.pwd2 = true;
 
     } else{
-        $("#checkPwd2").text("비밀번호 불일치").css("color", "red");
+        $("#checkPwd2").text("비밀번호 불일치합니다.").css("color", "red");
 
         checkObj.pwd2 = false;
     }
@@ -182,11 +179,45 @@ $(".phone").on("input", function(){
         checkObj.phone2 = true;
 
     }else{
-        $("#checkPhone").text("전화번호가 유효하지 않습니다.").css("color", "red");
+        $("#checkPhone").text("전화번호 형식이 유효하지 않습니다.").css("color", "red");
 
         checkObj.phone2 = false;
     }
 });
+
+// 체크박스 다중 선택 스크립트
+$(".agree-form").on("click", "#check_all", 
+	function(){
+	$(this).parents(".agree-form").find('input').prop(
+		"checked", $(this).is(":checked"));
+	
+});
+
+// 체크박스 개별 선택
+$(".agree-form").on("click", ".normal", function(){
+	var is_checked = true;
+	
+	$(".agree-form .normal").each(function(){
+		is_checked = is_checked && $(this).is(":checked");
+	});
+	
+	$("#check_all").prop("checked", is_checked);
+});
+
+function validate(){
+	if ($("#check_all:checked").length == 0){
+		swal({
+			"icon" : "info",
+			"title" : "약관 동의에 체크해주세요."
+		})
+		return false;
+		
+	}
+}
+
+
+
+
 
 
 // 회원 가입 버튼 클릭 시 전체 유효성 검사 여부 확인
@@ -214,14 +245,14 @@ function validate(){
 			case "id":
 				msg = "아이디가 유효하지 않습니다.";
 				break;
+			case "nickname":
+				msg = "닉네임이 유효하지 않습니다.";
+				break;
 			case "pwd1":
 				msg = "비밀번호가 유효하지 않습니다.";
 				break;
 			case "pwd2":
 				msg = "비밀번호가 일치하지 않습니다. ";
-				break;
-			case "name":
-				msg = "이름이 유효하지 않습니다.";
 				break;
 			case "phone2":
 				msg = "전화번호가 유효하지 않습니다. ";
@@ -244,6 +275,19 @@ function validate(){
 
         }
     }
+    
+    // name 속성값이 phone인 요소를 모두 얻어와 배열로 만들기
+    const phone = $("[name='phone']");
+    
+    // 요소에 저장된 value만 얻어와 합치기
+    const memberPhone = $(phone[0]).val() + "-" + $(phone[1]).val() + "-" + $(phone[2]).val();
+    
+    // form 태그에 type="hidden"으로 추가
+    const inputPhone = $("<input>", { type : "hidden", name : "memberPhone", value : memberPhone});
+    
+    // append() :  선택된 요소의 마지막 자식으로 추가
+    $("form[name='signUpForm']").append(inputPhone);
+    
 }
 
 
