@@ -30,12 +30,11 @@
 	 </resultMap>
 	 
 	 
-	<!-- 로그인 -->
-	<!-- parameterType : 전달받은 데이터의 자료형 -->
-	<!-- resultMap : 조회 결과 컬럼명과 VO 필드명이 다를 때 이를 매핑하는데 사용하는 태그 id -->
+	<!-- 일반 로그인 -->
 	<select id="login" parameterType="string" resultMap="member_rm">
 		SELECT * FROM MEMBER
 		WHERE MEMBER_STATUS = 'Y'
+		AND MEMBER_PATH = 'G'
 		AND MEMBER_ID = #{memberId}
 	</select>
 	

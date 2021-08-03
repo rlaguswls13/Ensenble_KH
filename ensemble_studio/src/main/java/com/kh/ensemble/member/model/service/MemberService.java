@@ -19,4 +19,11 @@ public interface MemberService {
 	 */
 	public abstract int idDupCheck(String id);
 
+
+	/** 로그인 Service
+	 * @param inputMember
+	 * @return result
+	 */
+	public abstract Member login(Member inputMember);
+
 }

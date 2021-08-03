@@ -32,4 +32,14 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.idDupCheck", id);
 	}
 
+
+	/** 로그인 DAO
+	 * @param memberId
+	 * @return loginMember
+	 */
+	public Member login(String memberId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("memberMapper.login", memberId);
+	}
+
 }
