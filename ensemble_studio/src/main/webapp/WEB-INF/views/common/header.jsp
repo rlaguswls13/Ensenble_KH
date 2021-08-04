@@ -142,6 +142,9 @@
 			"text" : "${text}"
 		});
 	</script>
+	<c:remove var="icon" />
+	<c:remove var="title" />
+	<c:remove var="text" />
   </c:if>
 </body>
 </html>
