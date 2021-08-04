@@ -64,7 +64,7 @@
 	</update>
 	
 	<!-- 게시글 카테고리 조회 -->
-	<select id="selectCategory" resultMap="category_rm">
+<!-- 	<select id="selectCategory" resultMap="category_rm">
 		SELECT * FROM CATEGORY
-	</select>
+	</select> -->
 </mapper>

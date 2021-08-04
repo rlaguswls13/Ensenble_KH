@@ -18,32 +18,27 @@
 				<table class="table table-hover table-striped my-5" id="list-table">
 					<thead>
 						<tr>
-							<th>글번호</th>
-							<th>카테고리</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>조회수</th>
+							<th>No.</th>
 							<th>작성일</th>
+							<th>분류</th>
+							<th>작성자</th>
+							<c:if test="${!empty loginMember}">
+								<th>상태</th>
+							</c:if>
+							<th>조회수</th>
 						</tr>
 					</thead>
 					
 					
 					<%-- 검색 상태 유지를 위한 쿼리스트링용 변수 선언 --%>
 					<c:if test="${!empty param.sk && !empty param.sv }">
-						<%-- 검색은  게시글 목록 조회에 단순히 sk, sv 파라미터를 추가한 것
-								-> 목록 조회 결과 화면을 만들기 위해 boardList.jsp로 요청 위임 되기 때문에
-									 request객체가 유지되고, 파라미터도 유지된다.
-						--%>
-						
 						<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"  />
 					</c:if>
 					
 					
 					<%-- 게시글 목록 출력 --%>
 					<tbody>
-						
 						<c:choose>
-							
 							<%-- 조회된 게시글 목록이 없는 경우 --%>
 							<c:when test="${empty boardList}">
 								<tr>
@@ -51,41 +46,20 @@
 								</tr>								
 							</c:when>
 							
-							
 							<%-- 조회된 게시글 목록이 있을 경우 --%>
-							<c:otherwise>
-							
+							<c:otherwise>					
 								<c:forEach items="${boardList}" var="board">
 									<tr>
 										<%-- 글 번호 --%>
-										<td> ${board.boardNo} </td>
-										
+										<td> ${board.boardNo} </td>										
 										<%-- 카테고리 --%>
-										<td> ${board.categoryName} </td>
-										
+										<td> ${category.boardCTNM} </td>										
 										<%-- 글 제목 --%>
 										<td class="boardTitle">                                                         
-											<a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">                                
-												
-												<%-- 썸네일 출력 --%>
-												<c:choose>
-													<%-- 썸네일 이미지가 없는 경우 --%>
-													<c:when test="${ board.atList[0].fileLevel !=0 }">
-														<img src="${contextPath}/resources/images/noimage.png">
-													</c:when>
-													
-													<%-- 썸네일 이미지가 있는 경우 --%>
-													<c:otherwise>
-														<img src="${contextPath}/${board.atList[0].filePath}${board.atList[0].fileName}">
-													</c:otherwise>
-												
-												</c:choose>
-											
-											 	${board.boardTitle }   
+											<a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
+											${board.boardTitle}
 											</a>
-											
-									 	</td>
-										
+										</td>
 										<%-- 작성자 --%>
 										<td> ${board.memberName} </td>
 										
@@ -94,7 +68,7 @@
 										
 										<%-- 작성일 --%>
 										<td> 
-											<fmt:formatDate var="createDate" value="${board.createDate}"  pattern="yyyy-MM-dd"/>                          
+											<fmt:formatDate var="createDate" value="${board.boardDT}"  pattern="yyyy-MM-dd"/>                          
 											<fmt:formatDate var="today" value="<%= new java.util.Date() %>"  pattern="yyyy-MM-dd"/>                          
 											
 											<c:choose>
@@ -105,7 +79,7 @@
 												
 												<%-- 글 작성일이 오늘일 경우 --%>
 												<c:otherwise>
-													<fmt:formatDate value="${board.createDate}"  pattern="HH:mm"/>                          
+													<fmt:formatDate value="${board.boardDT}"  pattern="HH:mm"/>                          
 												</c:otherwise>
 											</c:choose>
 										</td>
@@ -124,8 +98,6 @@
 
 			<%-- 로그인 되어 있을 경우에만 글쓰기 버튼 노출 --%>
 			<c:if test="${!empty loginMember }">
-				<%-- <button type="button" class="btn btn-primary float-right" id="insertBtn"
-				 onclick="location.href='../board2/insertForm?type=${pagination.boardType}';">글쓰기</button> --%>
 				<a  class="btn btn-primary float-right" id="insertBtn" href='insert'>글쓰기</a>
 			</c:if>
 			
@@ -181,9 +153,6 @@
 				</ul>
 			</div>
 			<%---------------------- Pagination end----------------------%>
-		
-		
-		
 		
 			<!-- 검색창 -->
 			<div class="my-5">

@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" scope="application"
-	value="${pageContext.servletContext.contextPath }"/>
+<c:set var="contextPath" scope="application" value="${pageContext.servletContext.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -95,16 +94,16 @@
             </div>
           </li>
           <li class="nav-item active padding-right-50">
-            <a class="nav-link noto-serif" href="#">Review</a>
+            <a class="nav-link noto-serif" href="${contextPath}/board/1/list">Review</a>
           </li>
           <li class="nav-item active dropdown padding-right-50">
             <a class="nav-link noto-serif" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               CS
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item noto-serif" href="#">Notice</a>
-              <a class="dropdown-item noto-serif" href="#">FAQ</a>
-              <a class="dropdown-item noto-serif" href="#">1:1</a>
+              <a class="dropdown-item noto-serif" href="${contextPath}/board/2/list">Notice</a>
+              <a class="dropdown-item noto-serif" href="${contextPath}/board/3/list">FAQ</a>
+              <a class="dropdown-item noto-serif" href="${contextPath}/board/4/list">1:1</a>
             </div>
           </li>
           <c:if test="${empty loginMember}">
