@@ -10,12 +10,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>header</title>
+    
+    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap core JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- sweetalert API 추가 --> 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- spoqa han sans font -->
+    <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+	<!-- google font : noto serif -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
@@ -70,7 +75,7 @@
     <nav class="navbar navbar-expand-lg navbar-light header-navbar-border" style="z-index:9999">
 
 
-      <a class="navbar-brand noto-serif-bold header-home-mob" href="#">Home</a>
+      <a class="navbar-brand noto-serif-bold header-home-mob" href="${contextPath }">Home</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -78,19 +83,19 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto navbar-center">
           <li class="nav-item active padding-right-50">
-            <a class="nav-link noto-serif header-home-web" href="#" >Home</a>
+            <a class="nav-link noto-serif header-home-web" href="${contextPath }" >Home</a>
           </li>
           <li class="nav-item active padding-right-50">
-            <a class="nav-link noto-serif" href="#">About</a>
+            <a class="nav-link noto-serif" href="${contextPath }/about">About</a>
           </li>
           <li class="nav-item active dropdown padding-right-50" style="width:165px">
             <a class="nav-link noto-serif" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Studio View
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item noto-serif" href="#">A ROOM</a>
-              <a class="dropdown-item noto-serif" href="#">B ROOM</a>
-              <a class="dropdown-item noto-serif" href="#">C ROOM</a>
+              <a class="dropdown-item noto-serif" href="${contextPath }/studio/1">A ROOM</a>
+              <a class="dropdown-item noto-serif" href="${contextPath }/studio/2">B ROOM</a>
+              <a class="dropdown-item noto-serif" href="${contextPath }/studio/3">C ROOM</a>
             </div>
           </li>
           <li class="nav-item active padding-right-50">
