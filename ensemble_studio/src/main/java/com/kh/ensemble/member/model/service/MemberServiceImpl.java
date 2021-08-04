@@ -45,6 +45,17 @@ public class MemberServiceImpl implements MemberService{
 		
 		Member loginMember = dao.login(inputMember.getMemberId());
 		
+		if(loginMember != null) {
+			
+			if(!bCryptPasswordEncoder.matches(inputMember.getMemberPw(), loginMember.getMemberPw()) ) {
+				
+			loginMember = null;
+			
+			}else {
+				loginMember.setMemberPw(null);
+			}
+		}
+		
 		return loginMember;
 	}
 
