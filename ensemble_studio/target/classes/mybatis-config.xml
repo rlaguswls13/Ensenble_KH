@@ -15,7 +15,8 @@
 		<!-- admin -->
 		
 		<!-- member -->
-				
+		<typeAlias type="com.kh.ensemble.member.model.vo.Member" alias="Member" />
+		
 		<!-- board -->
 		<typeAlias type="com.kh.ensemble.board.model.vo.Attachment" alias="Attachment" />
 		<typeAlias type="com.kh.ensemble.board.model.vo.Board" alias="Board" />
@@ -32,8 +33,10 @@
 		<!-- common -->	
 		
 		<!-- admin -->
+		<mapper resource="/mappers/admin/admin-mapper.xml" />
 		
 		<!-- member -->
+		<mapper resource="/mappers/member/member-mapper.xml" />
 				
 		<!-- board -->
 		<mapper resource="/mappers/board/board-mapper.xml" />
