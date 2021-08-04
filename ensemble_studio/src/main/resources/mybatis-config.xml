@@ -33,6 +33,7 @@
 		<!-- common -->	
 		
 		<!-- admin -->
+		<mapper resource="/mappers/admin/admin-mapper.xml" />
 		
 		<!-- member -->
 		<mapper resource="/mappers/member/member-mapper.xml" />
