@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="adminMapper">
+	<resultMap type="Pagination" id="pg_rm">
+		<result property="listCount" column="COUNT(*)"/>
+	</resultMap>
+
 	 <resultMap type="Member" id="member_rm">
 	 	<id property="memberNo" column="MEMBER_NO"/>
 	 	<result property="memberId" column="MEMBER_ID"/>
@@ -22,7 +26,16 @@
 		AND MEMBER_GRADE = 'A'
 		AND MEMBER_PATH = 'G'
 	</select>
+	
+	<select id="memberList" parameterType="Pagination" resultMap="member_rm">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_GRADE = 'G'
+		AND MEMBER_PATH = 'G'
+	</select>
   
+  	<select id="getMemberListCount" resultMap="pg_rm">
+  		SELECT COUNT(*) FROM MEMBER
+  	</select>
   
   
   

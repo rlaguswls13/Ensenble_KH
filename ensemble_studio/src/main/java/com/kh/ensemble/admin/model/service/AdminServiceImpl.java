@@ -1,10 +1,13 @@
 package com.kh.ensemble.admin.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.ensemble.admin.model.dao.AdminDAO;
+import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
 
 @Service
@@ -32,6 +35,16 @@ public class AdminServiceImpl implements AdminService{
 	      }
 		
 		return loginMember;
+	}
+
+	@Override
+	public List<Member> memberList(Pagination pg) {
+		return dao.memberList(pg);
+	}
+
+	@Override
+	public Pagination getMemberPagination() {
+		return dao.getMemberListCount();
 	}
 
 }

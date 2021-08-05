@@ -24,7 +24,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
-
+	<!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
     * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
@@ -69,7 +70,7 @@
   <div >
     <div style="padding:20px; text-align: center;">
       <a href="${contextPath}">
-        <img src="https://drive.google.com/uc?id=1agRyGlRuViUETnYKCyVgONSX6xJbD9mI" style="width:100px;">
+        <img src="${contextPath}/resources/images/common/logo.png" style="width:100px;">
       </a>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light header-navbar-border" style="z-index:9999">
@@ -113,13 +114,13 @@
           </li>
           <c:if test="${empty loginMember}">
             <li class="nav-item active">
-                <a href="${contextPath}/member/login" class="icon" id="user-icon" style="display: inline-block; padding-top:8px; "><img src="https://drive.google.com/uc?id=19vXoo3lrbxuLLn5YmPokmpcSovHDpXqg" style="height: 15px;"></a>
+                <a href="${contextPath}/member/login" class="icon" id="user-icon" style="display: inline-block; padding-top:8px; "><i class="fa fa-user"></i></a>
             </li>
           </c:if>
           <c:if test="${!empty loginMember}">
             <li class="nav-item active dropdown">
               <a class="nav-link noto-serif" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="https://drive.google.com/uc?id=19vXoo3lrbxuLLn5YmPokmpcSovHDpXqg" style="height: 15px;">
+                <i class="fa fa-user"></i>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item noto-serif" href="${contextPath}/member/myPage">My Page</a>
