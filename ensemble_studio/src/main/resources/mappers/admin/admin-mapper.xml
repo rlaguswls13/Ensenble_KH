@@ -18,6 +18,16 @@
  		<result property="memberGrade" column="MEMBER_GRADE"/>	 
  		<result property="memberPath" column="MEMBER_PATH"/>	 
 	 </resultMap>
+
+	 <resultMap type="Room" id="room_rm">
+	 	<id property="roomNo" column="ROOM_NO"/>
+ 		<result property="roomName" column="ROOM_NAME"/>	 
+ 		<result property="roomAbout" column="ROOM_ABOUT"/>	 
+ 		<result property="roomConfig" column="ROOM_CONFIG"/>	 
+ 		<result property="roomPrice" column="ROOM_PRICE"/>	 
+ 		<result property="roomDiscount" column="ROOM_DISCOUNT"/>	 
+ 		<result property="roomStatus" column="ROOM_STATUS"/>	 
+	 </resultMap>
 	 
 	<select id="login" parameterType="string" resultMap="member_rm">
 		SELECT * FROM MEMBER
@@ -36,7 +46,14 @@
   	<select id="getMemberListCount" resultMap="pg_rm">
   		SELECT COUNT(*) FROM MEMBER
   	</select>
-  
+  	
+  	<select id="getRoomListCount" resultMap="pg_rm">
+  		SELECT COUNT(*) FROM STUDIO_ROOM
+  	</select>
+  	
+  	<select id="roomList" parameterType="Pagination" resultMap="room_rm">
+  		SELECT * FROM STUDIO_ROOM
+  	</select>
   
   
   

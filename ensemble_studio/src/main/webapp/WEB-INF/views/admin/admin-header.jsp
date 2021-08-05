@@ -36,7 +36,7 @@
             <ul>
                 <li><a href="${contextPath}/admin"><i class="fa fa-th-large"></i>대시보드</a></li>
                 <li><a href="${contextPath}/admin/reservation"><i class="fa fa-calendar"></i>예약 관리</a></li>
-                <li><a href="${contextPath}/admin/product"><i class="fa fa-edit"></i>상품 관리</a></li>
+                <li><a href="${contextPath}/admin/studio"><i class="fa fa-edit"></i>상품 관리</a></li>
                 <li><a href="${contextPath}/admin/sales"><i class="fa fa-line-chart"></i>매출현황</a></li>
                 <li><a href="${contextPath}/admin/member"><i class="fa fa-user"></i>회원관리</a></li>
             </ul>

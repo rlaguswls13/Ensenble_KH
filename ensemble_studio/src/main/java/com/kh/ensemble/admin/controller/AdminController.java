@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ensemble.admin.model.service.AdminService;
+import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.member.controller.MemberController;
 import com.kh.ensemble.member.model.service.MemberService;
 import com.kh.ensemble.member.model.vo.Member;
@@ -66,5 +67,22 @@ public class AdminController {
 		model.addAttribute("pagination", pagination);
 		
 		return "admin/admin-member";
+	}
+	
+	@RequestMapping(value="/admin/studio", method=RequestMethod.GET)
+	public String roomList(@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+			Model model) {
+		
+		Pagination pagination = service.getRoomPagination();
+		pagination.setCurrentPage(cp);
+		pagination.setPageSize(5);
+		List<Room> rList = service.roomList(pagination);
+		
+		System.out.println(rList);
+		
+		model.addAttribute("rList", rList);
+		model.addAttribute("pagination", pagination);
+		
+		return "admin/admin-studio";
 	}
 }

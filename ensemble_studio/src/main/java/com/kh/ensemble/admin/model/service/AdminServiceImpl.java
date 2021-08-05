@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.ensemble.admin.model.dao.AdminDAO;
+import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
 
@@ -45,6 +46,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public Pagination getMemberPagination() {
 		return dao.getMemberListCount();
+	}
+
+	@Override
+	public Pagination getRoomPagination() {
+		return dao.getRoomListCount();
+	}
+
+	@Override
+	public List<Room> roomList(Pagination pagination) {
+		return dao.roomList(pagination);
 	}
 
 }

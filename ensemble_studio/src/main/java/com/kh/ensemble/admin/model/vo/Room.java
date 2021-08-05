@@ -2,7 +2,7 @@ package com.kh.ensemble.admin.model.vo;
 
 public class Room {
 
-	private int RoomNo;
+	private int roomNo;
 	private String roomName;
 	private String roomAbout;
 	private String roomConfig;
@@ -13,13 +13,17 @@ public class Room {
 	
 	public Room() {
 	}
+	
+	private void makeDiscountedPrice() {
+		   roomDiscountedPrice = roomPrice -(int)(roomPrice*(roomDiscount/100.0));
+		}
 
 	public int getRoomNo() {
-		return RoomNo;
+		return roomNo;
 	}
 
 	public void setRoomNo(int roomNo) {
-		RoomNo = roomNo;
+		this.roomNo = roomNo;
 	}
 
 	public String getRoomName() {
@@ -52,6 +56,7 @@ public class Room {
 
 	public void setRoomPrice(int roomPrice) {
 		this.roomPrice = roomPrice;
+		makeDiscountedPrice();
 	}
 
 	public int getRoomDiscount() {
@@ -60,10 +65,11 @@ public class Room {
 
 	public void setRoomDiscount(int roomDiscount) {
 		this.roomDiscount = roomDiscount;
+		makeDiscountedPrice();
 	}
 
 	public int getRoomDiscountedPrice() {
-		return (roomPrice/roomDiscount);
+		return roomDiscountedPrice;
 	}
 
 	public void setRoomDiscountedPrice(int roomDiscountedPrice) {
@@ -80,7 +86,7 @@ public class Room {
 
 	@Override
 	public String toString() {
-		return "Room [RoomNo=" + RoomNo + ", roomName=" + roomName + ", roomAbout=" + roomAbout + ", roomConfig="
+		return "Room [RoomNo=" + roomNo + ", roomName=" + roomName + ", roomAbout=" + roomAbout + ", roomConfig="
 				+ roomConfig + ", roomPrice=" + roomPrice + ", roomDiscount=" + roomDiscount + ", roomDiscountedPrice="
 				+ roomDiscountedPrice + ", roomStatus=" + roomStatus + "]";
 	}
