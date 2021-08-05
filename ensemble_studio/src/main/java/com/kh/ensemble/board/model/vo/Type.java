@@ -4,7 +4,7 @@ public class Type {
 	private int typeNo;
 	private String boardName;
 	private int boardCTNo;
-	private String boardCTNM;
+	private String boardCTNm;
 	
 	public Type() {}
 
@@ -32,20 +32,18 @@ public class Type {
 		this.boardCTNo = boardCTNo;
 	}
 
-	public String getBoardCTNM() {
-		return boardCTNM;
+	public String getBoardCTNm() {
+		return boardCTNm;
 	}
 
-	public void setBoardCTNM(String boardCTNM) {
-		this.boardCTNM = boardCTNM;
+	public void setBoardCTNm(String boardCTNm) {
+		this.boardCTNm = boardCTNm;
 	}
 
 	@Override
 	public String toString() {
-		return "Type [typeNo=" + typeNo + ", boardName=" + boardName + ", boardCTNo=" + boardCTNo + ", boardCTNM="
-				+ boardCTNM + "]";
+		return "Type [typeNo=" + typeNo + ", boardName=" + boardName + ", boardCTNo=" + boardCTNo + ", boardCTNm="
+				+ boardCTNm + "]";
 	}
 
-	
-	
 }

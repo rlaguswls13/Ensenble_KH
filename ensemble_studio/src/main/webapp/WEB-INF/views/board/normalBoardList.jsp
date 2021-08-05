@@ -29,6 +29,13 @@
 
 <body>
 	<jsp:include page="../common/header.jsp"/>
+	
+	
+	<%-- 검색 상태 유지를 위한 쿼리스트링용 변수 선언 --%>
+	<c:if test="${!empty param.sk && !empty param.sv }">
+		<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"  />
+	</c:if>
+					
 	<div class="container my-5">
 		
 		<h1>${pagination.boardName} 게시판</h1>
@@ -47,10 +54,7 @@
 					</thead>
 					
 					
-					<%-- 검색 상태 유지를 위한 쿼리스트링용 변수 선언 --%>
-					<c:if test="${!empty param.sk && !empty param.sv }">
-						<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"  />
-					</c:if>
+					
 					
 					
 					<%-- 게시글 목록 출력 --%>
@@ -120,7 +124,7 @@
 
 
 			<%-- 로그인 되어 있을 경우에만 글쓰기 버튼 노출 --%>
-			<c:if test="${!empty loginMember }">
+			<c:if test="${!empty loginMember}">
 				<a  class="btn btn-primary float-right" id="insertBtn" href='insert'>글쓰기</a>
 			</c:if>
 			
