@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
 
@@ -29,6 +30,17 @@ public class AdminDAO {
 		RowBounds rowBounds = new RowBounds(offset, pg.getLimit());
 		
 		return sqlSession.selectList("adminMapper.memberList", pg, rowBounds);
+	}
+
+	public Pagination getRoomListCount() {
+		return sqlSession.selectOne("adminMapper.getRoomListCount");
+	}
+
+	public List<Room> roomList(Pagination pg) {
+		int offset = (pg.getCurrentPage()-1) * pg.getLimit() ;
+		RowBounds rowBounds = new RowBounds(offset, pg.getLimit());
+		
+		return sqlSession.selectList("adminMapper.roomList", pg, rowBounds);
 	}
 
 
