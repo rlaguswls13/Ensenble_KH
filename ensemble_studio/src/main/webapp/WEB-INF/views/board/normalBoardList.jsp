@@ -8,7 +8,25 @@
 <meta charset="UTF-8">
 <title>${pagination.boardName} 게시판</title>
 
+	<!-- External CSS-->
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
+<%--     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/normalBoardList.css">
+ --%>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+   
+    <!-- JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    
+    <!-- include summernote -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+    <!-- sweetalert API 추가 --> 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
+
 <body>
 	<jsp:include page="../common/header.jsp"/>
 	<div class="container my-5">
@@ -21,10 +39,9 @@
 							<th>No.</th>
 							<th>작성일</th>
 							<th>분류</th>
+							<th>제목</th>
 							<th>작성자</th>
-							<c:if test="${!empty loginMember}">
-								<th>상태</th>
-							</c:if>
+							<th>상태</th>
 							<th>조회수</th>
 						</tr>
 					</thead>
@@ -51,20 +68,7 @@
 								<c:forEach items="${boardList}" var="board">
 									<tr>
 										<%-- 글 번호 --%>
-										<td> ${board.boardNo} </td>										
-										<%-- 카테고리 --%>
-										<td> ${category.boardCTNM} </td>										
-										<%-- 글 제목 --%>
-										<td class="boardTitle">                                                         
-											<a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
-											${board.boardTitle}
-											</a>
-										</td>
-										<%-- 작성자 --%>
-										<td> ${board.memberName} </td>
-										
-										<%-- 조회수 --%>
-										<td> ${board.readCount} </td>
+										<td> ${board.boardNo} </td>	
 										
 										<%-- 작성일 --%>
 										<td> 
@@ -76,13 +80,32 @@
 												<c:when test="${createDate != today}">
 													${createDate}
 												</c:when>
-												
 												<%-- 글 작성일이 오늘일 경우 --%>
 												<c:otherwise>
 													<fmt:formatDate value="${board.boardDT}"  pattern="HH:mm"/>                          
 												</c:otherwise>
 											</c:choose>
+										</td>	
+																	
+										<%-- 카테고리 --%>
+										<td> ${board.boardCTNm} </td>
+																			
+										<%-- 글 제목 --%>
+										<td class="boardTitle">                                                         
+											<a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
+											${board.boardTitle}
+											</a>
 										</td>
+										<%-- 작성자 --%>
+										<td> ${board.memberNk} </td>
+										
+										<%-- 글상태 --%>
+										<td> ${board.boardStatus} </td>
+										
+										<%-- 조회수 --%>
+										<td> ${board.boardReadCount} </td>
+										
+										
 									</tr>
 								</c:forEach>
 							
@@ -106,7 +129,6 @@
 			<%-- 페이징 처리 시 주소를 쉽게 작성할 수 있도록 필요한 변수를 미리 선언 --%>
 			
 			<c:set var="pageURL" value="list"  />
-			
 			<c:set var="prev" value="${pageURL}?cp=${pagination.prevPage}${searchStr}" />
 			<c:set var="next" value="${pageURL}?cp=${pagination.nextPage}${searchStr}" />
 			
@@ -159,7 +181,7 @@
 				<form action="list" method="GET" class="text-center" id="searchForm">
 				
 					<!-- 게시판 타입 유지를 위한 태그 -->
-					<input type="hidden" name="type" value="${pagination.boardType}">
+					<input type="hidden" name="type" value="${pagination.boardTypeNo}">
 				
 					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
 						<option value="title">글제목</option>

@@ -20,7 +20,6 @@
 		<!-- board -->
 		<typeAlias type="com.kh.ensemble.board.model.vo.Attachment" alias="Attachment" />
 		<typeAlias type="com.kh.ensemble.board.model.vo.Board" alias="Board" />
-		<typeAlias type="com.kh.ensemble.board.model.vo.Category" alias="Category" />
 		<typeAlias type="com.kh.ensemble.board.model.vo.HashTag" alias="HashTag" />
 		<typeAlias type="com.kh.ensemble.board.model.vo.Like" alias="Like" />
 		<typeAlias type="com.kh.ensemble.board.model.vo.Pagination" alias="Pagination" />

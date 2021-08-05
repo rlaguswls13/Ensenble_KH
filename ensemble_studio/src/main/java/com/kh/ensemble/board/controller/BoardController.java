@@ -29,12 +29,11 @@ public class BoardController {
 	@Autowired
 	private LikeService serviceL;
 	
-	// 일반 게시글 목록 조회
+	// 게시글 목록 조회
 	@RequestMapping("{boardTypeNo}/list")
 	public String boardList(@PathVariable("boardTypeNo") int boardTypeNo,
-							@RequestParam(value="cp", required=false, defaultValue="2") int cp,
-							Model model, Pagination pg, /* 페이징 처리에 사용할 비어있는 객체 */
-							Search search /*검색용 커맨드 객체*/) {
+					@RequestParam(value="cp", required=false, defaultValue="1") int cp,
+					Model model, Pagination pg, Search search) {
 		
 		pg.setBoardTypeNo(boardTypeNo);	
 		pg.setCurrentPage(cp);
@@ -43,10 +42,8 @@ public class BoardController {
 		List<Board> boardList = null;
 		
 		if(search.getSk() == null) {
-			
-		pagination = serviceB.getPagination(pg);
-		boardList = serviceB.selectBoardList(pagination);
-		
+			pagination = serviceB.getPagination(pg);
+			boardList = serviceB.selectBoardList(pagination);
 		} else { 
 			pagination = serviceB.getPagination(search, pg); 
 			boardList = serviceB.selectBoardList(search, pagination);
@@ -54,9 +51,9 @@ public class BoardController {
 		model.addAttribute("boardList",boardList);
 		model.addAttribute("pagination",pagination);
 		
-		if(boardTypeNo==1) {
+		if(boardTypeNo==1) { // 리뷰 게시판
 			return "board/reviewBoardList";
-		}else {
+		}else { // 일반 게시판
 			return "board/normalBoardList";
 		}
 		
