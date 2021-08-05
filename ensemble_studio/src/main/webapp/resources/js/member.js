@@ -290,6 +290,13 @@ function validate(){
     
 }
 
+	// 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+$(function() {
+	$(".inputImage").on("click", function() {
+		$("#Image").click();
+	});
+
+});
 
 
 

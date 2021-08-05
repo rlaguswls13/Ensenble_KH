@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.myPage-navi {
+	height: 100px;
+	margin: auto;
+	margin-left: 220px;
+}
+
+.myPage-navi>ul>li {
+	list-style-type: none;
+	float: left;
+	margin-left: 10px;
+	font-size: 14px;
+}
+
+.myPage-btn {
+	width: 100px;
+	border: none;
+	border-radius: 10px;
+}
+
+.myPage-btn:focus {
+	background-color: #424E59;
+	color: white;
+}

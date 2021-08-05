@@ -18,26 +18,10 @@ h5 {
 	color: black;
 }
 
-/* 마이페이지 네비*/
-.myPage-navi {
-	height: 100px;
-	margin: auto;
-	margin-left: 90px;
-}
 
-.myPage-navi>ul>li {
-	list-style-type: none;
-	float: left;
-	margin-left: 10px;
-	font-size: 14px;
+.content{
+	margin: Auto;
 }
-
-.myPage-btn {
-	width: 100px;
-	border: none;
-	border-radius: 10px;
-}
-
 /* 내 정보 조회*/
 .info-form {
 	width: 30%;
@@ -91,6 +75,11 @@ input::placeholder {
 	border-radius: 100px;
 	border: 1px solid lightgrey;
 	line-height: 110px;
+
+}
+
+#img{
+	position: relative;
 }
 
 .info-nick {
@@ -183,13 +172,13 @@ input::placeholder {
 }
 
 .plus-btn {
-	font-size: 16px;
-	background: #F9F7EB;
-	border: none;
+	font-size: 16px !important;
+	background: #F9F7EB !important;
+	border: none !important;
 	min-width: 80px;
 	height: 30px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 3px !important;
+	padding-bottom: 5px !important;
 	float: right;
 }
 
@@ -204,9 +193,10 @@ input::placeholder {
 }
 
 .pet-info {
-	width: 66%;
+	width: 64%;
 	margin: auto;
 	margin-top: 30px;
+	margin-left: 190px;
 }
 
 .table {
@@ -251,13 +241,13 @@ input::placeholder {
 }
 
 .insert-btn {
-	font-size: 16px;
-	background: #F9F7EB;
-	border: none;
+	font-size: 16px !important;
+	background: #F9F7EB !important;
+	border: none !important;
 	min-width: 100px;
 	height: 30px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 3px !important;
+	padding-bottom: 5px !important;
 	float: right;
 }
 

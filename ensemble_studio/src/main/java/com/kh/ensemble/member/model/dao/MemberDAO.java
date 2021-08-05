@@ -38,8 +38,48 @@ public class MemberDAO {
 	 * @return loginMember
 	 */
 	public Member login(String memberId) {
-		// TODO Auto-generated method stub
+
 		return sqlSession.selectOne("memberMapper.login", memberId);
+	}
+
+
+	/** 회원정보수정 DAO
+	 * @param inputMember
+	 * @return result
+	 */
+	public int updateMember(Member inputMember) {
+		
+		return sqlSession.update("memberMapper.updateMember", inputMember);
+	}
+
+
+	/** 비밀번호 조회 DAO
+	 * @param memberNo
+	 * @return savaPwd
+	 */
+	public String selectPassword(int memberNo) {
+		
+		return sqlSession.selectOne("memberMapper.selectPassword", memberNo);
+	}
+
+
+	/** 비밀번호 변경 DAO
+	 * @param loginMember
+	 * @return result
+	 */
+	public int changePwd(Member loginMember) {
+		
+		return sqlSession.update("memberMapper.changePwd", loginMember);
+	}
+
+
+	/** 회원 탈퇴 DAO
+	 * @param loginMember
+	 * @return result
+	 */
+	public int secession(Member loginMember) {
+
+		return sqlSession.update("memberMapper.secession", loginMember);
 	}
 
 }
