@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.ensemble.member.model.vo.Member;
 
-@WebFilter(filterName = "loginFilter", urlPatterns = {"/admin"})
+@WebFilter(filterName = "loginFilter", urlPatterns = {"/admin/*"})
 public class AdminLoginFilter implements Filter {
 
 	public void destroy() {

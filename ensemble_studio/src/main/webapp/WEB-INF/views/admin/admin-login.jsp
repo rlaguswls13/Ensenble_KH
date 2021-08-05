@@ -50,7 +50,7 @@
     <div style="text-align: center;">
         <img src="${contextPath}/resources/images/common/logo-white.png" style="width: 100px;">
         <div style="padding: 15px;"></div>
-        <form action="${contextPath}/admin/login" method="POST" onsubmit="return loginValidate();">
+        <form action="${contextPath}/adminLogin" method="POST" onsubmit="return loginValidate();">
 	        <input type="text" class="login-input" placeholder="아이디" name="memberId" id="memberId">
 	        <div style="padding:1px"></div>
 	        <input type="password" class="login-input" placeholder="비밀번호" name="memberPw" id="memberPw">
