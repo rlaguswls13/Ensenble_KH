@@ -77,7 +77,7 @@
 				swal({"icon" : "info", "title" : "탈퇴 약관에 동의해주세요."})
 				return false;
 			}
-		}
+		} 
 	</script>
 </body>
 </html>

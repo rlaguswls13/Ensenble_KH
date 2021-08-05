@@ -29,7 +29,7 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 
 	<div class="container">
-		<!-- 마이페이지 탑바 -->
+		<!-- 마이페이지 탑바  -->
 		<jsp:include page="myPageTopBar.jsp"></jsp:include>
 
 		<div class="content">

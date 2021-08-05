@@ -55,7 +55,7 @@ public interface MemberService {
 	public abstract int changePwd(String currentPwd, String newPwd, Member loginMember);
 
 
-	/** 회원 탈퇴 Service
+	/** 회원 탈퇴 Service 
 	 * @param currentPwd
 	 * @param loginMember
 	 * @return result

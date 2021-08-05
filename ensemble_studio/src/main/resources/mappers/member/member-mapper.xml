@@ -65,7 +65,7 @@
   	</update>
   
   
-  	<!-- 비밀번호 조회 -->
+  	<!-- 비밀번호 조회  -->
   	<select id="selectPassword" parameterType="_int" resultType="string">
   	SELECT MEMBER_PW FROM MEMBER
   	WHERE MEMBER_NO = #{memberNo}

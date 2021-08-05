@@ -53,7 +53,7 @@
 
 
 	<script>
-		// 비밀번호 유효성 검사
+		// 비밀번호 유효성 검사 
 		function pwdValidate(){
 			const regExp = /^[a-zA-Z0-9\#\-\_]{6,20}$/;
 			

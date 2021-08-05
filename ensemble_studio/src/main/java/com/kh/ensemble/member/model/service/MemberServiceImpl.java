@@ -69,7 +69,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int updateMember(Member inputMember, String savePath, MultipartFile file, String fileName) {
 		
-		if(file.getOriginalFilename() != null) { // 업로드된 이미지가 있을 때
+		if(file.getOriginalFilename() != null) { // 업로드된 이미지가 있을 때 
 			
 			try {
 				// 저장명 바꿔주기

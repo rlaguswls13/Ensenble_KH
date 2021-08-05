@@ -21,7 +21,7 @@
 	
 	<c:set var="phone" value="${fn:split( loginMember.memberPhone, '-' ) }"/>
 	<div class="container">
-			<!-- 마이페이지 탑바 -->
+			<!-- 마이페이지  탑바 -->
 			<jsp:include page="myPageTopBar.jsp"></jsp:include>
 
 			<div class="update-form">

@@ -75,7 +75,7 @@ public class MemberDAO {
 
 	/** 회원 탈퇴 DAO
 	 * @param loginMember
-	 * @return result
+	 * @return result 
 	 */
 	public int secession(Member loginMember) {
 

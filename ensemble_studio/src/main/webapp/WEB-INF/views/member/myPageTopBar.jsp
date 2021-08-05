@@ -10,4 +10,4 @@
                 <li><button type="submit" class="myPage-btn" onclick="location.href='changePwd'">비밀번호 변경</button></li>
                 <li><button type="submit" class="myPage-btn" onclick="">예약 상세 조회</button></li>
             </ul>
-        </div>
+        </div> 
