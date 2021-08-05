@@ -23,22 +23,18 @@ public class Board {
 	// member
 	private int memberNo;
 	private String memberNk;
+	private String memberImage;
 	
 	// attachment
 	private List<Attachment> atList;
 	
-	// view Table 만들기
-	public Board() {}
-
+	// boardLike
+	private int likeNo;
+	private String likeStatus;
+	private int likeCNT;
 	
-	public String getBoardNm() {
-		return boardNm;
-	}
-
-
-	public void setBoardNm(String boardNm) {
-		this.boardNm = boardNm;
-	}
+	
+	public Board() {}
 
 
 	public int getBoardNo() {
@@ -121,6 +117,16 @@ public class Board {
 	}
 
 
+	public String getBoardNm() {
+		return boardNm;
+	}
+
+
+	public void setBoardNm(String boardNm) {
+		this.boardNm = boardNm;
+	}
+
+
 	public int getBoardCTNo() {
 		return boardCTNo;
 	}
@@ -161,6 +167,16 @@ public class Board {
 	}
 
 
+	public String getMemberImage() {
+		return memberImage;
+	}
+
+
+	public void setMemberImage(String memberImage) {
+		this.memberImage = memberImage;
+	}
+
+
 	public List<Attachment> getAtList() {
 		return atList;
 	}
@@ -171,16 +187,47 @@ public class Board {
 	}
 
 
+	public int getLikeNo() {
+		return likeNo;
+	}
+
+
+	public void setLikeNo(int likeNo) {
+		this.likeNo = likeNo;
+	}
+
+
+	public String getLikeStatus() {
+		return likeStatus;
+	}
+
+
+	public void setLikeStatus(String likeStatus) {
+		this.likeStatus = likeStatus;
+	}
+
+
+	public int getLikeCNT() {
+		return likeCNT;
+	}
+
+
+	public void setLikeCNT(int likeCNT) {
+		this.likeCNT = likeCNT;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardDT=" + boardDT + ", boardMT=" + boardMT + ", boardStatus="
 				+ boardStatus + ", boardTitle=" + boardTitle + ", boardReadCount=" + boardReadCount + ", boardContent="
 				+ boardContent + ", boardTypeNo=" + boardTypeNo + ", boardNm=" + boardNm + ", boardCTNo=" + boardCTNo
-				+ ", boardCTNm=" + boardCTNm + ", memberNo=" + memberNo + ", memberNk=" + memberNk + ", atList="
-				+ atList + "]";
+				+ ", boardCTNm=" + boardCTNm + ", memberNo=" + memberNo + ", memberNk=" + memberNk + ", memberImage="
+				+ memberImage + ", atList=" + atList + ", likeNo=" + likeNo + ", likeStatus=" + likeStatus
+				+ ", likeCNT=" + likeCNT + "]";
 	}
 
 
-
-
+	
+	
 }

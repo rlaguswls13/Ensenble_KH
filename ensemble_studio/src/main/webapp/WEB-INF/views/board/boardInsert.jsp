@@ -15,7 +15,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-   ㄱ
+ 
     <!-- JS and jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
@@ -36,9 +36,18 @@
     
 
     <form action="" method="POST">
-        <div class="row-sm-12 d-flex">
-            <div class="col-sm-10">게시판 종류</div>
-            <div class="col-sm-2">카테고리</div>
+        <div class="row-sm-12 d-flex dropdown">
+        	
+			<span class="col-sm-10">${boardType.boardName}</span>
+			<select class="col-sm-2">
+					<c:forEach items="${typeList}" var="typeList">
+							<option class="dropdown-item" value="${typeList.boardCTNo}" >
+								${typeList.boardCTNm}
+							</option>
+					</c:forEach>
+			</select>
+			
+			
         </div>
         <div class="row-sm-12 d-flex">
             <div class="col-sm-9">해시태그 입력</div>
@@ -50,9 +59,12 @@
         </div>
         <textarea id="summernote" name="editordata"></textarea>
     </form>
-
+    
+    <a href="list?type=${param.type}&cp=${param.cp}${searchStr}"
+            	class="btn btn-primary float-right mr-2">목록으로</a>
 
     <script>
+    	// summernote 스타일 및 기능변경
          $('#summernote').summernote({
             placeholder: '<h1>글을 작성해주세요</h1>',
             tabsize: 2,  // 
@@ -76,12 +88,37 @@
                     ['view', ['fullscreen', 'help']]
                     ],
             fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-            fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+            fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+            
+            callback: {
+            	onImageUpload : function(files){
+            		sendBoardFile(file[0], this);
+            	}
+            }
         });
+        
+         // 이미지 파일 업로드
+        function sendBoardFile(file, editor) {
+     		var data = new FormData();
+           	data.append('file', file);
+           	$.ajax({
+             	data: data,
+             	type: "POST",
+             	url: 'insertImage',
+             	dataType : "json",
+             	cache: false,
+             	contentType: false,
+             	processData: false,
+             	enctype: 'multipart/form-data',             	
+             	success: function(data) {
+               		$(editor).summernote('editor.insertImage', at.atPath + "/"+ at.atName);
+             	}
+           	});
+         }
     </script>
 
 
-    
+
 </body>
 
 

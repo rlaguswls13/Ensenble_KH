@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.ensemble.board.model.vo.Board;
 import com.kh.ensemble.board.model.vo.Pagination;
+import com.kh.ensemble.board.model.vo.Type;
 
 @Repository
 public class boardDAO {
@@ -33,6 +34,30 @@ public class boardDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		return sqlSession.selectList("boardMapper.selectBoardList", pagination.getBoardTypeNo(), rowBounds);
 	}
-	
 
+	/** 게시글 상세 조회
+	 * @param boardNo
+	 * @return board
+	 */
+	public Board selectBoard(int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectBoard",boardNo);
+	}
+
+	/** 게시글 조회수
+	 * @param boardNo
+	 */
+	public void increaseReadCount(int boardNo) {
+		sqlSession.update("boardMapper.increaseReadCount",boardNo);
+	}
+
+	/** 특정 게시판 카테고리 조회
+	 * @return type
+	 */
+	public List<Type> selectType(int boardTypeNo) {
+		return sqlSession.selectList("boardMapper.selectType", boardTypeNo);
+
+	}
+	public Type selectboardType(int boardTypeNo) {
+		return sqlSession.selectOne("boardMapper.selectboardType", boardTypeNo);
+	}
 }
