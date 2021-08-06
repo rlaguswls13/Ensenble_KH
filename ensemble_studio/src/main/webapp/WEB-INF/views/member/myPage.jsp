@@ -57,7 +57,7 @@
 				<div class="info-form reserve col-me-6">
 					<div class="reserve-title">
 						<div class="reserve-con">최근 예약 현황</div>
-						<button type="submit" class="btn plus-btn">더보기</button>
+						<a type="submit" class="btn plus-btn" href="${contextPath}/reservation/rvList">더보기</a>
 					</div>
 
 					<div class="reserve-form">

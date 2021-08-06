@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+
+ .container {
+            width: 1200px;
+            background-color: ivory;
+        }
+
+        .innerContainer {
+            width: 1000px;
+            background-color: white;
+            margin: auto;
+        }
+
+        .rvStatus {
+            width: 1000px;
+
+
+        }
+
+        .rvStatusText0 {
+            height: 30px;
+        }
+
+        .rvStatusText {
+            height: 29px;
+            width: 100px;
+            float: left;
+            font-size: 20px;
+        }
+
+        .rvStatusText2 {
+            height: 29px;
+            width: 800px;
+            float: left;
+            font-size: 15px;
+            color: gray;
+        }
