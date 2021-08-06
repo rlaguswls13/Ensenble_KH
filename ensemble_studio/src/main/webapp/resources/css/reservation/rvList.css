@@ -1,0 +1,125 @@
+@charset "UTF-8";
+        .outterContainer {
+            width: 1200px;
+            margin: auto;
+
+        }
+
+        .innerContainer {
+            width: 1000px;
+            height: 430px;
+            margin: auto;
+            border: 1px solid gray;
+        }
+
+        .reservationList {
+            height: 500px;
+        }
+
+        #reservationNo {
+            height: 20px;
+            color: gray;
+        }
+
+        .reservationDetail {
+            width: 1200px;
+            height: 100px;
+        }
+
+        #roomImg {
+            height: 70px;
+            float: left;
+            width: 100px;
+        }
+
+        #reservationPreview {
+            float: left;
+            width: 1000px;
+            height: 100px;
+        }
+
+        .roomName {
+            width: 100%;
+            height: 40px;
+        }
+
+        .reservationTime {
+            width: 100%;
+            height: 40%;
+        }
+
+        .reservationDetailList {
+            height: 345px;
+        }
+
+        .detailList1 {
+            height: 50px;
+        }
+
+        .detail1-1 {
+            float: left;
+            width: 100px;
+            font-weight: bold;
+        }
+
+        .detail1-2 {
+            width: 600px;
+            float: left;
+            height: 45px;
+        }
+
+        .detailList2 {
+            height: 50px;
+        }
+
+        .detail2-1 {
+            float: left;
+            width: 100px;
+            font-weight: bold;
+        }
+
+        .detail2-2 {
+            width: 600px;
+            float: left;
+            height: 45px;
+        }
+
+        .detailList3 {
+            height: 50px;
+        }
+
+        .detail3-1 {
+            float: left;
+            width: 100px;
+            font-weight: bold;
+        }
+
+        .detail3-2 {
+            width: 600px;
+            float: left;
+            height: 45px;
+        }
+
+        .detailList4 {
+            height: 50px;
+        }
+
+        .detail4-1 {
+            float: left;
+            width: 100px;
+            font-weight: bold;
+        }
+
+        .detail4-2 {
+            width: 600px;
+            float: left;
+            height: 45px;
+        }
+
+        .totalPrice {
+            float: right;
+        }
+
+        #roomImg {
+            border-radius: 50%;
+        }

@@ -26,6 +26,10 @@
 		<typeAlias type="com.kh.ensemble.board.model.vo.Pagination" alias="Pagination" />
 		<typeAlias type="com.kh.ensemble.board.model.vo.Reply" alias="Reply" />
 		<typeAlias type="com.kh.ensemble.board.model.vo.Type" alias="Type" />
+		
+		<typeAlias type="com.kh.ensemble.reservation.model.vo.Rv" alias="Rv" />
+		<typeAlias type="com.kh.ensemble.reservation.model.vo.RvPagination" alias="RvPagination" />
+		<typeAlias type="com.kh.ensemble.reservation.model.vo.Option" alias="Option" />
 	</typeAliases>
 
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
@@ -42,6 +46,9 @@
 		<mapper resource="/mappers/board/board-mapper.xml" />
 		<mapper resource="/mappers/board/like-mapper.xml" />
 		<mapper resource="/mappers/board/reply-mapper.xml" />
+		
+		<!-- reservation -->
+		<mapper resource="/mappers/reservation/rv-mapper.xml" />
 	</mappers>
 
 
