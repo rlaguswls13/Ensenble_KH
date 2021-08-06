@@ -2,6 +2,7 @@ package com.kh.ensemble.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.ensemble.admin.model.service.AdminService;
@@ -78,11 +80,37 @@ public class AdminController {
 		pagination.setPageSize(5);
 		List<Room> rList = service.roomList(pagination);
 		
-		System.out.println(rList);
+		//System.out.println(rList);
 		
 		model.addAttribute("rList", rList);
 		model.addAttribute("pagination", pagination);
 		
 		return "admin/admin-studio";
+	}
+	
+	@RequestMapping(value="/admin/studio/insert", method=RequestMethod.GET)
+	public String gotoInsertRoom() {
+		return "admin/admin-studio-insert";
+	}
+	
+	@RequestMapping(value="/admin/studio/insert", method=RequestMethod.POST)
+	public String insertRoom(@ModelAttribute() Room room, 
+							@RequestParam("images") List<MultipartFile> images,
+							 RedirectAttributes ra,
+							 HttpServletRequest request) {
+		
+		String webPath ="resources/images/admin/studio";
+		String savePath = request.getSession().getServletContext().getRealPath(webPath);
+		
+		int roomNo = service.insertRoom(room, images, webPath, savePath);
+		
+		if(roomNo>0) {
+			MemberController.swalSetMessage(ra, "success", "상품 등록 성공", room.getRoomName()+"이(가) 정상적으로 업데이트되었습니다.");
+		}else {
+			MemberController.swalSetMessage(ra, "error", "상품 등록 실패", null);
+		}
+		
+		
+		return "redirect:/admin/studio";
 	}
 }

@@ -2,6 +2,8 @@ package com.kh.ensemble.admin.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
@@ -17,5 +19,7 @@ public interface AdminService {
 	Pagination getRoomPagination();
 
 	List<Room> roomList(Pagination pagination);
+
+	int insertRoom(Room room, List<MultipartFile> images, String webPath, String savePath);
 
 }

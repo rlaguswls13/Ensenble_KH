@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ensemble.admin.model.vo.Room;
+import com.kh.ensemble.admin.model.vo.StudioAttachment;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
 
@@ -41,6 +42,18 @@ public class AdminDAO {
 		RowBounds rowBounds = new RowBounds(offset, pg.getLimit());
 		
 		return sqlSession.selectList("adminMapper.roomList", pg, rowBounds);
+	}
+
+	public int insertRoom(Room room) {
+		int result = sqlSession.insert("adminMapper.insertRoom", room);
+		if(result>0) {
+			return room.getRoomNo();
+		}
+		return 0;
+	}
+
+	public int insertAttachment(List<StudioAttachment> atList) {
+		return sqlSession.insert("adminMapper.insertAttachment", atList);
 	}
 
 
