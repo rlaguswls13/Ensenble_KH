@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>myPage</title>
+<title>reservation list</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
