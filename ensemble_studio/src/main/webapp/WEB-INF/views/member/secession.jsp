@@ -61,14 +61,33 @@
 				<div class="form-group col-md-12 agree-btn">
 					<button type="button"
 						class="btn btn-lg secession-btn cancle col-md-6" onclick="location.href='updateMember'">취소</button>
-					<button type="submit"
-						class="btn btn-lg secession-btn secession col-md-6">탈퇴</button>
+					<button type="button"
+						class="btn btn-lg secession-btn secession col-md-6" data-toggle="modal" data-target="#modal_form">탈퇴</button>
 				</div>
 			</form>
 		</div>
 	</div>
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	
+	<!-- 모달창 -->
+<div class="modal fade" id="modal_form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 	
 	<script>
 		// 약관 동의가 체크되었을 때 탈퇴 진행
@@ -78,6 +97,11 @@
 				return false;
 			}
 		} 
+		
+/* 		$('#check_modal').on('click', function() {
+		    // 모달창 띄우기
+		    modal('#modal_form');
+		}); */
 	</script>
 </body>
 </html>

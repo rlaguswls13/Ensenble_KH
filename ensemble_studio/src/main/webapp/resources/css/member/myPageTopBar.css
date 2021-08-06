@@ -19,7 +19,7 @@
 	border-radius: 10px;
 }
 
-.myPage-btn:focus {
-	background-color: #424E59;
+.myPage-btn:hover {
+	background-color: #FF657D;
 	color: white;
 }

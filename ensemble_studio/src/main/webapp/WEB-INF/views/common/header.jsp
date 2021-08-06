@@ -73,7 +73,7 @@
         <img src="${contextPath}/resources/images/common/logo.png" style="width:100px;">
       </a>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light header-navbar-border" style="z-index:9999">
+    <nav class="navbar navbar-expand-lg navbar-light header-navbar-border" style="z-index:100">
 
 
       <a class="navbar-brand noto-serif-bold header-home-mob" href="${contextPath }">Home</a>
