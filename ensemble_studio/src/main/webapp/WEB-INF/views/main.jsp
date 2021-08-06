@@ -13,6 +13,9 @@
 <jsp:include page="common/header.jsp"></jsp:include>
 <link rel="stylesheet" href="${contextPath}/resources/css/common/main.css" type="text/css">
 
+<c:set var="contextPath" scope="application" value="${pageContext.servletContext.contextPath}"/>
+
+
 <body>
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -53,7 +56,7 @@
                 <div class="studio-view-cards">
                     <div class="card-img" style="background-image: url('https://lh3.googleusercontent.com/3-eYJzRV_WYLfrfLj4kO6H1w171rrKegk4Jv-b3IsC5DnVBYtvX22Y4LH32qhnuzj1R-uyepMxbveJpQ11w92vU8ctf8ltPhHeiXQqmzxQ=s0');"></div>
                     <div class="container card-text1">A ROOM</div>
-                    <a href="#" class="btn btn-beige">예약하기</a>
+                    <a href="${contextPath}/reservation/rvStatus" class="btn btn-beige">예약하기</a>
                     <div style="padding:15px;"></div>
                     <div class="container card-text2">
                         자연광이 변하는 위치를 치밀하게 <br>
