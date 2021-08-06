@@ -145,3 +145,7 @@ input::placeholder {
 	color: gray;
 	font-size: 12px;
 }
+
+#modal_form{
+	z-index:9999;
+}
