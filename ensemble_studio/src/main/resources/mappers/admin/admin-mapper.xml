@@ -55,6 +55,29 @@
   		SELECT * FROM STUDIO_ROOM
   	</select>
   
+  	<insert id="insertRoom" parameterType="Room" useGeneratedKeys="true">
+  	
+  		<selectKey keyProperty="roomNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_RNO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+  		INSERT INTO STUDIO_ROOM VALUES
+  		(#{roomNo}, #{roomName}, #{roomAbout}, #{roomConfig}, #{roomPrice}, #{roomDiscount}, DEFAULT)
+  	</insert>
   
+  	<insert id="insertAttachment" parameterType="list" >
+  		INSERT INTO STUDIO_ATTACHMENT
+		SELECT SEQ_FNO.NEXTVAL, A.* FROM 
+		(
+			<foreach collection="list" item="at" separator=" UNION ALL ">
+				SELECT #{at.fileLevel} FILE_LEVEL,  
+					   #{at.fileName} FILE_NAME, 
+           			   #{at.filePath} FILE_PATH, 
+           			   #{at.fileType} FILE_TYPE,
+           			   #{at.roomNo} ROOM_NO 
+           		FROM DUAL
+			</foreach>
+		) A
+  	</insert>
   
 </mapper>

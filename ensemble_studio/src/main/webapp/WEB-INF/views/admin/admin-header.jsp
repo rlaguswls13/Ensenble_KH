@@ -20,7 +20,7 @@
 	<!-- 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<link rel="stylesheet" href="${contextPath}/resources/css/admin/admin-header.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/admin/admin-header.css?ver=123">
 <body>
     <div class="wrapper">
         <div class="sidebar">
@@ -38,9 +38,22 @@
                 <li><a href="${contextPath}/admin/reservation"><i class="fa fa-calendar"></i>예약 관리</a></li>
                 <li><a href="${contextPath}/admin/studio"><i class="fa fa-edit"></i>상품 관리</a></li>
                 <li><a href="${contextPath}/admin/sales"><i class="fa fa-line-chart"></i>매출현황</a></li>
-                <li><a href="${contextPath}/admin/member"><i class="fa fa-user"></i>회원관리</a></li>
+                <li><a href="${contextPath}/admin/member"><i class="fa fa-user"></i>회원 관리</a></li>
+                <li><a href="${contextPath}/admin/reply"><i class="fa fa-comment"></i>댓글 관리</a></li>
             </ul>
         </ul>
     </div>
+    <c:if test="${!empty title }">
+    	<script>
+			swal({
+				"icon" : "${icon}",
+				"title" : "${title}",
+				"text" : "${text}"
+			});
+		</script>
+		<c:remove var="icon" />
+		<c:remove var="title" />
+		<c:remove var="text" />
+    </c:if>
 </body>
 </html>
