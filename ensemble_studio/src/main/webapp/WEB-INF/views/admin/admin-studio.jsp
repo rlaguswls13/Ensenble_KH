@@ -175,16 +175,8 @@ select {
 	</div>
 	<script>
 	
-	function selectAddClass(){
-		if($("select[name=selectRoomStatus]").val()=='N'){
-			$(this).removeClass().addClass('selectN');
-		}else{
-			$(this).removeClass().addClass('selectY');
-		}
-		location.reload();
-	}
-	
 	$("select[name=selectRoomStatus]").change(function(){
+		var select = $(this);
 		//console.log($(this).parent().prev().prev().prev().prev().text());
 		$.ajax({
 			url : '${contextPath}/admin/studio/updateRoomStatus',
@@ -195,7 +187,11 @@ select {
 			type : 'POST',
 			success : function(result){
 				if(result>0){
-					selectAddClass();
+					if(select.val()=='N'){
+						select.removeClass().addClass('selectN');
+					}else{
+						select.removeClass().addClass('selectY');
+					}
 				}else{
 					alert('상태 변경 실패');
 					return false;
