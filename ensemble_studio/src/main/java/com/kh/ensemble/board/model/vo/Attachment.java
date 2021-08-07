@@ -6,8 +6,22 @@ public class Attachment {
 	private String atPath;
 	private String atName;
 	private int boardNo;
+	private int atCount;
 	
 	public Attachment() {}
+	
+	
+	
+	public Attachment(int atNo, int atLv, String atPath, String atName, int boardNo) {
+		super();
+		this.atNo = atNo;
+		this.atLv = atLv;
+		this.atPath = atPath;
+		this.atName = atName;
+		this.boardNo = boardNo;
+	}
+
+
 
 	public int getAtNo() {
 		return atNo;
@@ -49,12 +63,17 @@ public class Attachment {
 		this.boardNo = boardNo;
 	}
 
+	public int getAtCount() {
+		return atCount;
+	}
+
+	public void setAtCount(int atCount) {
+		this.atCount = atCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Attachment [atNo=" + atNo + ", atLv=" + atLv + ", atPath=" + atPath + ", atName=" + atName
-				+ ", boardNo=" + boardNo + "]";
+				+ ", boardNo=" + boardNo + ", atCount=" + atCount + "]";
 	}
-	
-	
-	
 }

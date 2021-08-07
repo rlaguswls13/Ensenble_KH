@@ -10,23 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>boardView</title>
     
+    <jsp:include page="../common/header.jsp"/>    
     <!-- External CSS-->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
-<%--     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/reviewBoardDetail.css">
- --%>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-   
-    <!-- JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    
-    <!-- sweetalert API 추가 --> 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/reviewBoardDetail.css">
+
 
 </head>
 <body>
-		<%-- <jsp:include page="../common/header.jsp"/> --%>
+		
 		
 	
         <form action="" method="POST">
@@ -62,8 +54,10 @@
 		                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
 		                            </button>
 		                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-											<button id="deleteBtn" class="dropdown-item">삭제</button> 
-											<button id="updateBtn" class="dropdown-item" onclick="fnRequest('updateForm');">수정</button> 						
+											<button id="deleteBtn" class="dropdown-item" type="button"
+												data-toggle="modal" data-target="#boardDeleteBtn">삭제</button> 
+											<button id="updateBtn" class="dropdown-item" type="button"
+												onclick="fnRequest('updateForm');">수정</button> 						
 		                            </div>	                        
 	                        </div>  
                         </c:if>             
@@ -85,9 +79,50 @@
         </form>
         
         
+        <!-- Modal -->
+		<div class="modal fade" id="boardDeleteBtn" tabindex="-1" role="dialog" aria-labelledby="boardDeleteBtnLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="boardDeleteBtnLabel">게시물 삭제</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        게시물을 정말 삭제하시겠습니까?
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-primary" type="button" onclick="fnRequest('delete');">삭제하기</button>
+		       	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+        
         <%-- footer 영역 --%>
-			<jsp:include page="../common/footer.jsp"/>
+		<jsp:include page="../common/footer.jsp"/>
+			
+		
+		<form action="#" method="POST" name="requestForm">
+			<input type="hidden" name="boardNo" value="${board.boardNo}">
+			<input type="hidden" name="cp" value="${param.cp}">
+			<input type="hidden" name="boardTypeNo" value="${board.boardTypeNo}">
+		</form>
 </body>
-
+		<script>
+			function fnRequest(addr){
+				document.requestForm.action = addr;
+				document.requestForm.submit();	
+			}
+			
+			function deleteCheck(){
+				swal({
+					"icon"  : "${icon}",
+					"title" : "${title}",
+					"text"  : "${text}"
+				});				
+			}
+		</script>
 
 </html>

@@ -2,6 +2,8 @@ package com.kh.ensemble.board.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.ensemble.board.model.vo.Board;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.board.model.vo.Search;
@@ -23,5 +25,18 @@ public interface BoardService {
 	// 게시글 타입조회
 	List<Type> selectType(int boardTypeNo);
 	Type selectboardType(int boardTypeNo);
+	
+	// 파일 서버 저장
+	String uploadFile(MultipartFile file, String savePath);
+	
+	// 게시글 삽입
+	int insertBoard(Board board);
+	
+	// 게시글 수정
+	int updateBoard(Board board);
+	
+	// 게시글 삭제
+	int deleteBoard(int boardNo);
+	
 
 }

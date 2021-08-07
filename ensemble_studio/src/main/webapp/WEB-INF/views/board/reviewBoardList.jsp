@@ -13,24 +13,10 @@
     <!-- External CSS-->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/reviewBoardList.css">
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-   
-    <!-- JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    
-    <!-- include summernote -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
-    <!-- sweetalert API 추가 --> 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
 </head>
 <body>
-    <jsp:include page="../common/header.jsp"></jsp:include>
+    <jsp:include page="../common/header.jsp"/>
     
     <content>		
         <div class="" id="board_header">
@@ -93,7 +79,7 @@
         </div>
     </content>
     
-	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<jsp:include page="../common/footer.jsp"/>
 	
     <script>
         $(document).ready(function(){

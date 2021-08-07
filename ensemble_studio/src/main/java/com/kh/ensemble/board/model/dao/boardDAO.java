@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ensemble.board.model.vo.Attachment;
 import com.kh.ensemble.board.model.vo.Board;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.board.model.vo.Type;
@@ -35,7 +36,7 @@ public class boardDAO {
 		return sqlSession.selectList("boardMapper.selectBoardList", pagination.getBoardTypeNo(), rowBounds);
 	}
 
-	/** 게시글 상세 조회
+	/** 특정 게시글 상세 조회
 	 * @param boardNo
 	 * @return board
 	 */
@@ -43,7 +44,7 @@ public class boardDAO {
 		return sqlSession.selectOne("boardMapper.selectBoard",boardNo);
 	}
 
-	/** 게시글 조회수
+	/** 특정 게시글 조회수 증가
 	 * @param boardNo
 	 */
 	public void increaseReadCount(int boardNo) {
@@ -55,9 +56,60 @@ public class boardDAO {
 	 */
 	public List<Type> selectType(int boardTypeNo) {
 		return sqlSession.selectList("boardMapper.selectType", boardTypeNo);
-
 	}
 	public Type selectboardType(int boardTypeNo) {
 		return sqlSession.selectOne("boardMapper.selectboardType", boardTypeNo);
 	}
+
+	
+	/** 게시글 삽입
+	 * @param board
+	 * @return boardNo
+	 */
+	public int insertBoard(Board board) {
+		
+		int result = sqlSession.insert("boardMapper.insertBoard", board);
+
+		if(result > 0) {
+			return board.getBoardNo();
+		}else {
+			return 0;
+		}
+	}
+	
+
+	/** 특정 게시글 수정
+	 * @param board
+	 * @return result
+	 */
+	public int updateBoard(Board board) {
+		return sqlSession.update("boardMapper.updateBoard", board);
+	}
+
+	/** 특정 게시글 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public int deleteBoard(int boardNo) {
+		return sqlSession.update("boardMapper.deleteBoard", boardNo);
+	}
+
+	/** 특정 게시글 첨부 파일 갯수 조회
+	 * @param boardNo
+	 * @return rResult
+	 */
+	public Attachment selectAttachment(int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectAttachment", boardNo);
+	}
+
+	/** 특정 게시글 첨부 파일 정보 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public int deleteAttachment(int boardNo) {
+		return sqlSession.delete("boardMapper.deleteAttachment", boardNo);
+	}
+	
+	
+
 }
