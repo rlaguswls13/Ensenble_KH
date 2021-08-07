@@ -152,4 +152,9 @@ public class AdminServiceImpl implements AdminService{
 			
 		return date + str + ext;
 	}
+
+	@Override
+	public int updateRoomStatus(Room room) {
+		return dao.updateRoomStatus(room);
+	}
 }
