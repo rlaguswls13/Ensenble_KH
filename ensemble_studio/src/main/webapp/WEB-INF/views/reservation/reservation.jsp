@@ -13,8 +13,18 @@
 	href="https://getbootstrap.com/docs/4.6/examples/carousel/">
 </head>
 <jsp:include page="../common/header.jsp"></jsp:include>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+
 <link rel="stylesheet"
-	href="${contextPath}/resources/css/reservation/recss" type="text/css">
+	href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/reservation/reservation.css"
+	type="text/css">
 
 <body>
 
@@ -65,13 +75,9 @@
 			<div class="reservationTime" style="display: inline-block;">
 				<input type="radio" id="rv1" name="rv1" value="09:00 ~ 12:00">
 				<label for="rv1">09:00 ~ 12:00</label><br>
-				<br>
-				<br>
 				<br> <input type="radio" id="rv2" name="rv2"
 					value="12:00 ~ 15:00"> <label for="rv2">12:00 ~
 					15:00</label><br>
-				<br>
-				<br>
 				<br> <input type="radio" id="rv3" name="rv3"
 					value="15:00 ~ 18:00"> <label for="rv3">15:00 ~
 					18:00</label>
@@ -120,17 +126,15 @@
 				차량 수 : <input type="text" name="carQty"><br> 반려 동물 수 :
 				<input type="text" name="animalQty"><br> 촬영 내용
 				&nbsp;&nbsp;&nbsp; : <input type="text"><br> 비고 :<br>
-				<textarea rows="5" cols="50" name="ta" style="resize: none;">
-
-            </textarea>
-
+				<textarea rows="5" cols="50" name="ta" style="resize: none;"> </textarea>
+         
 			</div>
 
 		</div>
 
 		<div class="reservationAttention">
 			<div id="reservationAttentionText">
-				<div id="reservationAttentionText1">4. 예약시 주의사항</div>
+				<div id="reservationAttentionText1">예약시 주의사항</div>
 				<div id="reservationAttentionText2">주의사항을 필독해주세요</div>
 			</div>
 			<div class="reservationAttentionSentence">
@@ -191,15 +195,21 @@
 		<hr>
 
 		<div class="row4">
-			<button class="btn btn-primary btn-lg button0" type="submit"
-				style="width: 100px;">취소하기</button>
 			<button class="btn btn-primary btn-lg button1 " type="submit"
-				style="width: 100px;">예약하기</button>
+				style="width: 130px;">예약하기</button>
 		</div>
 
 	</div>
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+
+
+
+	<script>
+		$("#datepicker").datepicker();
+	</script>
+
+
 </body>
 
 </html>

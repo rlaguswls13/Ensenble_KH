@@ -76,7 +76,7 @@ public class RvController {
 		
 		return "reservation/rvStatus";
 	}
-	
+	// 예약 하기 화면 전환용
 	@RequestMapping(value = "reservation", method = RequestMethod.GET)
 	public String reservation() {
 
