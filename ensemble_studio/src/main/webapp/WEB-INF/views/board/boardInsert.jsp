@@ -7,63 +7,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>boardInsert</title>
+    <title>boardInsert</title>   
     
     <!-- External CSS-->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
     <%-- <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/normalBoard.css"> --%>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
- 
-    <!-- JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     
-    <!-- include summernote -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <jsp:include page="../common/header.jsp"/>
 
-    <!-- sweetalert API 추가 --> 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+	<!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  
 </head>
 <body>
-    
-    <h1>게시글 작성</h1>
-    <hr>
 
+	
     
+    <h3>게시글 작성</h3>
+    
+    <hr>    
 
-    <form action="" method="POST">
+    <form action="insert" method="POST" role="form" onsubmit="return boardValidate();">
         <div class="row-sm-12 d-flex dropdown">
         	
 			<span class="col-sm-10">${boardType.boardName}</span>
-			<select class="col-sm-2">
+ 			<select class="col-sm-2" id="boardCTNo" name="boardCTNo">
 					<c:forEach items="${typeList}" var="typeList">
-							<option class="dropdown-item" value="${typeList.boardCTNo}" >
-								${typeList.boardCTNm}
-							</option>
-					</c:forEach>
-			</select>
-			
+						<option class="dropdown-item" value="${typeList.boardCTNo}">
+							${typeList.boardCTNm}
+						</option>
+					</c:forEach>					
+			</select>			
 			
         </div>
+        
+        <div class="form-inline mb-2">
+			<label class="input-group-addon mr-3 insert-label">제목</label> 
+			<input type="text" class="form-control" id="boardTitle" name="boardTitle"
+					placeholder="제목을 입력해주세요." size="100%">
+		</div>
+		
+		<div class="form-inline mb-2">
+			<label class="input-group-addon mr-3 insert-label">작성일</label>
+			<h5 class="my-0" id="today"></h5>
+		</div>
+		
+		<div class="form-inline mb-2">
+			<label class="input-group-addon mr-3 insert-label">작성자</label>
+			<h5 class="my-0" id="writer">${loginMember.memberNick}</h5>
+		</div>
+      
         <div class="row-sm-12 d-flex">
-            <div class="col-sm-9">해시태그 입력</div>
-            <div class="col-sm-3">
-                <button class="btn-secondary">등록</button>
-                <button class="btn-secondary">취소</button>
+            <div class="col-sm-9">
+            	<input type="text" class="form-control" id="boardTitle" name="boardHashTag" placeholder="해시태그입력" size="100%">
             </div>
-            <div></div>
+            <div class="col-sm-3">
+                <button type="button" class="btn-secondary" onclick="return resetHashTag();">등록</button>
+                <button type="button" class="btn-secondary" onclick="return oneResetHashTag();">취소</button>
+                <button type="button" class="btn-secondary" onclick="return allResetHashTag();">삭제</button>
+            </div>
         </div>
-        <textarea id="summernote" name="editordata"></textarea>
+        <textarea class="summernote" id="summernote" name="boardContent"></textarea>
+   		 <div class="col-sm-12">
+   		 	<a class="btn btn-secondary mr-2 float-right" href="list?type=${param.type}&cp=${param.cp}${searchStr}">목록으로</a>			
+			<button class="btn btn-secondary mr-2 float-right" type="reset"  onclick="return resetSummerNote();">취소</button>
+			<button class="btn btn-secondary mr-2 float-right" type="submit">글등록</button>		
+         </div>
+    
     </form>
     
-    <a href="list?type=${param.type}&cp=${param.cp}${searchStr}"
-            	class="btn btn-primary float-right mr-2">목록으로</a>
+   
+
+
+	<jsp:include page="../common/footer.jsp"/>
 
     <script>
+    
+    
+			(function printToday() {
+				// 오늘 날짜 출력 
+				var today = new Date();
+				var month = (today.getMonth() + 1);
+				var date = today.getDate();
+		
+				var str = today.getFullYear() + "-"
+						+ (month < 10 ? "0" + month : month) + "-"
+						+ (date < 10 ? "0" + date : date);
+				$("#today").html(str);
+			})();
+		
+			// 유효성 검사 
+			function boardValidate() {
+				if ($("#boardTitle").val().trim().length == 0) {
+					alert("제목을 입력해 주세요.");
+					$("#title").focus();
+					return false;
+				}
+		
+				if ($("#summernote").val().trim().length == 0) {
+					alert("내용을 입력해 주세요.");
+					$('#summernote').summernote('focus');
+					return false;
+				}
+			}    
+			
+			// summernote 초기화
+			function resetSummerNote(){
+				$('#summernote').summernote('code', '');
+			}
+    
+    
     	// summernote 스타일 및 기능변경
          $('#summernote').summernote({
             placeholder: '<h1>글을 작성해주세요</h1>',
@@ -90,31 +144,42 @@
             fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
             fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
             
-            callback: {
-            	onImageUpload : function(files){
-            		sendBoardFile(file[0], this);
+            callbacks: {
+            	onImageUpload : function(files, editor){
+            		sendBoardFile(files[0], this);
             	}
             }
         });
         
          // 이미지 파일 업로드
-        function sendBoardFile(file, editor) {
-     		var data = new FormData();
-           	data.append('file', file);
+        function sendBoardFile(file, el) {
+        	data = new FormData()
+        	data.append("file", file);
            	$.ajax({
-             	data: data,
-             	type: "POST",
-             	url: 'insertImage',
-             	dataType : "json",
+           		url: 'insertImage',
+           		type: "POST",
+           		data: data,
+           		enctype: 'multipart/form-data',
              	cache: false,
              	contentType: false,
              	processData: false,
-             	enctype: 'multipart/form-data',             	
-             	success: function(data) {
-               		$(editor).summernote('editor.insertImage', at.atPath + "/"+ at.atName);
+             	             	
+             	success: function(fileName) {
+
+             		var image = "${contextPath}/" + fileName;
+             		$(el).summernote('editor.insertImage', image, function($image) {
+             			$image.css('width', '30%');
+             			$image.css('height', 'auto');
+             		});             		
              	}
            	});
          }
+         
+         
+         // hashTag
+         function resetHashTag(){}
+         function oneResetHashTag(){}
+         function allResetHashTag(){}
     </script>
 
 

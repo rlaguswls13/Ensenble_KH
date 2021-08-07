@@ -1,8 +1,15 @@
 package com.kh.ensemble.board.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +21,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.JsonObject;
+import com.kh.ensemble.board.exception.SaveFileException;
 import com.kh.ensemble.board.model.service.BoardService;
 import com.kh.ensemble.board.model.service.LikeService;
 import com.kh.ensemble.board.model.service.ReplyService;
+import com.kh.ensemble.board.model.vo.Attachment;
 import com.kh.ensemble.board.model.vo.Board;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.board.model.vo.Reply;
@@ -29,7 +40,7 @@ import com.kh.ensemble.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/board/*")
-@SessionAttributes({ "loginMember, boardList, pagination" })
+@SessionAttributes({"loginMember"})
 public class BoardController {
 
 	@Autowired
@@ -71,9 +82,11 @@ public class BoardController {
 
 	// 게시글 상세 조회
 	@RequestMapping("{boardTypeNo}/{boardNo}")
-	public String boardView(@PathVariable("boardTypeNo") int boardTypeNo, @PathVariable("boardNo") int boardNo,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model,
-			RedirectAttributes ra) {
+	public String boardView(@PathVariable("boardTypeNo") int boardTypeNo,
+							@PathVariable("boardNo") int boardNo,
+							@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+							Model model,
+							RedirectAttributes ra) {
 
 		Board board = serviceB.selectBoard(boardNo);
 
@@ -102,80 +115,140 @@ public class BoardController {
 		return "board/boardInsert";
 	}
 
-	// 게시글 삽입
-	/*
-	 * @RequestMapping(value="{boardTypeNo}/insert", method=RequestMethod.POST)
-	 * public String insertBoard(@PathVariable("boardTypeNo") int boardTypeNo,
-	 * 
-	 * @ModelAttribute Board board, 커맨드객체
-	 * 
-	 * @ModelAttribute("loginMember") Member loginMember, HttpServletRequest
-	 * request, RedirectAttributes ra ) { // 1) 로그인된 회원 정보에서 회원 번호를 얻어와 board 커맨드
-	 * 객체에 세팅 board.setMemberNo( loginMember.getMemberNo() );
-	 * 
-	 * // 2) @PathVariable boardType을 board 커맨드 객체에 세팅
-	 * board.setBoardTypeNo(boardTypeNo);
-	 * 
-	 * // 3) 웹상 접근 경로, 실제 파일 저장 경로 지정 String webPath = "resources/images/";
-	 * 
-	 * // 게시판 타입에 따라 업로드되는 파일의 경로를 지정 switch(boardTypeNo) { case 1 : webPath +=
-	 * "freeboard/"; break; }
-	 * 
-	 * // 실제로 파일이 저장되는 경로 얻어오기 String savePath =
-	 * request.getSession().getServletContext().getRealPath(webPath);
-	 * 
-	 * 
-	 * // 4) 게시글 삽입 Service 호출 // int boardNo = serviceB.insertBoard(board, webPath,
-	 * savePath); // 변수명이 boardNo인 이유? // -> 삽입 성공 시 해당 번호 글로 상세조회 하기 위해
-	 * 
-	 * 
-	 * String path = null; if(boardNo > 0) { // 삽입 성공 // 상세 조회 페이지로 리다이렉트 ->
-	 * /fin/board/1/600 // 현재 페이지 -> /fin/board/1/insert path = "redirect:" +
-	 * boardNo; MemberController.swalSetMessage(ra, "success", "게시글 삽입 성공", null);
-	 * 
-	 * } else { // 삽입 실패 // 이전 게시글 작성 화면으로 리다이렉트 path = "redirect:" +
-	 * request.getHeader("referer"); // 요청 이전 주소 MemberController.swalSetMessage(ra,
-	 * "error", "게시글 삽입 실패", null); }
-	 * 
-	 * 
-	 * return path; }
-	 */
-
-	// 게시글 첨부 파일 저장
-	@RequestMapping(value = "insertImage", method = RequestMethod.POST)
+	
+	// 게시글 첨부 파일 서버 저장
+	@RequestMapping(value = "{boardTypeNo}/insertImage", method = RequestMethod.POST)
 	@ResponseBody
-	public String insertImage(@PathVariable("boardTypeNo") int boardTypeNo,
-			@ModelAttribute("loginMember") Member loginMember, HttpServletRequest request, RedirectAttributes ra) {
-
-		// 3) 웹상 접근 경로, 실제 파일 저장 경로 지정
+	public String uploadImage(@PathVariable("boardTypeNo") int boardTypeNo,
+							@RequestParam("file") MultipartFile file,
+							HttpServletRequest request) {
+		
+		// 웹상 접근 경로, 실제 파일 저장 경로 지정
 		String webPath = "resources/images/board";
 
 		// 게시판 타입에 따라 업로드되는 파일의 경로를 지정
 		switch (boardTypeNo) {
-		case 1:
-			webPath += "review/";
-			break;
-		case 2:
-			webPath += "notice/";
-			break;
-		case 3:
-			webPath += "FAQ/";
-			break;
-		case 4:
-			webPath += "normalCS/";
-			break;
+			case 1:	webPath += "/review/"; break;
+			case 2: webPath += "/notice/"; break;
+			case 3:	webPath += "/FAQ/"; break;
+			case 4:	webPath += "/normalCS/"; break;
 		}
+		
 		String savePath = request.getSession().getServletContext().getRealPath(webPath);
+		String fileName = serviceB.uploadFile(file, savePath);		
+		
+			fileName = webPath + fileName;
 
-		return null;
+		return fileName;
 	}
 
+	
+	// 게시글 삽입
+	@RequestMapping(value="{boardTypeNo}/insert", method=RequestMethod.POST)
+	public String insertBoard(	@ModelAttribute("board") Board board, 
+								@ModelAttribute("loginMember") Member loginMember,
+								HttpServletRequest request, RedirectAttributes ra) {
+		
+		String content = imgExtract(board);
+		
+		board.setMemberNo(loginMember.getMemberNo());
+		int boardNo = serviceB.insertBoard(board);
+		
+		String path = null;
+		
+		if(boardNo > 0) {
+			path = "redirect:" + boardNo;
+			MemberController.swalSetMessage(ra, "success", "게시글 삽입 성공",  null);
+			
+		} else { 
+			path = "redirect:" + request.getHeader("referer");
+			MemberController.swalSetMessage(ra, "error", "게시글 삽입 실패",  null);
+		}
+				
+		return path;
+	}
+	
+	// 게시글 수정 화면 전환
+	@RequestMapping(value="{boardTypeNo}/updateForm", method=RequestMethod.POST)
+	public String updateBoard(@PathVariable("boardTypeNo") int boardTypeNo,
+								int boardNo, Model model) {
+		
+		List<Type> typeList = serviceB.selectType(boardTypeNo);
+		Type boardType = serviceB.selectboardType(boardTypeNo);
+		
+		Board board = serviceB.selectBoard(boardNo);
+		model.addAttribute(board);
+		model.addAttribute("typeList", typeList);
+		model.addAttribute("boardType", boardType);
+		
+		return "board/boardUpdate";
+	}
+		
+	// 게시글 수정
+	@RequestMapping(value="{boardTypeNo}/update", method=RequestMethod.POST)
+	public String updateBoard(@ModelAttribute Board board, Model model,								
+							  HttpServletRequest request, RedirectAttributes ra) {
+
+		int result = serviceB.updateBoard(board);
+		
+		String path = null;
+		
+		if(result > 0) {
+			path = "redirect:"+board.getBoardNo();
+			MemberController.swalSetMessage(ra, "success", "게시글 수정 성공",  null);
+			
+		} else { 
+			path = "redirect:"+request.getHeader("referer");
+			MemberController.swalSetMessage(ra, "error", "게시글 수정 실패",  null);
+		}
+		return path;
+	}
+	
+	// 게시글 삭제
+	@RequestMapping(value="{boardTypeNo}/delete", method=RequestMethod.POST)
+	public String deleteBoard(@RequestParam("boardNo") int boardNo,
+							  @RequestParam("boardTypeNo") int boardTypeNo,
+							  HttpServletRequest request, RedirectAttributes ra) {
+
+		int result = serviceB.deleteBoard(boardNo);
+		String path = null;
+
+		if(result > 0) {
+			path = "redirect:list";
+			MemberController.swalSetMessage(ra, "error", "게시글 삭제 성공",  null);
+		} else {
+			path = "redirect:" + boardNo;
+			MemberController.swalSetMessage(ra, "success", "게시글 삭제 실패",  null);
+		}
+		
+		return path;
+	}
+	
+
 	// SweetAlert 메소드
-	public static void swalSetMessage(RedirectAttributes ra, String icon, String title, String text) {
+	private void swalSetMessage(RedirectAttributes ra, String icon, String title, String text) {
 
 		ra.addFlashAttribute("icon", icon);
 		ra.addFlashAttribute("title", title);
 		ra.addFlashAttribute("text", text);
-
 	}
+	
+	// summernote img 추출
+	private String imgExtract(Board board) {
+		
+		// img 태그 src 추출 정규표현식
+		Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>$");
+        Matcher matcher = pattern.matcher(board.getBoardContent());     
+        String content = matcher.group();
+        System.out.println(content);
+        
+        // 저장할 빈 객체 생성
+        String src = null;		// ajax로 서버저장되서 올라간 img의 src
+        String filePath = null; // 저장할 위치
+        String fileName = null; // 저장할 파일 이름
+		
+        return fileName;
+   	}
+	
+
 }

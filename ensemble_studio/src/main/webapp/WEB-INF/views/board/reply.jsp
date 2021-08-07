@@ -11,12 +11,9 @@
 </head>
 <body>
 
-
-
-
-<hr>
-            <h5 id="replyTitle">댓글 (수)</h5>
-            <hr>
+	<hr>
+       <h5 id="replyTitle">댓글 (수)</h5>
+    <hr>
             
             <c:if test="${!empty loginMember}">      
 	            <div class="row-sm-12 d-flex" id="input-replyArea">
@@ -26,7 +23,7 @@
 	                    <span>${loginMember.memberNick}</span>
 	                </div>
 	                <div class="col-sm-11">
-	                    <textArea rows="3" id="input-reply"></textArea>
+	                    <input id="input-reply" size="100%">
 	                    <button class="btn btn-primary" id="addReply" onclick="addReply();">등록</button>
 	                </div>
 	            </div>
@@ -128,74 +125,7 @@ function addReply()	{
 				});
 			}
 		}
-		
 	}
-
-// 비동기 댓글 조회
-function selectReplyList(){
-
-	$.ajax({ 
-		url : "${contextPath}/reply/list",
-		data : {"boardNo" : boardNo},
-		type : "POST",
-		dataType : "JSON",
-		success : function(rList){
-			
-       $("#detail-replyArea").html(""); // 기존 정보 초기화
-       
-       	$.each(rList, function(index, item){
-    	   	// $.each() : jQuery의 반복문
-    	   	// rList : ajax 결과로 받은 댓글이 담겨있는 객체 배열
-    	   	// index : 순차 접근 시 현재 인덱스
-    	   	// item : 순차 접근 시 현재 접근한 배열 요소(댓글 객체 하나)          
-          var li = $("<li>").addClass("reply-row");
-       
-          // 작성자, 작성일, 수정일 영역 
-          var div = $("<div>");
-          var rMImage = $("<img>").addClass("rMImage").text(item.memberImage)
-          var rWriter = $("<span>").addClass("rWriter").text(item.memberNk);
-          var rDate = $("<p>").addClass("rDate").text("작성일 : " + item.createDate);
-          div.append(rWriter).append(rDate)
-          
-          
-          // 댓글 내용
-          var rContent = $("<div>").addClass("rContent").html(item.replyContent);
-          
-          // 대댓글, 수정, 삭제 버튼 영역
-          var replyBtnArea = $("<div>").addClass("replyBtnArea");
-          
-          // 현재 댓글의 작성자와 로그인한 멤버의 아이디가 같을 때 버튼 추가
-          if(item.memberNo == loginMemberNo){
-             
-             // ** 추가되는 댓글에 onclick 이벤트를 부여하여 버튼 클릭 시 수정, 삭제를 수행할 수 있는 함수를 이벤트 핸들러로 추가함. 
-
-             var showUpdate = $("<a>").addClass("btn btn-primary btn-sm ml-1").text("수정")
-             .attr("onclick", "showUpdateReply("+item.replyNo+", this)");
-             var deleteReply = $("<a>").addClass("btn btn-primary btn-sm ml-1").text("삭제")
-             .attr("onclick", "deleteReply("+item.replyNo+")");
-             var reportReply = $("<a>").addClass("btn btn-primary btn-sm ml-1").text("신고")
-             .attr("onclick", "deleteReply("+item.replyNo+")");
-             
-             replyBtnArea.append(showUpdate).append(deleteReply).append(reportReply);
-
-          }
-          
-          // 댓글 요소 하나로 합치기
-          li.append(div).append(rContent).append(replyBtnArea);
-          
-          
-          // 합쳐진 댓글을 화면에 배치
-          $("#replyListArea").append(li);
-       });
-			
-		},
-		
-		error : function(){
-			console.log("댓글 목록 조회 실패");
-		}
-		
-	});
-}
 
 </script>
 </html>
