@@ -22,11 +22,12 @@
 
 
 
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="${contextPath}/resources/css/reservation/fullcalendar/main.css"
 	type="text/css" />
-  <script src="${contextPath}/resources/js/reservation/fullcalendar/main.js"></script>
-  <script src="${contextPath}/resources/js/reservation/rvStatus.js"></script>
+<script
+	src="${contextPath}/resources/js/reservation/fullcalendar/main.js"></script>
+<script src="${contextPath}/resources/js/reservation/rvStatus.js"></script>
 
 
 
@@ -68,6 +69,7 @@
 	</div>
 
 
+	<a href="${contextPath}/reservation/reservation" class="btn btn-beige">예약하기</a>
 
 
 

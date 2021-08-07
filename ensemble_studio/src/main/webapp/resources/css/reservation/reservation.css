@@ -1,0 +1,269 @@
+@charset "UTF-8";
+
+/* 스튜디오 사진  */
+.aRoom {
+	width: 200px;
+	float: left;
+}
+
+.bRoom {
+	width: 200px;
+	float: left;
+}
+
+.cRoom {
+	width: 200px;
+	float: left;
+}
+
+.container {
+	width: 810px;
+	height: 2500px;
+}
+
+.studio {
+	width: 800px;
+	height: 300px;
+}
+
+h5 {
+	color: gray;
+}
+
+.reservationDate {
+	width: 1000px;
+	height: 500px;
+}
+
+.reservationCalender {
+	float: left;
+	width: 350px;
+	height: 300px;
+}
+
+.reservationTime {
+	float: left;
+	width: 500px;
+	height: 300px;
+}
+
+/* 촬영정보 선택  */
+.reservationOption {
+	height: 300px;
+}
+
+.optionDetail {
+	float: left;
+	width: 200px;
+	height: 210px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.optionRadio {
+	float: left;
+	width: 600px;
+	height: 190px;
+}
+
+.optionListA {
+	float: left;
+	width: 250px;
+	height: 190px;
+}
+
+.optionListB {
+	float: left;
+	width: 250px;
+	height: 200px;
+}
+
+.rvDetail2 {
+	width: 800px;
+	height: 250px;
+}
+
+.reservationOption1 {
+	height: 640px;
+	width: 1000px;
+}
+
+/* reservationAttentionText */
+#reservationAttentionText {
+	height: 30px;
+	width: 800px;
+}
+
+#reservationAttentionText1 {
+	float: left;
+	font-size: 20px;
+	font-weight: bold;
+	width: 200px;
+}
+
+#reservationAttentionText2 {
+	float: left;
+	font-size: 15px;
+	font-size: 15px;
+	width: 300px;
+	color: gray;
+	margin-top: 5px;
+}
+
+.reservationAttentionSentence {
+	border: 1px solid gray;
+	width: 800px;
+	height: 300px;
+	color: black;
+	font-size: 15px;
+}
+
+/* 가격 */
+.price {
+	height: 40px;
+	width: 800px;
+}
+
+#totalPrice {
+	width: 150px;
+	height: 30px;
+	float: right;
+	font-size: 30px;
+}
+
+#priceText {
+	margin-top: 10px;
+	width: 100px;
+	height: 30px;
+	float: right;
+	font-size: 15px;
+}
+
+/* 회원정보 */
+.userInfo {
+	height: 200px;
+	width: 800px;
+}
+
+.info {
+	height: 30px;
+	width: 800px;
+}
+
+.text {
+	float: left;
+	font-size: 15px;
+	width: 100px;
+	font-weight: bold;
+}
+
+.infodt {
+	float: left;
+	font-size: 15px;
+	width: 200px;
+	color: gray;
+}
+
+/* 버튼 */
+button {
+	width: 150px;
+	height: 50px;
+	font-size: 15px;
+}
+
+.reservationTime input[type=radio] {
+	display: none;
+}
+
+.reservationTime input[type=radio]+label {
+	height: 100px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: lightgray;
+	font-weight: 300;
+	font-size: 14px;
+	border-radius: 10px;
+	margin-right: 5px;
+}
+
+.reservationTime input[type=radio]:checked+label {
+	height: 100px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: ivory;
+	font-weight: bold;
+	font-size: 14px;
+	border-radius: 10px;
+	margin-right: 5px;
+}
+
+.carousel-img {
+	width: 100%;
+	height: 50vw;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.carousel-indicators>li {
+	width: 7px !important;
+	height: 7px !important;
+	margin-right: 20px !important;
+	border-radius: 50% !important;
+}
+
+.studio-view-cards {
+	width: 90%;
+	height: auto;
+	padding-bottom: 20px;
+	border: 1px solid rgb(182, 182, 182);
+	margin: auto;
+	margin-bottom: 20px;
+}
+
+.card-img {
+	width: 90%;
+	height: 300px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	margin: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.card-text1 {
+	font-family: 'Noto Serif KR', serif;
+	font-weight: 600;
+	font-size: larger;
+	width: auto;
+	display: inline-block;
+}
+
+.btn-beige {
+	background-color: #F9F7EB;
+	padding-left: 25px;
+	padding-right: 25px;
+	float: right;
+	margin-right: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.card-text2 {
+	font-family: 'cafe24 oneprettynight';
+	height: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.notice-img {
+	width: 100%;
+	height: 200px;
+	border: 1px solid rgb(182, 182, 182);
+	margin-bottom: 10px;
+}
