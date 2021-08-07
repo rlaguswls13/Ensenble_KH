@@ -22,4 +22,6 @@ public interface AdminService {
 
 	int insertRoom(Room room, List<MultipartFile> images, String webPath, String savePath);
 
+	int updateRoomStatus(Room room);
+
 }

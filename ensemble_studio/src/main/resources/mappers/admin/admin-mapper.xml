@@ -79,5 +79,11 @@
 			</foreach>
 		) A
   	</insert>
+  	
+  	<update id="updateRoomStatus" parameterType="Room">
+  		UPDATE STUDIO_ROOM SET
+  		ROOM_STATUS = #{roomStatus}
+  		WHERE ROOM_NO = #{roomNo}
+  	</update>
   
 </mapper>

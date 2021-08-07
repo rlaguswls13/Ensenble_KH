@@ -56,5 +56,9 @@ public class AdminDAO {
 		return sqlSession.insert("adminMapper.insertAttachment", atList);
 	}
 
+	public int updateRoomStatus(Room room) {
+		return sqlSession.update("adminMapper.updateRoomStatus", room);
+	}
+
 
 }
