@@ -70,6 +70,12 @@ public class RvController {
 		return "reservation/rvList";
 	}
 
+	// 예약 현황 화면 전환용
+	@RequestMapping(value = "rvStatus", method = RequestMethod.GET)
+	public String rvStatus() {
+		
+		return "reservation/rvStatus";
+	}
 	// 예약 하기 화면 전환용
 	@RequestMapping(value = "reservation", method = RequestMethod.GET)
 	public String reservation() {

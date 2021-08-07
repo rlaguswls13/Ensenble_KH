@@ -37,7 +37,10 @@
         <div class="main_content">
            <h3>상품 관리</h3>
            <div class="notice-text">*홈페이지에 표시되는 상품 목록은 최대 3개까지 입니다. </div>
+
            <a href="studio/insert" class="btn btn-ensemble" style="color: black;">추가하기</a>
+
+        
            <div style="padding: 5px;"></div>
 
             <table class="table">
