@@ -26,8 +26,8 @@
         padding: 5px;
         padding-left: 10px;
     }
-    .btn-beige{
-        background-color: #F9F7EB;
+    .btn-ensemble{
+        background-color: #FDCDCD;
         width: 265px;
         border: 0px;
         padding-top : 12px; padding-bottom: 12px;
@@ -55,7 +55,7 @@
 	        <div style="padding:1px"></div>
 	        <input type="password" class="login-input" placeholder="비밀번호" name="memberPw" id="memberPw">
 	        <div style="padding:5px"></div>
-	        <button class="btn-beige" type="submit">로그인</button>
+	        <button class="btn-ensemble" type="submit">로그인</button>
         </form>
         
         <div style="padding:5px"></div>

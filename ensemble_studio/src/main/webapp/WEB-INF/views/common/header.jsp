@@ -29,6 +29,7 @@
 </head>
 <style>
     * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+   	a { color: black; }
     .header-navbar-border{
         padding-top: 15px;
         padding-bottom: 15px;

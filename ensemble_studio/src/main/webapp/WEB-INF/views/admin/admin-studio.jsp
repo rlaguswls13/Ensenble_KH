@@ -17,8 +17,8 @@
 	.page-link{
 		color:black;		
 	}
-	.btn-beige{
-        background-color: #F9F7EB;
+	.btn-ensemble{
+        background-color: #FDCDCD;
         padding-left: 25px; padding-right: 25px;
         float: right;
         padding-top : 5px; padding-bottom: 5px;
@@ -37,7 +37,7 @@
         <div class="main_content">
            <h3>상품 관리</h3>
            <div class="notice-text">*홈페이지에 표시되는 상품 목록은 최대 3개까지 입니다. </div>
-           <a href="studio/insert" class="btn btn-beige" style="color: black;">추가하기</a>
+           <a href="studio/insert" class="btn btn-ensemble" style="color: black;">추가하기</a>
            <div style="padding: 5px;"></div>
 
             <table class="table">
@@ -99,7 +99,7 @@
 							<c:choose>
 								<c:when test="${p == pagination.currentPage }">
 									<li class="page-item active">
-										<a class="page-link" style="background-color:#F9F7EB; color:black;	border-color:#ddd;">
+										<a class="page-link" style="background-color:#FDCDCD; color:black;	border-color:#ddd;">
 											${p}
 										</a>
 									</li>

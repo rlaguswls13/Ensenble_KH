@@ -87,7 +87,7 @@
 							<c:choose>
 								<c:when test="${p == pagination.currentPage }">
 									<li class="page-item active">
-										<a class="page-link" style="background-color:#F9F7EB; color:black;	border-color:#ddd;">
+										<a class="page-link" style="background-color:#FDCDCD; color:black;	border-color:#ddd;">
 											${p}
 										</a>
 									</li>
