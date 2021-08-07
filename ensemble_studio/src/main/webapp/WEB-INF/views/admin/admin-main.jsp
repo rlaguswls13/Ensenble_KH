@@ -12,8 +12,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <jsp:include page="admin-header.jsp"></jsp:include>
 <style>
-        .btn-beige{
-            background-color: #F9F7EB;
+        .btn-ensemble{
+            background-color: #FDCDCD;
             padding-left: 25px; padding-right: 25px;
             float: right;
             padding-top : 5px; padding-bottom: 5px;
@@ -24,7 +24,7 @@
     <div class="main_bg">
         <div class="main_content">
            <h3 style="display: inline-block;">예약관리</h3>
-           <a href="#" class="btn btn-beige" style="color: black;">더보기</a>
+           <a href="admin/reservation" class="btn btn-ensemble" style="color: black;">더보기</a>
            <div style="padding: 5px;"></div>
 
             <table class="table">
@@ -81,7 +81,7 @@
         </div>
         <div class="main_content">
             <h3 style="display: inline-block;">매출 현황</h3>
-           <a href="#" class="btn btn-beige" style="color: black;">더보기</a>
+           <a href="admin/sales" class="btn btn-ensemble" style="color: black;">더보기</a>
            <div style="padding: 10px;"></div>
            <div style="width:20px; display: inline-block;"></div>
            <div style="width: 300px; display: inline-block;">
