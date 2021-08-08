@@ -11,7 +11,7 @@
     
     <!-- External CSS-->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
-    <%-- <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/normalBoard.css"> --%>
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/normalBoard.css">
     
     <jsp:include page="../common/header.jsp"/>
 
@@ -63,24 +63,39 @@
             	<input type="text" class="form-control" id="boardTitle" name="boardHashTag" placeholder="해시태그입력" size="100%">
             </div>
             <div class="col-sm-3">
-                <button class="btn-secondary">등록</button>
-                <button type="reset" class="btn-secondary">취소</button>
+                <button type="button" class="btn-secondary" onclick="return resetHashTag();">등록</button>
+                <button type="button" class="btn-secondary" onclick="return oneResetHashTag();">취소</button>
+                <button type="button" class="btn-secondary" onclick="return allResetHashTag();">삭제</button>
             </div>
-            <div></div>
         </div>
         <textarea class="summernote" id="summernote" name="boardContent"></textarea>
+    	
+    	<div class="col-sm-12">
+   		 	<a class="btn btn-secondary mr-2 float-right" href="list?type=${param.type}&cp=${param.cp}${searchStr}">목록으로</a>			
+			<button class="btn btn-secondary mr-2 float-right" type="reset"  onclick="return resetSummerNote();">취소</button>
+			<button class="btn btn-secondary mr-2 float-right" type="submit">글등록</button>		
+         </div>
     </form>
-    
-    <a href="list?type=${param.type}&cp=${param.cp}${searchStr}"
-            	class="btn btn-primary float-right mr-2">목록으로</a>
 
 
 	<jsp:include page="../common/footer.jsp"/>
 
-    <script>
-		// summernote 내용입력
-		$('#summernote').summernote('code', '${board.boardContent}');
-    
+    <script>  	
+		// 유효성 검사 
+		function boardValidate() {
+			if ($("#boardTitle").val().trim().length == 0) {
+				alert("제목을 입력해 주세요.");
+				$("#title").focus();
+				return false;
+			}
+	
+			if ($("#summernote").val().trim().length == 0) {
+				alert("내용을 입력해 주세요.");
+				$('#summernote').summernote('focus');
+				return false;
+			}
+		} 
+		
         // summernote 스타일 및 기능변경
          $('#summernote').summernote({
             placeholder: '<h1>글을 작성해주세요</h1>',
@@ -110,9 +125,15 @@
             callbacks: {
             	onImageUpload : function(files, editor){
             		sendBoardFile(files[0], this);
-            	}
+            	},
+            	onImageLinkInsert: function(url, editor) {
+            		sendBoardFileUrl(url, this);
+            	    }
             }
         });
+        
+        // summernote 내용입력
+  		$('#summernote').summernote('code', '${board.boardContent}');
         
          // 이미지 파일 업로드
         function sendBoardFile(file, el) {
@@ -138,7 +159,34 @@
            	});
          }
          
-         document
+     	// url 파일 업로드
+        function sendBoardFileUrl(url, el) {
+        	data = new FormData()
+        	data.append("url", url);
+        	console.log(url);
+           	$.ajax({
+           		url: 'insertImageUrl',
+           		type: "POST",
+           		data: data,
+             	cache: false,
+             	contentType: false,
+             	processData: false,
+             	             	
+             	success: function(fileName) {
+
+             		var image = "${contextPath}/" + fileName;
+             		$(el).summernote('editor.insertImage', image, function($image) {
+             			$image.css('width', '30%');
+             			$image.css('height', 'auto');
+             		});             		
+             	}
+           	});
+         }
+     	
+        // hashTag
+        function resetHashTag(){}
+        function oneResetHashTag(){}
+        function allResetHashTag(){}
     </script>
 
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.ensemble.board.model.vo.Attachment;
 import com.kh.ensemble.board.model.vo.Board;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.board.model.vo.Search;
@@ -28,15 +29,23 @@ public interface BoardService {
 	
 	// 파일 서버 저장
 	String uploadFile(MultipartFile file, String savePath);
-	
+	String uploadFile(String url, String savePath);
+		
 	// 게시글 삽입
 	int insertBoard(Board board);
+	void insertAt(List<Attachment> atFile);
 	
 	// 게시글 수정
 	int updateBoard(Board board);
+	void updateAt(List<Attachment> atFile);
+	void updateAt(int boardNo);
 	
 	// 게시글 삭제
 	int deleteBoard(int boardNo);
+	
+
+	
+	
 	
 
 }

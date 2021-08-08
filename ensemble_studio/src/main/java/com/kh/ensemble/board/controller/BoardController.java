@@ -1,15 +1,11 @@
 package com.kh.ensemble.board.controller;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.gson.JsonObject;
-import com.kh.ensemble.board.exception.SaveFileException;
+
 import com.kh.ensemble.board.model.service.BoardService;
 import com.kh.ensemble.board.model.service.LikeService;
 import com.kh.ensemble.board.model.service.ReplyService;
@@ -40,7 +35,7 @@ import com.kh.ensemble.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/board/*")
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember","board"})
 public class BoardController {
 
 	@Autowired
@@ -61,17 +56,21 @@ public class BoardController {
 
 		Pagination pagination = null;
 		List<Board> boardList = null;
-
+		List<Type> typeList = null;
+				
 		if (search.getSk() == null) {
 			pagination = serviceB.getPagination(pg);
 			boardList = serviceB.selectBoardList(pagination);
+			typeList = serviceB.selectType(boardTypeNo);
 		} else {
 			pagination = serviceB.getPagination(search, pg);
 			boardList = serviceB.selectBoardList(search, pagination);
+			typeList = serviceB.selectType(boardTypeNo);
 		}
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagination", pagination);
-
+		model.addAttribute("typeList", typeList);
+		
 		if (boardTypeNo == 1) { // 리뷰 게시판
 			return "board/reviewBoardList";
 		} else { // 일반 게시판
@@ -125,7 +124,7 @@ public class BoardController {
 		
 		// 웹상 접근 경로, 실제 파일 저장 경로 지정
 		String webPath = "resources/images/board";
-
+		
 		// 게시판 타입에 따라 업로드되는 파일의 경로를 지정
 		switch (boardTypeNo) {
 			case 1:	webPath += "/review/"; break;
@@ -136,9 +135,34 @@ public class BoardController {
 		
 		String savePath = request.getSession().getServletContext().getRealPath(webPath);
 		String fileName = serviceB.uploadFile(file, savePath);		
+		fileName = webPath + fileName;
+			
+		return fileName;
+	}
+	
+	// 게시글 url 파일 서버 저장
+	// @RequestParam(key) value가 비어있으면 오류뜨는거같음)
+	@RequestMapping(value = "{boardTypeNo}/insertImageUrl", method = RequestMethod.POST)
+	@ResponseBody
+	public String uploadImage(@PathVariable("boardTypeNo") int boardTypeNo,
+								@RequestParam("url") String url,
+								HttpServletRequest request) {
 		
-			fileName = webPath + fileName;
-
+		// 웹상 접근 경로, 실제 파일 저장 경로 지정
+		String webPath = "resources/images/board";
+		
+		// 게시판 타입에 따라 업로드되는 파일의 경로를 지정
+		switch (boardTypeNo) {
+			case 1:	webPath += "/review/"; break;
+			case 2: webPath += "/notice/"; break;
+			case 3:	webPath += "/FAQ/"; break;
+			case 4:	webPath += "/normalCS/"; break;
+		}
+		
+		String savePath = request.getSession().getServletContext().getRealPath(webPath);
+		String fileName = serviceB.uploadFile(url, savePath);		
+		fileName = webPath + fileName;
+			
 		return fileName;
 	}
 
@@ -149,14 +173,17 @@ public class BoardController {
 								@ModelAttribute("loginMember") Member loginMember,
 								HttpServletRequest request, RedirectAttributes ra) {
 		
-		String content = imgExtract(board);
-		
 		board.setMemberNo(loginMember.getMemberNo());
 		int boardNo = serviceB.insertBoard(board);
 		
 		String path = null;
 		
 		if(boardNo > 0) {
+			
+			// attachment에 정보 삽입문제야기는 추후
+			List<Attachment> atList = imgExtract(board);
+			if(!atList.isEmpty()) serviceB.insertAt(atList);
+			
 			path = "redirect:" + boardNo;
 			MemberController.swalSetMessage(ra, "success", "게시글 삽입 성공",  null);
 			
@@ -186,7 +213,7 @@ public class BoardController {
 		
 	// 게시글 수정
 	@RequestMapping(value="{boardTypeNo}/update", method=RequestMethod.POST)
-	public String updateBoard(@ModelAttribute Board board, Model model,								
+	public String updateBoard(@ModelAttribute("board") Board board, Model model,								
 							  HttpServletRequest request, RedirectAttributes ra) {
 
 		int result = serviceB.updateBoard(board);
@@ -194,6 +221,12 @@ public class BoardController {
 		String path = null;
 		
 		if(result > 0) {
+			
+			// attachment에 정보 삽입문제야기는 추후
+			List<Attachment> atList = imgExtract(board);
+			if(!atList.isEmpty()) serviceB.updateAt(atList);
+			else serviceB.updateAt(board.getBoardNo());
+			
 			path = "redirect:"+board.getBoardNo();
 			MemberController.swalSetMessage(ra, "success", "게시글 수정 성공",  null);
 			
@@ -234,20 +267,34 @@ public class BoardController {
 	}
 	
 	// summernote img 추출
-	private String imgExtract(Board board) {
+	private List<Attachment> imgExtract(Board board) {
 		
-		// img 태그 src 추출 정규표현식
-		Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>$");
-        Matcher matcher = pattern.matcher(board.getBoardContent());     
-        String content = matcher.group();
-        System.out.println(content);
-        
         // 저장할 빈 객체 생성
         String src = null;		// ajax로 서버저장되서 올라간 img의 src
         String filePath = null; // 저장할 위치
         String fileName = null; // 저장할 파일 이름
+		int fileLv = 0; 		// 저장할 파일 LV
+		List<Attachment> atList = new ArrayList<Attachment>(); // 파일 정보 담을 객체
 		
-        return fileName;
+		// img 태그 src 추출 정규표현식
+		Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+        Matcher matcher = pattern.matcher(board.getBoardContent());     
+        
+        
+        while(matcher.find()){
+        	src=  matcher.group(0); // 매칭된 src 속성값을  Matcher 객체에서 꺼내서 src에 저장 
+            filePath = src.substring(src.indexOf("/", 2), src.lastIndexOf("/")); // 파일명을 제외한 경로만 별도로 저장.
+            fileName = src.substring(src.lastIndexOf("/")+ 1); // 업로드된 파일명만 잘라서 별도로 저장.
+            fileName = fileName.substring(0,fileName.indexOf("\"",0)); 
+            		
+            // Attachment 객체를 이용하여 DB에 파일 정보를 저장
+            Attachment at = new Attachment(fileLv, filePath, fileName, board.getBoardNo());
+            atList.add(at);
+            fileLv ++;
+         }
+
+		
+        return atList;
    	}
 	
 

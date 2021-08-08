@@ -77,9 +77,7 @@
     
     </form>
     
-   
-
-
+ 
 	<jsp:include page="../common/footer.jsp"/>
 
     <script>
@@ -147,11 +145,15 @@
             callbacks: {
             	onImageUpload : function(files, editor){
             		sendBoardFile(files[0], this);
-            	}
+            		},
+            	onImageLinkInsert: function(url, editor) {
+            		sendBoardFileUrl(url, this);
+            	    }
+                   
             }
         });
         
-         // 이미지 파일 업로드
+        // 이미지 파일 업로드
         function sendBoardFile(file, el) {
         	data = new FormData()
         	data.append("file", file);
@@ -160,6 +162,30 @@
            		type: "POST",
            		data: data,
            		enctype: 'multipart/form-data',
+             	cache: false,
+             	contentType: false,
+             	processData: false,
+             	             	
+             	success: function(fileName) {
+
+             		var image = "${contextPath}/" + fileName;
+             		$(el).summernote('editor.insertImage', image, function($image) {
+             			$image.css('width', '30%');
+             			$image.css('height', 'auto');
+             		});             		
+             	}
+           	});
+         }
+        
+     	// url 파일 업로드
+        function sendBoardFileUrl(url, el) {
+        	data = new FormData()
+        	data.append("url", url);
+        	console.log(url);
+           	$.ajax({
+           		url: 'insertImageUrl',
+           		type: "POST",
+           		data: data,
              	cache: false,
              	contentType: false,
              	processData: false,
