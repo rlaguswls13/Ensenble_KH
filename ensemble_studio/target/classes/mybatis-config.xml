@@ -34,7 +34,8 @@
 
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
 	<mappers>
-		<!-- common -->	
+		<!-- main -->	
+		<mapper resource="/mappers/main/main-mapper.xml" />
 		
 		<!-- admin -->
 		<mapper resource="/mappers/admin/admin-mapper.xml" />
