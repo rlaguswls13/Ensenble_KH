@@ -1,5 +1,6 @@
 package com.kh.ensemble.board.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -76,6 +77,12 @@ public class boardDAO {
 			return 0;
 		}
 	}
+	/** 파일 정보 DB 삽입
+	 * @param atFile
+	 */
+	public void insertAt(List<Attachment> atList) {
+		sqlSession.insert("boardMapper.insertAt", atList);
+	}
 	
 
 	/** 특정 게시글 수정
@@ -85,6 +92,7 @@ public class boardDAO {
 	public int updateBoard(Board board) {
 		return sqlSession.update("boardMapper.updateBoard", board);
 	}
+
 
 	/** 특정 게시글 삭제
 	 * @param boardNo
@@ -109,6 +117,32 @@ public class boardDAO {
 	public int deleteAttachment(int boardNo) {
 		return sqlSession.delete("boardMapper.deleteAttachment", boardNo);
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/** 파일 정보 DB 수정
+	 * @param atFile
+	 */
+	public void updateAt(List<Attachment> atList) {
+		sqlSession.update("boardMapper.updateAt", atList);
+	}
+	/** 특정 게시글 일부 첨부 파일 정보 삭제
+	 * @param atList
+	 */
+	public void deleteAt(List<Attachment> atList) {
+		sqlSession.delete("boardMapper.deleteAt", atList);
+	}
+
+
+
+
 	
 	
 

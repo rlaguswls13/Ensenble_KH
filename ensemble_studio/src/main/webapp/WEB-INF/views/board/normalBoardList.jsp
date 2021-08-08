@@ -10,8 +10,7 @@
 
 	<!-- External CSS-->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
-<%--<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/normalBoardList.css">
- --%>
+	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/normalBoardList.css">
    
 </head>
 
@@ -28,7 +27,15 @@
 		
 		<h1>${pagination.boardName} 게시판</h1>
 			<div class="list-wrapper">
-				<table class="table table-hover table-striped my-5" id="list-table">
+				<form action="list" method="GET" class="text-center float-right" id="searchForm">
+						<div>
+							<c:forEach items="${typeList}" var="bCT">
+								<button class="btn btn-primary" id="searchForm" value="${bCT.boardCTNo}">${bCT.boardCTNm}</button>
+							</c:forEach>
+						</div>
+				</form>
+				<table class="table table-hover table-striped my-1" id="list-table">
+					
 					<thead>
 						<tr>
 							<th>No.</th>

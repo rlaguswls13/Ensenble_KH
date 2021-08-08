@@ -33,11 +33,11 @@
 	
 	<!-- 파일 정보 resultMap -->
 	<resultMap type="Attachment" id="attachment_rm">
-		<id property="attachmentNo" column="BOARD_AT_NO"/>
+		<id property="atNo" column="BOARD_AT_NO"/>
 		
-		<result property="attachmentLv" column="BOARD_AT_PATH"/>
-		<result property="attachmentPath" column="BOARD_AT_NM"/>
-		<result property="attachmentName" column="BOARD_AT_LV"/>
+		<result property="atLv" column="BOARD_AT_LV"/>
+		<result property="atPath" column="BOARD_AT_PATH"/>
+		<result property="atName" column="BOARD_AT_NM"/>
 		<result property="boardNo" column="BOARD_NO"/>
 		<result property="atCount" column="ATCOUNT"/>
 	</resultMap>
@@ -147,5 +147,47 @@
   		WHERE BOARD_NO = #{boardNo}
   		AND BOARD_STATUS = 'Y' 
   	</update>
+	
+	<!-- 게시글 첨부 파일 정보 삽입 -->
+	<insert id="insertAt" parameterType="list">
+		INSERT INTO BOARD_ATTACHMENT
+		SELECT SEQ_BANO.NEXTVAL, A.* FROM (
+
+		<foreach collection="list" item="at" separator=" UNION ALL ">
+			SELECT
+			#{at.atLv} BOARD_AT_LV,
+			#{at.atPath} BOARD_AT_PATH,
+			#{at.atName} BOARD_AT_NM,
+			#{at.boardNo} BOARD_NO FROM DUAL
+		</foreach>
+		) A
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	<!-- 게시글 첨부 파일 정보 수정 -->
+	<update id="updateAt" parameterType="list">
+		<foreach collection="list" item="at" separator=";" open="DECLARE BEGIN" close="; END;">
+			UPDATE BOARD_ATTACHMENT
+			SET
+			BOARD_AT_PATH = #{at.atPath},
+			BOARD_AT_NM = #{at.atName},
+			BOARD_AT_LV = #{at.atLv} ,
+			BOARD_NO =  #{at.boardNo}
+			WHERE BOARD_NO = #{at.boardNo} AND BOARD_AT_LV = #{at.atLv}
+		</foreach>
+	</update>
+	
+	<!-- 게시글 첨부 파일 정보 일부 삭제 -->
+	<delete id="deleteAt" parameterType="list">
+		DELETE FROM BOARD_ATTACHMENT WHERE
+			<foreach collection="list" item="at" open="" close="" separator="AND">
+				 (BOARD_NO = #{at.boardNo} AND BOARD_AT_LV NOT IN(#{at.atLv}))
+			</foreach>
+	</delete>
 	
 </mapper>

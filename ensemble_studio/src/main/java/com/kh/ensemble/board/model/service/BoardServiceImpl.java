@@ -1,8 +1,16 @@
 package com.kh.ensemble.board.model.service;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,23 +83,32 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectboardType(boardTypeNo);
 	}
 	
-	// 파일 서버 저장
+	// 파일 서버 저장(1)
 	@Override
 	public String uploadFile(MultipartFile file, String savePath) {
 		
 		String fileName = rename(file.getOriginalFilename());
 		String realPath = savePath + fileName;
-		
+			
+			try {
+				file.transferTo(new File(realPath));
+				return fileName;
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new SaveFileException();	
+			}
+	}
+	// 파일 서버 저장(2)
+	@Override
+	public String uploadFile(String url, String savePath) {
 		try {
-			file.transferTo(new File(realPath));
+			String fileName = saveImgFromUrl(url, savePath, null);
 			return fileName;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new SaveFileException();	
-		}		
+		}
 	}
-	
-	
 	
 	// 게시글 삽입
 	@Transactional(rollbackFor = Exception.class)
@@ -99,14 +116,30 @@ public class BoardServiceImpl implements BoardService {
 	public int insertBoard(Board board) {
 		return dao.insertBoard(board);
 	}
-	
+	// 파일 정보 DB 삽입
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public void insertAt(List<Attachment> atList) {
+		dao.insertAt(atList);
+	}
+		
+
 	// 게시글 수정
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int updateBoard(Board board) {
 		return dao.updateBoard(board);
 	}
-	
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void updateAt(List<Attachment> atList) {
+		dao.deleteAttachment(atList.get(0).getBoardNo());
+		dao.insertAt(atList);
+	}
+	@Override
+	public void updateAt(int boardNo) {
+		dao.deleteAttachment(boardNo);
+	}
 	// 게시글 삭제
 	@Transactional(rollbackFor = Exception.class)
 	@Override
@@ -130,15 +163,63 @@ public class BoardServiceImpl implements BoardService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String date = sdf.format(new java.util.Date(System.currentTimeMillis()));
 		
-		int ranNum = (int)(Math.random()*100000); // 5자리 랜덤 숫자 생성
+		int ranNum = (int)(Math.random()*100000);
 		
 		String str = "_" + String.format("%05d", ranNum);
+		String ext = null;
 		
-		String ext = originFileName.substring(originFileName.lastIndexOf("."));
+		// url이미지 이름 설정
+		String regex = "^http[s]?:.*";
+		boolean flag = Pattern.matches(regex, originFileName);
 		
-		return date + str + ext;
+		if(!flag) {
+			ext = originFileName.substring(originFileName.lastIndexOf("."));
+			return date + str + ext;
+		}else {
+			return date + str;
+		}
 	}
 	
 	
-	
+	// 이미지 URL 파일 저장
+	private String saveImgFromUrl(String url, String savePath, String reFileName) throws Exception {
+		
+		InputStream in = null;
+		OutputStream out = null;
+		URL reUrl = new URL(url);
+		
+		try {
+
+			// 헤더에서 파일 확장자 가져오기(content-type)
+			URLConnection urlConn = reUrl.openConnection();
+			String conType = urlConn.getContentType();
+			String conT[] = conType.split("/");
+			
+			// 파일네임 정하기
+			reFileName = rename(url);
+
+			in = urlConn.getInputStream();
+			out = new FileOutputStream(savePath + "/" + reFileName + "." + conT[1]);
+			
+			// 서버 저장
+			while (true) {
+				int data = in.read();
+				if (data == -1) break;
+				out.write(data);			
+			}
+			
+			in.close();
+			out.close();
+			
+			String fileName = reFileName + "." + conT[1];
+			return fileName;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new SaveFileException();
+		} finally {
+			if (in != null) in.close();
+			if (out != null) out.close();
+		}
+	}
 }

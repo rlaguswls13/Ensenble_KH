@@ -12,9 +12,8 @@ public class Attachment {
 	
 	
 	
-	public Attachment(int atNo, int atLv, String atPath, String atName, int boardNo) {
+	public Attachment(int atLv, String atPath, String atName, int boardNo) {
 		super();
-		this.atNo = atNo;
 		this.atLv = atLv;
 		this.atPath = atPath;
 		this.atName = atName;
