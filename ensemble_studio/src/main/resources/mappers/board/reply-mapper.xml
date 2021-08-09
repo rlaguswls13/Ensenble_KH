@@ -32,4 +32,49 @@
 		ORDER BY BOARD_REPLY_NO DESC
 	</select>
 	
+	<!--신고 댓글 목록 조회 -->
+	<select id="selectReportList" parameterType="Reply" resultMap="reply_rm">
+		SELECT BOARD_REPLY_NO, BOARD_REPLY_DT,
+				BOARD_REPLY_MT, 
+				BOARD_REPLY_CONTENT,
+				MEMBER_NO, MEMBER_NICK, MEMBER_IMAGE
+		FROM BOARD_REPLY
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE BOARD_REPLY_ST = 'R'
+		AND BOARD_NO = #{boardNo}
+		ORDER BY BOARD_REPLY_NO DESC
+	</select>
+	
+	<!-- 댓글 삽입 -->
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO BOARD_REPLY VALUES
+		(SEQ_BRNO.NEXTVAL, #{replyContent},
+		DEFAULT, DEFAULT, DEFAULT,
+		#{boardNo}, #{memberNo})
+	</insert>
+
+	<!-- 댓글 수정 -->
+	<update id="updateReply" parameterType="Reply">
+		UPDATE BOARD_REPLY SET
+		BOARD_REPLY_CONTENT = #{replyContent},
+		BOARD_REPLY_MT = DEFAULT
+		WHERE BOARD_REPLY_NO = #{replyNo}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<update id="deleteReply" parameterType="_int">
+		UPDATE BOARD_REPLY SET
+		BOARD_REPLY_ST = 'N'
+		WHERE BOARD_REPLY_NO = #{replyNo}
+	</update>
+	
+	<!-- 댓글 신고 -->
+	<update id="reportReply" parameterType="Reply">
+		UPDATE BOARD_REPLY SET
+		BOARD_REPLY_ST = 'R'
+		WHERE BOARD_REPLY_NO = #{replyNo}
+		AND MEMBER_NO != #{memberNo}
+		AND BOARD_REPLY_ST NOI IN('N', 'R')
+	</update>
+	
 </mapper>

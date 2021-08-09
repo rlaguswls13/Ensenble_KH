@@ -67,17 +67,14 @@
             <hr>
             <div class="" id="review_detail_context">
                 ${board.boardContent}
-            </div> 
-            
-            
-            <%-- 댓글 영역 --%>
+            </div>      
+      </form>
+      <%-- 댓글 영역 --%>
 			<jsp:include page="reply.jsp"/>
 			<hr>
             
             <a href="list?type=${param.type}&cp=${param.cp}${searchStr}"
-            	class="btn btn-primary float-right mr-2">목록으로</a>
-        </form>
-        
+            	class="btn btn-primary float-right mr-2">목록으로</a>  
         
         <!-- Modal -->
 		<div class="modal fade" id="boardDeleteBtn" tabindex="-1" role="dialog" aria-labelledby="boardDeleteBtnLabel" aria-hidden="true">
