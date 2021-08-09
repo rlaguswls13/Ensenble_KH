@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mainMapper">
+
+	 <resultMap type="Room" id="room_rm">
+	 	<id property="roomNo" column="ROOM_NO"/>
+ 		<result property="roomName" column="ROOM_NAME"/>	 
+ 		<result property="roomAbout" column="ROOM_ABOUT"/>	 
+ 		<result property="roomConfig" column="ROOM_CONFIG"/>	 
+ 		<result property="roomPrice" column="ROOM_PRICE"/>	 
+ 		<result property="roomDiscount" column="ROOM_DISCOUNT"/>	 
+ 		<result property="roomStatus" column="ROOM_STATUS"/>	 
+ 		
+ 		<collection property="atList" column="ROOM_NO" 
+		javaType="java.util.ArrayList" ofType="StudioAttachment" select="selectStudioAttachment"/>
+ 		
+	 </resultMap>
+	 
+	 <resultMap type="StudioAttachment" id="studio_attachment_rm">
+	 	<id property="fileNo" column="FILE_NO"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="fileType" column="FILE_TYPE"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="fileLevel" column="FILE_LEVEL"/>
+		<result property="roomNo" column="ROOM_NO"/>
+	 </resultMap>
+
+	<select id="selectStudioAttachment" parameterType="_int" resultMap="studio_attachment_rm">
+		SELECT*FROM STUDIO_ATTACHMENT 
+		WHERE ROOM_NO = #{roomNo}
+		ORDER BY FILE_LEVEL
+	</select>
+
+	<select id="selectRoomList" resultMap="room_rm">
+		SELECT A.* FROM
+	        (SELECT ROOM_NO, ROOM_NAME, ROOM_ABOUT, ROOM_CONFIG, 
+	                    ROOM_PRICE, ROOM_DISCOUNT, ROOM_STATUS, FILE_PATH, FILE_NAME 
+	        FROM STUDIO_ROOM
+			LEFT JOIN (SELECT*FROM STUDIO_ATTACHMENT WHERE FILE_LEVEL = 0)
+	        USING (ROOM_NO)
+	        WHERE ROOM_STATUS = 'Y'
+	        ORDER BY ROOM_NO) A
+		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+  
+</mapper>

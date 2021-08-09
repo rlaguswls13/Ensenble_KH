@@ -100,7 +100,7 @@ public class AdminController {
 							 RedirectAttributes ra,
 							 HttpServletRequest request) {
 		
-		String webPath ="resources/images/admin/studio";
+		String webPath ="resources/images/admin/studio/";
 		String savePath = request.getSession().getServletContext().getRealPath(webPath);
 		
 		int roomNo = service.insertRoom(room, images, webPath, savePath);

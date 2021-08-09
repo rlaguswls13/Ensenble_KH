@@ -41,6 +41,7 @@
 		SELECT * FROM MEMBER
 		WHERE MEMBER_GRADE = 'G'
 		AND MEMBER_PATH = 'G'
+		ORDER BY MEMBER_NO DESC
 	</select>
   
   	<select id="getMemberListCount" resultMap="pg_rm">
@@ -53,6 +54,7 @@
   	
   	<select id="roomList" parameterType="Pagination" resultMap="room_rm">
   		SELECT * FROM STUDIO_ROOM
+  		ORDER BY ROOM_NO DESC
   	</select>
   
   	<insert id="insertRoom" parameterType="Room" useGeneratedKeys="true">

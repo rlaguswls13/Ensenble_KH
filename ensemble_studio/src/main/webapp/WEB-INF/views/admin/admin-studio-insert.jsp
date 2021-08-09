@@ -67,9 +67,9 @@
         display: block;
         padding-bottom: 100%;
     }
-    .btn-beige{
+    .btn-ensemble{
     	color: black;
-        background-color: #F9F7EB;
+        background-color: #FDCDCD;
         padding-left: 25px; padding-right: 25px;
         float: right;
         padding-top : 10px; padding-bottom: 10px;
@@ -163,7 +163,7 @@
 				</div>
 				
 				<div style="text-align: right; margin-right:3%">
-	                <button class="btn btn-beige">추가하기</button>
+	                <button class="btn btn-ensemble">추가하기</button>
 	                <button type="button" class="btn btn-grey" id="cancelBtn">취소하기</button>
             	</div>
             

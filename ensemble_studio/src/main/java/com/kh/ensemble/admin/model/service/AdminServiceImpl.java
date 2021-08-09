@@ -81,7 +81,7 @@ public class AdminServiceImpl implements AdminService{
 			for(int i=0; i<images.size(); i++) {
 				if(!images.get(i).getOriginalFilename().equals("")) {
 					
-					String fileName = room.getRoomName()+"_"+rename(images.get(i).getOriginalFilename());
+					String fileName = rename(images.get(i).getOriginalFilename());
 					
 					StudioAttachment a = new StudioAttachment();
 					a.setFileLevel(i);
@@ -101,8 +101,11 @@ public class AdminServiceImpl implements AdminService{
 			
 			if (!atList.isEmpty()) {
 				int result = dao.insertAttachment(atList);
+				System.out.println("atList.size() : "+atList.size());
+				System.out.println("result : "+result);
+				
 				if(atList.size()==result) {
-					// 파일을 서버에 저장(transfer())
+					// 파일을 서버에 저장(transferTo())
 					for(int i=0; i<atList.size(); i++) {
 						try {
 							images.get(atList.get(i).getFileLevel())
