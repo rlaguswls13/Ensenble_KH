@@ -6,8 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비밀번호 찾기 결과</title>
-<!-- CSS -->
+<title>아이디 찾기 결과</title>
 <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet"
@@ -35,12 +34,12 @@
 			</div>
 
 			<div class="find_content">
-				<div class="findView_title">비밀번호 찾기</div>
+				<div class="findView_title">아이디 찾기</div>
 				<div class="form-group findView_text">
-					비밀번호가 입력하신 이메일 주소로 전송되었습니다. 
+					${findMember.memberNick}님의 아이디는 ${findMember.memberId}입니다.
 					<div class="btn-area">
-					<button type="submit" class="btn main-btn"
-						onclick="location.href='/ensemble'">메인 페이지로 이동</button>
+						<button type="submit" class="btn main-btn"
+							onclick="location.href='${contextPath}'">메인 페이지로 이동</button>
 					</div>
 				</div>
 			</div>

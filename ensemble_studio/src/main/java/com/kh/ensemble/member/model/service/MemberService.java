@@ -78,7 +78,15 @@ public interface MemberService {
 	 * @param response
 	 * @param member
 	 */
-	public abstract int findPwd(HttpServletResponse response, Member member) throws Exception;
+	public abstract int findPwd(HttpServletResponse response, Member findMember) throws Exception;
+
+
+	/** 아이디 찾기 Service
+	 * @param inputName
+	 * @param inputEmail
+	 * @return result
+	 */
+	public abstract String findId(Member findMember) throws Exception;
 
 
 

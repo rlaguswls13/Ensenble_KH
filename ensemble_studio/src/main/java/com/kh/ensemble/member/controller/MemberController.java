@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,7 +75,7 @@ public class MemberController {
 			session.setAttribute("icon", "error");
 			session.setAttribute("title", "로그인 실패");
 			session.setAttribute("text", "아이디 또는 비밀번호를 확인해주세요.");
- 
+
 		}
 
 		return "redirect:/";
@@ -165,8 +166,8 @@ public class MemberController {
 			if (!file.getOriginalFilename().equals("")) { // 업로드된 이미지가 있을 때
 				loginMember.setMemberImage("/resources/images/member/" + fileName);
 			}
-			
-			if(deleteCheck == 1) {
+
+			if (deleteCheck == 1) {
 				loginMember.setMemberImage("/resources/images/common/profile-img-default.png");
 			}
 
@@ -206,94 +207,114 @@ public class MemberController {
 	}
 
 	// 회원 탈퇴 화면 전환 Controller
-	@RequestMapping(value="secession", method=RequestMethod.GET) 
+	@RequestMapping(value = "secession", method = RequestMethod.GET)
 	public String secession() {
 		return "member/secession";
 	}
-	
-	
+
 	// 회원 탈퇴 화면 전환 Controller
-	@RequestMapping(value="secession", method=RequestMethod.POST) 
-	public String secession( @RequestParam("currentPwd") String currentPwd,
-							@ModelAttribute("loginMember") Member loginMember,
-							RedirectAttributes ra,
-							SessionStatus status) {
-	 
+	@RequestMapping(value = "secession", method = RequestMethod.POST)
+	public String secession(@RequestParam("currentPwd") String currentPwd,
+			@ModelAttribute("loginMember") Member loginMember, RedirectAttributes ra, SessionStatus status) {
+
 		int result = service.secession(currentPwd, loginMember);
-		
+
 		String path = "redirect:";
-		
+
 		System.out.println(result);
-		if(result > 0) {
+		if (result > 0) {
 			swalSetMessage(ra, "success", "이용해주셔서 감사합니다.", null);
 			status.setComplete(); // 세션 만료
 			path += "/"; // 메인 페이지
-		} else { 
+		} else {
 			swalSetMessage(ra, "error", "회원 탈퇴 실패", null);
 			path += "secession";
 		}
 		return path;
 	}
-	
+
 	// 아이디/비밀번호 찾기 화면 전환 Controller
-	@RequestMapping(value="findIdPwd", method=RequestMethod.GET)
+	@RequestMapping(value = "findIdPwd", method = RequestMethod.GET)
 	public String findIdPwd() {
 		return "member/findIdPwd";
 	}
-	
-	
-	/*
-	 * // 아이디 찾기 Controller
-	 * 
-	 * @RequestMapping(value="findId", method=RequestMethod.POST) public String
-	 * findId(HttpServletResponse response, String inputName, String inputEmail,
-	 * Model model ) {
-	 * 
-	 * return "member/findIdPwdView";
-	 * 
-	 * }
-	 */
-	
+
+	// 아이디 찾기 Controller
+	@RequestMapping(value = "findId", method = RequestMethod.POST)
+	public String findId(HttpServletResponse response, @RequestParam("inputNick") String inputNick,
+			@RequestParam("inputEmail") String inputEmail, Model model, @ModelAttribute Member findMember,
+			RedirectAttributes ra) throws Exception {
+
+		findMember.setMemberEmail(inputEmail);
+		findMember.setMemberNick(inputNick);
+
+		//System.out.println(findMember.getMemberNick());
+		//System.out.println(findMember.getMemberEmail());
+		
+		String path = "redirect:";
+		String result = service.findId(findMember);
+		
+
+		// 일치하는 아이디가 없을 때
+		if (result == null) {
+			swalSetMessage(ra, "error", "일치하는 아이디가 없습니다.", null);
+			path += "findIdPwd";
+
+		} else { // 일치하는 아이디가 있을 때
+			result = result.replaceAll("(?<=.{3}).", "*");
+			
+			findMember.setMemberId(result);
+			
+			model.addAttribute("findMember", findMember);
+			
+			path += "findIdView";
+		}
+
+		//System.out.println(findMember);
+		return path;
+
+	}
+
+
 	// 비밀번호 찾기 Controller
-	@RequestMapping(value="findPwd", method=RequestMethod.POST)
-	public String findPwd( @ModelAttribute Member member, 
-						 @RequestParam("inputId") String inputId, 
-						 @RequestParam("inputEmail") String inputEmail,
-						 RedirectAttributes ra, HttpServletResponse response) throws Exception{
-		
-		member.setMemberId(inputId);
-		member.setMemberEmail(inputEmail);
-		
+	@RequestMapping(value = "findPwd", method = RequestMethod.POST)
+	public String findPwd(@ModelAttribute Member findMember, @RequestParam("inputId") String inputId,
+			@RequestParam("inputEmail") String inputEmail, RedirectAttributes ra, HttpServletResponse response)
+			throws Exception {
+
+		findMember.setMemberId(inputId);
+		findMember.setMemberEmail(inputEmail);
+
 		int result = 0;
 		String path = "redirect:";
-		
+
 		// 비번 변경
-		result = service.findPwd(response, member);
-		
-		if(result == 2) {
-			swalSetMessage(ra, "error", "등록되지 않은 아이디입니다.", null);
-		} else if(result == 3) {
-			swalSetMessage(ra, "error", "등록되지 않은 이메일입니다.", null);
-		} else if(result == 1) {
+		result = service.findPwd(response, findMember);
+
+		if (result == 2) {
+			swalSetMessage(ra, "error", "등록되지 않은 아이디입니다.", "다시 확인해주세요.");
+			path += "findIdPwd";
+
+		} else if (result == 3) {
+			swalSetMessage(ra, "error", "등록되지 않은 이메일입니다.", "다시 확인해주세요.");
+			path += "findIdPwd";
+
+		} else if (result == 1) {
 			path += "findPwdView";
 		} else {
 			swalSetMessage(ra, "error", "비밀번호 찾기 실패", "고객센터에 문의해주세요.");
 			path += "/";
 		}
-			
-		
+
 		return path;
 	}
-	
+
 	// 비번찾기 결과 화면 전환 Controller
-	@RequestMapping(value="findPwdView", method=RequestMethod.GET) 
-	public String findPwdVidw() {
+	@RequestMapping(value = "findPwdView", method = RequestMethod.GET)
+	public String findPwdView() {
 		return "member/findPwdView";
 	}
-	
-	
-	
-	
+
 	// SweetAlert를 이용한 메세지 전달용 메소드
 	public static void swalSetMessage(RedirectAttributes ra, String icon, String title, String text) {
 		// RedirectAttributes : 리다이렉트 시 값을 전달하는 용도의 객체

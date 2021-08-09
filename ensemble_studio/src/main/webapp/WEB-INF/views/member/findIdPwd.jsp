@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디/비밀번호 찾기</title>
-<!-- CSS -->
+
 <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css'
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet"
@@ -21,7 +21,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
 	crossorigin="anonymous"></script>
-
+<!-- 스왈창 -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- CSS -->
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/member/findIdPwd.css"
 	type="text/css" />
@@ -31,7 +33,8 @@
 	<div class="container">
 		<div class="find_body">
 			<div class="logo col-md-12">
-				<img src="${contextPath}/resources/images/common/logo.png" width="30%" height="30%" onclick="location.href='/ensemble'">
+				<img src="${contextPath}/resources/images/common/logo.png"
+					width="30%" height="30%" onclick="location.href='/ensemble'">
 			</div>
 			<nav>
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -54,10 +57,11 @@
 									찾을 수 있습니다.</div>
 
 								<hr>
-								<div class="form-group" id="nameform">
-									<div class="name1">이름</div>
-									<input type="text" class="form-control input" id="inputName"
-										name="inputName" placeholder="이름을 입력해주세요." required="required">
+								<div class="form-group" id="nickForm">
+									<div class="name1">닉네임</div>
+									<input type="text" class="form-control input" id="inputNick"
+										name="inputNick" placeholder="닉네임을 입력해주세요."
+										required="required">
 								</div>
 								<div class="form-group" id="emailform">
 									<div class="email1">이메일</div>
@@ -82,8 +86,7 @@
 								<div class="form-group" id="idform">
 									<div class="id1">아이디</div>
 									<input type="text" class="form-control input" id="inputId"
-										name="inputId" placeholder="아이디를 입력해주세요."
-										 required="required">
+										name="inputId" placeholder="아이디를 입력해주세요." required="required">
 								</div>
 								<div class="form-group" id="emailform">
 									<div class="email1">이메일</div>
@@ -102,5 +105,18 @@
 
 		</div>
 	</div>
+
+	<c:if test="${!empty title }">
+		<script>
+			swal({
+				"icon" : "${icon}",
+				"title" : "${title}",
+				"text" : "${text}"
+			});
+		</script>
+		<c:remove var="icon" />
+		<c:remove var="title" />
+		<c:remove var="text" />
+	</c:if>
 </body>
 </html>
