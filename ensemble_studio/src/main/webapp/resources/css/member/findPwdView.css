@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.container {
+	margin: auto;
+	box-sizing: border-box;
+	width: 1000px;
+}
+
+div {
+	color: black;
+}
+
+h5 {
+	color: black;
+}
+
+.find_body {
+	width: 60%;
+	text-align: center;
+	margin: auto;
+}
+
+.logo {
+	text-align: center;
+	margin: auto;
+}
+
+.find_content {
+	border: 1px solid #e2e2e2;
+}
+
+.findView_title {
+	text-align: left;
+	border-bottom: 1px solid #e2e2e2;
+	color: lightslategrey;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	font-size: 18px;
+}
+
+.findView_text {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.main-btn {
+	width: 160px;
+	font-size: 15px;
+	background-color: #FDCDCD;
+	display: inline-block;
+	margin-left: 10px;
+	margin-top: 20px;
+}

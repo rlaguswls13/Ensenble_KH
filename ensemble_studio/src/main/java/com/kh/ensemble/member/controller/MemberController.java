@@ -138,7 +138,7 @@ public class MemberController {
 	@RequestMapping(value = "updateMember", method = RequestMethod.POST)
 	public String updateMember(@ModelAttribute("loginMember") Member loginMember, String inputEmail, String inputPhone,
 			String inputNick, @RequestParam("file") MultipartFile file, Member inputMember, RedirectAttributes ra,
-			HttpServletRequest request) {
+			HttpServletRequest request, int deleteCheck) {
 
 		inputMember.setMemberNo(loginMember.getMemberNo());
 		inputMember.setMemberEmail(inputEmail);
@@ -157,13 +157,17 @@ public class MemberController {
 		}
 
 		// 회원 정보 수정 Service
-		int result = service.updateMember(inputMember, savePath, file, fileName);
+		int result = service.updateMember(inputMember, savePath, file, fileName, deleteCheck);
 
 		if (result > 0) {
 			swalSetMessage(ra, "success", "회원정보 수정 성공!", null);
 
 			if (!file.getOriginalFilename().equals("")) { // 업로드된 이미지가 있을 때
 				loginMember.setMemberImage("/resources/images/member/" + fileName);
+			}
+			
+			if(deleteCheck == 1) {
+				loginMember.setMemberImage("/resources/images/common/profile-img-default.png");
 			}
 
 			loginMember.setMemberEmail(inputEmail);
@@ -230,8 +234,66 @@ public class MemberController {
 		}
 		return path;
 	}
-	 
-
+	
+	// 아이디/비밀번호 찾기 화면 전환 Controller
+	@RequestMapping(value="findIdPwd", method=RequestMethod.GET)
+	public String findIdPwd() {
+		return "member/findIdPwd";
+	}
+	
+	
+	/*
+	 * // 아이디 찾기 Controller
+	 * 
+	 * @RequestMapping(value="findId", method=RequestMethod.POST) public String
+	 * findId(HttpServletResponse response, String inputName, String inputEmail,
+	 * Model model ) {
+	 * 
+	 * return "member/findIdPwdView";
+	 * 
+	 * }
+	 */
+	
+	// 비밀번호 찾기 Controller
+	@RequestMapping(value="findPwd", method=RequestMethod.POST)
+	public String findPwd( @ModelAttribute Member member, 
+						 @RequestParam("inputId") String inputId, 
+						 @RequestParam("inputEmail") String inputEmail,
+						 RedirectAttributes ra, HttpServletResponse response) throws Exception{
+		
+		member.setMemberId(inputId);
+		member.setMemberEmail(inputEmail);
+		
+		int result = 0;
+		String path = "redirect:";
+		
+		// 비번 변경
+		result = service.findPwd(response, member);
+		
+		if(result == 2) {
+			swalSetMessage(ra, "error", "등록되지 않은 아이디입니다.", null);
+		} else if(result == 3) {
+			swalSetMessage(ra, "error", "등록되지 않은 이메일입니다.", null);
+		} else if(result == 1) {
+			path += "findPwdView";
+		} else {
+			swalSetMessage(ra, "error", "비밀번호 찾기 실패", "고객센터에 문의해주세요.");
+			path += "/";
+		}
+			
+		
+		return path;
+	}
+	
+	// 비번찾기 결과 화면 전환 Controller
+	@RequestMapping(value="findPwdView", method=RequestMethod.GET) 
+	public String findPwdVidw() {
+		return "member/findPwdView";
+	}
+	
+	
+	
+	
 	// SweetAlert를 이용한 메세지 전달용 메소드
 	public static void swalSetMessage(RedirectAttributes ra, String icon, String title, String text) {
 		// RedirectAttributes : 리다이렉트 시 값을 전달하는 용도의 객체

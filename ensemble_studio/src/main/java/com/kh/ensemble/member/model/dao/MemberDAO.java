@@ -1,5 +1,7 @@
 package com.kh.ensemble.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -81,5 +83,33 @@ public class MemberDAO {
 
 		return sqlSession.update("memberMapper.secession", loginMember);
 	}
+
+
+	/** 회원 이미지 삭제
+	 * @param memberNo
+	 * @return result
+	 */
+	public int deleteMemberImage(int memberNo) {
+		return sqlSession.update("memberMapper.deleteMemberImage", memberNo);
+	}
+
+
+	/** 비밀번호 변경
+	 * @param member
+	 */
+	public int updatePwd(Member member) {
+		return sqlSession.update("memberMapper.updatePwd", member);
+		
+	}
+
+
+	/** 비번 찾기 회원 정보 조회
+	 * @param memberId
+	 * @return result
+	 */
+	public List<Object> readMember(String memberId) {
+		return sqlSession.selectList("memberMapper.readMember", memberId);
+	}
+
 
 }

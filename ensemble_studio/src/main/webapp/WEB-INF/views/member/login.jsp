@@ -27,7 +27,7 @@
     <div class="container">
         <div class="login_body row">
             <div class="logo col-md-12">
-                <img src="${contextPath}/resources/images/common/logo.png" width="30%" height="30%">
+                <img src="${contextPath}/resources/images/common/logo.png" width="30%" height="30%" onclick="location.href='/ensemble'">
             </div>
             <form class="row login_Form" action="login" method="POST"
                 onsubmit="return loginValidate();">
@@ -58,7 +58,7 @@
                 <div class="login_line col-md-12">
                     <hr>
                 </div>
-                <p class="mt-2 col-md-6 findId"><a href="#" class="login_bottom">ID/PW 찾기</a></p>
+                <p class="mt-2 col-md-6 findId"><a href="${contextPath}/member/findIdPwd" class="login_bottom">ID/PW 찾기</a></p>
                 <p class="mt-2 col-md-6"><a href="${contextPath}/member/signUp" class="login_bottom">회원가입</a></p>
             </form>
         </div>
