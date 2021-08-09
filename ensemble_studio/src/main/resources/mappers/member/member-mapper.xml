@@ -95,7 +95,7 @@
 	<!-- 비번 찾기 가입 회원 조회 -->
 	<select id="readMember" parameterType="Member" resultType="string">
 	SELECT * FROM MEMBER
-	WHERE MEMBER_ID = #{inputId}
+	WHERE MEMBER_ID = #{memberId}
 	</select>
 	
 	<!-- 비번 찾기 임시 비번으로 변경 -->

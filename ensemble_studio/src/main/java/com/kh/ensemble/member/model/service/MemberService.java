@@ -63,6 +63,8 @@ public interface MemberService {
 	 * @param loginMember
 	 * @return result
 	 */
+	
+	
 	public abstract int secession(String currentPwd, Member loginMember);
 
 	/** 이메일 발송 Service
@@ -76,7 +78,7 @@ public interface MemberService {
 	 * @param response
 	 * @param member
 	 */
-	public abstract void findPwd(HttpServletResponse response, Member member) throws Exception;
+	public abstract int findPwd(HttpServletResponse response, Member member) throws Exception;
 
 
 

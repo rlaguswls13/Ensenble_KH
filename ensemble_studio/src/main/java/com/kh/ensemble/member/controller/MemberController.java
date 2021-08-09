@@ -256,8 +256,39 @@ public class MemberController {
 	
 	// 비밀번호 찾기 Controller
 	@RequestMapping(value="findPwd", method=RequestMethod.POST)
-	public void findPwd( @ModelAttribute Member member, HttpServletResponse response) throws Exception{
-		service.findPwd(response, member);
+	public String findPwd( @ModelAttribute Member member, 
+						 @RequestParam("inputId") String inputId, 
+						 @RequestParam("inputEmail") String inputEmail,
+						 RedirectAttributes ra, HttpServletResponse response) throws Exception{
+		
+		member.setMemberId(inputId);
+		member.setMemberEmail(inputEmail);
+		
+		int result = 0;
+		String path = "redirect:";
+		
+		// 비번 변경
+		result = service.findPwd(response, member);
+		
+		if(result == 2) {
+			swalSetMessage(ra, "error", "등록되지 않은 아이디입니다.", null);
+		} else if(result == 3) {
+			swalSetMessage(ra, "error", "등록되지 않은 이메일입니다.", null);
+		} else if(result == 1) {
+			path += "findPwdView";
+		} else {
+			swalSetMessage(ra, "error", "비밀번호 찾기 실패", "고객센터에 문의해주세요.");
+			path += "/";
+		}
+			
+		
+		return path;
+	}
+	
+	// 비번찾기 결과 화면 전환 Controller
+	@RequestMapping(value="findPwdView", method=RequestMethod.GET) 
+	public String findPwdVidw() {
+		return "member/findPwdView";
 	}
 	
 	

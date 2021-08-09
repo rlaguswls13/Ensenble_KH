@@ -1,5 +1,7 @@
 package com.kh.ensemble.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -105,8 +107,8 @@ public class MemberDAO {
 	 * @param memberId
 	 * @return result
 	 */
-	public Member readMember(String memberId) {
-		return sqlSession.selectOne("memberMapper.readMember", memberId);
+	public List<Object> readMember(String memberId) {
+		return sqlSession.selectList("memberMapper.readMember", memberId);
 	}
 
 

@@ -31,7 +31,7 @@
 	<div class="container">
 		<div class="find_body">
 			<div class="logo col-md-12">
-				<img src="${contextPath}/resources/images/common/logo.png" width="30%" height="30%">
+				<img src="${contextPath}/resources/images/common/logo.png" width="30%" height="30%" onclick="location.href='/ensemble'">
 			</div>
 			<nav>
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -83,7 +83,7 @@
 									<div class="id1">아이디</div>
 									<input type="text" class="form-control input" id="inputId"
 										name="inputId" placeholder="아이디를 입력해주세요."
-										" required="required">
+										 required="required">
 								</div>
 								<div class="form-group" id="emailform">
 									<div class="email1">이메일</div>

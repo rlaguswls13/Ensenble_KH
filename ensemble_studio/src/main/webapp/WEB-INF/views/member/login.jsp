@@ -27,7 +27,7 @@
     <div class="container">
         <div class="login_body row">
             <div class="logo col-md-12">
-                <img src="${contextPath}/resources/images/common/logo.png" width="30%" height="30%">
+                <img src="${contextPath}/resources/images/common/logo.png" width="30%" height="30%" onclick="location.href='/ensemble'">
             </div>
             <form class="row login_Form" action="login" method="POST"
                 onsubmit="return loginValidate();">
