@@ -10,7 +10,8 @@
  		<result property="roomPrice" column="ROOM_PRICE"/>	 
  		<result property="roomDiscount" column="ROOM_DISCOUNT"/>	 
  		<result property="roomStatus" column="ROOM_STATUS"/>	 
- 		<result property="roomPrimaryOption" column="ROOM_PRIMARY_OPTION"/>	 
+ 		<result property="roomPrimaryOption" column="ROOM_PRIMARY_OPTION"/>	
+ 		<result property="roomHref" column="ROOM_HREF"/>	  
  		
  		<collection property="atList" column="ROOM_NO" 
 		javaType="java.util.ArrayList" ofType="StudioAttachment" select="selectStudioAttachment"/>
@@ -34,8 +35,8 @@
 
 	<select id="selectRoomList" resultMap="room_rm">
 		SELECT A.* FROM
-	        (SELECT ROOM_NO, ROOM_NAME, ROOM_ABOUT, ROOM_CONFIG, 
-	                    ROOM_PRICE, ROOM_DISCOUNT, ROOM_STATUS, FILE_PATH, FILE_NAME 
+	        (SELECT ROOM_NO, ROOM_NAME, ROOM_ABOUT, ROOM_HREF,
+	                ROOM_STATUS, FILE_PATH, FILE_NAME 
 	        FROM STUDIO_ROOM
 			LEFT JOIN (SELECT*FROM STUDIO_ATTACHMENT WHERE FILE_LEVEL = 0)
 	        USING (ROOM_NO)
@@ -44,10 +45,10 @@
 		WHERE ROWNUM BETWEEN 1 AND 3
 	</select>
 	
-	<select id="selectRoom" parameterType="_int" resultMap="room_rm">
+	<select id="selectRoom" parameterType="string" resultMap="room_rm">
 		SELECT*FROM STUDIO_ROOM
 	    WHERE ROOM_STATUS = 'Y'
-	    AND ROOM_NO = #{roomNo}
+	    AND ROOM_HREF = #{roomHref}
 	</select>
   
 </mapper>

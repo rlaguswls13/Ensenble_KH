@@ -18,8 +18,8 @@ public class MainDAO {
 		return sqlSession.selectList("mainMapper.selectRoomList");
 	}
 
-	public Room selectRoom(int roomNo) {
-		return sqlSession.selectOne("mainMapper.selectRoom", roomNo);
+	public Room selectRoom(String roomHref) {
+		return sqlSession.selectOne("mainMapper.selectRoom", roomHref);
 	}
 	
 	

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>관리자페이지 상품등록</title>
+    <title>관리자페이지 상품 수정</title>
     <jsp:include page="admin-header.jsp"></jsp:include>
 </head>
 <style>
@@ -95,59 +95,63 @@
 <body>
     <div class="main_bg">
         <div class="main_content">
-            <h2>상품 등록</h2>
+            <h2>상품 수정</h2>
             <div style="padding: 5px;"></div>
 
-            <form action="insert" method="POST" enctype="multipart/form-data" role="form">
+            <form action="${room.roomNo}" method="POST" enctype="multipart/form-data" role="form">
+
+                <div class="prod-text">상품 번호</div>
+                <span>${room.roomNo }</span>
+                <div style="padding: 10px;"></div>
 
                 <div class="prod-text">상품 이름</div>
-                <input type="text" class="form-control prod-input-min" name="roomName" id="roomName" required>
+                <input type="text" class="form-control prod-input-min" name="roomName" id="roomName" value="${room.roomName}" required>
                 <div style="padding: 10px;"></div>
 
                 <div class="prod-text" >설명</div>
-                <textarea class="form-control prod-textarea" name="roomAbout" id="roomAbout" rows="6" required></textarea>
+                <textarea class="form-control prod-textarea" name="roomAbout" id="roomAbout" rows="6" required>${room.roomAbout}</textarea>
                 <div style="padding: 10px;"></div>
 
                 <div class="prod-text" >구성</div>
-                <input type="text" class="form-control prod-input-med" name="roomConfig" id="roomConfig" required>
+                <input type="text" class="form-control prod-input-med" name="roomConfig" id="roomConfig" value="${room.roomConfig}" required>
                 <div style="padding: 10px;"></div>
 
                 <div class="prod-text">정상가</div>
-                <input type="number" class="form-control prod-input-min" name="roomPrice" id="roomPrice" required>
+                <input type="number" class="form-control prod-input-min" name="roomPrice" id="roomPrice" value="${room.roomPrice}" required>
                 <div style="padding: 10px;"></div>
                 
                 <div class="prod-text">할인률</div>
-                <input type="number" class="form-control prod-input-min" name="roomDiscount" id="roomDiscount" value="0"  required>
+                <input type="number" class="form-control prod-input-min" name="roomDiscount" id="roomDiscount" value="${room.roomDiscount }"  required>
                 <div style="padding: 10px;"></div>
 
                 <div class="prod-text" >기본 옵션</div>
-                <input type="text" class="form-control prod-input-med" id="roomOpt" name="roomPrimaryOption" required> 
+                <input type="text" class="form-control prod-input-med" id="roomOpt" name="roomPrimaryOption" value="${room.roomPrimaryOption}" required> 
                 <div style="padding: 10px;"></div>
                 
                 <div class="prod-text" >연결 주소</div>
                 <span>ensemble/studio/</span>
-                <input type="text" class="form-control prod-input-min" name="roomHref" required> 
+                <input type="text" class="form-control prod-input-min" name="roomHref" value="${room.roomHref}" required> 
                 <div style="padding: 10px;"></div>
 
                 <div class="prod-text">메인 사진</div>
                 <div class="img-box">
-                    <div class="img main-img1" style="background-image: url();"></div>
-                    <div class="img main-img2" style="background-image: url();"></div>
-                    <div  class="img main-img2" style="background-image: url(); float: right;"></div>
+                    <div class="img main-img1" style="background-image: url('${contextPath}/${room.atList[0].filePath}${room.atList[0].fileName}');"></div>
+                    <div class="img main-img2" style="background-image: url('${contextPath}/${room.atList[1].filePath}${room.atList[1].fileName}');"></div>
+                    <div  class="img main-img2" style="background-image: url('${contextPath}/${room.atList[2].filePath}${room.atList[2].fileName}'); float: right;"></div>
                 </div>
                 <div style="padding: 10px;"></div>
 
                 <div class="prod-text">추가사진 <br>(9개)</div>
                 <div class="img-box">
-                    <div class="img imgs9" style="background-image: url();"></div>
-                    <div class="img imgs9" style="background-image: url();"></div>
-                    <div class="img imgs9" style="background-image: url();"></div>
-                    <div class="img imgs9" style="background-image: url();"></div>
-                    <div class="img imgs9" style="background-image: url();"></div>
-                    <div class="img imgs9" style="background-image: url();"></div>
-                    <div class="img imgs9" style="background-image: url();"></div>
-                    <div class="img imgs9" style="background-image: url();"></div>
-                    <div class="img imgs9" style="background-image: url();"></div>
+                    <div class="img imgs9" style="background-image: url('${contextPath}/${room.atList[3].filePath}${room.atList[3].fileName}');"></div>
+                    <div class="img imgs9" style="background-image: url('${contextPath}/${room.atList[4].filePath}${room.atList[4].fileName}');"></div>
+                    <div class="img imgs9" style="background-image: url('${contextPath}/${room.atList[5].filePath}${room.atList[5].fileName}');"></div>
+                    <div class="img imgs9" style="background-image: url('${contextPath}/${room.atList[6].filePath}${room.atList[6].fileName}');"></div>
+                    <div class="img imgs9" style="background-image: url('${contextPath}/${room.atList[7].filePath}${room.atList[7].fileName}');"></div>
+                    <div class="img imgs9" style="background-image: url('${contextPath}/${room.atList[8].filePath}${room.atList[8].fileName}');"></div>
+                    <div class="img imgs9" style="background-image: url('${contextPath}/${room.atList[9].filePath}${room.atList[9].fileName}');"></div>
+                    <div class="img imgs9" style="background-image: url('${contextPath}/${room.atList[10].filePath}${room.atList[10].fileName}');"></div>
+                    <div class="img imgs9" style="background-image: url('${contextPath}/${room.atList[11].filePath}${room.atList[11].fileName}');"></div>
                 </div>
                 <div style="padding: 10px;"></div>
 
@@ -168,7 +172,7 @@
 				</div>
 				
 				<div style="text-align: right; margin-right:3%">
-	                <button class="btn btn-ensemble">추가하기</button>
+	                <button class="btn btn-ensemble">수정하기</button>
 	                <button type="button" class="btn btn-grey" id="cancelBtn">취소하기</button>
             	</div>
             

@@ -14,6 +14,7 @@ public class Room {
 	private String roomStatus;
 	private List<StudioAttachment> atList;
 	private String roomPrimaryOption;
+	private String roomHref;
 	
 	public Room() {
 	}
@@ -104,14 +105,23 @@ public class Room {
 		this.roomPrimaryOption = roomPrimaryOption;
 	}
 
+	public String getRoomHref() {
+		return roomHref;
+	}
+
+	public void setRoomHref(String roomHref) {
+		this.roomHref = roomHref;
+	}
+
 	@Override
 	public String toString() {
 		return "Room [roomNo=" + roomNo + ", roomName=" + roomName + ", roomAbout=" + roomAbout + ", roomConfig="
 				+ roomConfig + ", roomPrice=" + roomPrice + ", roomDiscount=" + roomDiscount + ", roomDiscountedPrice="
 				+ roomDiscountedPrice + ", roomStatus=" + roomStatus + ", atList=" + atList + ", roomPrimaryOption="
-				+ roomPrimaryOption + "]";
+				+ roomPrimaryOption + ", roomHref=" + roomHref + "]";
 	}
 
+	
 	
 	
 	

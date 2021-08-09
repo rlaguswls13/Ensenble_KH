@@ -89,7 +89,7 @@ select {
 					<c:forEach items="${rList}" var="r">
 						<tr style="text-align: center;">
 							<th scope="row">${r.roomNo }</th>
-							<td><a href="#" style="color: black;">${r.roomName }</a></td>
+							<td><a href="studio/update/${r.roomNo}" style="color: black;">${r.roomName }</a></td>
 							<td>${r.roomPrice }</td>
 							<td>${r.roomDiscountedPrice }</td>
 							<td>

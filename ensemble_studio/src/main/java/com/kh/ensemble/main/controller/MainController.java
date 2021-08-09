@@ -30,10 +30,10 @@ public class MainController {
 		return "main"; 
 	}
 	
-	@RequestMapping("/studio/{roomNo}")
-	public String studioView(@PathVariable("roomNo") int roomNo, Model model) {
+	@RequestMapping("/studio/{roomHref}")
+	public String studioView(@PathVariable("roomHref") String roomHref, Model model) {
 		
-		Room room = service.selectRoom(roomNo);
+		Room room = service.selectRoom(roomHref);
 		model.addAttribute("room", room);
 		
 		return "common/studioView";

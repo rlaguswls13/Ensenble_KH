@@ -24,4 +24,8 @@ public interface AdminService {
 
 	int updateRoomStatus(Room room);
 
+	Room selectRoom(int roomNo);
+
+	int updateRoom(Room room, List<MultipartFile> images, String webPath, String savePath);
+
 }

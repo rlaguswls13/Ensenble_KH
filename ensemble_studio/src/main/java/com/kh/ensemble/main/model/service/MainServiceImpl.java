@@ -19,9 +19,10 @@ public class MainServiceImpl implements MainService{
 		return dao.selectRoomList();
 	}
 
+
 	@Override
-	public Room selectRoom(int roomNo) {
-		return dao.selectRoom(roomNo);
+	public Room selectRoom(String roomHref) {
+		return dao.selectRoom(roomHref);
 	}
 	
 }
