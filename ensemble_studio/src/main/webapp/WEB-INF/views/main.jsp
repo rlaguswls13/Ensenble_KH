@@ -61,7 +61,7 @@
                     <div class="card-img" style="background-image: url('${contextPath}/${r.atList[0].filePath}${r.atList[0].fileName}');"></div>
                     <div class="container card-text1">${r.roomName}</div>
 
-                    <a href="#" class="btn btn-ensemble">예약하기</a>
+                    <a href="${contextPath}/reservation/rvStatus" class="btn btn-ensemble">예약하기</a>
 
 
                     <div style="padding:15px;"></div>
