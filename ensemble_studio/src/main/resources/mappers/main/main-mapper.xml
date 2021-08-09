@@ -10,6 +10,7 @@
  		<result property="roomPrice" column="ROOM_PRICE"/>	 
  		<result property="roomDiscount" column="ROOM_DISCOUNT"/>	 
  		<result property="roomStatus" column="ROOM_STATUS"/>	 
+ 		<result property="roomPrimaryOption" column="ROOM_PRIMARY_OPTION"/>	 
  		
  		<collection property="atList" column="ROOM_NO" 
 		javaType="java.util.ArrayList" ofType="StudioAttachment" select="selectStudioAttachment"/>
@@ -41,6 +42,12 @@
 	        WHERE ROOM_STATUS = 'Y'
 	        ORDER BY ROOM_NO) A
 		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+	
+	<select id="selectRoom" parameterType="_int" resultMap="room_rm">
+		SELECT*FROM STUDIO_ROOM
+	    WHERE ROOM_STATUS = 'Y'
+	    AND ROOM_NO = #{roomNo}
 	</select>
   
 </mapper>

@@ -6,6 +6,7 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -29,6 +30,17 @@ public class MainController {
 		return "main"; 
 	}
 	
+	@RequestMapping("/studio/{roomNo}")
+	public String studioView(@PathVariable("roomNo") int roomNo, Model model) {
+		
+		Room room = service.selectRoom(roomNo);
+		model.addAttribute("room", room);
+		
+		return "common/studioView";
+	}
 	
-	
+	@RequestMapping("/about")
+	public String about() {
+		return "common/about";
+	}
 }

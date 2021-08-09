@@ -13,7 +13,7 @@ public class Room {
 	private int roomDiscountedPrice;
 	private String roomStatus;
 	private List<StudioAttachment> atList;
-	
+	private String roomPrimaryOption;
 	
 	public Room() {
 	}
@@ -96,13 +96,23 @@ public class Room {
 		this.atList = atList;
 	}
 
+	public String getRoomPrimaryOption() {
+		return roomPrimaryOption;
+	}
+
+	public void setRoomPrimaryOption(String roomPrimaryOption) {
+		this.roomPrimaryOption = roomPrimaryOption;
+	}
+
 	@Override
 	public String toString() {
 		return "Room [roomNo=" + roomNo + ", roomName=" + roomName + ", roomAbout=" + roomAbout + ", roomConfig="
 				+ roomConfig + ", roomPrice=" + roomPrice + ", roomDiscount=" + roomDiscount + ", roomDiscountedPrice="
-				+ roomDiscountedPrice + ", roomStatus=" + roomStatus + ", atList=" + atList + "]";
+				+ roomDiscountedPrice + ", roomStatus=" + roomStatus + ", atList=" + atList + ", roomPrimaryOption="
+				+ roomPrimaryOption + "]";
 	}
 
+	
 	
 	
 	
