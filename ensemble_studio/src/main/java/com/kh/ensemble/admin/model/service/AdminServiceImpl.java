@@ -128,6 +128,29 @@ public class AdminServiceImpl implements AdminService{
 		return roomNo;
 	}
 
+	@Override
+	public int updateRoomStatus(Room room) {
+		return dao.updateRoomStatus(room);
+	}
+
+	@Override
+	public Room selectRoom(int roomNo) {
+		Room room = dao.selectRoom(roomNo);
+		room.setRoomAbout(room.getRoomAbout().replaceAll("<br>", "\r\n"));
+		return room;
+	}
+
+	@Override
+	public int updateRoom(Room room, List<MultipartFile> images, String webPath, String savePath) {
+		room.setRoomAbout(replaceParameter(room.getRoomAbout()));
+		room.setRoomConfig(replaceParameter(room.getRoomConfig()));
+		room.setRoomAbout(room.getRoomAbout().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"));
+		
+		int result = dao.updateRoom(room);
+		
+		
+		return result;
+	}
 	
 	// 크로스 사이트 스크립트 방지 처리 메소드
 	public static String replaceParameter(String param) {
@@ -154,10 +177,5 @@ public class AdminServiceImpl implements AdminService{
 		String ext = originFileName.substring(originFileName.lastIndexOf("."));
 			
 		return date + str + ext;
-	}
-
-	@Override
-	public int updateRoomStatus(Room room) {
-		return dao.updateRoomStatus(room);
 	}
 }

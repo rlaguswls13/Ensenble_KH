@@ -27,7 +27,28 @@
  		<result property="roomPrice" column="ROOM_PRICE"/>	 
  		<result property="roomDiscount" column="ROOM_DISCOUNT"/>	 
  		<result property="roomStatus" column="ROOM_STATUS"/>	 
+ 		<result property="roomPrimaryOption" column="ROOM_PRIMARY_OPTION"/>	 
+ 		<result property="roomHref" column="ROOM_HREF"/>	 
+ 		
+ 		<collection property="atList" column="ROOM_NO" 
+		javaType="java.util.ArrayList" ofType="StudioAttachment" select="selectStudioAttachment"/>
+		
 	 </resultMap>
+	 
+	<resultMap type="StudioAttachment" id="studio_attachment_rm">
+	 	<id property="fileNo" column="FILE_NO"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="fileType" column="FILE_TYPE"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="fileLevel" column="FILE_LEVEL"/>
+		<result property="roomNo" column="ROOM_NO"/>
+	 </resultMap>
+	 
+	<select id="selectStudioAttachment" parameterType="_int" resultMap="studio_attachment_rm">
+		SELECT*FROM STUDIO_ATTACHMENT 
+		WHERE ROOM_NO = #{roomNo}
+		ORDER BY FILE_LEVEL
+	</select>
 	 
 	<select id="login" parameterType="string" resultMap="member_rm">
 		SELECT * FROM MEMBER
@@ -64,7 +85,7 @@
 		</selectKey>
 		
   		INSERT INTO STUDIO_ROOM VALUES
-  		(#{roomNo}, #{roomName}, #{roomAbout}, #{roomConfig}, #{roomPrice}, #{roomDiscount}, DEFAULT)
+  		(#{roomNo}, #{roomName}, #{roomAbout}, #{roomConfig}, #{roomPrice}, #{roomDiscount}, DEFAULT, #{roomPrimaryOption}, #{roomHref})
   	</insert>
   
   	<insert id="insertAttachment" parameterType="list" >
@@ -87,5 +108,23 @@
   		ROOM_STATUS = #{roomStatus}
   		WHERE ROOM_NO = #{roomNo}
   	</update>
+  	
+  	<select id="selectRoom" parameterType="_int" resultMap="room_rm">
+  		SELECT*FROM STUDIO_ROOM 
+  		WHERE ROOM_NO = #{roomNo}
+  	</select>
   
+  	<update id="updateRoom" parameterType="Room">
+  		UPDATE STUDIO_ROOM SET
+  		ROOM_NAME = #{roomName},
+  		ROOM_ABOUT = #{roomAbout},
+  		ROOM_CONFIG = #{roomConfig},
+  		ROOM_PRICE = #{roomPrice},
+  		ROOM_DISCOUNT = #{roomDiscount},
+  		ROOM_PRIMARY_OPTION = #{roomPrimaryOption},
+  		ROOM_HREF = #{roomHref}
+  		WHERE ROOM_NO = #{roomNo}
+  	</update>
+  	
+  	
 </mapper>

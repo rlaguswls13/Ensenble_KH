@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ import com.kh.ensemble.member.model.service.MemberService;
 import com.kh.ensemble.member.model.vo.Member;
 import com.kh.ensemble.board.model.service.BoardService;
 import com.kh.ensemble.board.model.vo.Pagination;
+import com.kh.ensemble.main.model.service.MainService;
 
 @Controller
 @SessionAttributes({"loginMember"})
@@ -122,4 +124,28 @@ public class AdminController {
 		int result = service.updateRoomStatus(room);
 		return result;
 	}
+	
+	@RequestMapping(value="admin/studio/update/{roomNo}", method = RequestMethod.GET)
+	public String updateRoom(@PathVariable("roomNo") int roomNo, Model model) {
+		Room room = service.selectRoom(roomNo);
+		model.addAttribute("room", room);
+		return "admin/admin-studio-update";
+	}
+	
+	@RequestMapping(value="admin/studio/update/{roomNo}", method = RequestMethod.POST)
+	public String updateRoom(Room room, List<MultipartFile> images,
+						RedirectAttributes ra, HttpServletRequest request ) {
+		
+		String webPath ="resources/images/admin/studio/";
+		String savePath = request.getSession().getServletContext().getRealPath(webPath);
+		
+		int result = service.updateRoom(room, images, webPath, savePath);
+		if(result>0) {
+			MemberController.swalSetMessage(ra, "success", "상품 수정 성공", room.getRoomName()+"이(가) 정상적으로 업데이트되었습니다.");
+		}else {
+			MemberController.swalSetMessage(ra, "error", "상품 수정 실패", null);
+		}
+		return "redirect:/admin/studio";
+	}
+	
 }

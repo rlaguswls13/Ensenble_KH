@@ -60,5 +60,13 @@ public class AdminDAO {
 		return sqlSession.update("adminMapper.updateRoomStatus", room);
 	}
 
+	public Room selectRoom(int roomNo) {
+		return sqlSession.selectOne("adminMapper.selectRoom", roomNo);
+	}
+
+	public int updateRoom(Room room) {
+		return sqlSession.update("adminMapper.updateRoom", room);
+	}
+
 
 }
