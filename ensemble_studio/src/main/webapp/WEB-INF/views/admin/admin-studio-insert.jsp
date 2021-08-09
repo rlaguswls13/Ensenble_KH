@@ -133,7 +133,7 @@
                 <div class="img-box">
                     <div class="img main-img1" style="background-image: url();"></div>
                     <div class="img main-img2" style="background-image: url();"></div>
-                    <div  class="img main-img2" style="background-image: url(); float: right;"></div>
+                    <div class="img main-img2" style="background-image: url(); float: right;"></div>
                 </div>
                 <div style="padding: 10px;"></div>
 
@@ -164,7 +164,6 @@
 					<input type="file" id="img9" name="images" onchange="LoadImg(this,9)" accept="image/*"> 
 					<input type="file" id="img10" name="images" onchange="LoadImg(this,10)" accept="image/*"> 
 					<input type="file" id="img11" name="images" onchange="LoadImg(this,11)" accept="image/*"> 
-					<input type="file" id="img12" name="images" onchange="LoadImg(this,12)" accept="image/*"> 
 				</div>
 				
 				<div style="text-align: right; margin-right:3%">

@@ -68,5 +68,13 @@ public class AdminDAO {
 		return sqlSession.update("adminMapper.updateRoom", room);
 	}
 
+	public int updateStudioAttachment(StudioAttachment a) {
+		return sqlSession.update("adminMapper.updateStudioAttachment", a);
+	}
+
+	public int insertAttachment(StudioAttachment a) {
+		return sqlSession.insert("adminMapper.insertOneAttachment", a);
+	}
+
 
 }

@@ -16,7 +16,7 @@ import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.admin.model.vo.StudioAttachment;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
-
+import com.kh.ensemble.board.exception.InsertAttachmentException;
 import com.kh.ensemble.board.exception.SaveFileException;
 
 @Service
@@ -81,7 +81,7 @@ public class AdminServiceImpl implements AdminService{
 			for(int i=0; i<images.size(); i++) {
 				if(!images.get(i).getOriginalFilename().equals("")) {
 					
-					String fileName = rename(images.get(i).getOriginalFilename());
+					String fileName = room.getRoomHref()+"_"+rename(images.get(i).getOriginalFilename());
 					
 					StudioAttachment a = new StudioAttachment();
 					a.setFileLevel(i);
@@ -148,6 +148,47 @@ public class AdminServiceImpl implements AdminService{
 		
 		int result = dao.updateRoom(room);
 		
+		if(result>0) {
+			List<StudioAttachment> atList = new ArrayList<StudioAttachment>();
+			
+			for(int i=0; i<images.size(); i++) {
+				if(!images.get(i).getOriginalFilename().equals("")) {
+					
+					String fileName = room.getRoomHref()+"_"+rename(images.get(i).getOriginalFilename());
+					
+					StudioAttachment a = new StudioAttachment();
+					a.setFileLevel(i);
+					a.setFileName(fileName);
+					a.setFilePath(webPath);
+					a.setRoomNo(room.getRoomNo());
+					
+					if(i<3) {
+						a.setFileType(1);
+					}else {
+						a.setFileType(2);
+					}
+					atList.add(a);
+				}
+			}
+			
+			for(StudioAttachment a : atList) {
+				result = dao.updateStudioAttachment(a);
+				if(result==0) {
+					result =dao.insertAttachment(a);
+					if(result==0) {
+						throw new InsertAttachmentException();
+					}
+				}
+			}
+			for(int i=0; i<atList.size(); i++) {
+				try {
+					images.get(atList.get(i).getFileLevel()).transferTo(new File(savePath+"/"+atList.get(i).getFileName()));
+				}catch(Exception e) {
+					e.printStackTrace();
+					throw new SaveFileException();
+				}
+			}
+		}
 		
 		return result;
 	}
