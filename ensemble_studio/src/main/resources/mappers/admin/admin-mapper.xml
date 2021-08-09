@@ -126,5 +126,18 @@
   		WHERE ROOM_NO = #{roomNo}
   	</update>
   	
+  	<update id="updateStudioAttachment" parameterType="StudioAttachment">
+  		UPDATE STUDIO_ATTACHMENT SET
+  		FILE_NAME = #{fileName},
+  		FILE_PATH = #{filePath},
+  		FILE_TYPE = #{fileType}
+  		WHERE FILE_LEVEL = #{fileLevel}
+  		AND ROOM_NO = #{roomNo}
+  	</update>
+  	
+  	<insert id="insertOneAttachment" parameterType="StudioAttachment">
+  		INSERT INTO STUDIO_ATTACHMENT VALUES
+  		(SEQ_FNO.NEXTVAL, #{fileLevel}, #{fileName}, #{filePath}, #{fileType}, #{roomNo})
+  	</insert>
   	
 </mapper>

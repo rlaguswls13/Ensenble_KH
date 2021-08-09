@@ -168,7 +168,6 @@
 					<input type="file" id="img9" name="images" onchange="LoadImg(this,9)" accept="image/*"> 
 					<input type="file" id="img10" name="images" onchange="LoadImg(this,10)" accept="image/*"> 
 					<input type="file" id="img11" name="images" onchange="LoadImg(this,11)" accept="image/*"> 
-					<input type="file" id="img12" name="images" onchange="LoadImg(this,12)" accept="image/*"> 
 				</div>
 				
 				<div style="text-align: right; margin-right:3%">
