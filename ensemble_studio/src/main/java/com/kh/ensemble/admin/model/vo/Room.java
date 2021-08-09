@@ -1,5 +1,7 @@
 package com.kh.ensemble.admin.model.vo;
 
+import java.util.List;
+
 public class Room {
 
 	private int roomNo;
@@ -10,6 +12,8 @@ public class Room {
 	private int roomDiscount;
 	private int roomDiscountedPrice;
 	private String roomStatus;
+	private List<StudioAttachment> atList;
+	
 	
 	public Room() {
 	}
@@ -84,12 +88,22 @@ public class Room {
 		this.roomStatus = roomStatus;
 	}
 
+	public List<StudioAttachment> getAtList() {
+		return atList;
+	}
+
+	public void setAtList(List<StudioAttachment> atList) {
+		this.atList = atList;
+	}
+
 	@Override
 	public String toString() {
-		return "Room [RoomNo=" + roomNo + ", roomName=" + roomName + ", roomAbout=" + roomAbout + ", roomConfig="
+		return "Room [roomNo=" + roomNo + ", roomName=" + roomName + ", roomAbout=" + roomAbout + ", roomConfig="
 				+ roomConfig + ", roomPrice=" + roomPrice + ", roomDiscount=" + roomDiscount + ", roomDiscountedPrice="
-				+ roomDiscountedPrice + ", roomStatus=" + roomStatus + "]";
+				+ roomDiscountedPrice + ", roomStatus=" + roomStatus + ", atList=" + atList + "]";
 	}
+
+	
 	
 	
 }

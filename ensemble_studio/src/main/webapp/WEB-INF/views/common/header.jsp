@@ -26,8 +26,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
 	<!-- 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <style>
+	@font-face {
+	    font-family: 'Cafe24Oneprettynight';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
     * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
    	a { color: black; }
     .header-navbar-border{
@@ -95,9 +102,9 @@
               Studio View
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item noto-serif" href="${contextPath }/studio/1">A ROOM</a>
-              <a class="dropdown-item noto-serif" href="${contextPath }/studio/2">B ROOM</a>
-              <a class="dropdown-item noto-serif" href="${contextPath }/studio/3">C ROOM</a>
+            <c:forEach items="${mainRList}" var="r">
+            	<a class="dropdown-item noto-serif" href="${contextPath }/studio/${r.roomNo}">${r.roomName}</a>
+            </c:forEach>
             </div>
           </li>
           <li class="nav-item active padding-right-50">

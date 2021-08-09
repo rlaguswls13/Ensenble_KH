@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" scope="application" value="${pageContext.servletContext.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -11,7 +13,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/carousel/">
 </head>
 <jsp:include page="common/header.jsp"></jsp:include>
-<link rel="stylesheet" href="${contextPath}/resources/css/common/main.css?ver=123" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/common/main.css?ver=234" type="text/css">
 
 <c:set var="contextPath" scope="application" value="${pageContext.servletContext.contextPath}"/>
 
@@ -52,52 +54,23 @@
       <h5 style="text-align: center; font-family: 'Noto Serif KR', serif; font-weight: 600;">Studio View</h5>
       <div style="padding:10px;"></div>
       <div class="row" style="  display: flex; justify-content: center;">
-          <div class="col-12 col-lg-4 " > 
+          
+          <c:forEach items="${mainRList}" var="r">
+          <div class="col-12 col-lg-4 "> 
                 <div class="studio-view-cards">
-                    <div class="card-img" style="background-image: url('https://lh3.googleusercontent.com/3-eYJzRV_WYLfrfLj4kO6H1w171rrKegk4Jv-b3IsC5DnVBYtvX22Y4LH32qhnuzj1R-uyepMxbveJpQ11w92vU8ctf8ltPhHeiXQqmzxQ=s0');"></div>
-                    <div class="container card-text1">A ROOM</div>
+                    <div class="card-img" style="background-image: url('${contextPath}/${r.atList[0].filePath}${r.atList[0].fileName}');"></div>
+                    <div class="container card-text1">${r.roomName}</div>
 
                     <a href="#" class="btn btn-ensemble">예약하기</a>
 
 
                     <div style="padding:15px;"></div>
                     <div class="container card-text2">
-                        자연광이 변하는 위치를 치밀하게 <br>
-                        계산하여 제작된 라이프 스타일의 세트장입니다. <br>
-                        반려동물 프로필 촬영 및 동반 촬영이 가능하며 <br>
-                        따뜻한 분위기를 제공합니다.
+                        ${r.roomAbout }
                     </div>
-                </div>
+                </div>   
           </div>
-          <div class="col-12 col-lg-4 " > 
-                <div class="studio-view-cards">
-                    <div class="card-img" style="background-image: url('https://lh3.googleusercontent.com/3-eYJzRV_WYLfrfLj4kO6H1w171rrKegk4Jv-b3IsC5DnVBYtvX22Y4LH32qhnuzj1R-uyepMxbveJpQ11w92vU8ctf8ltPhHeiXQqmzxQ=s0');"></div>
-                    <div class="container card-text1">A ROOM</div>
-                    <a href="#" class="btn btn-ensemble">예약하기</a>
-                    <div style="padding:15px;"></div>
-                    <div class="container card-text2">
-                        자연광이 변하는 위치를 치밀하게  <br>
-                        계산하여 제작된 라이프 스타일의 세트장입니다. <br>
-                        반려동물 프로필 촬영 및 동반 촬영이 가능하며 <br>
-                        따뜻한 분위기를 제공합니다.
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-4 " > 
-                <div class="studio-view-cards">
-                    <div class="card-img" style="background-image: url('https://lh3.googleusercontent.com/3-eYJzRV_WYLfrfLj4kO6H1w171rrKegk4Jv-b3IsC5DnVBYtvX22Y4LH32qhnuzj1R-uyepMxbveJpQ11w92vU8ctf8ltPhHeiXQqmzxQ=s0');"></div>
-                    <div class="container card-text1">A ROOM</div>
-                    <a href="#" class="btn btn-ensemble">예약하기</a>
-                    <div style="padding:15px;"></div>
-                    <div class="container card-text2">
-                        자연광이 변하는 위치를 치밀하게  <br>
-                        계산하여 제작된 라이프 스타일의 세트장입니다. <br>
-                        반려동물 프로필 촬영 및 동반 촬영이 가능하며 <br>
-                        따뜻한 분위기를 제공합니다.
-                    </div>
-                </div>
-            </div>
-
+          </c:forEach>
 
 
       </div>
