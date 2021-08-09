@@ -84,4 +84,24 @@
 	MEMBER_STATUS = 'N'
 	WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<!--  회원 이미지 삭제-->
+	<update id="deleteMemberImage" parameterType="_int">
+	UPDATE MEMBER SET
+	MEMBER_IMAGE = DEFAULT
+	WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 비번 찾기 가입 회원 조회 -->
+	<select id="readMember" parameterType="Member" resultType="string">
+	SELECT * FROM MEMBER
+	WHERE MEMBER_ID = #{inputId}
+	</select>
+	
+	<!-- 비번 찾기 임시 비번으로 변경 -->
+	<update id="updatePwd">
+	UPDATE MEMBER SET MEMBER_PW = #{memberPw}
+	WHERE MEMBER_ID = #{memberId}
+	</update>
+	
 </mapper>

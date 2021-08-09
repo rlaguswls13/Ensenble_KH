@@ -16,7 +16,8 @@
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<div class="container">
 		<div class="secession-form">
-			<form action="secession" method="post" onsubmit="return secessionValidate();">
+			<form action="secession" method="post"
+				onsubmit="return secessionValidate();">
 				<h5>회원탈퇴</h5>
 				<hr>
 				<div class="form-group">
@@ -60,48 +61,55 @@
 					for="check_all">탈퇴 약관에 동의하며 이의를 제기하지 않겠습니다.</label>
 				<div class="form-group col-md-12 agree-btn">
 					<button type="button"
-						class="btn btn-lg secession-btn cancle col-md-6" onclick="location.href='updateMember'">취소</button>
+						class="btn btn-lg secession-btn cancle col-md-6"
+						onclick="location.href='updateMember'">취소</button>
 					<button type="button"
-						class="btn btn-lg secession-btn secession col-md-6" data-toggle="modal" data-target="#modal_form">탈퇴</button>
+						class="btn btn-lg secession-btn secession col-md-6"
+						data-toggle="modal" data-target="#modal_form" id="modal_opne_btn">탈퇴</button>
+				</div>
+
+				<!-- 모달창 -->
+				<div class="modal" tabindex="-1" id="modal_form">
+					<div class="modal-dialog">
+						<div class="modal-content">
+
+							<div class="modal-body">
+								<p>정말.. 탈퇴할 것인가요..?</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn no-btn"
+									data-dismiss="modal">아니오</button>
+								<button type="submit" class="btn yes-btn">예</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 
 	<jsp:include page="../common/footer.jsp"></jsp:include>
-	
-	<!-- 모달창 -->
-<div class="modal fade" id="modal_form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-	
+
+
+
 	<script>
 		// 약관 동의가 체크되었을 때 탈퇴 진행
-		function secessionValidate(){
-			if($("#agree:checked").length == 0){
-				swal({"icon" : "info", "title" : "탈퇴 약관에 동의해주세요."})
+		function secessionValidate() {
+			if ($("#agree:checked").length == 0) {
+				swal({
+					"icon" : "info",
+					"title" : "탈퇴 약관에 동의해주세요."
+				})
 				return false;
 			}
-		} 
-		
-/* 		$('#check_modal').on('click', function() {
-		    // 모달창 띄우기
-		    modal('#modal_form');
-		}); */
+		}
+
+		/* 		$('#check_modal').on('click', function() {
+		 // 모달창 띄우기
+		 modal('#modal_form');
+		 }); */
 	</script>
+
+
 </body>
 </html>

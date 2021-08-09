@@ -298,6 +298,23 @@ $(function() {
 
 });
 
-
+		$('#check_1').on('change', function(e) {
+			if (e.target.checked) {
+				$('#myModal1').modal();
+			}
+		});
+		
+		$('#check_2').on('change', function(e) {
+			if (e.target.checked) {
+				$('#myModal2').modal();
+			}
+		});
+		
+		$('#check_3').on('change', function(e) {
+			if (e.target.checked) {
+				$('#myModal3').modal();
+			}
+		});
+		
 
 

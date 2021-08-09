@@ -82,4 +82,32 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.secession", loginMember);
 	}
 
+
+	/** 회원 이미지 삭제
+	 * @param memberNo
+	 * @return result
+	 */
+	public int deleteMemberImage(int memberNo) {
+		return sqlSession.update("memberMapper.deleteMemberImage", memberNo);
+	}
+
+
+	/** 비밀번호 변경
+	 * @param member
+	 */
+	public int updatePwd(Member member) {
+		return sqlSession.update("memberMapper.updatePwd", member);
+		
+	}
+
+
+	/** 비번 찾기 회원 정보 조회
+	 * @param memberId
+	 * @return result
+	 */
+	public Member readMember(String memberId) {
+		return sqlSession.selectOne("memberMapper.readMember", memberId);
+	}
+
+
 }

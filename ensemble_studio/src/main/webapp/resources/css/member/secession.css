@@ -26,20 +26,23 @@ h5 {
 .input, .btn {
 	border-radius: 3px;
 }
- 
+
 .secession-form {
-	width: 500px;
-	margin: 0 auto;
+	width: 460px;
+	margin: 80px auto;
 	padding: 30px 0;
+	border: 1px solid lightgrey;
 }
 
 .secession-form form {
 	color: #9ba5a8;
-	border-radius: 3px;
+	/* 	border-radius: 3px; */
 	margin-bottom: 15px;
 	background: #fff;
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	/* 	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */
 	padding: 30px;
+	width: 80%;
+	margin: auto;
 }
 
 .secession-form h2 {
@@ -65,12 +68,13 @@ h5 {
 	width: 50px;
 	font-size: 16px;
 	font-weight: bold;
-	background: #F9F7EB;
+	background: #FDCDCD;
 	border: none;
-	min-width: 140px;
+	min-width: 120px;
 	box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.3);
 	padding-top: 10px;
 	padding-bottom: 10px;
+	margin-left: 2px;
 }
 
 .secession-form .secession-btn:active {
@@ -86,16 +90,17 @@ h5 {
 	font-weight: bold;
 	background: #f7f7f7;
 	border: none;
-	min-width: 140px;
+	min-width: 120px;
 	box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.3);
 	padding-top: 10px;
 	padding-bottom: 10px;
+	margin-right: 2px;
 }
 
 .agree-btn {
-	margin-left: 60px;
-	padding: auto;
+	margin: auto; padding : auto;
 	width: 100%;
+	padding: auto;
 }
 
 .secession-form a {
@@ -146,6 +151,33 @@ input::placeholder {
 	font-size: 12px;
 }
 
-#modal_form{
-	z-index:9999;
+/* 모달창 */
+.modal {
+	text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 100%;
+	}
+}
+
+.modal-dialog {
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+	width: 300px !important;
+}
+
+.no-btn {
+	background-color: #FF657D !important;
+
+}
+
+.yes-btn {
+	background-color: #F4F4F4 !important;
+
 }
