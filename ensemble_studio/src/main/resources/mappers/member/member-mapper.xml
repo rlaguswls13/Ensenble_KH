@@ -93,7 +93,7 @@
 	</update>
 	
 	<!-- 비번 찾기 가입 회원 조회 -->
-	<select id="readMember" parameterType="Member" resultType="string">
+	<select id="readMember" parameterType="string" resultMap="member_rm">
 	SELECT * FROM MEMBER
 	WHERE MEMBER_ID = #{memberId}
 	</select>
@@ -104,4 +104,10 @@
 	WHERE MEMBER_ID = #{memberId}
 	</update>
 	
+	<!-- 아이디 찾기 조회 -->
+	<select id="findId" parameterType="Member" resultType="string">
+	SELECT MEMBER_ID FROM MEMBER
+	WHERE MEMBER_NICK = #{memberNick}
+	AND MEMBER_EMAIL = #{memberEmail}
+	</select>
 </mapper>

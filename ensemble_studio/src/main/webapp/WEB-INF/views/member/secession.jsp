@@ -74,11 +74,10 @@
 						<div class="modal-content">
 
 							<div class="modal-body">
-								<p>정말.. 탈퇴할 것인가요..?</p>
+								<p>정말 탈퇴하시겠습니까?</p>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn no-btn"
-									data-dismiss="modal">아니오</button>
+								<button type="button" class="btn no-btn" data-dismiss="modal">아니오</button>
 								<button type="submit" class="btn yes-btn">예</button>
 							</div>
 						</div>
@@ -103,11 +102,6 @@
 				return false;
 			}
 		}
-
-		/* 		$('#check_modal').on('click', function() {
-		 // 모달창 띄우기
-		 modal('#modal_form');
-		 }); */
 	</script>
 
 

@@ -107,8 +107,19 @@ public class MemberDAO {
 	 * @param memberId
 	 * @return result
 	 */
-	public List<Object> readMember(String memberId) {
-		return sqlSession.selectList("memberMapper.readMember", memberId);
+	public Member readMember(String memberId) {
+		return sqlSession.selectOne("memberMapper.readMember", memberId);
+	}
+
+
+	/** 아이디 찾기 조회 
+	 * @param inputName
+	 * @param inputEmail
+	 * @return
+	 */
+	public String findId(Member findMember) {
+		
+		return sqlSession.selectOne("memberMapper.findId", findMember);
 	}
 
 

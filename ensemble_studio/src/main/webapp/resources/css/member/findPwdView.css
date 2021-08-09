@@ -48,6 +48,7 @@ h5 {
 	padding-bottom: 30px;
 }
 
+   
 .main-btn {
 	width: 160px;
 	font-size: 15px;
@@ -55,4 +56,10 @@ h5 {
 	display: inline-block;
 	margin-left: 10px;
 	margin-top: 20px;
+	    display: inline-block !important;
+}
+
+.btn-area{
+	width: 100%;
+	
 }

@@ -157,13 +157,15 @@ public class MemberServiceImpl implements MemberService {
 	// 메일 발송 메소드
 	@Override
 	public void sendEmail(Member member, String div) throws Exception {
-		System.out.println(member);
+		//System.out.println(member);
 		String setfrom = "ost0230@naver.com"; // 보내는 사람 이메일
 		String tomail = member.getMemberEmail(); // 받는 사람 이메일
-		String title = "임시비밀번호 메일 발송"; // 메일 제목
-
-		String content = "임시비밀번호 메일 발송"; // 내용
+		String title = "앙상블스튜디오 임시 비밀번호 발송"; // 메일 제목
 		String key = member.getMemberPw();
+
+		String content = member.getMemberId() + " 님의 임시 비밀번호입니다. <br>"
+				+ "비밀번호를 변경하여 사용해주세요.<br>"
+				+ "임시비밀번호 : <span style=\"color:blueviolet\">" + key +"</span>"; // 내용
 		
 		try {
 
@@ -173,7 +175,9 @@ public class MemberServiceImpl implements MemberService {
 			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
 			messageHelper.setTo(tomail); // 받는사람 이메일
 			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-			messageHelper.setText(content + key); // 메일 내용
+			messageHelper.setText(content, true); // 메일 내용
+			
+		
 			mailSender.send(message);
 		} catch (Exception e) {
 			System.out.println(e);
@@ -185,26 +189,25 @@ public class MemberServiceImpl implements MemberService {
 
 	// 비밀번호 찾기 메소드
 	@Override
-	public int findPwd(HttpServletResponse response, Member member) throws Exception {
+	public int findPwd(HttpServletResponse response, Member findMember) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 
-		List<Object> ck = dao.readMember(member.getMemberId());
-
+		Member ck = dao.readMember(findMember.getMemberId());
+		
+		//System.out.println("ck : " + ck);
+		
 		PrintWriter out = response.getWriter();
-
-		System.out.println(ck);
 
 		int result = 0;
 		
-		
 		// 가입된 아이디가 없으면
-		if (dao.readMember(member.getMemberId()) == null) {
+		if (dao.idDupCheck(findMember.getMemberId()) == 0) {
 			//out.print("등록되지 않은 아이디입니다.");
 			//out.close();
 			result = 2;
 		}
 		// 가입된 이메일이 아니면
-		else if (!member.getMemberEmail().equals(member.getMemberEmail())) {
+		else if (!findMember.getMemberEmail().equals(ck.getMemberEmail())) {
 			// out.print("등록되지 않은 이메일입니다.");
 			// out.close();
 
@@ -216,18 +219,31 @@ public class MemberServiceImpl implements MemberService {
 			for (int i = 0; i < 12; i++) {
 				pw += (char) ((Math.random() * 26) + 97);
 			}
-			member.setMemberPw(bCryptPasswordEncoder.encode(pw));
+			findMember.setMemberPw(bCryptPasswordEncoder.encode(pw));
 			
 			// 비밀번호 변경
-			result = dao.updatePwd(member);
+			result = dao.updatePwd(findMember);
 			
 			// 비밀번호 변경 메일 발송
-			member.setMemberPw(pw);
-			sendEmail(member, "findpw");
-
-			
+			findMember.setMemberPw(pw);
+			sendEmail(findMember, "findpw");
 			//out.print("이메일로 임시 비밀번호를 발송하였습니다.");
 			//out.close();
+		}
+		
+		return result;
+	}
+
+	// 아이디 찾기 메소드
+	@Override
+	public String findId(Member findMember) throws Exception {
+		
+		String result = "";
+		try {
+			result = dao.findId(findMember);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		
 		return result;
