@@ -121,7 +121,7 @@
                 <div style="padding: 10px;"></div>
 
                 <div class="prod-text" >기본 옵션</div>
-                <input type="text" class="prod-input-med" id="roomOpt"  required> 
+                <input type="text" class="prod-input-med" id="roomOpt" name="roomPrimaryOption" required> 
                 <div style="padding: 10px;"></div>
 
                 <div class="prod-text">메인 사진</div>

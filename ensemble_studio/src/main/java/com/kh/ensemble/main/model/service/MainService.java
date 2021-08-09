@@ -8,4 +8,6 @@ public interface MainService {
 
 	List<Room> selectRoomList();
 
+	Room selectRoom(int roomNo);
+
 }

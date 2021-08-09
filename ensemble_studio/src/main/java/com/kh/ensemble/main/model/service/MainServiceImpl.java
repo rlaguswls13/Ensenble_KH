@@ -18,5 +18,10 @@ public class MainServiceImpl implements MainService{
 	public List<Room> selectRoomList() {
 		return dao.selectRoomList();
 	}
+
+	@Override
+	public Room selectRoom(int roomNo) {
+		return dao.selectRoom(roomNo);
+	}
 	
 }
