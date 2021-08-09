@@ -13,10 +13,9 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/carousel/">
 </head>
 <jsp:include page="common/header.jsp"></jsp:include>
-<link rel="stylesheet" href="${contextPath}/resources/css/common/main.css?ver=234" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/common/main.css?ver=345" type="text/css">
 
 <c:set var="contextPath" scope="application" value="${pageContext.servletContext.contextPath}"/>
-
 
 <body>
 
@@ -58,9 +57,10 @@
           <c:forEach items="${mainRList}" var="r">
           <div class="col-12 col-lg-4 "> 
                 <div class="studio-view-cards">
-                    <div class="card-img" style="background-image: url('${contextPath}/${r.atList[0].filePath}${r.atList[0].fileName}');"></div>
-                    <div class="container card-text1">${r.roomName}</div>
-
+                	<a href="${contextPath}/studio/${r.roomHref}">
+                		<div class="card-img" style="background-image: url('${contextPath}/${r.atList[0].filePath}${r.atList[0].fileName}');"></div>
+                    	<div class="container card-text1">${r.roomName}</div>
+                	</a>
                     <a href="${contextPath}/reservation/rvStatus" class="btn btn-ensemble">예약하기</a>
 
 

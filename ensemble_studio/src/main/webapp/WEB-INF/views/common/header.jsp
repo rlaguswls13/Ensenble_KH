@@ -103,7 +103,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <c:forEach items="${mainRList}" var="r">
-            	<a class="dropdown-item noto-serif" href="${contextPath }/studio/${r.roomNo}">${r.roomName}</a>
+            	<a class="dropdown-item noto-serif" href="${contextPath }/studio/${r.roomHref}">${r.roomName}</a>
             </c:forEach>
             </div>
           </li>
