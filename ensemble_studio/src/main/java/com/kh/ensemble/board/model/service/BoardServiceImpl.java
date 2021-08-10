@@ -57,17 +57,30 @@ public class BoardServiceImpl implements BoardService {
 			return dao.selectBoardListCT(pagination);	
 		}			
 	}
-	
-	
-	
-	
+		
+	// 전체 게시글 수 + 게시판 이름 조회(검색)
 	@Override
 	public Pagination getPagination(Search search, Pagination pg) {
-		return null;
+		Pagination selectPg;
+		// 1) 전체 게시글 수 조회
+		if(pg.getBoardCTNo()==0) {
+			selectPg = dao.getListCount(search);
+		}else {
+			selectPg = dao.getListCountCT(search);
+		}
+		// 2) 계산이 완료된 Pagination 객체 생성 후 반환
+		return new Pagination(pg.getCurrentPage(),selectPg.getListCount(),
+							pg.getBoardTypeNo(), selectPg.getBoardName(),
+							pg.getBoardCTNo(), pg.getBoardCTNm());
 	}
+	// 게시판 pagination(검색)
 	@Override
 	public List<Board> selectBoardList(Search search, Pagination pagination) {
-		return null;
+		if(pagination.getBoardCTNo()==0) {
+			return dao.selectBoardList(search, pagination);	
+		}else {
+			return dao.selectBoardListCT(search, pagination);	
+		}	
 	}
 	
 	// 게시글 상세조회
