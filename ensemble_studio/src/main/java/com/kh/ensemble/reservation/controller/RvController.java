@@ -98,7 +98,7 @@ public class RvController {
 			
 	
 				
-		System.out.println("Rv : " +  rv + option);
+		System.out.println("Rv : 123" +  rv + option);
 		
 		int result = service.reservation(loginMember);
 

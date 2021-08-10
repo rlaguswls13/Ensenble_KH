@@ -308,13 +308,13 @@
 
 			console.log(roomNo)
 			console.log(rvDate)
-			console.log(rvPeople)
+			console.log(rvPeople)ss
 			console.log(rvTime)
 			console.log(rvAnimals)
 			console.log(rvPurpose)
 			console.log(rvTime)
 			console.log(inputOption)
-
+fdsf
 		} */
 	</script>
 
