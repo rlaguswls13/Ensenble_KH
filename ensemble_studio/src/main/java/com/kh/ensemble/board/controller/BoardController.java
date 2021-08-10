@@ -48,12 +48,14 @@ public class BoardController {
 	// 게시글 목록 조회
 	@RequestMapping("{boardTypeNo}/list")
 	public String boardList(@PathVariable("boardTypeNo") int boardTypeNo,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model, Pagination pg,
-			Search search) {
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp
+			, Model model, Pagination pg, Search search,
+			@RequestParam(value = "bctN", required = false, defaultValue = "0") int bct) {
 
 		pg.setBoardTypeNo(boardTypeNo);
 		pg.setCurrentPage(cp);
-
+		pg.setBoardCTNo(bct);
+		
 		Pagination pagination = null;
 		List<Board> boardList = null;
 		List<Type> typeList = null;
@@ -66,6 +68,7 @@ public class BoardController {
 			pagination = serviceB.getPagination(search, pg);
 			boardList = serviceB.selectBoardList(search, pagination);
 			typeList = serviceB.selectType(boardTypeNo);
+			
 		}
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagination", pagination);

@@ -36,9 +36,13 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Pagination getPagination(Pagination pg) {
 		
+		Pagination selectPg;
 		// 1) 전체 게시글 수 조회
-		Pagination selectPg = dao.getListCount(pg.getBoardTypeNo());
-
+		if(pg.getBoardCTNo()==0) {
+			selectPg = dao.getListCount(pg.getBoardTypeNo());
+		}else {
+			selectPg = dao.getListCountCT(pg);
+		}
 		// 2) 계산이 완료된 Pagination 객체 생성 후 반환
 		return new Pagination(pg.getCurrentPage(),selectPg.getListCount(),
 							pg.getBoardTypeNo(), selectPg.getBoardName(),
@@ -47,8 +51,15 @@ public class BoardServiceImpl implements BoardService {
 	// 게시판 pagination
 	@Override
 	public List<Board> selectBoardList(Pagination pagination) {
-		return dao.selectBoardList(pagination);		
+		if(pagination.getBoardCTNo()==0) {
+			return dao.selectBoardList(pagination);	
+		}else {
+			return dao.selectBoardListCT(pagination);	
+		}			
 	}
+	
+	
+	
 	
 	@Override
 	public Pagination getPagination(Search search, Pagination pg) {

@@ -58,7 +58,7 @@ public class ReplyDAO {
 	 * @param reply
 	 * @return result
 	 */
-	public int reportReply(Reply reply) {
-		return sqlSession.update("replyMapper.reportReply", reply);
+	public int reportReply(int replyNo) {
+		return sqlSession.update("replyMapper.reportReply", replyNo);
 	}
 }

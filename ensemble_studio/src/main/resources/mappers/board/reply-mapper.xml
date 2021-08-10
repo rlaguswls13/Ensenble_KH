@@ -69,12 +69,11 @@
 	</update>
 	
 	<!-- 댓글 신고 -->
-	<update id="reportReply" parameterType="Reply">
+	<update id="reportReply" parameterType="_int">
 		UPDATE BOARD_REPLY SET
 		BOARD_REPLY_ST = 'R'
 		WHERE BOARD_REPLY_NO = #{replyNo}
-		AND MEMBER_NO != #{memberNo}
-		AND BOARD_REPLY_ST NOI IN('N', 'R')
+		AND BOARD_REPLY_ST NOT IN('N', 'R')
 	</update>
 	
 </mapper>

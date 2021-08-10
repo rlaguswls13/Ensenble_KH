@@ -22,6 +22,6 @@ public interface ReplyService {
 	int deleteReply(int replyNo);
 
 	// 댓글 신고
-	int reportReply(Reply reply);
+	int reportReply(int replyNo);
 
 }

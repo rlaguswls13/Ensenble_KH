@@ -29,8 +29,8 @@
 			<div class="list-wrapper">
 				<form action="list" method="GET" class="text-center float-right" id="searchForm">
 						<div>
-							<c:forEach items="${typeList}" var="bCT">
-								<button class="btn btn-primary" id="searchForm" value="${bCT.boardCTNo}">${bCT.boardCTNm}</button>
+							<c:forEach items="${typeList}" var="bct">
+								<button class="btn btn-primary" id="searchForm" name="bctN" value="${bct.boardCTNo}">${bct.boardCTNm}</button>
 							</c:forEach>
 						</div>
 				</form>
@@ -128,8 +128,8 @@
 			<%-- 페이징 처리 시 주소를 쉽게 작성할 수 있도록 필요한 변수를 미리 선언 --%>
 			
 			<c:set var="pageURL" value="list"  />
-			<c:set var="prev" value="${pageURL}?cp=${pagination.prevPage}${searchStr}" />
-			<c:set var="next" value="${pageURL}?cp=${pagination.nextPage}${searchStr}" />
+			<c:set var="prev" value="${pageURL}?bctN=${pagination.boardTypeNo}?cp=${pagination.prevPage}${searchStr}" />
+			<c:set var="next" value="${pageURL}?bctN=${pagination.boardTypeNo}?cp=${pagination.nextPage}${searchStr}" />
 			
 			
 			<div class="my-5">
@@ -142,7 +142,7 @@
 					
 					<%-- 현재 페이지가 2페이지 초과인 경우 --%>
 					<c:if test="${pagination.currentPage > 2 }">
-						<li><a class="page-link" href="${pageURL}?cp=${pagination.currentPage - 1}${searchStr}">&lt;</a></li>
+						<li><a class="page-link" href="${pageURL}?bctN=${pagination.boardTypeNo}?cp=${pagination.currentPage - 1}${searchStr}">&lt;</a></li>
 					</c:if>
 					
 					
@@ -181,7 +181,8 @@
 				
 					<!-- 게시판 타입 유지를 위한 태그 -->
 					<input type="hidden" name="type" value="${pagination.boardTypeNo}">
-				
+					<input type="hidden" name="type" value="${pagination.boardCTNo}">
+					
 					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
 						<option value="title">글제목</option>
 						<option value="content">내용</option>
@@ -209,7 +210,6 @@
 				$("select[name=sk] > option").each(function(index, item){
 					// index : 현재 접근중인 요소의 인덱스
 					// item : 현재 접근중인 요소
-								// content            content
 					if( $(item).val() == searchKey  ){
 						$(item).prop("selected", true);
 					}

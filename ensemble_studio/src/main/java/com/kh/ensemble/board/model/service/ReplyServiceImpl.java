@@ -54,8 +54,8 @@ public class ReplyServiceImpl implements ReplyService {
 	// 댓글 신고
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int reportReply(Reply reply) {
-		return dao.reportReply(reply);
+	public int reportReply(int replyNo) {
+		return dao.reportReply(replyNo);
 	}
 	// 크로스 사이트 스크립트 방지 처리 메소드
 	public static String replaceParameter(String param) {
