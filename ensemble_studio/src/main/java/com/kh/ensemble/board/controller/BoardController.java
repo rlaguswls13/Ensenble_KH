@@ -50,11 +50,11 @@ public class BoardController {
 	public String boardList(@PathVariable("boardTypeNo") int boardTypeNo,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp
 			, Model model, Pagination pg, Search search,
-			@RequestParam(value = "bctN", required = false, defaultValue = "0") int bctN) {
+			@RequestParam(value = "bctN", required = false, defaultValue = "0") int bct) {
 
 		pg.setBoardTypeNo(boardTypeNo);
 		pg.setCurrentPage(cp);
-		pg.setBoardCTNo(bctN);
+		pg.setBoardCTNo(bct);
 		
 		Pagination pagination = null;
 		List<Board> boardList = null;

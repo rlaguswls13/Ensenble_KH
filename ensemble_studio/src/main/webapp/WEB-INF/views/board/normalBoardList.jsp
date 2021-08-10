@@ -43,9 +43,7 @@
 							<th>분류</th>
 							<th>제목</th>
 							<th>작성자</th>
-							<c:if test="${pagination.boardTypeNo == 4}">
-								<th>상태</th>
-							</c:if>
+							<th>상태</th>
 							<th>조회수</th>
 						</tr>
 					</thead>
@@ -98,14 +96,15 @@
 											</a>
 										</td>
 										<%-- 작성자 --%>
-										<td> ${board.memberNk} </td>										
-							
-										<%-- 글 상태 --%>
-										<c:if test="${pagination.boardTypeNo == 4}">
-											<td> ${board.boardStatus} </td>
-										</c:if>
+										<td> ${board.memberNk} </td>
+										
+										<%-- 글상태 --%>
+										<td> ${board.boardStatus} </td>
+										
 										<%-- 조회수 --%>
 										<td> ${board.boardReadCount} </td>
+										
+										
 									</tr>
 								</c:forEach>
 							
@@ -129,9 +128,8 @@
 			<%-- 페이징 처리 시 주소를 쉽게 작성할 수 있도록 필요한 변수를 미리 선언 --%>
 			
 			<c:set var="pageURL" value="list"  />
-			<c:set var="bCTNo" value= "${pagination.boardCTNo}"/>
-			<c:set var="prev" value="${pageURL}?bctN=${bCTNo}&cp=${pagination.prevPage}${searchStr}" />
-			<c:set var="next" value="${pageURL}?bctN=${bCTNo}&cp=${pagination.nextPage}${searchStr}" />
+			<c:set var="prev" value="${pageURL}?bctN=${pagination.boardTypeNo}?cp=${pagination.prevPage}${searchStr}" />
+			<c:set var="next" value="${pageURL}?bctN=${pagination.boardTypeNo}?cp=${pagination.nextPage}${searchStr}" />
 			
 			
 			<div class="my-5">
@@ -142,9 +140,9 @@
 						<li><a class="page-link" href="${prev}">&lt;&lt;</a></li>
 					</c:if>
 					
-					<%-- 현재 페이지가 1페이지 초과인 경우 --%>
-					<c:if test="${pagination.currentPage > 1 }">
-						<li><a class="page-link" href="${pageURL}?bctN=${bCTNo}&cp=${pagination.currentPage - 1}${searchStr}">&lt;</a></li>
+					<%-- 현재 페이지가 2페이지 초과인 경우 --%>
+					<c:if test="${pagination.currentPage > 2 }">
+						<li><a class="page-link" href="${pageURL}?bctN=${pagination.boardTypeNo}?cp=${pagination.currentPage - 1}${searchStr}">&lt;</a></li>
 					</c:if>
 					
 					
@@ -158,14 +156,14 @@
 								</c:when>
 								
 								<c:otherwise>
-									<li><a class="page-link" href="${pageURL}?bctN=${bCTNo}&cp=${p}${searchStr}">${p}</a></li>
+									<li><a class="page-link" href="${pageURL}?cp=${p}${searchStr}">${p}</a></li>
 								</c:otherwise>
 							</c:choose>						
 					</c:forEach>
 					
 					<%-- 현재 페이지가 마지막 페이지 미만인 경우 --%>
 					<c:if test="${pagination.currentPage < pagination.maxPage }">
-						<li><a class="page-link" href="${pageURL}?bctN=${bCTNo}&cp=${pagination.currentPage + 1}${searchStr}">&gt;</a></li>
+						<li><a class="page-link" href="${pageURL}?cp=${pagination.currentPage + 1}${searchStr}">&gt;</a></li>
 					</c:if>
 					
 					<%-- 현재 페이지가 마지막 페이지가 아닌 경우 --%>
@@ -183,7 +181,7 @@
 				
 					<!-- 게시판 타입 유지를 위한 태그 -->
 					<input type="hidden" name="type" value="${pagination.boardTypeNo}">
-					<input type="hidden" name="btcN" value="${pagination.boardCTNo}">
+					<input type="hidden" name="type" value="${pagination.boardCTNo}">
 					
 					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
 						<option value="title">글제목</option>
