@@ -45,7 +45,7 @@
 		                        <c:if test="${!empty loginMember}">
 			                        <div class="dropdown mr-1">
 			                            <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset"
-			                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+			                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20" onclick="savedata(this)">
 			                            </button>
 			                           
 			                            <div class="dropdown-menu replyBtnArea" aria-labelledby="dropdownMenuOffset">                            
@@ -66,8 +66,8 @@
 	
 	                    <div class="row-sm-12 d-flex">
 	                        <div class="col-sm-4">
-	                            <span>                         
-									${reply.replyMT}                
+	                            <span>
+	                            	 <fmt:formatDate value="${reply.replyMT}" pattern="yyyy-MM-dd HH:mm"/>
 	                            </span>
 	                        </div>
 	                        <div class="col-sm-4">
@@ -84,12 +84,20 @@
 
 <script>
 
-//로그인한 회원 번호. 비로그인 시 "" (빈문자열)
-const loginMemberNo = "${loginMember.memberNo}";
-// 현재 게시글 번호
-const boardNo = ${board.boardNo};
-// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
-let beforeReplyRow;
+	//로그인한 회원 번호. 비로그인 시 "" (빈문자열)
+	const loginMemberNo = "${loginMember.memberNo}";
+	const loginMember = "&{loginMember}";
+	
+	// 현재 게시글 번호
+	const boardNo = ${board.boardNo};
+	// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
+	let beforeReplyRow;
+	let beforeReplyRowDeactive;
+	
+	// 드랍박스 비활성화 저장함수
+	function savedata(el) {
+		beforeReplyRowDeactive = $(el).parent().parent().parent().html();
+	}
 
 
 //댓글 등록
@@ -113,9 +121,10 @@ function addReply()	{
 				success : function(result){
 					
 					if(result > 0){ 
-						swal({"icon" : "success" , "title" : "댓글 등록 성공"});
-						//selectReplyList();
-						$("#replyContent").val("");						
+						
+						$("#input-reply").val("");
+						swal({"icon" : "success" , "title" : "댓글 등록 성공"})			
+						selectReplyList();
 					}
 				},
 				error : function(){
@@ -125,12 +134,159 @@ function addReply()	{
 			}
 		}
 	}
+	
+//댓글 조회
+function selectReplyList(){
+
+	$.ajax({ 
+		url : "${contextPath}/reply/list",
+		data : {"boardNo" : boardNo},
+		type : "POST",
+		dataType : "JSON",
+		success : function(rList){
+
+       		$("#replyListArea").html(""); 
+       
+       	  	$.each(rList, function(index, item){
+        	   	
+		  // reply 1개
+	      var li = $("<li>").addClass("reply-row"); 
+	   	  
+	   	  // reply 전영역
+		  var detailReplyArea = $("<div>").addClass("row-sm-12 d-flex").attr("id", "detail-replyArea");
+		  
+		  // 작성자 (왼쪽 영역)
+		  var cdivCol1 = $("<div>").addClass("col-sm-1");
+	      var replyArea 
+	      var rMImage = $("<img>").attr("src", item.memberImage).attr("alt", "null");
+	      var br = $("<br>")
+	      var rWriter = $("<span>").addClass("rWriter").text(item.memberNk);
+	     
+	      var rSpace = cdivCol1.append(rMImage).append(br).append(rWriter);
+	      
+	      // 작성 내용 오른쪽 영역
+	      var cdivCol2 = $("<div>").addClass("col-sm-11");
+	      
+	      // 첫 번째 row
+	      var cdivRow1 = $("<div>").addClass("row-sm-12 d-flex");
+	      // 댓글 내용
+	      var rContent = $("<div>").addClass("col-sm-10 rContent").html(item.replyContent);
+	      // btn 내용
+	      var btnArea = $("<div>").addClass("dropdown mr-1")
+	      if(loginMember != null){
+	    	  // drop-btn 영역
+	          var dropdownBtn = $("<button>").addClass("btn btn-secondary dropdown-toggle")
+	          					.attr("id","dropdownMenuOffset").attr("type","button")
+	          					.attr("data-toggle","dropdown").attr("aria-haspopup", "true")
+	          					.attr("aria-expanded", "false").attr("data-offset", "10,20");
+	          // 신고, 수정, 삭제 btn 영역
+	          var replyBtnArea = $("<div>").addClass("dropdown-menu replyBtnArea").attr("aria-labelledby", "dropdownMenuOffset");
+	          
+	          // 회원에 따른 btn
+	          if(item.memberNo == loginMemberNo){  
+	             var showUpdate = $("<a>").addClass("dropdown-item").text("수정").attr("onclick", "showUpdateReply("+item.replyNo+", this)");
+	             var deleteReply = $("<a>").addClass("dropdown-item").text("삭제").attr("onclick", "deleteReply("+item.replyNo+")");
+	             replyBtnArea.append(showUpdate).append(deleteReply);
+	          } else{
+	        	 var reportReply = $("<a>").addClass("dropdown-item").text("신고").attr("onclick", "reportReply("+item.replyNo+")");
+	        	 replyBtnArea.append(reportReply);
+	          }
+	      }
+	      // btn 요소 합
+	      var totBtn = btnArea.append(dropdownBtn).append(replyBtnArea);
+	      
+	      // 첫 번째 요소 합
+	      var firRow = cdivRow1.append(rContent).append(totBtn);
+	      
+	      // 두 번째 row
+	      var cdivRow2 = $("<div>").addClass("row-sm-12 d-flex");
+	      // 날짜, 좋아요
+	      var colSM1 = $("<div>").addClass("col-sm-4");
+	      var rDate = $("<span>").text(item.replyMT);
+	      var colSM2 = $("<div>").addClass("col-sm-4");
+	      var rLike = $("<span>").text("좋아요");
+	      var secRow = cdivRow2.append(colSM1.append(rDate)).append(colSM2.append(rLike));
+	      
+	      // 왼쪽 영역
+	      var lSpace = cdivCol2.append(firRow).append(secRow);
+	      
+	      // 댓글 요소 하나로 합치기
+	      detailReplyArea.append(rSpace).append(lSpace);
+	      li.append(detailReplyArea)
+	      
+	      // 합쳐진 댓글을 화면에 배치
+	      $("#replyListArea").append(li);
+	   });
+			
+		},
+		error : function(){
+			console.log("댓글 목록 조회 실패");
+		}
+	});
+}
+
+
+
+// 수정 형식
+function showUpdateReply(replyNo, el){
+	// el : 수정 버튼 클릭 이벤트가 발생한 요소
+	
+	// 이미 열려있는 댓글 수정 창이 있을 경우 닫아주기
+	if($(".replyUpdateContent").length > 0){
+		$(".replyUpdateContent").parent().parent().parent().html(beforeReplyRowDeactive);
+		$(".replyUpdateContent").eq(0).parent().empty();
+		
+	}
+		
+	// 댓글 수정화면 출력 전 요소를 저장해둠.
+	// beforeReplyRow = $(el).parent().parent().parent().parent().html();
+	// 작성되어있던 내용(수정 전 댓글 내용) 
+	var beforeContent = $(el).parent().parent().parent().children().eq(0).html();
+	
+	// 이전 댓글 내용의 크로스사이트 스크립트 처리 해제, 개행문자 변경
+	beforeContent = beforeContent.replace(/&amp;/g, "&");	
+	beforeContent = beforeContent.replace(/&lt;/g, "<");	
+	beforeContent = beforeContent.replace(/&gt;/g, ">");	
+	beforeContent = beforeContent.replace(/&quot;/g, "\"");	
+	
+	beforeContent = beforeContent.replace(/<br>/g, "\n");	
+		
+	// 기존 댓글 영역
+	var replyArea = $(el).parent().parent().parent().parent();
+	
+
+	
+	// 기존 댓글 영역 삭제
+	$(el).parent().parent().parent().children().eq(0).empty();
+	// 기존 날짜 영역 삭제
+	$(el).parent().parent().parent().parent().children().eq(1).remove();
+	// 기존 버튼 영역 삭제
+	
+	// 작성 영역
+	var inputText = $("<textarea>").addClass("replyUpdateContent").attr("rows", "auto").attr("cols", "100").val(beforeContent);
+		
+	// 수정, 취소 btn 영역
+	var updateReply = $("<button>").addClass("btn btn-primary ml-1 mb-4 my-2").text("댓글수정").attr("onclick", "updateReply(" + replyNo + ", this)");
+	var cancelBtn = $("<button>").addClass("btn btn-primary ml-1 mb-4 my-2").text("취소").attr("type", "button").attr("onclick", "updateCancel(this)");
+	
+	// 통합
+	$(el).parent().parent().parent().children().eq(0).append(inputText);
+	$(el).parent().parent().parent().append(updateReply).append(cancelBtn);
+	$(el).parent().parent().remove();
+
+}
+
+//댓글 수정 취소 시 원래대로 돌아가기
+function updateCancel(el){
+	$(".replyUpdateContent").parent().parent().parent().html(beforeReplyRowDeactive);
+	$(".replyUpdateContent").eq(0).parent().empty();
+}
 
 //댓글 수정
 function updateReply(replyNo, el){
 	
-	const replyContent = $(el).parent().prev().val();
-	
+	const replyContent = $(el).prev().children().eq(0).val();
+
 	$.ajax({
 		url : "${contextPath}/reply/updateReply",
 		type : "POST",
@@ -139,8 +295,8 @@ function updateReply(replyNo, el){
 		success : function(result){
 			
 			if(result > 0){
-				swal({"icon" : "success" , "title" : "댓글 수정 성공"});
-				//selectReplyList();
+				swal({"icon" : "success", "title" : "댓글 수정 성공"});
+				selectReplyList();
 			}
 			
 		},
@@ -151,54 +307,6 @@ function updateReply(replyNo, el){
 	});
 }
 
-// 수정 형식
-function showUpdateReply(replyNo, el){
-	// el : 수정 버튼 클릭 이벤트가 발생한 요소
-	
-	// 이미 열려있는 댓글 수정 창이 있을 경우 닫아주기
-	if($(".replyUpdateContent").length > 0){
-		$(".replyUpdateContent").eq(0).parent().html(beforeReplyRow);
-	}
-		
-	// 댓글 수정화면 출력 전 요소를 저장해둠.
-	beforeReplyRow = $(el).parent().parent().html();
-	
-	
-	// 작성되어있던 내용(수정 전 댓글 내용) 
-	var beforeContent = $(el).parent().prev().html();
-	
-	
-	// 이전 댓글 내용의 크로스사이트 스크립트 처리 해제, 개행문자 변경
-	// -> 자바스크립트에는 replaceAll() 메소드가 없으므로 정규 표현식을 이용하여 변경
-	beforeContent = beforeContent.replace(/&amp;/g, "&");	
-	beforeContent = beforeContent.replace(/&lt;/g, "<");	
-	beforeContent = beforeContent.replace(/&gt;/g, ">");	
-	beforeContent = beforeContent.replace(/&quot;/g, "\"");	
-	
-	beforeContent = beforeContent.replace(/<br>/g, "\n");	
-	
-	
-	// 기존 댓글 영역을 삭제하고 textarea를 추가 
-	$(".rContent",this).remove();
-	var textarea = $("<textarea>").addClass("replyUpdateContent").attr("rows", "2").val(beforeContent);
-	
-	// 수정 버튼
-	var updateReply = $("<button>").addClass("btn btn-primary btn-sm ml-1 mb-4").text("댓글 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
-	
-	// 취소 버튼
-	var cancelBtn = $("<button>").addClass("btn btn-primary btn-sm ml-1 mb-4").text("취소").attr("onclick", "updateCancel(this)");
-	
-	var replyBtnArea = $(el).parent();
-	
-	$(replyBtnArea).empty(); 
-	$(replyBtnArea).append(updateReply); 
-	$(replyBtnArea).append(cancelBtn); 
-}
-
-//댓글 수정 취소 시 원래대로 돌아가기
-function updateCancel(el){
-	$(el).parent().parent().html( beforeReplyRow );
-}
 	
 //댓글 삭제
 function deleteReply(replyNo){
@@ -210,8 +318,7 @@ function deleteReply(replyNo){
 			data : {"replyNo" : replyNo},
 			success : function(result){
 				if(result > 0){
-					//selectReplyList(boardNo);
-					
+					selectReplyList(boardNo);
 					swal({"icon" : "success" , "title" : "댓글 삭제 성공"});
 				}
 				
@@ -223,20 +330,18 @@ function deleteReply(replyNo){
 }
 
 //댓글 신고
-function reportReply(){
+function reportReply(replyNo){
 	if(confirm("정말로 신고하시겠습니까?")){
 		var url = "${contextPath}/reply/reportReply";
 		
 		$.ajax({
 			url : url,
-			data : {"replyNo" : replyNo,
-					"memberNo" : loginMemberNo
+			data : {"replyNo" : replyNo
 				},
 			success : function(result){
 				if(result > 0){
-					//selectReplyList(boardNo);
-					
-					swal({"icon" : "success" , "title" : "댓글 삭제 성공"});
+					selectReplyList(boardNo);		
+					swal({"icon" : "success" , "title" : "댓글 신고 성공"});
 				}
 				
 			}, error : function(){
@@ -245,5 +350,7 @@ function reportReply(){
 		});
 	}
 }
+
+
 </script>
 </html>

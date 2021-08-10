@@ -14,8 +14,6 @@
     <!-- External CSS-->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/reviewBoardDetail.css">
-
-
 </head>
 <body>
 		
@@ -98,8 +96,7 @@
 		</div>
         
         <%-- footer 영역 --%>
-		<jsp:include page="../common/footer.jsp"/>
-			
+		<jsp:include page="../common/footer.jsp"/>		
 		
 		<form action="#" method="POST" name="requestForm">
 			<input type="hidden" name="boardNo" value="${board.boardNo}">

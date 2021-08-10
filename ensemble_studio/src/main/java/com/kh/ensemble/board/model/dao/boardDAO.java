@@ -26,6 +26,9 @@ public class boardDAO {
 	public Pagination getListCount(int boardTypeNo) {
 		return sqlSession.selectOne("boardMapper.getListCount", boardTypeNo);
 	}
+	public Pagination getListCountCT(Pagination pg) {
+		return sqlSession.selectOne("boardMapper.getListCountCT", pg);
+	}
 
 	/** 게시글 목록 조회
 	 * @param pagination
@@ -35,6 +38,11 @@ public class boardDAO {
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		return sqlSession.selectList("boardMapper.selectBoardList", pagination.getBoardTypeNo(), rowBounds);
+	}
+	public List<Board> selectBoardListCT(Pagination pagination) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		return sqlSession.selectList("boardMapper.selectBoardListCT", pagination, rowBounds);
 	}
 
 	/** 특정 게시글 상세 조회
@@ -139,6 +147,11 @@ public class boardDAO {
 	public void deleteAt(List<Attachment> atList) {
 		sqlSession.delete("boardMapper.deleteAt", atList);
 	}
+
+
+
+
+
 
 
 
