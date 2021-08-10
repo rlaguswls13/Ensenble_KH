@@ -101,29 +101,29 @@
 					<div class="optionDetail">옵션 내용</div>
 					<div class="optionRadio">
 						<div class="optionListA">
-							<input type="checkbox" id="optionList" value="11"
-								name="optionList"> <label for="11">캐논 100D (무료) </label><br>
-							<br> <input type="checkbox" id="optionList" value="12"
-								name="optionList"> <label for="12">캐논 5D Mark II
+							<input type="checkbox" id="addOptionList" value="11"
+								name="addOptionList"> <label for="11">캐논 100D (무료) </label><br>
+							<br> <input type="checkbox" id="addOptionList" value="12"
+								name="addOptionList"> <label for="12">캐논 5D Mark II
 								(+20,000원) </label><br> <br> <input type="checkbox"
-								id="optionList" value="13" name="optionList"> <label
+								id="addOptionList" value="13" name="addOptionList"> <label
 								for="13">캐논 5D Mark IV (+30,000원)</label><br> <br> <input
-								type="checkbox" id="optionList" value="14" name="optionList">
+								type="checkbox" id="addOptionList" value="14" name="addOptionList">
 							<label for="14">70-200mm f 렌즈(+10,000원)</label><br> <br>
-							<input type="checkbox" id="optionList" value="15"
-								name="optionList"> <label for="15">탑라이트 조명 (무료)</label>
+							<input type="checkbox" id="addOptionList" value="15"
+								name="addOptionList"> <label for="15">탑라이트 조명 (무료)</label>
 						</div>
 						<div class="optionListB">
-							<input type="checkbox" id="optionList" value="16"
-								name="optionList"> <label for="16">소프트박스
+							<input type="checkbox" id="addOptionList" value="16"
+								name="addOptionList"> <label for="16">소프트박스
 								2개(+10,000원)</label><br> <br> <input type="checkbox"
-								id="optionList" value="17" name="optionList"> <label
+								id="addOptionList" value="17" name="addOptionList"> <label
 								for="17">컬러필터(+10,000원)</label><br> <br> <input
-								type="checkbox" id="optionList" value="18" name="optionList">
+								type="checkbox" id="addOptionList" value="18" name="addOptionList">
 							<label for="18">반사판(+10,000)</label><br> <br> <input
-								type="checkbox" id="optionList" value="19" name="optionList">
+								type="checkbox" id="addOptionList" value="19" name="addOptionList">
 							<label for="19">건조간식(+5,000원)</label><br> <br> <input
-								type="checkbox" id="optionList" value="20" name="optionList">
+								type="checkbox" id="addOptionList" value="20" name="addOptionList">
 							<label for="20">육포(+3,000)</label>
 						</div>
 					</div>
@@ -287,7 +287,7 @@
 		 */
 
 		/*예약 버튼 클릭시 */
-		function validate() {
+		/* function validate() {
 			const roomNo = $("input[name='roomNo']"); //방번호
 			const rvDate = $("input[name='rvDate']"); //예약일 
 
@@ -315,7 +315,7 @@
 			console.log(rvTime)
 			console.log(inputOption)
 
-		}
+		} */
 	</script>
 
 </body>
