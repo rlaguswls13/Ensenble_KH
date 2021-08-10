@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.kh.ensemble.member.model.vo.Member;
 import com.kh.ensemble.reservation.model.dao.RvDAO;
 import com.kh.ensemble.reservation.model.vo.Rv;
 import com.kh.ensemble.reservation.model.vo.RvPagination;
@@ -40,4 +41,32 @@ public class RvServiceImpl implements RvService{
 		
 		return dao.selectRvLIst(pagination);
 	}
+
+	//예약하기
+	@Override
+	public int reservation(Member loginMember) {
+		
+		return dao.reservation(loginMember);
+	}
+
+	//선택일 예약 가능 시간 조회
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public List<Rv> selectRvTimeList(Rv rv) {
+		
+		return dao.selectRvTimeList(rv);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
 }
