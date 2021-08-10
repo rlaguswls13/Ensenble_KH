@@ -140,4 +140,17 @@
   		(SEQ_FNO.NEXTVAL, #{fileLevel}, #{fileName}, #{filePath}, #{fileType}, #{roomNo})
   	</insert>
   	
+  	<delete id="deleteRooms" parameterType="string">
+  		DELETE FROM STUDIO_ROOM WHERE ROOM_NO IN ( ${rooms} )
+  	</delete>
+  	
+  	<delete id="deleteStudioAttachments" parameterType="string">
+  		DELETE FROM STUDIO_ATTACHMENT WHERE ROOM_NO IN ( ${rooms} )
+  	</delete>
+  	
+  	<select id="countRooms" resultType="_int">
+  		SELECT COUNT(*) FROM STUDIO_ROOM
+		WHERE ROOM_STATUS = 'Y'
+  	</select>
+  	
 </mapper>

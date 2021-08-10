@@ -21,10 +21,10 @@
 }
 
 .btn-ensemble {
+	float:right;
 	background-color: #FDCDCD;
 	padding-left: 25px;
 	padding-right: 25px;
-	float: right;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
@@ -33,7 +33,7 @@
 	font-size: smaller;
 	color: #888;
 	padding-top: 20px;
-	width: 70%;
+	width: 60%;
 	display: inline-block;
 }
 
@@ -61,15 +61,28 @@ select {
 		no-repeat 85% 50%;
 	color: #C64242;
 }
+.btn-delete{
+	color: #FF657D;
+	border-color : #FF657D;
+	background-color : white;
+	margin-right : 10px;
+	float: right;
+	display : none;
+}
+.btn-delete:hover{
+	color: white;
+	background-color : #FF657D;
+}
 </style>
 <body>
 	<div class="main_bg">
 		<div class="main_content">
 			<h3>상품 관리</h3>
 			<div class="notice-text">*홈페이지에 표시되는 상품 목록은 최대 3개까지 입니다.</div>
+				
+			<a href="studio/insert" class="btn btn-ensemble" style="color: black;">추가하기</a>
+			<button type="button" class="btn btn-delete">선택한 항목 삭제하기</button>
 
-			<a href="studio/insert" class="btn btn-ensemble"
-				style="color: black;">추가하기</a>
 
 
 			<div style="padding: 5px;"></div>
@@ -77,17 +90,20 @@ select {
 			<table class="table">
 				<thead>
 					<tr style="text-align: center;">
+						<th scope="col"></th>
 						<th scope="col">상품 번호</th>
 						<th scope="col">상품 이름</th>
 						<th scope="col">정상가</th>
 						<th scope="col">할인가</th>
 						<th scope="col">글 상태</th>
+						
 					</tr>
 				</thead>
 
 				<tbody>
 					<c:forEach items="${rList}" var="r">
 						<tr style="text-align: center;">
+							<td scope="row"><input type="checkbox" name="deleteRoom" value="${r.roomNo}"></td>
 							<th scope="row">${r.roomNo }</th>
 							<td><a href="studio/update/${r.roomNo}" style="color: black;">${r.roomName }</a></td>
 							<td>${r.roomPrice }</td>
@@ -105,6 +121,7 @@ select {
 									</select>
 								</c:if>
 							</td>
+							
 						</tr>
 					</c:forEach>
 
@@ -193,13 +210,81 @@ select {
 						select.removeClass().addClass('selectY');
 					}
 				}else{
-					alert('상태 변경 실패');
+					swal({
+						  title: "글 상태 변경 불가",
+						  text: "노출되는 상품은 3개 이상 선택할 수 없습니다.",
+						  icon: "warning",
+						});
 					return false;
 				}
 			}
 		})
 		
 	})
+	
+	
+	$("input:checkbox[name='deleteRoom']").change( function(){
+				
+		if($(this).is(":checked")){
+			$(".btn-delete").css("display", "block");
+			$(this).parent().parent().css("background-color", "#FFF5F5");
+		}else{
+			$(this).parent().parent().css("background-color", "white");
+		}
+		
+		if($("input:checkbox[name='deleteRoom']:checked").length ==0){
+			$(".btn-delete").css("display", "none");
+			
+		}
+	});
+	
+	
+	$(".btn-delete").on("click", function(){
+		
+		swal({
+			  title: "정말로 삭제하시겠습니까?",
+			  text: "한 번 지워지면 복구할 수 없습니다.",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			    deleteRooms();
+			  } else {
+			    swal("Your imaginary file is safe!");
+			  }
+			});
+	});
+	
+	function deleteRooms(){
+		let rooms = "";
+		$("input:checkbox[name='deleteRoom']:checked").each(function(index){
+			if(index!=0){
+				rooms +=", ";
+			}
+			rooms += $(this).val();
+		})
+		
+		$.ajax({
+			url : '${contextPath}/admin/studio/deleteRooms',
+			data : { "rooms" : rooms },
+			type : 'POST',
+			success : function(result){
+				if(result>0){
+					window.location.reload();
+					swal({
+						  title: "삭제 완료",
+						  text: "선택한 상품이 삭제되었습니다.",
+						  icon: "success",
+						});
+				}else{
+					alert('삭제 실패');
+				}
+			}
+		})
+		
+	}
 	
 	
 	

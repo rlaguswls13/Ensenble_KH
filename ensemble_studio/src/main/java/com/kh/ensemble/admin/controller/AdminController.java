@@ -121,7 +121,12 @@ public class AdminController {
 	@RequestMapping(value = "admin/studio/updateRoomStatus" , method= RequestMethod.POST)
 	public int updateRoomStatus(Room room) {
 		//System.out.println(room);
-		int result = service.updateRoomStatus(room);
+		int result = service.countRooms();
+		if(result<3) {
+			result = service.updateRoomStatus(room);
+		}else {
+			result = 0;
+		}
 		return result;
 	}
 	
@@ -146,6 +151,15 @@ public class AdminController {
 			MemberController.swalSetMessage(ra, "error", "상품 수정 실패", null);
 		}
 		return "redirect:/admin/studio";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "admin/studio/deleteRooms" , method= RequestMethod.POST)
+	public int deleteRooms(String rooms) {
+		
+		//System.out.println(rooms);
+		int result = service.deleteRooms(rooms);
+		return result;
 	}
 	
 }

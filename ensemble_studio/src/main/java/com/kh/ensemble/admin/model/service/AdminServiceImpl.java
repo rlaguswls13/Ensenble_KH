@@ -140,6 +140,12 @@ public class AdminServiceImpl implements AdminService{
 		return room;
 	}
 
+	
+	@Override
+	public int countRooms() {
+		return dao.countRooms();
+	}
+
 	@Override
 	public int updateRoom(Room room, List<MultipartFile> images, String webPath, String savePath) {
 		room.setRoomAbout(replaceParameter(room.getRoomAbout()));
@@ -193,6 +199,13 @@ public class AdminServiceImpl implements AdminService{
 		return result;
 	}
 	
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int deleteRooms(String rooms) {
+		return dao.deleteRooms(rooms);
+	}
+	
 	// 크로스 사이트 스크립트 방지 처리 메소드
 	public static String replaceParameter(String param) {
 	   String result = param;
@@ -219,4 +232,5 @@ public class AdminServiceImpl implements AdminService{
 			
 		return date + str + ext;
 	}
+
 }
