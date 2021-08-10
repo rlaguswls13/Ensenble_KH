@@ -76,5 +76,17 @@ public class AdminDAO {
 		return sqlSession.insert("adminMapper.insertOneAttachment", a);
 	}
 
+	public int deleteRooms(String rooms) {
+		int result = sqlSession.delete("adminMapper.deleteStudioAttachments", rooms);
+		if(result>=0) {
+			result = sqlSession.delete("adminMapper.deleteRooms", rooms);
+		}
+		return result;
+	}
+
+	public int countRooms() {
+		return sqlSession.selectOne("adminMapper.countRooms");
+	}
+
 
 }

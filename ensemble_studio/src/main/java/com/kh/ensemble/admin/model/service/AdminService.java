@@ -28,4 +28,8 @@ public interface AdminService {
 
 	int updateRoom(Room room, List<MultipartFile> images, String webPath, String savePath);
 
+	int deleteRooms(String rooms);
+
+	int countRooms();
+
 }
