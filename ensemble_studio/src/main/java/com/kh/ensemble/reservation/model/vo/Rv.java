@@ -1,6 +1,6 @@
 package com.kh.ensemble.reservation.model.vo;
 
-import java.sql.Date;
+
 import java.util.List;
 
 public class Rv {
@@ -8,14 +8,19 @@ public class Rv {
 	private int rvNo;
 	private int memberNo;
 	private int roomNo;
-	private Date rvDate;
+	private String rvDate;
 	private String rvTime;
 	private int rvPeople;
 	private int rvCars;
 	private int rvAnimals;
 	private String rvPurpose;
 	private String rvEtc;
+
+	private String roomName;
 	
+
+
+
 	private List<Option> optionList;
 	
 	public Rv() {}
@@ -28,6 +33,14 @@ public class Rv {
 		this.optionList = optionList;
 	}
 
+	
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
 	public int getRvNo() {
 		return rvNo;
 	}
@@ -52,11 +65,13 @@ public class Rv {
 		this.roomNo = roomNo;
 	}
 
-	public Date getRvDate() {
+
+
+	public String getRvDate() {
 		return rvDate;
 	}
 
-	public void setRvDate(Date rvDate) {
+	public void setRvDate(String rvDate) {
 		this.rvDate = rvDate;
 	}
 
@@ -108,26 +123,13 @@ public class Rv {
 		this.rvEtc = rvEtc;
 	}
 
-	public Rv(int rvNo, int memberNo, int roomNo, Date rvDate, String rvTime, int rvPeople, int rvCars, int rvAnimals,
-			String rvPurpose, String rvEtc) {
-		super();
-		this.rvNo = rvNo;
-		this.memberNo = memberNo;
-		this.roomNo = roomNo;
-		this.rvDate = rvDate;
-		this.rvTime = rvTime;
-		this.rvPeople = rvPeople;
-		this.rvCars = rvCars;
-		this.rvAnimals = rvAnimals;
-		this.rvPurpose = rvPurpose;
-		this.rvEtc = rvEtc;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "Rv [rvNo=" + rvNo + ", memberNo=" + memberNo + ", roomNo=" + roomNo + ", rvDate=" + rvDate + ", rvTime="
 				+ rvTime + ", rvPeople=" + rvPeople + ", rvCars=" + rvCars + ", rvAnimals=" + rvAnimals + ", rvPurpose="
-				+ rvPurpose + ", rvEtc=" + rvEtc + ", optionList=" + optionList + "]";
+				+ rvPurpose + ", rvEtc=" + rvEtc + ", roomName=" + roomName + ", optionList=" + optionList + "]";
 	}
 	
 	

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ensemble.member.model.vo.Member;
 import com.kh.ensemble.reservation.model.vo.Rv;
 import com.kh.ensemble.reservation.model.vo.RvPagination;
 
@@ -32,6 +33,17 @@ public class RvDAO {
 		return sqlSession.selectList("rvMapper.selectRvList", pagination.getMemberNo() , rowBounds );
 	}
 
+	
+	//예약하기 DAO
+	public int reservation(Member loginMember) {
+	
+		return sqlSession.insert("rvMapper.reservation", loginMember);
+	}
+
+	public List<Rv> selectRvTimeList(Rv rv) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("rvMapper.selectRvTimeList", rv);
+	}
 
 	
 

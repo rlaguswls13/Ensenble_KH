@@ -69,6 +69,7 @@
 		MEMBER_NO = #{pagination.getMemberNo()}
 		ORDER BY RV_NO DESC
 	</select>
+	
 	<select id="selectOptionList" parameterType="_int"
 		resultMap="option_rm">
 		SELECT * FROM RESERVATION_OPTION
@@ -77,6 +78,18 @@
 
 
 	</select>
+	
+	
+	<!-- 예약 목록 조회 -->
+	<select id="selectRvTimeList" parameterType="Rv" resultMap="rv_rm">
+		SELECT
+		RV_TIME
+		FROM RESERVATION
+		WHERE RV_DATE = #{rvDate}
+		AND ROOM_NO = #{roomNo}
+		
+	</select>
+	
 
 
 </mapper>
