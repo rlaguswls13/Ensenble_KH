@@ -57,7 +57,7 @@
 										height="70 px">
 								</div>
 								<div id="reservationPreview">
-									<div class="roomName"> 예약 스튜디오 : ${reservation.roomNo}</div>
+									<div class="roomName"> 예약 스튜디오 : ${reservation.roomName} </div>
 									<div class="reservationTime">예약 일정 : ${reservation.rvDate} | ${reservation.rvTime}</div>
 								</div>
 								<hr>
@@ -66,6 +66,7 @@
 
 							<div class="reservationDetailList">
 								<div class="detailList1">
+								
 									<div class="detail1-1">구성</div>
 									<div class="detail1-2">기본 카메라 1개, 기본 조명 1개</div>
 								</div>
@@ -82,7 +83,7 @@
 									<div class="detail4-2">성인 : ${reservation.rvPeople} , 동물 : ${reservation.rvAnimals}</div>
 								</div>
 								<hr>
-								<div class="totalPrice">가격 ${reservation.rvPrice}원</div>
+								<div class="totalPrice">가격 ${reservation.roomPrice}원</div>
 
 
 

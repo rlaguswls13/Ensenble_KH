@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.vo.Rv;
 
 public interface AdminService {
 
@@ -31,5 +32,10 @@ public interface AdminService {
 	int deleteRooms(String rooms);
 
 	int countRooms();
+
+	//예약 목록 pagination
+	Pagination getPagination(Pagination pg);
+	//예약 목록 불러오기 
+	List<Rv> selectReservationList(Pagination pagination);
 
 }

@@ -16,6 +16,7 @@ import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.admin.model.vo.StudioAttachment;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.vo.Rv;
 import com.kh.ensemble.board.exception.InsertAttachmentException;
 import com.kh.ensemble.board.exception.SaveFileException;
 
@@ -231,6 +232,26 @@ public class AdminServiceImpl implements AdminService{
 		String ext = originFileName.substring(originFileName.lastIndexOf("."));
 			
 		return date + str + ext;
+	}
+
+	//예약 내역 pagination
+	@Override
+	public Pagination getPagination(Pagination pg) {
+		
+		Pagination selectPg = dao.getListCount(pg);
+		
+		System.out.println(selectPg);
+		
+		return new Pagination(pg.getCurrentPage(), selectPg.getListCount());
+	}
+	
+	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public List<Rv> selectReservationList(Pagination pagination) {
+	
+		
+		return dao.selectReservationList(pagination);
 	}
 
 }
