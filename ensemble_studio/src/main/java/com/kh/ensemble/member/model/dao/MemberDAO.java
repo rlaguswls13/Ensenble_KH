@@ -124,6 +124,26 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.findId", findMember);
 	}
 
+	/** 네이버 로그인 DAO
+	 * @param navermember
+	 * @return result
+	 */
+	public Member naverLogin(Member navermember) {
+		
+		return sqlSession.selectOne("memberMapper.naverLogin", navermember);
+	}
+
+
+	/** 네이버 DB에 저장 DAO
+	 * @param navermember
+	 * @return result
+	 */
+	public int naverSignUp(Member navermember) {
+		
+		return sqlSession.insert("memberMapper.naverSignUp", navermember);
+	}
+
+	
 	//--------------------------------------------------------------------
 	
 	public int insertAnimal(Animal animal) {

@@ -91,6 +91,22 @@ public interface MemberService {
 	 * @return result
 	 */
 	public abstract String findId(Member findMember) throws Exception;
+	
+	
+	/** 네이버 로그인 Service
+	 * @param navermember
+	 * @return result
+	 */
+	public abstract Member naverLogin(Member navermember);
+
+	
+	/** 네이버 DB에 저장 Service
+	 * @param navermember
+	 * @return result
+	 */
+	public abstract int naverSingUp(Member navermember);
+	
+
 
 	//----------------------------------------------------------------------
 	
@@ -128,6 +144,9 @@ public interface MemberService {
 	 * @return rvList
 	 */
 	public abstract List<Rv> selectRvList(int memberNo);
+
+
+
 
 
 	//----------------------------------------------------------------------

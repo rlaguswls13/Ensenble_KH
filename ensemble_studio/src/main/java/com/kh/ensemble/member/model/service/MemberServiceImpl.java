@@ -251,6 +251,36 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+	// 네이버 로그인 메소드
+	@Override
+	public Member naverLogin(Member navermember) {
+		
+		return dao.naverLogin(navermember);
+	}
+	
+	
+
+	// 네이버 DB에 저장 메소드
+	@Override
+	public int naverSingUp(Member navermember) {
+		
+		int idCheck = dao.idDupCheck(navermember.getMemberId());
+		int result = 0;
+		
+		// 이미 가입된 아이디가 아니면 
+		if(idCheck == 0) {
+			
+			result = dao.naverSignUp(navermember); // 가입 시키고 DB에 저장되면 result 1 반환
+			
+		} else if(idCheck == 1) { // 이미 가입된 아이디면
+			
+			result = 1;
+		}
+		
+		return result;
+	}
+	
+
 	//--------------------------------------------------------------------
 	
 	//반려동물 정보 추가
