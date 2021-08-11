@@ -2,17 +2,14 @@ package com.kh.ensemble.board.model.service;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,16 +63,20 @@ public class BoardServiceImpl implements BoardService {
 	// 게시글 상세조회
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public Board selectBoard(int boardNo) {
+	public Board selectBoard(int loginMemberNo, int boardNo) {
 		
 		Board board = dao.selectBoard(boardNo);
 		
 		if(board != null) {
-			dao.increaseReadCount(boardNo);
-			board.setBoardReadCount(board.getBoardReadCount() + 1);
+			if(board.getMemberNo() != loginMemberNo) {
+				dao.increaseReadCount(boardNo);
+				board.setBoardReadCount(board.getBoardReadCount() + 1);
+			}
 		}			
 		return board;
 	}
+	
+		
 	
 	// 특정 게시판 카테고리 조회
 	@Override

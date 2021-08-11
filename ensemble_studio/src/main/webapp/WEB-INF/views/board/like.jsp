@@ -112,7 +112,7 @@
 		}
 		
 		// 버튼 작동
-		$('button').click(function(){
+		$('.btn_like').click(function(){
 			if(loginMemberNoLike != ""){
 			  if($(this).hasClass('btn_unlike')){
 			    $(this).removeClass('btn_unlike');

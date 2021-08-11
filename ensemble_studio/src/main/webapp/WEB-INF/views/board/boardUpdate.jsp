@@ -24,7 +24,7 @@
 
 	
     
-    <h3>게시글 작성</h3>
+    <h3>게시글 수정</h3>
     
     <hr>    
 
@@ -73,7 +73,7 @@
     	<div class="col-sm-12">
    		 	<a class="btn btn-secondary mr-2 float-right" href="list?type=${param.type}&cp=${param.cp}${searchStr}">목록으로</a>			
 			<button class="btn btn-secondary mr-2 float-right" type="reset"  onclick="return resetSummerNote();">취소</button>
-			<button class="btn btn-secondary mr-2 float-right" type="submit">글등록</button>		
+			<button class="btn btn-secondary mr-2 float-right" type="submit">글수정</button>		
          </div>
     </form>
 
@@ -135,6 +135,7 @@
  		// summernote 초기화
  		function resetSummerNote(){
  			$('#summernote').summernote('code', '');
+ 			$('#boardTitle').removeAttr("value");
  		}
         
         // summernote 내용입력
