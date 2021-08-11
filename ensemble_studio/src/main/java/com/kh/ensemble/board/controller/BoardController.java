@@ -94,16 +94,19 @@ public class BoardController {
 	public String boardView(@PathVariable("boardTypeNo") int boardTypeNo,
 							@PathVariable("boardNo") int boardNo,
 							@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,				
-							Model model, Like like, RedirectAttributes ra,
+							Model model, Like like, RedirectAttributes ra,							
 							HttpSession session) {
 		
-		
+		int loginMemberNo = 0;
 		Member loginMember = (Member)session.getAttribute("loginMember");
-		if(loginMember != null)  like.setMemberNo(loginMember.getMemberNo());
+		if(loginMember != null) {
+			like.setMemberNo(loginMember.getMemberNo());
+			loginMemberNo = loginMember.getMemberNo();
+		}
 		like.setBoardNo(boardNo);
 		
 		Like selLike = serviceL.selectLike(like);
-		Board board = serviceB.selectBoard(boardNo);
+		Board board = serviceB.selectBoard(loginMemberNo, boardNo);
 		
 		if (board != null) {
 			List<Reply> rList = serviceR.selectList(boardNo);
@@ -160,7 +163,6 @@ public class BoardController {
 	}
 	
 	// 게시글 url 파일 서버 저장
-	// @RequestParam(key) value가 비어있으면 오류뜨는거같음)
 	@RequestMapping(value = "{boardTypeNo}/insertImageUrl", method = RequestMethod.POST)
 	@ResponseBody
 	public String uploadImage(@PathVariable("boardTypeNo") int boardTypeNo,
@@ -217,12 +219,14 @@ public class BoardController {
 	// 게시글 수정 화면 전환
 	@RequestMapping(value="{boardTypeNo}/updateForm", method=RequestMethod.POST)
 	public String updateBoard(@PathVariable("boardTypeNo") int boardTypeNo,
-								int boardNo, Model model) {
+							@ModelAttribute("loginMember") Member loginMember ,
+							int boardNo, Model model) {
 		
+		int loginMemberNo = loginMember.getMemberNo();
 		List<Type> typeList = serviceB.selectType(boardTypeNo);
 		Type boardType = serviceB.selectboardType(boardTypeNo);
 		
-		Board board = serviceB.selectBoard(boardNo);
+		Board board = serviceB.selectBoard(loginMemberNo, boardNo);
 		model.addAttribute(board);
 		model.addAttribute("typeList", typeList);
 		model.addAttribute("boardType", boardType);
@@ -260,14 +264,23 @@ public class BoardController {
 	@RequestMapping(value="{boardTypeNo}/delete", method=RequestMethod.POST)
 	public String deleteBoard(@RequestParam("boardNo") int boardNo,
 							  @RequestParam("boardTypeNo") int boardTypeNo,
+							  @ModelAttribute("loginMember") Member loginMember,
+							  Like like,
 							  HttpServletRequest request, RedirectAttributes ra) {
 
+		
+		int loginMemberNo = loginMember.getMemberNo();
+		like.setMemberNo(loginMemberNo);
+		like.setBoardNo(boardNo);
+		
 		int result = serviceB.deleteBoard(boardNo);
+
 		String path = null;
 
 		if(result > 0) {
 			path = "redirect:list";
 			MemberController.swalSetMessage(ra, "error", "게시글 삭제 성공",  null);
+			serviceL.deleteLike(like);
 		} else {
 			path = "redirect:" + boardNo;
 			MemberController.swalSetMessage(ra, "success", "게시글 삭제 실패",  null);

@@ -21,7 +21,7 @@ public interface BoardService {
 	List<Board> selectSearchBoardList(Search search, Pagination pagination);
 	
 	// 게시글 상세조회
-	Board selectBoard(int boardNo);
+	Board selectBoard(int loginMembeNo, int boardNo);
 	
 	// 게시글 타입조회
 	List<Type> selectType(int boardTypeNo);
