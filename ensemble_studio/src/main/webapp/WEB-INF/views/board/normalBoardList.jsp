@@ -199,7 +199,7 @@
 	
 	<jsp:include page="../common/footer.jsp"/>
 
-
+	
 	<script>
 			// 검색 내용이 있을 경우 검색창에 해당 내용을 작성해두는 기능
 			(function(){
