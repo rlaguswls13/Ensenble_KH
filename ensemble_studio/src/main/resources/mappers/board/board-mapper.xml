@@ -63,8 +63,8 @@
 				WHERE BOARD_TYPE_NO = #{boardTypeNo} AND BOARD_CT_NO = 1) BOARD_NAME
 		FROM (SELECT COUNT(*) CNT FROM BOARD_LIST
 				WHERE BOARD_TYPE_NO = #{boardTypeNo} AND BOARD_STATUS = 'Y'
-		<if test="#{boardCTNo} > 0">
-			BOARD_CT_NO = #{boardCTNo}	
+		<if test="boardCTNo!=0">
+				AND BOARD_CT_NO = #{boardCTNo}	
 		</if>
 				)
 	</select>
@@ -77,10 +77,9 @@
 				WHERE BOARD_TYPE_NO = #{boardTypeNo} AND BOARD_CT_NO = 1) BOARD_NAME
 		FROM (SELECT COUNT(*) CNT FROM BOARD_LIST
 				WHERE BOARD_TYPE_NO = #{boardTypeNo} AND BOARD_STATUS = 'Y'
-		<if test="#{boardCTNo} > 0">
-			BOARD_CT_NO = #{boardCTNo}	
+		<if test="boardCTNo!=0">
+			AND BOARD_CT_NO = #{boardCTNo}	
 		</if>
-			)
 		<!-- 검색어 조건 -->
 		<if test="sv != null">
 			AND 
@@ -100,6 +99,7 @@
 				</when>		
 			</choose>
 		</if>
+		)
 	</select>
 	
 	<!-- 게시글 목록 조회 -->
@@ -108,7 +108,7 @@
 		WHERE BOARD_STATUS = 'Y'
 		AND
 		BOARD_TYPE_NO = #{boardTypeNo}
-		<if test="#{boardCTNo} != null">
+		<if test="boardCTNo!=0">
 			AND BOARD_CT_NO = #{boardCTNo}	
 		</if>
 		ORDER BY BOARD_NO DESC
@@ -122,10 +122,9 @@
 		AND
 		BOARD_TYPE_NO = #{boardTypeNo}
 		
-		<if test="#{boardCTNo} > 0">
+		<if test="boardCTNo!=0">
 			AND BOARD_CT_NO = #{boardCTNo}	
 		</if>
-
 		<if test="sv != null">
 			AND 
 			<bind name="val" value="'%' + sv + '%'"/>
@@ -140,7 +139,7 @@
 					( BOARD_TITLE LIKE #{val} OR BOARD_CONTENT LIKE #{val} )
 				</when>
 				<when test="sk == 'writer'" >
-					MEMBER_NM LIKE #{val}
+					MEMBER_NICK LIKE #{val}
 				</when>
 			</choose>
 		</if>

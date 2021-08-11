@@ -5,12 +5,20 @@ public class Search {
 	private String sk;
 	private String sv;
 	private int boardTypeNo;
-	private int bct;
+	private int boardCTNo;
 	
 	public Search() {}
 
 	public String getSk() {
 		return sk;
+	}
+
+	public int getBoardCTNo() {
+		return boardCTNo;
+	}
+
+	public void setBoardCTNo(int boardCTNo) {
+		this.boardCTNo = boardCTNo;
 	}
 
 	public void setSk(String sk) {
@@ -33,16 +41,8 @@ public class Search {
 		this.boardTypeNo = boardTypeNo;
 	}
 
-	public int getBct() {
-		return bct;
-	}
-
-	public void setBct(int bct) {
-		this.bct = bct;
-	}
-
 	@Override
 	public String toString() {
-		return "Search [sk=" + sk + ", sv=" + sv + ", boardTypeNo=" + boardTypeNo + ", bct=" + bct + "]";
-	}
+		return "Search [sk=" + sk + ", sv=" + sv + ", boardTypeNo=" + boardTypeNo + ", boardCTNo=" + boardCTNo + "]";
+	}	
 }
