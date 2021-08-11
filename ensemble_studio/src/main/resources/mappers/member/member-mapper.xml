@@ -213,14 +213,18 @@
 
 	<!-- 네이버 로그인 -->
 	<select id="naverLogin" resultMap="member_rm"
-		parameterType="string">SELECT * FROM MEMBERWHERE MEMBER_STATUS = 'Y'AND
-		MEMBER_PATH = #{memberPath}AND MEMBER_ID = #{memberId} 
+		parameterType="string">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_STATUS = 'Y'
+		AND MEMBER_PATH = #{memberPath}
+		AND MEMBER_ID = #{memberId} 
 	</select>
 
 	<!-- 네이버 DB에 저장 -->
-	<insert id="naverSignUp" parameterType="Member">INSERT INTO
-		MEMBERVALUES(SEQ_MNO.NEXTVAL, #{memberId}, 'naverpassword',
-		#{memberEmail},#{memberNick}, DEFAULT, #{memberPhone}, DEFAULT,
-		DEFAULT, 'S',DEFAULT) 
+	<insert id="naverSignUp" parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES(SEQ_MNO.NEXTVAL, #{memberId}, 'naverpassword',
+		#{memberEmail}, #{memberNick}, DEFAULT, #{memberPhone}, DEFAULT,
+		DEFAULT, 'S', DEFAULT) 
 	</insert>
 </mapper>

@@ -75,7 +75,7 @@ $("#id").on("input", function(){
 // 닉네임 유효성 검사
 // 조건 : 숫자, 영어, 한국어 2~8글자 -> ^[가-힣ㄱ-ㅎa-zA-Z0-9]{2,}\$
 $("#nickname").on("input", function(){
-	const regExp = /^[가-힣ㄱ-ㅎa-zA-Z0-9_-*]{2,8}$/;
+	const regExp = /^[가-힣ㄱ-ㅎa-zA-Z0-9_\-*]{2,8}$/;
 	
 	const inputNickname = $(this).val().trim();
 	
