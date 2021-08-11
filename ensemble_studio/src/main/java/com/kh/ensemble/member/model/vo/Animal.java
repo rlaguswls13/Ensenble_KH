@@ -8,7 +8,7 @@ public class Animal {
 	private String aniType;
 	private int aniAge;
 	private int aniKg;
-	private int MemberNo;
+	private int memberNo;
 
 	
 	public Animal() {
@@ -51,18 +51,20 @@ public class Animal {
 	public void setAniKg(int aniKg) {
 		this.aniKg = aniKg;
 	}
+
 	public int getMemberNo() {
-		return MemberNo;
+		return memberNo;
 	}
+
 	public void setMemberNo(int memberNo) {
-		MemberNo = memberNo;
+		this.memberNo = memberNo;
 	}
 
 	@Override
 	public String toString() {
 		return "Animal [aniNo=" + aniNo + ", aniName=" + aniName + ", aniGender=" + aniGender + ", aniType=" + aniType
-				+ ", aniAge=" + aniAge + ", aniKg=" + aniKg + ", MemberNo=" + MemberNo + "]";
+				+ ", aniAge=" + aniAge + ", aniKg=" + aniKg + ", memberNo=" + memberNo + "]";
 	}
-	
+
 	
 }

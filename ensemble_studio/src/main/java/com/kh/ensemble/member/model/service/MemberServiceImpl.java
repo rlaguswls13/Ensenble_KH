@@ -18,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ensemble.board.exception.SaveFileException;
 import com.kh.ensemble.member.model.dao.MemberDAO;
+import com.kh.ensemble.member.model.vo.Animal;
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.vo.Rv;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -248,7 +250,44 @@ public class MemberServiceImpl implements MemberService {
 		
 		return result;
 	}
-	
-	
 
+	//--------------------------------------------------------------------
+	
+	//반려동물 정보 추가
+	@Override
+	public int insertAnimal(Animal animal) {
+		return dao.insertAnimal(animal);
+	}
+
+	//반려동물 정보 삭제
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int deleteAnimal(int aniNo) {
+		return dao.deleteAnimal(aniNo);
+	}
+	
+	//반려동물 정보 수정화면을 위한 조회
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public Animal selectAnimal(int aniNo) {
+		return dao.selectAnimal(aniNo);
+	}
+
+	//반려동물 정보 수정
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public int updateAnimal(Animal animal) {
+		return dao.updateAnimal(animal);
+	}
+
+	//로그인멤버 예약리스트 조회
+	@Override
+	public List<Rv> selectRvList(int memberNo) {
+		return dao.selectRvList(memberNo);
+	}
+	
+	
+	//--------------------------------------------------------------------
+	
+	
 }

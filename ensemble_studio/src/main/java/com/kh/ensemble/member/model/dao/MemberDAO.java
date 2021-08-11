@@ -6,7 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ensemble.member.model.vo.Animal;
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.vo.Rv;
 
 @Repository
 public class MemberDAO {
@@ -122,5 +124,31 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.findId", findMember);
 	}
 
+	//--------------------------------------------------------------------
+	
+	public int insertAnimal(Animal animal) {
+		return sqlSession.insert("memberMapper.insertAnimal", animal);
+	}
+
+
+	public int deleteAnimal(int aniNo) {
+		return sqlSession.delete("memberMapper.deleteAnimal", aniNo);
+	}
+
+	public Animal selectAnimal(int aniNo) {
+		return sqlSession.selectOne("memberMapper.selectOneAnimal", aniNo);
+	}
+
+
+	public int updateAnimal(Animal animal) {
+		return sqlSession.update("memberMapper.updateAnimal", animal);
+	}
+
+
+	public List<Rv> selectRvList(int memberNo) {
+		return sqlSession.selectList("memberMapper.selectRvList", memberNo);
+	}
+	
+	//--------------------------------------------------------------------
 
 }

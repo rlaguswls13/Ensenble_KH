@@ -1,5 +1,12 @@
 package com.kh.ensemble.member.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +33,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.ensemble.auth.SNSLogin;
 import com.kh.ensemble.auth.SnsValue;
 import com.kh.ensemble.member.model.service.MemberService;
+import com.kh.ensemble.member.model.vo.Animal;
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.vo.Rv;
 
 @Controller
 @RequestMapping("/member/*")
@@ -175,14 +184,95 @@ public class MemberController {
 
 		return result;
 	}
+	
+	//------------------------------------------------------------------------
 
 	// 마이페이지 화면 전환 Controller
 	@RequestMapping(value = "myPage", method = RequestMethod.GET)
-	public String myPage(@ModelAttribute Member inputMember) {
-
+	public String myPage(@ModelAttribute("loginMember") Member loginMember, Model model) {
+		
+		List<Rv> rvList = service.selectRvList(loginMember.getMemberNo());
+		
+		model.addAttribute("rvList", rvList);
+		
 		return "member/myPage";
 	}
+	
+	//반려동물 정보 추가하기 화면전환
+	@RequestMapping(value = "insertAnimal", method = RequestMethod.GET)
+	public String insertAnimal() {
+		return "member/insertPet";
+	}
+	
+	//반려동물 정보 추가하기
+	@RequestMapping(value = "insertAnimal", method = RequestMethod.POST)
+	public String insertAnimal(@ModelAttribute("loginMember") Member loginMember, Animal animal, RedirectAttributes ra) {
+		
+		animal.setMemberNo(loginMember.getMemberNo());
+		System.out.println(animal);
+		
+		int result = service.insertAnimal(animal);
+		if(result>0) {
+			swalSetMessage(ra, "success", "반려동물 정보 추가 성공", null);
+			loginMember.getAniList().add(animal);
+			
+		}else {
+			swalSetMessage(ra, "error", "반려동물 정보 추가 실패", null);
+		}
+		return "redirect:/member/myPage";
+	}
+	
+	//반려동물 정보 수정 화면 전환
+	@RequestMapping(value = "updateAnimal/{aniNo}", method = RequestMethod.GET)
+	public String updateAnimal(@PathVariable("aniNo") int aniNo, Model model) {
+		
+		Animal ani = service.selectAnimal(aniNo);
+		model.addAttribute("ani", ani);
+		return "member/updatePet";
+	}
+	
+	//반려동물 정보 수정 화면 전환
+	@RequestMapping(value = "updateAnimal/{aniNo}", method = RequestMethod.POST)
+	public String updateAnimal(@PathVariable("aniNo") int aniNo,
+								@ModelAttribute("loginMember") Member loginMember, 
+								Animal animal, RedirectAttributes ra) {
+		animal.setAniNo(aniNo);
+		int result = service.updateAnimal(animal);
+		if(result>0) {
+			swalSetMessage(ra, "success", "반려동물 정보 수정 성공", null);
+			for(Animal a : loginMember.getAniList()) {
+				if(a.getAniNo()== animal.getAniNo()) {
+					a.setAniAge(animal.getAniAge());
+					a.setAniGender(animal.getAniGender());
+					a.setAniKg(animal.getAniKg());
+					a.setAniName(animal.getAniName());
+					a.setAniType(animal.getAniType());
+				}
+			}
+		}else {
+			swalSetMessage(ra, "error", "반려동물 정보 수정 실패", null);
+		}
+		
+		return "redirect:/member/myPage";
+	}
 
+	//반려동물 정보 삭제하기
+	@ResponseBody
+	@RequestMapping(value = "deleteAnimal", method = RequestMethod.POST)
+	public int deleteAnimal(@ModelAttribute("loginMember") Member loginMember, int aniNo) {
+		int result= service.deleteAnimal(aniNo);
+		if(result>0) {
+			for(int i=0; i<loginMember.getAniList().size(); i++) {
+				if(loginMember.getAniList().get(i).getAniNo()==aniNo) {
+					loginMember.getAniList().remove(i);
+				}
+			}
+		}
+		return result; 
+	}
+	
+	//------------------------------------------------------------------------
+	
 	// 회원정보 수정 화면 전환 Controller
 	@RequestMapping(value = "updateMember", method = RequestMethod.GET)
 	public String updateMember(@ModelAttribute("loginMember") Member loginMember) {
