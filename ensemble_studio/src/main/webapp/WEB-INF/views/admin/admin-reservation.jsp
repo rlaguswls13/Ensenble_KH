@@ -40,17 +40,17 @@
                   </tr>
                 </thead>
 
-				<c:forEach items="${totalRvList}" var="totalRvList">
+				<c:forEach items="${totalRvList}" var="reservation">
                 <tbody>
                   <tr>
-                    <th scope="row" style="text-align: center;">${totalRvList.rvNo}</th>
+                    <th scope="row" style="text-align: center;"><a href="${reservation.rvNo}?cp=${pagination.currentPage}">${reservation.rvNo}</a></th>
                     <td  style="text-align: center;">Mark</td>
-                    <td  style="text-align: center;">${totalRvList.rvDate}<br>
-                            <span style="color: rgb(156, 156, 156);">${totalRvList.rvTime}</span>
+                    <td  style="text-align: center;">${reservation.rvDate}<br>
+                            <span style="color: rgb(156, 156, 156);">${reservation.rvTime}</span>
                     </td>
                     <td  style="text-align: center;">A Room</td>
-                    <td style="text-align: center;">${totalRvList.optionList[0].optionName}</td>
-                    <td style="text-align: center;">${totalRvList.rvEtc}</td>
+                    <td style="text-align: center;">${reservation.optionList[0].optionName}</td>
+                    <td style="text-align: center;">${reservation.rvEtc}</td>
                     <td style="text-align: center;">
                         <select name="selectRvStatus">
                             <option value="대기">대기</option>

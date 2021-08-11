@@ -254,4 +254,12 @@ public class AdminServiceImpl implements AdminService{
 		return dao.selectReservationList(pagination);
 	}
 
+	///예약수정 페이지 
+	@Override
+	public Rv selectReservation(int rvNo) {
+		
+		
+		return dao.selectReservation(rvNo);
+	}
+
 }

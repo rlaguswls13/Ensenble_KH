@@ -63,27 +63,22 @@ public class AdminController {
 		pg.setCurrentPage(cp);
 
 		Pagination pagination = null;
-		
-		
-		
-		
+
 		List<Rv> totalRvList = null;
 
 		pagination = service.getPagination(pg);
-		
+
 		System.out.println("admin컨트롤러 " + pagination);
 
 		totalRvList = service.selectReservationList(pagination);
-		
+
 		System.out.println("admin컨트롤러 " + totalRvList);
 
 		model.addAttribute("totalRvList", totalRvList);
 		model.addAttribute("pagination", pagination);
-		
+
 		return "admin/admin-reservation";
 	}
-
-	
 
 	@RequestMapping(value = "/admin/member", method = RequestMethod.GET)
 	public String memberList(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
@@ -143,20 +138,20 @@ public class AdminController {
 	public int updateRoomStatusY(Room room) {
 		// System.out.println(room);
 		int result = 0;
-		if(room.getRoomStatus().equals("Y")) {
+		if (room.getRoomStatus().equals("Y")) {
 			result = service.countRooms();
 			if (result < 3) {
 				result = service.updateRoomStatus(room);
 			} else {
 				result = 0;
 			}
-		}else {
+		} else {
 			result = service.updateRoomStatus(room);
 		}
-		
+
 		return result;
 	}
-	
+
 	@RequestMapping(value = "admin/studio/update/{roomNo}", method = RequestMethod.GET)
 	public String updateRoom(@PathVariable("roomNo") int roomNo, Model model) {
 		Room room = service.selectRoom(roomNo);
@@ -186,6 +181,20 @@ public class AdminController {
 		// System.out.println(rooms);
 		int result = service.deleteRooms(rooms);
 		return result;
+	}
+
+	// 게시글 수정 페이지
+	
+	@RequestMapping(value = "admin/{rvNo}", method = RequestMethod.GET)
+	public String modifyRv(@PathVariable("rvNo") int rvNo,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model
+			) {
+		
+		Rv rv = service.selectReservation(rvNo);
+		
+		System.out.println("게시글 수정 페이지 용 정보 조회 " + rv);
+
+		return "admin/admin-modifyRv";
 	}
 
 }

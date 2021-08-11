@@ -38,4 +38,8 @@ public interface AdminService {
 	//예약 목록 불러오기 
 	List<Rv> selectReservationList(Pagination pagination);
 
+	
+	//예약 내용 수정 페이지 
+	Rv selectReservation(int rvNo);
+
 }
