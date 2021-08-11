@@ -279,7 +279,6 @@ function showUpdateReply(replyNo, el){
 //댓글 수정 취소 시 원래대로 돌아가기
 function updateCancel(el){
 	$(".replyUpdateContent").parent().parent().parent().html(beforeReplyRowDeactive);
-	$(".replyUpdateContent").eq(0).parent().empty();
 }
 
 //댓글 수정
