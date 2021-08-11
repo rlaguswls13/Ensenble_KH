@@ -17,7 +17,7 @@
             <c:if test="${!empty loginMember}">      
 	            <div class="row-sm-12 d-flex" id="input-replyArea">
 	                <div class="col-sm-1">
-	                    <img src="${loginMember.memberImage}" alt="null">
+	                    <img src="${contextPath}${loginMember.memberImage}" alt="null" width="50px">
 	                    <br>
 	                    <span>${loginMember.memberNick}</span>
 	                </div>
@@ -33,7 +33,7 @@
 			<li class="reply-row">
 	            <div class="row-sm-12 d-flex" id="detail-replyArea">
 	                <div class="col-sm-1">
-	                    <img class="rMImage" src="${reply.memberImage}" alt="null">
+	                    <img class="rMImage" src="${contextPath}${reply.memberImage}" alt="null" width="50px">
 	                    <br>
 	                    <span class="rWriter">${reply.memberNk}</span>
 	                </div>
@@ -150,7 +150,7 @@ function selectReplyList(){
 		  // 작성자 (왼쪽 영역)
 		  var cdivCol1 = $("<div>").addClass("col-sm-1");
 	      var replyArea 
-	      var rMImage = $("<img>").attr("src", item.memberImage).attr("alt", "null");
+	      var rMImage = $("<img>").attr("src", "${contextPath}"+item.memberImage).attr("alt", "null").attr("width","50px");
 	      var br = $("<br>")
 	      var rWriter = $("<span>").addClass("rWriter").text(item.memberNk);
 	     
@@ -221,12 +221,9 @@ function selectReplyList(){
 function savedata(el) {
 	if(!nowBeforeReplyRowDeactive){
 		nowBeforeReplyRowDeactive = $(el).parent().parent().parent().html();
-		console.log(nowBeforeReplyRowDeactive);
 	} else{
 		postBeforeReplyRowDeactive = nowBeforeReplyRowDeactive;
 		nowBeforeReplyRowDeactive = $(el).parent().parent().parent().html();
-		console.log(postBeforeReplyRowDeactive);
-		console.log(nowBeforeReplyRowDeactive);
 	}
 }
 
