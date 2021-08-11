@@ -215,7 +215,12 @@ select {
 						  text: "노출되는 상품은 3개 이상 선택할 수 없습니다.",
 						  icon: "warning",
 						});
-					return false;
+					if(select.val()=='N'){
+						select.val('Y');
+					}else{
+						select.val('N');
+					}
+					
 				}
 			}
 		})
