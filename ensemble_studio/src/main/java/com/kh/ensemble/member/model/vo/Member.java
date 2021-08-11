@@ -1,6 +1,7 @@
 package com.kh.ensemble.member.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Member {
 	
@@ -15,6 +16,8 @@ public class Member {
 	private String memberStatus;
 	private String memberPath;
 	private String memberGrade;
+	
+	private List<Animal> aniList;
 	
 	public Member() {}
 
@@ -135,13 +138,26 @@ public class Member {
 		this.memberGrade = memberGrade;
 	}
 
+
+	public List<Animal> getAniList() {
+		return aniList;
+	}
+
+
+	public void setAniList(List<Animal> aniList) {
+		this.aniList = aniList;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw="
-				+ memberPw + ", memberEmail=" + memberEmail + ", memberNick=" + memberNick + ", memberImage="
-				+ memberImage + ", memberPhone=" + memberPhone + ", enrollDate=" + enrollDate + ", memberStatus="
-				+ memberStatus + ", memberPath=" + memberPath + ", memberGrade=" + memberGrade + "]";
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberEmail="
+				+ memberEmail + ", memberNick=" + memberNick + ", memberImage=" + memberImage + ", memberPhone="
+				+ memberPhone + ", enrollDate=" + enrollDate + ", memberStatus=" + memberStatus + ", memberPath="
+				+ memberPath + ", memberGrade=" + memberGrade + ", aniList=" + aniList + "]";
 	}
+
+
 	
 	
 }
