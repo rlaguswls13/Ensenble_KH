@@ -19,6 +19,7 @@
 <style>
 </style>
 <body>
+
 	<jsp:include page="../common/header.jsp"></jsp:include>
 
 	<c:set var="phone" value="${fn:split( loginMember.memberPhone, '-' ) }" />
@@ -123,7 +124,7 @@
 		function memberUpdateValidate() {
 
 			// 닉네임 유효성 검사
-			const regExp = /^[가-힣ㄱ-ㅎa-zA-Z0-9]{2,6}$/;
+			const regExp = /^[가-힣ㄱ-ㅎa-zA-Z0-9_-*]{2,8}$/;
 
 			const inputNickname = $("#nickname").val().trim();
 
@@ -132,7 +133,7 @@
 				swal({
 					"icon" : "warning",
 					"title" : "닉네임이 유효하지 않습니다.",
-					"text" : "한글, 숫자, 영어 2~6글자 이내 형식으로 작성해주세요."
+					"text" : "숫자, 영어, 한국어, _-* 2~8글자 이내 형식으로 작성해주세요."
 				});
 
 				return false;
@@ -140,7 +141,7 @@
 
 			// 전화번호 유효성 검사
 			const regExp1 = /^\d{3,4}$/; // 숫자 3~4글자
-			const regExp2 = /^\d{4}$/; // 숫자 3~4글자
+			const regExp2 = /^\d{4}$/; // 숫자 4글자
 
 			const ph2 = $("#phone2").val();
 			const ph3 = $("#phone3").val();

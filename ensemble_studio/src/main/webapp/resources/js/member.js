@@ -73,9 +73,9 @@ $("#id").on("input", function(){
 
 
 // 닉네임 유효성 검사
-// 조건 : 숫자, 영어, 한국어 2~6글자 -> ^[가-힣ㄱ-ㅎa-zA-Z0-9]{2,}\$
+// 조건 : 숫자, 영어, 한국어 2~8글자 -> ^[가-힣ㄱ-ㅎa-zA-Z0-9]{2,}\$
 $("#nickname").on("input", function(){
-	const regExp = /^[가-힣ㄱ-ㅎa-zA-Z0-9]{2,6}$/;
+	const regExp = /^[가-힣ㄱ-ㅎa-zA-Z0-9_-*]{2,8}$/;
 	
 	const inputNickname = $(this).val().trim();
 	
@@ -87,7 +87,7 @@ $("#nickname").on("input", function(){
 		checkObj.nickname = true;
 		
 	} else{
-		$("#checkNickname").text("숫자, 영어, 한국어 2~6글자로 작성해주세요.").css("color", "red");
+		$("#checkNickname").text("숫자, 영어, 한국어, _-* 2~8글자로 작성해주세요.").css("color", "red");
 		
 		checkObj.nickname = false;
 	}

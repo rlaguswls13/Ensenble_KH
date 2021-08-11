@@ -49,33 +49,59 @@ public class MemberController {
 	private SnsValue naverSns;
 	
 	// 소셜로그인 한 결과가 나올 화면 Controller
-	@RequestMapping(value="/auth/naver/callBack", method=RequestMethod.GET)
-	public String snsLoginCallback(Model model, @RequestParam("code") String code, HttpSession session) throws Exception{
+	@RequestMapping(value = "/auth/naver/callBack", method = RequestMethod.GET)
+	public String snsLoginCallback(Model model, @RequestParam("code") String code, HttpSession session,
+								HttpServletRequest request, HttpServletResponse response,
+								RedirectAttributes ra) throws Exception {
 		System.out.println(code);
-		
+
 		SnsValue sns = null;
 		Member member = null;
 		Member navermember = null;
+		int result = 0;
 		
+
 		sns = naverSns;
-		
+
 		SNSLogin snsLogin = new SNSLogin(sns);
-		
+
 		// 1. code를 이용해서 access_token 받기
 		// 2. access_token을 이용해서 사용자 profile 정보 가져오기
 		navermember = snsLogin.getUserProfile(code); // 1, 2번 동시
 		System.out.println("Profile : " + navermember);
 
-		//model.addAttribute("result", navermember);
+		// model.addAttribute("result", navermember);
+
+		// 3. DB에 해당 유저가 존재하는지 체크
+		member = service.naverLogin(navermember); 
+		// System.out.println("member" + member);
 		
-		// 3. DB 해당 유저가 존재하는지 체크 
-		/*
-		 * service.getBySns(navermember); if(user == null) {
-		 * model.addAttribute("result", "존재하지 않는 사용자라노") }
-		 */
-		
-		return "member/loginResult";
+		if(member == null) { // 가입되지 않은 회원일 때
+			
+			System.out.println("member 결과 : " + member);
+			
+			result = service.naverSingUp(navermember); // 가입을 시킴 
+			
+			System.out.println("가입 결과 : " + result);
+			
+			model.addAttribute("loginMember", member);
+			
+			if(result > 0) { // 가입이 됐다면
+				model.addAttribute("loginMember", member);
+				
+				return "redirect:/";
+				
+			} else {
+				swalSetMessage(ra, "회원 가입 실패", "고객센터에 문의하세요.", null);
+			}
+		}else { // 가입된 회원일 때
+			model.addAttribute("loginMember", member);
+			
+			
+		}
+		return "redirect:/";
 	}
+
 	
 	
 	
