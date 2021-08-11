@@ -27,6 +27,23 @@
 
 	
 	
+    <!-- oauth2 login -->
+	<beans:bean id="naverClientID" class="java.lang.String">
+	   <beans:constructor-arg value="3CcwxeeL8TpNlydfHa1z" />
+    </beans:bean>
+	<beans:bean id="naverClientSecret" class="java.lang.String">
+		<beans:constructor-arg value="xSN4D2gvT8" />
+	</beans:bean>
+	<beans:bean id="naverRedirectUrl" class="java.lang.String">
+		<beans:constructor-arg value="http://localhost:8080/ensemble/member/auth/naver/callBack" />
+	</beans:bean>
+
+	<beans:bean id="naverSns" class="com.kh.ensemble.auth.SnsValue">
+		<beans:constructor-arg value="naver" />
+		<beans:constructor-arg ref="naverClientID" />
+		<beans:constructor-arg ref="naverClientSecret" />
+		<beans:constructor-arg ref="naverRedirectUrl" />
+	</beans:bean>
 	
 	
 	
