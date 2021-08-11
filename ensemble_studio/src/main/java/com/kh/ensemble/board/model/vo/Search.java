@@ -4,8 +4,8 @@ public class Search {
 	
 	private String sk;
 	private String sv;
-	private int boardType;
-	private int[] ct;
+	private int boardTypeNo;
+	private int bct;
 	
 	public Search() {}
 
@@ -25,24 +25,24 @@ public class Search {
 		this.sv = sv;
 	}
 
-	public int getBoardType() {
-		return boardType;
+	public int getBoardTypeNo() {
+		return boardTypeNo;
 	}
 
-	public void setBoardType(int boardType) {
-		this.boardType = boardType;
+	public void setBoardTypeNo(int boardTypeNo) {
+		this.boardTypeNo = boardTypeNo;
 	}
 
-	public int[] getCt() {
-		return ct;
+	public int getBct() {
+		return bct;
 	}
 
-	public void setCt(int[] ct) {
-		this.ct = ct;
+	public void setBct(int bct) {
+		this.bct = bct;
 	}
 
 	@Override
 	public String toString() {
-		return "Search [sk=" + sk + ", sv=" + sv + ", boardType=" + boardType + ", ct=" + ct + "]";
-	}	
+		return "Search [sk=" + sk + ", sv=" + sv + ", boardTypeNo=" + boardTypeNo + ", bct=" + bct + "]";
+	}
 }

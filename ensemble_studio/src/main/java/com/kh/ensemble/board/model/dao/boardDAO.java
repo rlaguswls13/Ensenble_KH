@@ -24,22 +24,16 @@ public class boardDAO {
 	 * @param boardTypeNo
 	 * @return pagination
 	 */
-	public Pagination getListCount(int boardTypeNo) {
-		return sqlSession.selectOne("boardMapper.getListCount", boardTypeNo);
-	}
-	public Pagination getListCountCT(Pagination pg) {
-		return sqlSession.selectOne("boardMapper.getListCountCT", pg);
+	public Pagination getListCount(Pagination pg) {
+		return sqlSession.selectOne("boardMapper.getListCount", pg);
 	}
 	
 	/** 게시판 전체 게시글 수 조회(검색)
 	 * @param search
 	 * @return pagination
 	 */
-	public Pagination getListCount(Search search) {
-		return null;
-	}
-	public Pagination getListCountCT(Search search) {
-		return null;
+	public Pagination getSearchListCount(Search search) {
+		return sqlSession.selectOne("boardMapper.getSearchListCount", search);
 	}
 
 	/** 게시글 목록 조회
@@ -49,29 +43,18 @@ public class boardDAO {
 	public List<Board> selectBoardList(Pagination pagination) {
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		return sqlSession.selectList("boardMapper.selectBoardList", pagination.getBoardTypeNo(), rowBounds);
-	}
-	public List<Board> selectBoardListCT(Pagination pagination) {
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		return sqlSession.selectList("boardMapper.selectBoardListCT", pagination, rowBounds);
-	}
-	
+		return sqlSession.selectList("boardMapper.selectBoardList", pagination, rowBounds);
+	}	
 
 	/** 게시글 목록 조회 (검색)
 	 * @param search
 	 * @param pagination
 	 * @return boardList
 	 */
-	public List<Board> selectBoardList(Search search, Pagination pagination) {
+	public List<Board> selectSearchBoardList(Search search, Pagination pagination) {
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		return sqlSession.selectList("boardMapper.selectBoardList", search, rowBounds);
-	}
-	public List<Board> selectBoardListCT(Search search, Pagination pagination) {
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		return sqlSession.selectList("boardMapper.selectBoardList", search, rowBounds);
+		return sqlSession.selectList("boardMapper.selectSearchBoardList", search, rowBounds);
 	}
 
 	/** 특정 게시글 상세 조회

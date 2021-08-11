@@ -56,20 +56,26 @@ public class BoardController {
 		pg.setCurrentPage(cp);
 		pg.setBoardCTNo(bct);
 		
+		search.setBoardTypeNo(boardTypeNo);
+		search.setBct(bct);
+		
+		
 		Pagination pagination = null;
 		List<Board> boardList = null;
 		List<Type> typeList = null;
-				
+		
+		typeList = serviceB.selectType(boardTypeNo);
+		
 		if (search.getSk() == null) {
 			pagination = serviceB.getPagination(pg);
 			boardList = serviceB.selectBoardList(pagination);
-			typeList = serviceB.selectType(boardTypeNo);
+			
 		} else {
-			pagination = serviceB.getPagination(search, pg);
-			boardList = serviceB.selectBoardList(search, pagination);
-			typeList = serviceB.selectType(boardTypeNo);
+			pagination = serviceB.getSearchPagination(search, pg);
+			boardList = serviceB.selectSearchBoardList(search, pagination);
 			
 		}
+
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagination", pagination);
 		model.addAttribute("typeList", typeList);

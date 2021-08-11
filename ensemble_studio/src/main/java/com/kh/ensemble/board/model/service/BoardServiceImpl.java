@@ -37,13 +37,7 @@ public class BoardServiceImpl implements BoardService {
 	public Pagination getPagination(Pagination pg) {
 		
 		Pagination selectPg;
-		// 1) 전체 게시글 수 조회
-		if(pg.getBoardCTNo()==0) {
-			selectPg = dao.getListCount(pg.getBoardTypeNo());
-		}else {
-			selectPg = dao.getListCountCT(pg);
-		}
-		// 2) 계산이 완료된 Pagination 객체 생성 후 반환
+		selectPg = dao.getListCount(pg);
 		return new Pagination(pg.getCurrentPage(),selectPg.getListCount(),
 							pg.getBoardTypeNo(), selectPg.getBoardName(),
 							pg.getBoardCTNo(), pg.getBoardCTNm());
@@ -51,36 +45,22 @@ public class BoardServiceImpl implements BoardService {
 	// 게시판 pagination
 	@Override
 	public List<Board> selectBoardList(Pagination pagination) {
-		if(pagination.getBoardCTNo()==0) {
-			return dao.selectBoardList(pagination);	
-		}else {
-			return dao.selectBoardListCT(pagination);	
-		}			
+		return dao.selectBoardList(pagination);		
 	}
 		
 	// 전체 게시글 수 + 게시판 이름 조회(검색)
 	@Override
-	public Pagination getPagination(Search search, Pagination pg) {
+	public Pagination getSearchPagination(Search search, Pagination pg) {
 		Pagination selectPg;
-		// 1) 전체 게시글 수 조회
-		if(pg.getBoardCTNo()==0) {
-			selectPg = dao.getListCount(search);
-		}else {
-			selectPg = dao.getListCountCT(search);
-		}
-		// 2) 계산이 완료된 Pagination 객체 생성 후 반환
+		selectPg = dao.getSearchListCount(search);
 		return new Pagination(pg.getCurrentPage(),selectPg.getListCount(),
 							pg.getBoardTypeNo(), selectPg.getBoardName(),
 							pg.getBoardCTNo(), pg.getBoardCTNm());
 	}
 	// 게시판 pagination(검색)
 	@Override
-	public List<Board> selectBoardList(Search search, Pagination pagination) {
-		if(pagination.getBoardCTNo()==0) {
-			return dao.selectBoardList(search, pagination);	
-		}else {
-			return dao.selectBoardListCT(search, pagination);	
-		}	
+	public List<Board> selectSearchBoardList(Search search, Pagination pagination) {
+		return dao.selectSearchBoardList(search, pagination);	
 	}
 	
 	// 게시글 상세조회

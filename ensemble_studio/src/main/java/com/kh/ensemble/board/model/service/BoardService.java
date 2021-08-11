@@ -17,8 +17,8 @@ public interface BoardService {
 	List<Board> selectBoardList(Pagination pagination);
 	
 	// 목록조회(검색)
-	Pagination getPagination(Search search, Pagination pg);
-	List<Board> selectBoardList(Search search, Pagination pagination);
+	Pagination getSearchPagination(Search search, Pagination pg);
+	List<Board> selectSearchBoardList(Search search, Pagination pagination);
 	
 	// 게시글 상세조회
 	Board selectBoard(int boardNo);

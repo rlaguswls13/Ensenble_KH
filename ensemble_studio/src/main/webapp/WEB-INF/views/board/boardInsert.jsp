@@ -110,10 +110,10 @@
 				}
 			}    
 			
-			// summernote 초기화
-			function resetSummerNote(){
-				$('#summernote').summernote('code', '');
-			}
+		// summernote 초기화
+		function resetSummerNote(){
+			$('#summernote').summernote('code', '');
+		}
     
     
     	// summernote 스타일 및 기능변경

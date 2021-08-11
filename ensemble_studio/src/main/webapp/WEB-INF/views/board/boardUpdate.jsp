@@ -132,6 +132,11 @@
             }
         });
         
+ 		// summernote 초기화
+ 		function resetSummerNote(){
+ 			$('#summernote').summernote('code', '');
+ 		}
+        
         // summernote 내용입력
   		$('#summernote').summernote('code', '${board.boardContent}');
         
