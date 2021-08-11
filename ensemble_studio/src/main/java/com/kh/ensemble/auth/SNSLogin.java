@@ -57,7 +57,7 @@ public class SNSLogin {
 		navermember.setMemberId(resNode.get("id").asText());
 		navermember.setMemberNick(resNode.get("nickname").asText());
 		navermember.setMemberEmail(resNode.get("email").asText());
-		//navermember.setMemberPhone(resNode.get("moblie").asText());
+		navermember.setMemberPhone(resNode.get("mobile").asText());
 		navermember.setMemberPath("S"); // 회원가입경로 -> 소셜 : S 
 		
 		return navermember;
