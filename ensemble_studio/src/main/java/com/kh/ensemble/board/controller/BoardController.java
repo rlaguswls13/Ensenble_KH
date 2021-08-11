@@ -172,9 +172,9 @@ public class BoardController {
 	
 	// 게시글 삽입
 	@RequestMapping(value="{boardTypeNo}/insert", method=RequestMethod.POST)
-	public String insertBoard(	@ModelAttribute("board") Board board, 
-								@ModelAttribute("loginMember") Member loginMember,
-								HttpServletRequest request, RedirectAttributes ra) {
+	public String insertBoard(	@ModelAttribute("loginMember") Member loginMember,
+								HttpServletRequest request, RedirectAttributes ra,
+								Board board) {
 		
 		board.setMemberNo(loginMember.getMemberNo());
 		int boardNo = serviceB.insertBoard(board);
