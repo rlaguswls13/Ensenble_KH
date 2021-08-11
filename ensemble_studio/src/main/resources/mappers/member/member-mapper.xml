@@ -26,9 +26,27 @@
  		<result property="enrollDate" column="ENROLL_DATE"/>
  		<result property="memberStatus" column="MEMBER_STATUS"/>
  		<result property="memberPath" column="MEMBER_PATH"/>
- 		<result property="memberGrade" column="MEMBER_GRADE"/>	 
+ 		<result property="memberGrade" column="MEMBER_GRADE"/>	
+ 		
+ 		<collection property="aniList" column="MEMBER_NO" 
+		javaType="java.util.ArrayList" ofType="Animal" select="selectAnimal"/>
+ 		 
 	 </resultMap>
 	 
+	 <resultMap type="Animal" id="animal_rm">
+	 	<id property="aniNo" column="ANI_NO"/>
+	 	<result property="aniName" column="ANI_NAME"/>
+	 	<result property="aniGender" column="ANI_GENDER"/>
+	 	<result property="aniType" column="ANI_TYPE"/>
+	 	<result property="aniAge" column="ANI_AGE"/>
+	 	<result property="aniKg" column="ANI_KG"/>
+	 	<result property="memberNo" column="MEMBER_NO"/>
+	 </resultMap>
+
+	<select id="selectAnimal" parameterType="_int" resultMap="animal_rm">
+		SELECT * FROM ANIMAL WHERE MEMBER_NO = #{memberNo} ORDER BY ANI_NO DESC
+	</select>
+		 
 	 
 	<!-- 일반 로그인 -->
 	<select id="login" parameterType="string" resultMap="member_rm">

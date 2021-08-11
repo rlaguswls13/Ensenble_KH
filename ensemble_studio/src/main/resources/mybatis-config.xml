@@ -18,6 +18,7 @@
 			
 		<!-- member -->
 		<typeAlias type="com.kh.ensemble.member.model.vo.Member" alias="Member" />
+		<typeAlias type="com.kh.ensemble.member.model.vo.Animal" alias="Animal" />
 		
 		<!-- board -->
 		<typeAlias type="com.kh.ensemble.board.model.vo.Attachment" alias="Attachment" />
