@@ -39,9 +39,7 @@
 	                </div>
 	                <div class="col-sm-11">
 	                    <div class="row-sm-12 d-flex">
-	                        <div class="col-sm-10 rContent">
-	                        	${reply.replyContent}
-	                        </div>
+	                        <div class="col-sm-10 rContent">${reply.replyContent}</div>
 		                        <c:if test="${!empty loginMember}">
 			                        <div class="dropdown mr-1">
 			                            <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset"
@@ -92,14 +90,9 @@
 	const boardNo = ${board.boardNo};
 	// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
 	let beforeReplyRow;
-	let beforeReplyRowDeactive;
+	let nowBeforeReplyRowDeactive;
+	let postBeforeReplyRowDeactive;
 	
-	// 드랍박스 비활성화 저장함수
-	function savedata(el) {
-		beforeReplyRowDeactive = $(el).parent().parent().parent().html();
-	}
-
-
 //댓글 등록
 function addReply()	{
 	
@@ -111,7 +104,6 @@ function addReply()	{
 		if(replyContent.trim() == ""){
 			swal("댓글 작성 후 클릭해주세요.");
 		}else{
-			console.log("${contextPath}");
 			$.ajax({ 
 				url : "${contextPath}/reply/insertReply", 
 				type : "POST",
@@ -225,7 +217,23 @@ function selectReplyList(){
 	});
 }
 
+// 드랍박스 비활성화 저장함수
+function savedata(el) {
+	if(!nowBeforeReplyRowDeactive){
+		nowBeforeReplyRowDeactive = $(el).parent().parent().parent().html();
+		console.log(nowBeforeReplyRowDeactive);
+	} else{
+		postBeforeReplyRowDeactive = nowBeforeReplyRowDeactive;
+		nowBeforeReplyRowDeactive = $(el).parent().parent().parent().html();
+		console.log(postBeforeReplyRowDeactive);
+		console.log(nowBeforeReplyRowDeactive);
+	}
+}
 
+//댓글 수정 취소 시 원래대로 돌아가기
+function updateCancel(el){
+	$(".replyUpdateContent").parent().parent().parent().html(nowBeforeReplyRowDeactive);
+}
 
 // 수정 형식
 function showUpdateReply(replyNo, el){
@@ -233,9 +241,8 @@ function showUpdateReply(replyNo, el){
 	
 	// 이미 열려있는 댓글 수정 창이 있을 경우 닫아주기
 	if($(".replyUpdateContent").length > 0){
-		$(".replyUpdateContent").parent().parent().parent().html(beforeReplyRowDeactive);
+		$(".replyUpdateContent").parent().parent().parent().html(postBeforeReplyRowDeactive);
 		$(".replyUpdateContent").eq(0).parent().empty();
-		
 	}
 		
 	// 댓글 수정화면 출력 전 요소를 저장해둠.
@@ -276,10 +283,6 @@ function showUpdateReply(replyNo, el){
 
 }
 
-//댓글 수정 취소 시 원래대로 돌아가기
-function updateCancel(el){
-	$(".replyUpdateContent").parent().parent().parent().html(beforeReplyRowDeactive);
-}
 
 //댓글 수정
 function updateReply(replyNo, el){

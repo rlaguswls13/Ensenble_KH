@@ -29,6 +29,7 @@
 	
 		<typeAlias type="com.kh.ensemble.board.model.vo.Reply" alias="Reply" />
 		<typeAlias type="com.kh.ensemble.board.model.vo.Type" alias="Type" />
+		<typeAlias type="com.kh.ensemble.board.model.vo.Search" alias="Search" />
 		
 		<typeAlias type="com.kh.ensemble.reservation.model.vo.Rv" alias="Rv" />
 		<typeAlias type="com.kh.ensemble.reservation.model.vo.RvPagination" alias="RvPagination" />

@@ -13,6 +13,7 @@
     <jsp:include page="../common/header.jsp"/>    
     <!-- External CSS-->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common/heart.css">
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/reviewBoardDetail.css">
 </head>
 <body>
@@ -41,7 +42,7 @@
 							</span>
                         </div>
                         <div class="col-sm-3">
-                            <span>좋아요</span>
+                            <div class="heart"></div>
                         </div>
                         <div class="col-sm-2">
                             <span>조회수 ${board.boardReadCount}</span>
@@ -117,6 +118,17 @@
 					"text"  : "${text}"
 				});				
 			}
+			
+			// Heart 좋아요 기능
+			/* when a user clicks, toggle the 'is-animating' class */
+			$(".heart").on('click touchstart', function(){
+			  $(this).toggleClass('is_animating');
+			});
+
+			/*when the animation is over, remove the class*/
+			$(".heart").on('animationend', function(){
+			  $(this).toggleClass('is_animating');
+			});
 		</script>
 
 </html>
