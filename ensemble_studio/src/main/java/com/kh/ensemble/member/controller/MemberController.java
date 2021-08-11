@@ -1,5 +1,6 @@
 package com.kh.ensemble.member.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ensemble.auth.SNSLogin;
+import com.kh.ensemble.auth.SnsValue;
 import com.kh.ensemble.member.model.service.MemberService;
 import com.kh.ensemble.member.model.vo.Member;
 
@@ -31,10 +35,58 @@ public class MemberController {
 
 	@Autowired
 	private MemberService service;
+	
+	@Inject
+	private SnsValue naverSns;
+	
+	// 소셜로그인 한 결과가 나올 화면 Controller
+	@RequestMapping(value="/auth/naver/callBack", method=RequestMethod.GET)
+	public String snsLoginCallback(Model model, @RequestParam("code") String code, HttpSession session) throws Exception{
+		System.out.println(code);
+		
+		SnsValue sns = null;
+		Member member = null;
+		Member navermember = null;
+		
+		sns = naverSns;
+		
+		SNSLogin snsLogin = new SNSLogin(sns);
+		
+		// 1. code를 이용해서 access_token 받기
+		// 2. access_token을 이용해서 사용자 profile 정보 가져오기
+		navermember = snsLogin.getUserProfile(code); // 1, 2번 동시
+		System.out.println("Profile : " + navermember);
 
+		//model.addAttribute("result", navermember);
+		
+		// 3. DB 해당 유저가 존재하는지 체크 
+		/*
+		 * service.getBySns(navermember); if(user == null) {
+		 * model.addAttribute("result", "존재하지 않는 사용자라노") }
+		 */
+		
+		return "member/loginResult";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 로그인 화면 전환 Controller
 	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String login() {
+	public String login(Model model) {
+		
+		SNSLogin naverLogin = new SNSLogin(naverSns);
+	      model.addAttribute("naver_url", naverLogin.getNaverAuthURL());
+	      
 		return "member/login";
 		// /WEB-INF/views/member/login.jsp
 	}
@@ -81,6 +133,9 @@ public class MemberController {
 		return "redirect:/";
 	}
 
+	
+	
+	
 	// 로그아웃 Controller
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout(SessionStatus status, @RequestHeader("referer") String referer) {
