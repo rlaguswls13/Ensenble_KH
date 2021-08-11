@@ -317,6 +317,7 @@ public class MemberController {
 		inputMember.setMemberPhone(inputPhone);
 		inputMember.setMemberNick(inputNick);
 
+		System.out.println("inputMember : "+ inputMember);
 		// 실제로 파일이 저장되는 경로 얻어오기
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/images/member/");
 
@@ -327,7 +328,6 @@ public class MemberController {
 			fileName = service.rename(file.getOriginalFilename());
 			inputMember.setMemberImage("/resources/images/member/" + fileName);
 		}
-
 		// 회원 정보 수정 Service
 		int result = service.updateMember(inputMember, savePath, file, fileName, deleteCheck);
 

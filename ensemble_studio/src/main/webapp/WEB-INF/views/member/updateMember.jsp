@@ -19,7 +19,7 @@
 <style>
 </style>
 <body>
-
+${loginMember}
 	<jsp:include page="../common/header.jsp"></jsp:include>
 
 	<c:set var="phone" value="${fn:split( loginMember.memberPhone, '-' ) }" />
@@ -124,7 +124,7 @@
 		function memberUpdateValidate() {
 
 			// 닉네임 유효성 검사
-			const regExp = /^[가-힣ㄱ-ㅎa-zA-Z0-9_-*]{2,8}$/;
+			const regExp = /^[가-힣ㄱ-ㅎa-zA-Z0-9_\-*]{2,8}$/;
 
 			const inputNickname = $("#nickname").val().trim();
 
