@@ -43,10 +43,84 @@
 	 	<result property="memberNo" column="MEMBER_NO"/>
 	 </resultMap>
 
-	<select id="selectAnimal" parameterType="_int" resultMap="animal_rm">
-		SELECT * FROM ANIMAL WHERE MEMBER_NO = #{memberNo} ORDER BY ANI_NO DESC
+	<resultMap type="Rv" id="rv_rm">
+		<id property="rvNo" column="RV_NO" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="roomNo" column="ROOM_NO" />
+		<result property="rvDate" column="RV_DATE" />
+		<result property="rvTime" column="RV_TIME" />
+		<result property="rvPeople" column="RV_PEOPLE" />
+		<result property="rvCars" column="RV_CARS" />
+		<result property="rvAnimals" column="RV_ANIMALS" />
+		<result property="rvPurpose" column="RV_PURPOSE" />
+		<result property="rvEtc" column="RV_ETC" />
+		<result property="roomName" column="ROOM_NAME" />
+		<result property="roomPrice" column="ROOM_PRICE" />
+		<result property="roomDiscount" column="ROOM_DISCOUNT" />
+		
+		<collection property="optionList" column="RV_NO"
+			javaType="java.util.List" ofType="Option" select="selectOptionList"/>
+	</resultMap>
+	
+	<resultMap type="Option" id="option_rm">
+		<id property="optionNo" column="OPTION_NO" />
+		<result property="optionName" column="OPTION_NAME" />
+		<result property="optionType" column="OPTION_TYPE" />
+		<result property="optionPrice" column="OPTION_PRICE" />
+	</resultMap>
+	
+	<!-- 로그인멤버 예약내역 조회 -->
+	<select id="selectRvList" parameterType="_int" resultMap="rv_rm">
+		SELECT RV_NO, MEMBER_NO, ROOM_NO, RV_DATE, RV_TIME, RV_PEOPLE, 
+				RV_CARS, RV_ANIMALS,ROOM_NAME, ROOM_PRICE, ROOM_DISCOUNT,RV_PURPOSE,RV_ETC
+		FROM RESERVATION
+		JOIN STUDIO_ROOM USING(ROOM_NO)
+		WHERE MEMBER_NO = #{memberNo}
+		ORDER BY RV_NO DESC
 	</select>
-		 
+	
+	<!-- 예약내역 조회에 필요한 옵션리스트 조회 -->
+	<select id="selectOptionList" parameterType="_int" resultMap="option_rm">
+		SELECT * FROM RESERVATION_OPTION
+		JOIN STUDIO_OPTION USING
+		(OPTION_NO)
+		WHERE RV_NO = #{rvNo}
+	</select>
+
+	<!-- 로그인멤버 반려동물 정보 조회  -->
+	<select id="selectAnimal" parameterType="_int" resultMap="animal_rm">
+		SELECT * FROM ANIMAL WHERE MEMBER_NO = #{memberNo} ORDER BY ANI_NO
+	</select>
+	
+	<!-- 반려동물 정보 삭제 -->
+	<delete id="deleteAnimal" parameterType="_int">
+		DELETE FROM ANIMAL WHERE ANI_NO = #{aniNo}
+	</delete>
+	
+	<!-- 반려동물 정보 수정에 필요한 정보 조회 -->
+	<select id="selectOneAnimal" parameterType="_int" resultMap="animal_rm">
+		SELECT * FROM ANIMAL WHERE ANI_NO = #{aniNo}
+	</select>
+	
+	<!-- 반려동물 정보 수정 -->
+	<update id="updateAnimal" parameterType="Animal">
+		UPDATE ANIMAL SET
+		ANI_NAME = #{aniName},
+		ANI_GENDER = #{aniGender},
+		ANI_TYPE = #{aniType},
+		ANI_AGE = #{aniAge},
+		ANI_KG = #{aniKg}
+		WHERE ANI_NO = #{aniNo}
+	</update>
+	
+	<!-- 반려동물 정보 추가 -->
+	<insert id="insertAnimal" parameterType="Animal">
+	INSERT INTO ANIMAL VALUES
+	(SEQ_ANO.NEXTVAL, #{aniName}, #{aniGender}, #{aniType}, #{aniAge}, #{aniKg}, #{memberNo})
+	</insert>
+
+	<!-- / -->
+
 	 
 	<!-- 일반 로그인 -->
 	<select id="login" parameterType="string" resultMap="member_rm">
@@ -128,4 +202,5 @@
 	WHERE MEMBER_NICK = #{memberNick}
 	AND MEMBER_EMAIL = #{memberEmail}
 	</select>
+	
 </mapper>
