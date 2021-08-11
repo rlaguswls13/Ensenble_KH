@@ -125,6 +125,7 @@
 							<label for="19">건조간식(+5,000원)</label><br> <br> <input
 								type="checkbox" id="optionList" value="20" name="optionList">
 							<label for="20">육포(+3,000)</label>
+							
 						</div>
 					</div>
 
