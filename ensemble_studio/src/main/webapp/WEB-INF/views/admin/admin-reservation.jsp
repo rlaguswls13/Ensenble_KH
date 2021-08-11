@@ -40,16 +40,17 @@
                   </tr>
                 </thead>
 
+				<c:forEach items="${totalRvList}" var="reservation">
                 <tbody>
                   <tr>
-                    <th scope="row" style="text-align: center;">1</th>
+                    <th scope="row" style="text-align: center;"><a href="${reservation.rvNo}?cp=${pagination.currentPage}">${reservation.rvNo}</a></th>
                     <td  style="text-align: center;">Mark</td>
-                    <td  style="text-align: center;">07/22(목)<br>
-                            <span style="color: rgb(156, 156, 156);">12:00~15:00</span>
+                    <td  style="text-align: center;">${reservation.rvDate}<br>
+                            <span style="color: rgb(156, 156, 156);">${reservation.rvTime}</span>
                     </td>
-                    <td  style="text-align: center;">A ROOM</td>
-                    <td style="text-align: center;">옵션 내용</td>
-                    <td style="text-align: center;">비고 내용</td>
+                    <td  style="text-align: center;">A Room</td>
+                    <td style="text-align: center;">${reservation.optionList[0].optionName}</td>
+                    <td style="text-align: center;">${reservation.rvEtc}</td>
                     <td style="text-align: center;">
                         <select name="selectRvStatus">
                             <option value="대기">대기</option>
@@ -57,24 +58,10 @@
                         </select>
                     </td>
                   </tr>
-                  <tr>
-                    <th scope="row" style="text-align: center;">1</th>
-                    <td  style="text-align: center;">Mark</td>
-                    <td  style="text-align: center;">07/22(목)<br>
-                            <span style="color: rgb(156, 156, 156);">12:00~15:00</span>
-                    </td>
-                    <td  style="text-align: center;">A ROOM</td>
-                    <td style="text-align: center;">옵션 내용</td>
-                    <td style="text-align: center;">비고 내용</td>
-                    <td style="text-align: center;">
-                        <select name="selectRvStatus">
-                            <option value="대기">대기</option>
-                            <option value="취소">취소</option>
-                        </select>
-                    </td>
-                  </tr>
+                  
 
                 </tbody>
+                </c:forEach>
               </table>
               <hr>
               <div style="padding: 5px;"></div>

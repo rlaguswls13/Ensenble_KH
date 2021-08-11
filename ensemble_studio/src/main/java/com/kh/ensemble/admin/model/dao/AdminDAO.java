@@ -98,5 +98,10 @@ public class AdminDAO {
 		return sqlSession.selectList("rvMapper.selectReservationList");
 	}
 
+	public Rv selectReservation(int rvNo) {
+		
+		return sqlSession.selectOne("rvMapper.selectReservation", rvNo);
+	}
+
 
 }
