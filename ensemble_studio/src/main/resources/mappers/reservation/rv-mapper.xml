@@ -8,7 +8,10 @@
 
 	</resultMap>
 
-
+	<resultMap type="Pagination" id="pg_rm">
+		<result property="listCount" column="CNT" />
+		<result property="boardName" column="BOARD_NAME" />
+	</resultMap>
 	<resultMap type="Rv" id="rv_rm">
 		<!-- 기본키(PK)에 해당하는 컬럼, 필드 매핑 -->
 		<id property="rvNo" column="RV_NO" />
@@ -23,6 +26,11 @@
 		<result property="rvAnimals" column="RV_ANIMALS" />
 		<result property="rvPurpose" column="RV_PURPOSE" />
 		<result property="rvEtc" column="RV_ETC" />
+		<result property="roomName" column="ROOM_NAME" />
+		<result property="roomPrice" column="ROOM_PRICE" />
+		<result property="roomDiscount" column="ROOM_DISCOUNT" />
+
+
 		<collection property="optionList" column="RV_NO"
 			javaType="java.util.List" ofType="Option" select="selectOptionList">
 			<!-- 옵션리스트를 얻어오는데 사용할값 -->
@@ -46,6 +54,14 @@
 
 
 
+	<select id="getListCount" resultMap="pg_rm">
+		SELECT
+		CNT
+		FROM (SELECT
+		COUNT(*) CNT
+		FROM RESERVATION )
+
+	</select>
 
 
 	<select id="getRvListCount" parameterType="_int"
@@ -62,34 +78,53 @@
 	<!-- 예약 목록 조회 -->
 	<select id="selectRvList" parameterType="_int" resultMap="rv_rm">
 		SELECT
-		RV_NO, MEMBER_NO, ROOM_NO, RV_DATE, RV_TIME, RV_PEOPLE, RV_CARS, RV_ANIMALS,
+		RV_NO, MEMBER_NO, ROOM_NO, RV_DATE, RV_TIME, RV_PEOPLE, RV_CARS,
+		RV_ANIMALS,ROOM_NAME, ROOM_PRICE, ROOM_DISCOUNT
 		RV_PURPOSE,RV_ETC
-		FROM RESERVATION
+		FROM
+		RESERVATION
+		JOIN STUDIO_ROOM USING(ROOM_NO)
 		WHERE
-		MEMBER_NO = #{pagination.getMemberNo()}
+		MEMBER_NO =
+		#{pagination.getMemberNo()}
 		ORDER BY RV_NO DESC
 	</select>
-	
+	<select id="selectReservationList" resultMap="rv_rm">
+		SELECT
+		RV_NO,
+		MEMBER_NO, ROOM_NO, RV_DATE, RV_TIME, RV_PEOPLE, RV_CARS,
+		RV_ANIMALS,
+		RV_PURPOSE,RV_ETC
+		FROM RESERVATION
+		ORDER BY RV_NO DESC
+	</select>
+
 	<select id="selectOptionList" parameterType="_int"
 		resultMap="option_rm">
 		SELECT * FROM RESERVATION_OPTION
-		JOIN STUDIO_OPTION USING (OPTION_NO)
+		JOIN STUDIO_OPTION USING
+		(OPTION_NO)
 		WHERE RV_NO = #{rvNo}
 
 
 	</select>
-	
-	
+
+
 	<!-- 예약 목록 조회 -->
-	<select id="selectRvTimeList" parameterType="Rv" resultMap="rv_rm">
+	<select id="selectRvTimeList" parameterType="Rv"
+		resultMap="rv_rm">
 		SELECT
-		RV_TIME
+		RV_TIME, ROOM_PRICE
 		FROM RESERVATION
+		JOIN STUDIO_ROOM USING
+		(ROOM_NO)
 		WHERE RV_DATE = #{rvDate}
-		AND ROOM_NO = #{roomNo}
-		
+		AND
+		ROOM_NO =
+		#{roomNo}
+
 	</select>
-	
+
 
 
 </mapper>

@@ -15,13 +15,21 @@ public class Rv {
 	private int rvAnimals;
 	private String rvPurpose;
 	private String rvEtc;
-
+	
+	private int roomDiscount;
+	private int roomPrice;
 	private String roomName;
 	
-
-
+	
+	
 
 	private List<Option> optionList;
+	
+	
+	
+	
+	
+	
 	
 	public Rv() {}
 
@@ -125,11 +133,28 @@ public class Rv {
 
 	
 
+	public int getRoomDiscount() {
+		return roomDiscount;
+	}
+
+	public void setRoomDiscount(int roomDiscount) {
+		this.roomDiscount = roomDiscount;
+	}
+
+	public int getRoomPrice() {
+		return roomPrice;
+	}
+
+	public void setRoomPrice(int roomPrice) {
+		this.roomPrice = roomPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "Rv [rvNo=" + rvNo + ", memberNo=" + memberNo + ", roomNo=" + roomNo + ", rvDate=" + rvDate + ", rvTime="
 				+ rvTime + ", rvPeople=" + rvPeople + ", rvCars=" + rvCars + ", rvAnimals=" + rvAnimals + ", rvPurpose="
-				+ rvPurpose + ", rvEtc=" + rvEtc + ", roomName=" + roomName + ", optionList=" + optionList + "]";
+				+ rvPurpose + ", rvEtc=" + rvEtc + ", roomDiscount=" + roomDiscount + ", roomPrice=" + roomPrice
+				+ ", roomName=" + roomName + ", optionList=" + optionList + "]";
 	}
 	
 	

@@ -15,7 +15,7 @@
 		<!-- admin -->
 		<typeAlias type="com.kh.ensemble.admin.model.vo.Room" alias="Room" />
 		<typeAlias type="com.kh.ensemble.admin.model.vo.StudioAttachment" alias="StudioAttachment" />
-		
+			
 		<!-- member -->
 		<typeAlias type="com.kh.ensemble.member.model.vo.Member" alias="Member" />
 		
@@ -25,6 +25,7 @@
 		<typeAlias type="com.kh.ensemble.board.model.vo.HashTag" alias="HashTag" />
 		<typeAlias type="com.kh.ensemble.board.model.vo.Like" alias="Like" />
 		<typeAlias type="com.kh.ensemble.board.model.vo.Pagination" alias="Pagination" />
+	
 		<typeAlias type="com.kh.ensemble.board.model.vo.Reply" alias="Reply" />
 		<typeAlias type="com.kh.ensemble.board.model.vo.Type" alias="Type" />
 		

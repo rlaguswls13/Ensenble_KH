@@ -11,6 +11,7 @@ import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.admin.model.vo.StudioAttachment;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.vo.Rv;
 
 @Repository
 public class AdminDAO {
@@ -86,6 +87,15 @@ public class AdminDAO {
 
 	public int countRooms() {
 		return sqlSession.selectOne("adminMapper.countRooms");
+	}
+
+	public Pagination getListCount(Pagination pg) {
+		return sqlSession.selectOne("rvMapper.getListCount");
+	}
+
+	public List<Rv> selectReservationList(Pagination pagination) {
+		
+		return sqlSession.selectList("rvMapper.selectReservationList");
 	}
 
 
