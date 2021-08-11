@@ -140,17 +140,23 @@ public class AdminController {
 
 	@ResponseBody
 	@RequestMapping(value = "admin/studio/updateRoomStatus", method = RequestMethod.POST)
-	public int updateRoomStatus(Room room) {
+	public int updateRoomStatusY(Room room) {
 		// System.out.println(room);
-		int result = service.countRooms();
-		if (result < 3) {
+		int result = 0;
+		if(room.getRoomStatus().equals("Y")) {
+			result = service.countRooms();
+			if (result < 3) {
+				result = service.updateRoomStatus(room);
+			} else {
+				result = 0;
+			}
+		}else {
 			result = service.updateRoomStatus(room);
-		} else {
-			result = 0;
 		}
+		
 		return result;
 	}
-
+	
 	@RequestMapping(value = "admin/studio/update/{roomNo}", method = RequestMethod.GET)
 	public String updateRoom(@PathVariable("roomNo") int roomNo, Model model) {
 		Room room = service.selectRoom(roomNo);
