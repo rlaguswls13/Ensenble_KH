@@ -57,8 +57,7 @@ public class BoardController {
 		pg.setBoardCTNo(bct);
 		
 		search.setBoardTypeNo(boardTypeNo);
-		search.setBct(bct);
-		
+		search.setBoardCTNo(bct);		
 		
 		Pagination pagination = null;
 		List<Board> boardList = null;
