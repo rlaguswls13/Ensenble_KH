@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -72,7 +73,7 @@
 		<property name="host" value="smtp.naver.com" />
 		<property name="port" value="587" />
 		<property name="username" value="ost0230@naver.com" />
-		<property name="password" value="dkfkaWkd3!" />
+		<property name="password" value="dkfkaWkd3" />
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>
@@ -81,4 +82,89 @@
 		</property>
 	</bean>
 
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+
+	<!-- DBCP bean -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url"
+			value="jdbc:oracle:thin:@115.90.212.22:9000:xe" />
+		<property name="username" value="ensemble" />
+		<property name="password" value="ensemble" />
+
+		<!-- defaultAutoCommit: SQL 수행 후 자동 COMMIT -->
+		<property name="defaultAutoCommit" value="false" />
+
+		<!-- 커넥션 풀 설정 -->
+		<property name="initialSize" value="10" />
+		<property name="maxTotal" value="500" />
+		<property name="maxIdle" value="100" />
+		<property name="minIdle" value="10" />
+		<property name="maxWaitMillis" value="-1" />
+
+	</bean>
+
+	<!--@SqlSession -->
+	<bean id="sqlSessionFactoryBean"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:mybatis-config.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- SqlSessionTemplate : 기본 SQL 실행 + 트랜잭션 관리 역할을 하는 SqlSession을 생성할 수 있게 
+		하는 객체(Spring bean으로 등록해야함.) -->
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean" />
+	</bean>
+
+	<!-- proxy를 이용한 트랜잭션 제어가 안될 경우 추가적인 트랜잭션 매니저를 추가 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- @Transactional -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
+	<!-- 파일 업로드를 위한 MultipartResolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		
+		
+		<property name="maxUploadSize" value="104857600" />
+		<property name="maxUploadSizePerFile" value="104857600" />
+		<property name="maxInMemorySize" value="104857600" />
+	</bean>
+
+
+	<!-- 비번찾기 메일 보내기 -->
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.naver.com" />
+		<property name="port" value="587" />
+		<property name="username" value="ost0230@naver.com" />
+		<property name="password" value="dkfkaWkd3" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+
+>>>>>>> branch 'CAR' of https://github.com/rlaguswls13/Ensenble_KH.git
 </beans>

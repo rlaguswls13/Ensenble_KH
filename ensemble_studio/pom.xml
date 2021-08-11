@@ -122,7 +122,7 @@
 		<!-- 이용국 -->
 
 		<!-- 최아람 -->
-		<!-- 비밀번호찾기 관련 이메일 API  -->
+		<!-- 비밀번호찾기 관련 이메일 API -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -136,6 +136,28 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.2</version>
 		</dependency>
+
+
+		<!-- oauth2 login -->
+		<dependency>
+			<groupId>com.github.scribejava</groupId>
+			<artifactId>scribejava-apis</artifactId>
+			<version>5.6.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.scribejava</groupId>
+			<artifactId>scribejava-core</artifactId>
+			<version>5.6.0</version>
+		</dependency>
+		
+		<!-- 문자열 작업 Library -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+
 
 
 		<!-- Spring -->
