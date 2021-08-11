@@ -57,6 +57,14 @@ public class Pagination {
 		nMakePagination();
 	}
 
+	public Pagination(int currentPage, int listCount) {
+		super();
+		this.currentPage = currentPage;
+		this.listCount = listCount;
+		nMakePagination();
+	}
+
+
 	public int getCurrentPage() {
 		return currentPage;
 	}
