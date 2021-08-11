@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ import com.kh.ensemble.board.model.service.LikeService;
 import com.kh.ensemble.board.model.service.ReplyService;
 import com.kh.ensemble.board.model.vo.Attachment;
 import com.kh.ensemble.board.model.vo.Board;
+import com.kh.ensemble.board.model.vo.Like;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.board.model.vo.Reply;
 import com.kh.ensemble.board.model.vo.Search;
@@ -91,16 +93,25 @@ public class BoardController {
 	@RequestMapping("{boardTypeNo}/{boardNo}")
 	public String boardView(@PathVariable("boardTypeNo") int boardTypeNo,
 							@PathVariable("boardNo") int boardNo,
-							@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
-							Model model,
-							RedirectAttributes ra) {
-
+							@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,				
+							Model model, Like like, RedirectAttributes ra,
+							HttpSession session) {
+		
+		
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		if(loginMember != null)  like.setMemberNo(loginMember.getMemberNo());
+		like.setBoardNo(boardNo);
+		
+		Like selLike = serviceL.selectLike(like);
 		Board board = serviceB.selectBoard(boardNo);
-
+		
 		if (board != null) {
 			List<Reply> rList = serviceR.selectList(boardNo);
+			
+			model.addAttribute("selLike", selLike);
 			model.addAttribute("rList", rList);
 			model.addAttribute("board", board);
+			
 			return "board/boardView";
 
 		} else {

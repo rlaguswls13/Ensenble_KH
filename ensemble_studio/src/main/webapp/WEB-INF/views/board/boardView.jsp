@@ -13,13 +13,10 @@
     <jsp:include page="../common/header.jsp"/>    
     <!-- External CSS-->
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common/heart.css">
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/reviewBoardDetail.css">
 </head>
 <body>
 		
-		
-	
         <form action="" method="POST">
             <div class="" id="review_detail_header">
                 <div class="row-sm-12">
@@ -41,8 +38,8 @@
 						        수정일  : <fmt:formatDate value="${board.boardMT}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
 							</span>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="heart"></div>
+                        <div class="col-sm-1">
+                        	<jsp:include page="like.jsp"/>
                         </div>
                         <div class="col-sm-2">
                             <span>조회수 ${board.boardReadCount}</span>
@@ -64,9 +61,7 @@
                 </div>
             </div>
             <hr>
-            <div class="" id="review_detail_context">
-                ${board.boardContent}
-            </div>      
+            <div class="" id="review_detail_context">${board.boardContent}</div>      
       </form>
       <%-- 댓글 영역 --%>
 			<jsp:include page="reply.jsp"/>
@@ -102,33 +97,25 @@
 		<form action="#" method="POST" name="requestForm">
 			<input type="hidden" name="boardNo" value="${board.boardNo}">
 			<input type="hidden" name="cp" value="${param.cp}">
-			<input type="hidden" name="boardTypeNo" value="${board.boardTypeNo}">
+			<input type="hidden" name="boardTypeN" value="${board.boardTypeNo}">
 		</form>
-</body>
-		<script>
-			function fnRequest(addr){
-				document.requestForm.action = addr;
-				document.requestForm.submit();	
-			}
-			
-			function deleteCheck(){
-				swal({
-					"icon"  : "${icon}",
-					"title" : "${title}",
-					"text"  : "${text}"
-				});				
-			}
-			
-			// Heart 좋아요 기능
-			/* when a user clicks, toggle the 'is-animating' class */
-			$(".heart").on('click touchstart', function(){
-			  $(this).toggleClass('is_animating');
-			});
+	</body>
 
-			/*when the animation is over, remove the class*/
-			$(".heart").on('animationend', function(){
-			  $(this).toggleClass('is_animating');
-			});
-		</script>
 
+
+
+	<script>
+		function fnRequest(addr){
+			document.requestForm.action = addr;
+			document.requestForm.submit();	
+		}
+		
+		function deleteCheck(){
+			swal({
+				"icon"  : "${icon}",
+				"title" : "${title}",
+				"text"  : "${text}"
+			});				
+		}	
+	</script>
 </html>

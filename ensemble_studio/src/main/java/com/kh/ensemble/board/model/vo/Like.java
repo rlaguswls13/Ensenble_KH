@@ -5,9 +5,10 @@ public class Like {
 	private String likeStatus;
 	private int boardNo;
 	private int memberNo;
+	private int likeCNT;
 	
 	public Like() {}
-
+	
 	public int getLikeNo() {
 		return likeNo;
 	}
@@ -40,9 +41,17 @@ public class Like {
 		this.memberNo = memberNo;
 	}
 
+	public int getLikeCNT() {
+		return likeCNT;
+	}
+
+	public void setLikeCNT(int likeCNT) {
+		this.likeCNT = likeCNT;
+	}
+
 	@Override
 	public String toString() {
 		return "Like [likeNo=" + likeNo + ", likeStatus=" + likeStatus + ", boardNo=" + boardNo + ", memberNo="
-				+ memberNo + "]";
+				+ memberNo + ", likeCNT=" + likeCNT + "]";
 	}
 }
