@@ -43,7 +43,6 @@
 					<div class="info-image info" ></div>
 					<div class="info-nick info">
 						<h5>${loginMember.memberNick}</h5>
-						<span style="color:#888">@${loginMember.memberId }</span>
 					</div>
 					<div class="info-email info">
 						<div class="info-eIcon info">
