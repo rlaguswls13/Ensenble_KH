@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ensemble.admin.model.vo.Room;
+import com.kh.ensemble.board.model.vo.Board;
 
 @Repository
 public class MainDAO {
@@ -20,6 +21,10 @@ public class MainDAO {
 
 	public Room selectRoom(String roomHref) {
 		return sqlSession.selectOne("mainMapper.selectRoom", roomHref);
+	}
+
+	public List<Board> selectNoticeList() {
+		return sqlSession.selectList("mainMapper.selectNoticeList");
 	}
 	
 	

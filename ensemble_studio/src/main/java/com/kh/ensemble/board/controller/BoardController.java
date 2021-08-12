@@ -83,7 +83,9 @@ public class BoardController {
 		
 		if (boardTypeNo == 1) { // 리뷰 게시판
 			return "board/reviewBoardList";
-		} else { // 일반 게시판
+		} else if(boardTypeNo == 2){ //공지 게시판
+			return "board/noticeList";
+		}else { // 일반 게시판
 			return "board/normalBoardList";
 		}
 
