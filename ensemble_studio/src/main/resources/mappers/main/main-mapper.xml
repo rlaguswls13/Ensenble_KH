@@ -26,7 +26,45 @@
 		<result property="fileLevel" column="FILE_LEVEL"/>
 		<result property="roomNo" column="ROOM_NO"/>
 	 </resultMap>
+	 
+  	<!-- notice resultMap -->
+	<resultMap type="Board" id="notice_rm">
+		<id property="boardNo" column="BOARD_NO" />
+		<result property="boardTitle" column="BOARD_TITLE" />
+		<result property="boardReadCount" column="BOARD_READ_COUNT" />
+		<result property="boardCTNm" column="BOARD_CT_NM" />
+		
+		<collection property="atList" column="BOARD_NO" 
+		javaType="java.util.ArrayList" ofType="Attachment" select="selectAttachment"/>
 
+	</resultMap>
+	
+	<!-- 파일 정보 resultMap -->
+	<resultMap type="Attachment" id="attachment_rm">
+		<id property="atNo" column="BOARD_AT_NO"/>
+		<result property="atLv" column="BOARD_AT_LV"/>
+		<result property="atPath" column="BOARD_AT_PATH"/>
+		<result property="atName" column="BOARD_AT_NM"/>
+		<result property="boardNo" column="BOARD_NO"/>
+	</resultMap>
+	
+	<select id="selectAttachment" parameterType="_int" resultMap="attachment_rm">
+		SELECT * FROM BOARD_ATTACHMENT
+		WHERE BOARD_NO = #{boardNo}
+		AND BOARD_AT_LV = 0
+	</select>
+		
+	<select id="selectNoticeList" resultMap="notice_rm">
+		SELECT A.* FROM 
+		(SELECT ROWNUM RNUM, BOARD_NO, BOARD_TITLE, BOARD_READ_COUNT, BOARD_CT_NM FROM BOARD
+		JOIN BOARD_TYPE USING (BOARD_TYPE_NO, BOARD_CT_NO)
+		WHERE BOARD_TYPE_NO = 2
+		AND BOARD_STATUS = 'Y'
+		ORDER BY BOARD_NO DESC) A
+		WHERE RNUM BETWEEN 1 AND 3
+	</select>
+	
+	
 	<select id="selectStudioAttachment" parameterType="_int" resultMap="studio_attachment_rm">
 		SELECT*FROM STUDIO_ATTACHMENT 
 		WHERE ROOM_NO = #{roomNo}

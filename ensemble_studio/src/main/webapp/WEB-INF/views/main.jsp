@@ -13,9 +13,8 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/carousel/">
 </head>
 <jsp:include page="common/header.jsp"></jsp:include>
-<link rel="stylesheet" href="${contextPath}/resources/css/common/main.css?ver=345" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/common/main.css?ver=456" type="text/css">
 
-<c:set var="contextPath" scope="application" value="${pageContext.servletContext.contextPath}"/>
 
 <body>
 
@@ -80,25 +79,22 @@
       <h5 style="text-align: center; font-family: 'Noto Serif KR', serif; font-weight: 600;">Notice</h5>
       <div style="padding:10px"></div>
       <div class="container">
-        <div class="notice-img" style="background-image:url('')"></div>
-        <div style="padding-bottom: 20px;">
-            <h6 style="display: inline-block;">[공지] 이벤트를 합니다...</h6>
-            <span style="float: right; color:#888">조회수 123</span>
-        </div>
-
-        <div class="notice-img" style="background-image:url('')"></div>
-        <div style="padding-bottom: 20px;">
-            <h6 style="display: inline-block;">[공지] 이벤트를 합니다...</h6>
-            <span style="float: right; color:#888">조회수 123</span>
-        </div>
-
-        <div class="notice-img" style="background-image:url('')"></div>
-        <div style="padding-bottom: 20px;">
-            <h6 style="display: inline-block;">[공지] 이벤트를 합니다...</h6>
-            <span style="float: right; color:#888">조회수 123</span>
-        </div>
-
-
+      
+	      <c:if test="${!empty noticeList}">
+	      <c:forEach items="${noticeList}" var="notice">
+	      	<c:if test="${!empty notice.atList }">
+	      	<div class="notice-img" style="background-image:url('${contextPath}/${notice.atList[0].atPath}${notice.atList[0].atName}')"></div>
+	      	</c:if>
+	      	<c:if test="${empty notice.atList }">
+	      	<div class="notice-img" style="background-image:url('${contextPath}/resources/images/common/notice.png')"></div>
+	      	</c:if>
+		      
+		        <div style="padding-bottom: 20px;">
+		            <h6 style="display: inline-block;">[ ${notice.boardCTNm}] ${notice.boardTitle }</h6>
+		            <span style="float: right; color:#888">조회수 ${notice.boardReadCount }</span>
+		      </div>
+	      </c:forEach>
+	      </c:if>
       </div>
 
       <div style="padding:30px;"></div>

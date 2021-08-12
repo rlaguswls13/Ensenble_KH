@@ -9,9 +9,8 @@
 <title>${pagination.boardName}</title>
 
 	<!-- External CSS-->
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/normalBoardList.css">
-   
+
 </head>
 
 <body>
@@ -22,31 +21,90 @@
 	<c:if test="${!empty param.sk && !empty param.sv }">
 		<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"  />
 	</c:if>
-					
-	<div class="container my-5">
+	
+	<c:if test="${pagination.boardTypeNo == 3}">
+	<div class="top-box">
+	    <div style="padding:20px"></div>
+      	<h3 style="text-align: center; font-family: 'Noto Serif KR', serif; font-weight: 600; display:block;">${pagination.boardName }</h3>
 		
-		<h1>${pagination.boardName} 게시판</h1>
-			<div class="list-wrapper">
-				<form action="list" method="GET" class="text-center float-right" id="searchForm">
-						<div>
-							<c:forEach items="${typeList}" var="bct">
-								<button class="btn btn-primary" id="searchForm" name="bctN" value="${bct.boardCTNo}">${bct.boardCTNm}</button>
-							</c:forEach>
-						</div>
+		<div class="my-5">
+			<!-- 검색창 -->
+			<form action="list" method="GET" class="text-center" id="searchForm">
+				
+				<!-- 게시판 타입 유지를 위한 태그 -->
+				<input type="hidden" name="type" value="${pagination.boardTypeNo}">
+				<input type="hidden" name="btcN" value="${pagination.boardCTNo}">
+					
+				<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
+					<option value="title">글제목</option>
+					<option value="content">내용</option>
+					<option value="titcont">제목+내용</option>
+					<option value="writer">작성자</option>
+				</select>
+				<input type="text" name="sv" class="searchInput" style="width: 40%; display: inline-block;" placeholder="궁금한 것을 물어보세요.">
+				
+			</form>
+		
+			<!-- 카테고리 버튼 -->
+			<div class="category">
+				<form action="list" method="GET" id="categoryForm" class="text-center">
+					<button class="btn-sm btn-category-checked" id="ct-btn0">전체</button>
+					<button class="btn-sm btn-category" id="ct-btn1" name="bctN" value="${typeList[0].boardCTNo}">${typeList[0].boardCTNm}</button>
+					<button class="btn-sm btn-category" id="ct-btn2" name="bctN" value="${typeList[1].boardCTNo}">${typeList[1].boardCTNm}</button>
+					<button class="btn-sm btn-category" id="ct-btn3" name="bctN" value="${typeList[2].boardCTNo}">${typeList[2].boardCTNm}</button>
 				</form>
-				<table class="table table-hover table-striped my-1" id="list-table">
+			</div>
+		</div>
+	</div>
+	</c:if>
+
+	<c:if test="${pagination.boardTypeNo == 4}">
+	<div style="padding:20px"></div>
+    <h3 style="text-align: center; font-family: 'Noto Serif KR', serif; font-weight: 600; display:block;">${pagination.boardName }</h3>
+	</c:if>
+	
+	<div class="container my-5">
+	
+		<%-- 로그인 되어 있을 경우에만 글쓰기 버튼 노출 --%>
+		<c:if test="${!empty loginMember && pagination.boardTypeNo == 3}">
+			<a  class="btn btn-insert" id="insertBtn" href='insert'>
+				<img src="${contextPath}/resources/images/common/edit.png" width="30px">
+			</a>
+		</c:if>
+		<c:if test="${!empty loginMember && pagination.boardTypeNo == 4}">
+			<div style="float:right; margin-bottom:10px; display:inline-block;">
+				<a  class="btn btn-ensemble" id="insertBtn" href='insert'>
+					<img src="${contextPath}/resources/images/common/edit.png" width="20px" style="margin-right:5px;">
+					문의하기
+				</a>
+			</div>
+		</c:if>
+		
+		<c:if test="${pagination.boardTypeNo == 4}">
+		<div class="category">
+				<form action="list" method="GET" id="categoryForm">
+					<button class="btn-sm btn-category-checked" id="ct-btn0">전체</button>
+					<button class="btn-sm btn-category" id="ct-btn1" name="bctN" value="${typeList[0].boardCTNo}">${typeList[0].boardCTNm}</button>
+					<button class="btn-sm btn-category" id="ct-btn2" name="bctN" value="${typeList[1].boardCTNo}">${typeList[1].boardCTNm}</button>
+					<button class="btn-sm btn-category" id="ct-btn3" name="bctN" value="${typeList[2].boardCTNo}">${typeList[2].boardCTNm}</button>
+				</form>
+			</div>
+		
+		</c:if>
+
+		
+			<div class="list-wrapper">
+
+				<table class="table table-hover my-1" id="list-table">
 					
 					<thead>
 						<tr>
-							<th>No.</th>
-							<th>작성일</th>
+							<th>글번호</th>
 							<th>분류</th>
 							<th>제목</th>
-							<th>작성자</th>
-							<c:if test="${pagination.boardTypeNo == 4}">
-								<th>상태</th>
-							</c:if>
-							<th>조회수</th>
+							<c:if test="${pagination.boardTypeNo == 4}"><th>작성자</th></c:if>
+							<th>작성일</th>
+							<c:if test="${pagination.boardTypeNo == 4}"><th>상태</th></c:if>
 						</tr>
 					</thead>
 					
@@ -71,6 +129,21 @@
 										<%-- 글 번호 --%>
 										<td> ${board.boardNo} </td>	
 										
+										<%-- 카테고리 --%>
+										<td> ${board.boardCTNm} </td>
+										
+										<%-- 글 제목 --%>
+										<td class="boardTitle">                                                         
+											<a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
+											${board.boardTitle}
+											</a>
+										</td>
+										
+										<%-- 작성자 --%>
+										<c:if test="${pagination.boardTypeNo == 4}">
+											<td> ${board.memberNk} </td>
+										</c:if>
+										
 										<%-- 작성일 --%>
 										<td> 
 											<fmt:formatDate var="createDate" value="${board.boardDT}"  pattern="yyyy-MM-dd"/>                          
@@ -87,25 +160,12 @@
 												</c:otherwise>
 											</c:choose>
 										</td>	
-																	
-										<%-- 카테고리 --%>
-										<td> ${board.boardCTNm} </td>
-																			
-										<%-- 글 제목 --%>
-										<td class="boardTitle">                                                         
-											<a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
-											${board.boardTitle}
-											</a>
-										</td>
-										<%-- 작성자 --%>
-										<td> ${board.memberNk} </td>										
 							
 										<%-- 글 상태 --%>
 										<c:if test="${pagination.boardTypeNo == 4}">
 											<td> ${board.boardStatus} </td>
 										</c:if>
-										<%-- 조회수 --%>
-										<td> ${board.boardReadCount} </td>
+										
 									</tr>
 								</c:forEach>
 							
@@ -118,12 +178,6 @@
 				</table>
 			</div>
 
-
-			<%-- 로그인 되어 있을 경우에만 글쓰기 버튼 노출 --%>
-			<c:if test="${!empty loginMember}">
-				<a  class="btn btn-primary float-right" id="insertBtn" href='insert'>글쓰기</a>
-			</c:if>
-			
 			
 			<%---------------------- Pagination start----------------------%>
 			<%-- 페이징 처리 시 주소를 쉽게 작성할 수 있도록 필요한 변수를 미리 선언 --%>
@@ -154,7 +208,9 @@
 						
 							<c:choose>
 								<c:when test="${p == pagination.currentPage }">
-									<li class="page-item active"><a class="page-link">${p}</a></li>
+									<li class="page-item active">
+										<a class="page-link" style="background-color: #FDCDCD; color: black; border-color: #ddd;">${p}</a>
+									</li>
 								</c:when>
 								
 								<c:otherwise>
@@ -177,24 +233,7 @@
 			</div>
 			<%---------------------- Pagination end----------------------%>
 		
-			<!-- 검색창 -->
-			<div class="my-5">
-				<form action="list" method="GET" class="text-center" id="searchForm">
-				
-					<!-- 게시판 타입 유지를 위한 태그 -->
-					<input type="hidden" name="type" value="${pagination.boardTypeNo}">
-					<input type="hidden" name="btcN" value="${pagination.boardCTNo}">
-					
-					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
-						<option value="title">글제목</option>
-						<option value="content">내용</option>
-						<option value="titcont">제목+내용</option>
-						<option value="writer">작성자</option>
-					</select>
-					<input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
-					<button class="form-control btn btn-primary" style="width: 100px; display: inline-block;">검색</button>
-				</form>
-			</div>
+			
 	</div>
 	
 	<jsp:include page="../common/footer.jsp"/>
@@ -220,6 +259,25 @@
 				// 검색어 입력창에 searcValue 값 출력
 				$("input[name=sv]").val(searchValue);
 			})();
+			
+			
+			$(document).ready(function(){
+				if(location.href.toString().includes("bctN=1")){
+					$("#ct-btn0").removeClass("btn-category-checked").addClass("btn-category");
+					$("#ct-btn1").removeClass("btn-category").addClass("btn-category-checked");
+				}
+				if(location.href.toString().includes("bctN=2")){
+					$("#ct-btn0").removeClass("btn-category-checked").addClass("btn-category");
+					$("#ct-btn2").removeClass("btn-category").addClass("btn-category-checked");
+				}
+				if(location.href.toString().includes("bctN=3")){
+					$("#ct-btn0").removeClass("btn-category-checked").addClass("btn-category");
+					$("#ct-btn3").removeClass("btn-category").addClass("btn-category-checked");
+				}
+				
+				
+			})
+			
 			
 	</script>
 	
