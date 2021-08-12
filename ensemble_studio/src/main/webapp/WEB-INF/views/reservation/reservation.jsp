@@ -49,20 +49,20 @@
 				<h5>원하시는 스튜디오를 선택해주세요</h5>
 
 				<div class="aRoom">
-					<input type="radio" id="A Room" value="47" checked="checked"
-						name="roomNo"> <label for="A Room">A Room</label><br>
-					<img src="${contextPath}/resources/images/reservation/Aroom.jpg"
+					<input type="radio" id="A Room" value="81" name="roomNo"> <label
+						for="A Room">A Room</label><br> <img
+						src="${contextPath}/resources/images/reservation/Aroom.jpg"
 						width="190 px " height="150 px">
 				</div>
 				<div class="bRoom">
-					<input type="radio" id="B Room" value="48" name=roomNo> <label
+					<input type="radio" id="B Room" value="82" name=roomNo> <label
 						for="B Room">B Room</label><br> <img
 						src="${contextPath}/resources/images/reservation/Broom.png"
 						width="190 px " height="150 px">
 				</div>
 				<div class="cRoom">
-					<input type="radio" id="C Room" value="C Room" name="roomNo">
-					<label for="B Room">C Room</label><br> <img
+					<input type="radio" id="C Room" value="83" name="roomNo"> <label
+						for="B Room">C Room</label><br> <img
 						src="${contextPath}/resources/images/reservation/Croom.jpg"
 						width="190 px " height="150 px">
 				</div>
@@ -99,35 +99,36 @@
 			<div class="reservationOption1">
 				<div class="reservationOption">
 					<div class="optionDetail">옵션 내용</div>
+
+
 					<div class="optionRadio">
+
 						<div class="optionListA">
-							<input type="checkbox" id="optionList" value="11"
-								name="optionList"> <label for="11">캐논 100D (무료) </label><br>
-							<br> <input type="checkbox" id="optionList" value="12"
-								name="optionList"> <label for="12">캐논 5D Mark II
-								(+20,000원) </label><br> <br> <input type="checkbox"
-								id="optionList" value="13" name="optionList"> <label
-								for="13">캐논 5D Mark IV (+30,000원)</label><br> <br> <input
-								type="checkbox" id="optionList" value="14" name="optionList">
-							<label for="14">70-200mm f 렌즈(+10,000원)</label><br> <br>
-							<input type="checkbox" id="optionList" value="15"
-								name="optionList"> <label for="15">탑라이트 조명 (무료)</label>
+							<c:forEach items="${optionList}" var="option">
+								<c:if test="${option.optionType== 'G'}">
+									<input type="checkbox" id="${option.optionName}"
+										value="${option.optionNo}" name="option">
+									<label for="${option.optionName}">${option.optionName})</label>
+									<br>
+								</c:if>
+							</c:forEach>
 						</div>
+
 						<div class="optionListB">
-							<input type="checkbox" id="optionList" value="16"
-								name="optionList"> <label for="16">소프트박스
-								2개(+10,000원)</label><br> <br> <input type="checkbox"
-								id="optionList" value="17" name="optionList"> <label
-								for="17">컬러필터(+10,000원)</label><br> <br> <input
-								type="checkbox" id="optionList" value="18" name="optionList">
-							<label for="18">반사판(+10,000)</label><br> <br> <input
-								type="checkbox" id="optionList" value="19" name="optionList">
-							<label for="19">건조간식(+5,000원)</label><br> <br> <input
-								type="checkbox" id="optionList" value="20" name="optionList">
-							<label for="20">육포(+3,000)</label>
-							
+							<c:forEach items="${optionList}" var="option">
+								<c:if test="${option.optionType == 'A'}">
+									<input type="checkbox" id="${option.optionName}"
+										value="${option.optionNo}" name="option">
+									<label for="${option.optionName}">${option.optionName})</label>
+									<br>
+								</c:if>
+							</c:forEach>
 						</div>
+
+
+
 					</div>
+
 
 				</div>
 				<div class="rvDetail2">
@@ -190,12 +191,6 @@
 					<div class="text">휴대폰</div>
 					<div class="infodt">${loginMember.memberPhone}</div>
 				</div>
-				<div class="info">
-					<div class="text">반려동물</div>
-					<div class="infodt">코코/여/푸들/6살/5KG</div>
-				</div>
-
-
 
 
 			</div>
@@ -303,8 +298,7 @@
 				type : "checkbox",
 				name : "optionList",
 				value : "input[name='optionList']:checked".val()
-				
-				//name값이 같은 value를 map형태로 저장해서 넘어가게 
+
 			});
 
 			console.log(roomNo)

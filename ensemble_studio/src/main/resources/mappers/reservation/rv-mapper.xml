@@ -116,7 +116,8 @@
 		SELECT
 		RV_TIME, ROOM_PRICE
 		FROM RESERVATION
-		JOIN STUDIO_ROOM USING
+		JOIN STUDIO_ROOM
+		USING
 		(ROOM_NO)
 		WHERE RV_DATE = #{rvDate}
 		AND
@@ -124,18 +125,45 @@
 		#{roomNo}
 
 	</select>
-<!-- 예약 목록 조회 -->
-	<select id="selectReservation" parameterType="_int" resultMap="rv_rm">
+	<!-- 예약 목록 조회 -->
+	<select id="selectOption" resultMap="option_rm">
+		SELECT* FROM
+		STUDIO_OPTION
+	</select>
+	<!-- 예약 목록 조회 -->
+	<select id="selectReservation" parameterType="_int"
+		resultMap="rv_rm">
 		SELECT
-		RV_NO, MEMBER_NO, ROOM_NO, RV_DATE, RV_TIME, RV_PEOPLE, RV_CARS,
-		RV_ANIMALS,ROOM_NAME, ROOM_PRICE, ROOM_DISCOUNT
+		RV_NO, MEMBER_NO, ROOM_NO, RV_DATE, RV_TIME,
+		RV_PEOPLE, RV_CARS,
+		RV_ANIMALS,ROOM_NAME, ROOM_PRICE, ROOM_DISCOUNT,
 		RV_PURPOSE,RV_ETC
 		FROM
 		RESERVATION
 		JOIN STUDIO_ROOM USING(ROOM_NO)
 		WHERE
-		RV_NO =  #{rvNo}
+		RV_NO = #{rvNo}
 	</select>
+
+	<insert id="reservation" parameterType="Rv">
+
+		<selectKey keyProperty="rvNo" resultType="_int"
+			order="BEFORE">
+			SELECT SEQ_RVNO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO RESERVATION VALUES(
+		#{rvNo} , #{memberNo}, #{roomNo}, #{rvDate},#{rvTime}, #{rvPeople},
+		#{rvCars},#{rvAnimals}, #{rvPurpose}, #{rvEtc}  )
+
+
+	</insert>
+	
+	<insert id="setOptionNo" parameterType="map">
+		INSERT 
+		
+		INTO RESERVATION_OPTION VALUES(
+		#{rvNo} , #{optionNo}  )
+	</insert>
 
 
 </mapper>
