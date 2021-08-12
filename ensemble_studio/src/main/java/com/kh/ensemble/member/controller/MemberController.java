@@ -78,11 +78,11 @@ public class MemberController {
 		
 		if(member == null) { // 가입되지 않은 회원일 때
 			
-			System.out.println("member 결과 : " + member);
+			//System.out.println("member 결과 : " + member);
 			
 			result = service.naverSingUp(navermember); // 가입을 시킴 
 			
-			System.out.println("가입 결과 : " + result);
+			//System.out.println("가입 결과 : " + result);
 			
 			model.addAttribute("loginMember", member);
 			
@@ -131,6 +131,8 @@ public class MemberController {
 	public String memberLogin(Member inputMember, Model model, HttpServletRequest request, HttpServletResponse response,
 			RedirectAttributes ra, @RequestParam(value = "save", required = false) String save) {
 
+		String path = "redirect:";
+		
 		Member loginMember = service.login(inputMember);
 
 		if (loginMember != null) { // 로그인 성공 시
@@ -154,6 +156,8 @@ public class MemberController {
 			// 응답에 Cookie를 담아서 클라이언트에게 전달
 			response.addCookie(cookie);
 
+			path += "/";
+			
 			System.out.println(loginMember);
 
 		} else { // 로그인 실패 시
@@ -163,9 +167,10 @@ public class MemberController {
 			session.setAttribute("title", "로그인 실패");
 			session.setAttribute("text", "아이디 또는 비밀번호를 확인해주세요.");
 
+			path += "login";
 		}
 
-		return "redirect:/";
+		return path;
 	}
 
 	

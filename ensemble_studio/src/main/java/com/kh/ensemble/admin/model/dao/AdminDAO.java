@@ -11,6 +11,7 @@ import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.admin.model.vo.StudioAttachment;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.vo.Option;
 import com.kh.ensemble.reservation.model.vo.Rv;
 
 @Repository
@@ -101,6 +102,11 @@ public class AdminDAO {
 	public Rv selectReservation(int rvNo) {
 		
 		return sqlSession.selectOne("rvMapper.selectReservation", rvNo);
+	}
+
+	public List<Option> adminSelectOption() {
+		
+		return sqlSession.selectList("rvMapper.adminSelectOption");
 	}
 
 

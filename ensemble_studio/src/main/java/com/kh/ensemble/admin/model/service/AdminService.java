@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.vo.Option;
 import com.kh.ensemble.reservation.model.vo.Rv;
 
 public interface AdminService {
@@ -41,5 +42,9 @@ public interface AdminService {
 	
 	//예약 내용 수정 페이지 
 	Rv selectReservation(int rvNo);
+
+	
+
+	List<Option> adminSelectOption();
 
 }
