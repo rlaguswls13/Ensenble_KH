@@ -16,6 +16,7 @@ import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.admin.model.vo.StudioAttachment;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.vo.Option;
 import com.kh.ensemble.reservation.model.vo.Rv;
 import com.kh.ensemble.board.exception.InsertAttachmentException;
 import com.kh.ensemble.board.exception.SaveFileException;
@@ -260,6 +261,12 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 		return dao.selectReservation(rvNo);
+	}
+
+	@Override
+	public List<Option> adminSelectOption() {
+		// TODO Auto-generated method stub
+		return dao.adminSelectOption();
 	}
 
 }
