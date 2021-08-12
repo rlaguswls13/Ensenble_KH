@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.ensemble.admin.model.vo.Room;
+import com.kh.ensemble.board.model.vo.Board;
 import com.kh.ensemble.main.model.dao.MainDAO;
 
 @Service
@@ -23,6 +24,12 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public Room selectRoom(String roomHref) {
 		return dao.selectRoom(roomHref);
+	}
+
+
+	@Override
+	public List<Board> selectNoticeList() {
+		return dao.selectNoticeList();
 	}
 	
 }

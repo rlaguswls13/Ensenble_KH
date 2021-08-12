@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+	.top-box{
+		background-color : #F7F7F7;
+		height:260px;
+	}
+	.searchInput{
+            width: 80%; height:37px;
+            max-width: 600px;
+            background-image: url('https://drive.google.com/uc?id=1ekFsz_P2MZWoMUt0QyvZjPjAm2fx308R');
+            background-repeat: no-repeat;
+            background-size: 20px;
+            background-position: 7px center;
+            border : 1px solid #ccc;
+            border-radius: 5px;
+            padding-left: 40px;
+     }
+	.btn-ensemble {
+		background-color: #FDCDCD !important;
+		padding: 5px 10px 5px 10px !important;
+	}
+	.btn-insert {
+		background-color: #FDCDCD !important;
+		padding: 15px !important;
+		border-radius : 100% !important;
+		position:absolute;
+		top:400px;
+		right : 80px;
+	}
+	.btn-category{
+		background-color : white !important;
+		border : 1px solid #ccc !important;
+		margin-right: 5px !important;
+		padding : 5px 20px 5px 20px !important;
+		border-radius : 20px !important;
+	}
+	.btn-category:hover{
+		background-color : white !important;
+		color : #FF657D !important;
+		border : 1px solid #FF657D !important;
+		
+	}
+	.btn-category-checked{
+		background-color : #FF657D !important;
+		color : white !important;
+		border : 1px solid #FF657D !important;
+		margin-right: 5px !important;
+		padding : 5px 20px 5px 20px !important;
+		border-radius : 20px !important;
+	}
+	.category{
+		margin-top : 15px;	
+	}
+	 .pagination {
+		justify-content: center;
+	}
+	
+	.page-link {
+		color: black !important;
+	}

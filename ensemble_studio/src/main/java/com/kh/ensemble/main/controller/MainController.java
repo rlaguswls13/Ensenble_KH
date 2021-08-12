@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.ensemble.admin.model.vo.Room;
+import com.kh.ensemble.board.model.vo.Board;
 import com.kh.ensemble.main.model.service.MainService;
 
 @Controller
@@ -26,6 +27,8 @@ public class MainController {
 		
 		List<Room> mainRList = service.selectRoomList();
 		model.addAttribute("mainRList", mainRList);
+		List<Board> noticeList = service.selectNoticeList();
+		model.addAttribute("noticeList", noticeList);
 		
 		return "main"; 
 	}
