@@ -27,6 +27,10 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
 	crossorigin="anonymous"></script>
+	
+<!-- 스왈창 -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- CSS -->
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/member/login.css" type="text/css" />
 </head>
@@ -63,10 +67,9 @@
 				<div class="login_line col-md-12">
 					<hr>
 				</div>
-				<div id="naver_id_login"><a href="${naver_url}">네이버로그인</a>
-<%-- 					<a href="#"><img
+				<div id="naver_id_login"><a href="${naver_url}"><img
 						src="${contextPath}/resources/images/common/naverLogin.png"
-						id="naverimg" class="btn-lg login-btn" width="100%" height="80%"></a> --%>
+						id="naverimg" class="btn-lg login-btn" width="100%" height="80%"></a>
 				</div>
 				<div class="login_line col-md-12">
 					<hr>
@@ -118,15 +121,17 @@
     </script>
 
 
-	<!-- //네이버아이디로로그인 버튼 노출 영역 -->
-<!-- 	<script type="text/javascript">
-  	var naver_id_login = new naver_id_login("3CcwxeeL8TpNlydfHa1z", "http://localhost:8080/ensemble/member/auth/naver/callBack");
-  	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 2,40);
-  	naver_id_login.setDomain("http://localhost:8080/ensemble/member/login");
-  	naver_id_login.setState(state);
-  	naver_id_login.setPopup();
-  	naver_id_login.init_naver_id_login();
-  </script> -->
+	<c:if test="${!empty title }">
+		<script>
+			swal({
+				"icon" : "${icon}",
+				"title" : "${title}",
+				"text" : "${text}"
+			});
+		</script>
+		<c:remove var="icon" />
+		<c:remove var="title" />
+		<c:remove var="text" />
+	</c:if>
 </body>
 </html>

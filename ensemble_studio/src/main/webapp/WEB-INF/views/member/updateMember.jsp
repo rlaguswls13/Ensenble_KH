@@ -19,7 +19,7 @@
 <style>
 </style>
 <body>
-${loginMember}
+
 	<jsp:include page="../common/header.jsp"></jsp:include>
 
 	<c:set var="phone" value="${fn:split( loginMember.memberPhone, '-' ) }" />
