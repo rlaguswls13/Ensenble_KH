@@ -75,66 +75,73 @@ public class RvController {
 
 	// 예약 하기 화면 전환용
 	@RequestMapping(value = "reservation", method = RequestMethod.GET)
-	public String reservation(@ModelAttribute("loginMember") Member loginMember ) {
+	public String reservation(@ModelAttribute("loginMember") Member loginMember, Model model, Rv rv) {
+
+		List<Option> optionList = service.selectOption();
+
+		System.out.println("예약하기 컨트롤러" + optionList);
+
+		model.addAttribute("optionList", optionList);
 
 		return "reservation/reservation";
 	}
 
 	// 예약 하기 내용 저장
 	@RequestMapping(value = "reservation", method = RequestMethod.POST)
-	public String reservation(@ModelAttribute("loginMember") Member loginMember, Rv rv, Option option, RedirectAttributes ra) {
-
-	
+	public String reservation(@RequestParam("option") String[] option,Option optionNumber,
+			@ModelAttribute("loginMember") Member loginMember, Rv rv, RedirectAttributes ra) {
 		
-		/*
-		 * for( List<Option> optionLists : optionList ) {
-		 * 
-		 * List<optionList>
-		 * 
-		 * }
-		 * 
-		 * 
-		 */
+		rv.setMemberNo(loginMember.getMemberNo());
+		
+		System.out.println("예약내용" + rv + option);
+		
+		
+
+		int rvNo = service.reservation(rv);
+		
+		
+		
+		int result= 0;
+		
+		
+		if(rvNo>0) {//삽입 성공
+						
+		for (int i = 0; i < option.length; i++) {
+
+				int optionNo = Integer.parseInt(option[i]); 
 			
-	
-				
-		System.out.println("Rv reservation : " +  rv + option);
+			  result= service.setOptionNo(optionNo , rvNo);
 		
-		int result = service.reservation(loginMember);
-
-		// 예약 성공 또는 실패.....
+		}
+		
 		if (result > 0) {
 			swalSetMessage(ra, "success", "예약 성공", loginMember.getMemberNick() + "님 예약에 성공하셨습니다.");
 
 		} else {
+			swalSetMessage(ra, "error", "옵션 입력 실패", "고객센터에 문의 바랍니다.");
+		}
+		}else { //rv 입력 실패 
 			swalSetMessage(ra, "error", "예약 실패", "고객센터에 문의 바랍니다.");
 		}
+
+		// 예약 성공 또는 실패.....
+		
 
 		return "redirect:/";// 메인페이지 재요청 -> / : 메인페이지
 
 	}
 
-	
-	   @RequestMapping(value="list",  method=RequestMethod.POST)
-	   @ResponseBody
-	   public String selectRvTimeList(Rv rv) {
-		   
-			/* System.out.println(rv); */
-		   
-			 List<Rv> rvTimeList = service.selectRvTimeList(rv); 
-			 
-		   
-		   
-		   return new Gson().toJson(rvTimeList);
-	   }
-	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value = "list", method = RequestMethod.POST)
+	@ResponseBody
+	public String selectRvTimeList(Rv rv) {
+
+		/* System.out.println(rv); */
+
+		List<Rv> rvTimeList = service.selectRvTimeList(rv);
+
+		return new Gson().toJson(rvTimeList);
+	}
+
 	public static void swalSetMessage(RedirectAttributes ra, String icon, String title, String text) {
 		// RediectAttributes : 리다이렉트 시 값을 전달하는 용도의 객체
 

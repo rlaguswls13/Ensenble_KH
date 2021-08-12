@@ -1,6 +1,7 @@
 package com.kh.ensemble.reservation.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.vo.Option;
 import com.kh.ensemble.reservation.model.vo.Rv;
 import com.kh.ensemble.reservation.model.vo.RvPagination;
 
@@ -34,15 +36,28 @@ public class RvDAO {
 	}
 
 	
-	//예약하기 DAO
-	public int reservation(Member loginMember) {
 	
-		return sqlSession.insert("rvMapper.reservation", loginMember);
-	}
+	
 
 	public List<Rv> selectRvTimeList(Rv rv) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("rvMapper.selectRvTimeList", rv);
+	}
+
+	//selectOption
+	public List<Option> selectOption() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("rvMapper.selectOption");
+	}
+	//예약하기 DAO
+	public int reservation(Rv rv) {
+	
+		return sqlSession.insert("rvMapper.reservation", rv);
+	}
+
+	public int setOptionNo(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("rvMapper.setOptionNo", map);
 	}
 
 	
