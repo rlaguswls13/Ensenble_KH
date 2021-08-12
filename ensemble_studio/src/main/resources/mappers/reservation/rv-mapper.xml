@@ -164,6 +164,11 @@
 		INTO RESERVATION_OPTION VALUES(
 		#{rvNo} , #{optionNo}  )
 	</insert>
+	
+	<select id="adminSelectOption" resultMap="option_rm">
+		SELECT* FROM
+		STUDIO_OPTION
+	</select>
 
 
 </mapper>

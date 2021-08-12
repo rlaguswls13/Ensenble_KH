@@ -23,6 +23,7 @@ import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.member.controller.MemberController;
 import com.kh.ensemble.member.model.service.MemberService;
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.vo.Option;
 import com.kh.ensemble.reservation.model.vo.Rv;
 import com.kh.ensemble.board.model.service.BoardService;
 import com.kh.ensemble.board.model.vo.Pagination;
@@ -190,9 +191,13 @@ public class AdminController {
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model
 			) {
 		
+		List<Option> optionList = service.adminSelectOption();
+		
+		
 		Rv rv = service.selectReservation(rvNo);
 		
-		System.out.println("게시글 수정 페이지 용 정보 조회 " + rv);
+		model.addAttribute("rv", rv);
+		model.addAttribute("optionList", optionList);
 
 		return "admin/admin-modifyRv";
 	}
