@@ -114,9 +114,12 @@
 	</update>
 
 	<!-- 반려동물 정보 추가 -->
-	<insert id="insertAnimal" parameterType="Animal">
+	<insert id="insertAnimal" parameterType="Animal" useGeneratedKeys="true">
+		<selectKey keyProperty="aniNo" order="BEFORE" resultType="_int">
+			SELECT SEQ_ANO.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO ANIMAL VALUES
-		(SEQ_ANO.NEXTVAL, #{aniName}, #{aniGender}, #{aniType}, #{aniAge}, #{aniKg},
+		(#{aniNo}, #{aniName}, #{aniGender}, #{aniType}, #{aniAge}, #{aniKg},
 		#{memberNo})
 	</insert>
 

@@ -113,7 +113,7 @@ public interface MemberService {
 	/**
 	 * 반려동물 정보 추가
 	 * @param animal
-	 * @return result
+	 * @return aniNo
 	 */
 	public abstract int insertAnimal(Animal animal);
 

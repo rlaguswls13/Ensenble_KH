@@ -237,9 +237,10 @@ public class MemberController {
 		animal.setMemberNo(loginMember.getMemberNo());
 		System.out.println(animal);
 		
-		int result = service.insertAnimal(animal);
-		if(result>0) {
+		int aniNo = service.insertAnimal(animal);
+		if(aniNo>0) {
 			swalSetMessage(ra, "success", "반려동물 정보 추가 성공", null);
+			animal.setAniNo(aniNo);
 			loginMember.getAniList().add(animal);
 			
 		}else {

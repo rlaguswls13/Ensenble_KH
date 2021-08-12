@@ -147,7 +147,11 @@ public class MemberDAO {
 	//--------------------------------------------------------------------
 	
 	public int insertAnimal(Animal animal) {
-		return sqlSession.insert("memberMapper.insertAnimal", animal);
+		int result= sqlSession.insert("memberMapper.insertAnimal", animal);
+		if(result>0) {
+			return animal.getAniNo();
+		}
+		return 0;
 	}
 
 
