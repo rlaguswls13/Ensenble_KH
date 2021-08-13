@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.ensemble.admin.model.vo.Room;
+import com.kh.ensemble.admin.model.vo.Sales;
 import com.kh.ensemble.admin.model.vo.StudioAttachment;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
@@ -108,6 +109,15 @@ public class AdminDAO {
 		
 		return sqlSession.selectList("rvMapper.adminSelectOption");
 	}
+
+	public List<Sales> selectSalesList() {
+		return sqlSession.selectList("adminMapper.selectSalesList");
+	}
+
+	public List<Integer> getSalesByDay(int roomNo) {
+		return sqlSession.selectList("adminMapper.getSalesByDay", roomNo);
+	}
+
 
 
 }
