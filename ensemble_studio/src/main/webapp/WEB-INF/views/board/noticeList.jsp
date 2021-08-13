@@ -47,14 +47,18 @@
 	      <c:if test="${!empty boardList}">
 	      <c:forEach items="${boardList}" var="notice">
 	      	<c:if test="${!empty notice.atList }">
-	      	<div class="notice-img" style="background-image:url('${contextPath}/${notice.atList[0].atPath}${notice.atList[0].atName}')"></div>
+	      	<div class="notice-img" style="background-image:url('${notice.atList[0].atPath}/${notice.atList[0].atName}')"></div>
 	      	</c:if>
 	      	<c:if test="${empty notice.atList }">
-	      	<div class="notice-img" style="background-image:url('${contextPath}/resources/images/common/notice.png')"></div>
+	      	<div class="notice-img" style="background-image:url('/ensemble/resources/images/common/notice.png')"></div>
 	      	</c:if>
 		      
 		        <div style="padding-bottom: 20px;">
-		            <h6 style="display: inline-block;">[ ${notice.boardCTNm}] ${notice.boardTitle }</h6>
+		            <h6 style="display: inline-block;">
+		            <a href="${notice.boardNo}?cp=${pagination.currentPage}">
+		            [ ${notice.boardCTNm}] ${notice.boardTitle }
+		            </a>
+		            </h6>
 		            <span style="float: right; color:#888">조회수 ${notice.boardReadCount }</span>
 		      </div>
 	      </c:forEach>

@@ -37,6 +37,10 @@
 	}
     * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
    	a { color: black; }
+   	a:hover{
+			text-decoration: none;
+			color:#FF657D;
+	}
     .header-navbar-border{
         padding-top: 15px;
         padding-bottom: 15px;
@@ -44,6 +48,7 @@
         border-bottom: 1px solid rgb(182, 182, 182);
         background-color: white;
     }
+    
     .noto-serif{
         font-family: 'Noto Serif KR', serif;
     }

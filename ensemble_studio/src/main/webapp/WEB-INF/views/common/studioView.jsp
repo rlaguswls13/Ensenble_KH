@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" scope="application" value="${pageContext.servletContext.contextPath}"/>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="contextPath" scope="application" value="${pageContext.servletContext.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,7 +14,6 @@
     <jsp:include page="header.jsp"></jsp:include>
 </head>
 <style>
-    * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
     .carousel-img{
         width: 100%; height: 50vw; 
         background-repeat: no-repeat; 
@@ -191,7 +191,7 @@
 	            border-bottom: thin solid rgb(223, 223, 223);
 	        }
 	    }
-
+		
 </style>
 <body>
     <div style="padding:20px;"></div>
@@ -266,7 +266,7 @@
                     <div class="pr-text5">${room.roomPrimaryOption }</div>
                     <hr>
                     <div style="padding:5px"></div>
-                    <a href="#" class="btn btn-ensemble">예약하기</a>
+                    <a href="../reservation/rvStatus" class="btn btn-ensemble">예약하기</a>
                     <div style="padding:5px"></div>
                 </div>
             </div>
@@ -293,26 +293,31 @@
     <h5 style="text-align: center; font-family: 'Noto Serif KR', serif; font-weight: 600;">Review</h5>
     <div style="padding:10px;"></div>
 
-    <div class="container">
-        <div class="width65">
-            <h6>리뷰 제목</h6>
-            <p style="font-size: 12px; line-height: 1.4;">
-                리뷰 내용....리뷰 내용....리뷰 내용....리뷰 내용....리뷰 내용....
-            </p>
-            <div class="user-profile" style="background-image: url('');"></div>
-            <div class="user-name">유저닉네임</div>
-            <div class="time">1시간 전</div>
-            <div class="comments">댓글 4</div>
-            <a href="#">
-                <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
-                <div class="comments">좋아요</div>
-            </a>
-                
-        </div>
-        <div class="q-img" style="background-image: url('');"></div>
-        <div style="padding:10px"></div>
-        <hr>
-    </div>
+	<c:forEach items="${reviewList}" var="review">
+		<div class="container">
+	        <div class="width65">
+	            <h6><a href="../board/1/${review.boardNo }?cp=1">${review.boardTitle }</a></h6>
+	            <p style="font-size: 12px; line-height: 1.4; display:block; height:30px">
+	               ${review.boardContent }
+	            </p>
+	            <div class="user-profile" style="background-image: url('${contextPath}${review.memberImage }');"></div>
+	            <div class="user-name">${review.memberNk }</div>
+	            <div class="time">${review.boardDT }</div>
+	            <div class="comments">댓글 ${review.replyCount }</div>
+	            <a href="#">
+	                <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
+	                <div class="comments">좋아요</div>
+	            </a>
+	                
+	        </div>
+	        <c:if test="${!empty review.atList }">
+	        <div class="q-img" style="background-image: url('${review.atList[0].atPath}${review.atList[0].atName}');"></div>
+	        </c:if>
+	        <div style="padding:5px"></div>
+	        <hr>
+	        <div style="padding:5px"></div>
+	    </div>
+	</c:forEach>
     
 	<div class="modal">
 		<div class="modalBox">
