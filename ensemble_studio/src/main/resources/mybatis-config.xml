@@ -15,6 +15,7 @@
 		<!-- admin -->
 		<typeAlias type="com.kh.ensemble.admin.model.vo.Room" alias="Room" />
 		<typeAlias type="com.kh.ensemble.admin.model.vo.StudioAttachment" alias="StudioAttachment" />
+		<typeAlias type="com.kh.ensemble.admin.model.vo.Sales" alias="Sales" />
 			
 		<!-- member -->
 		<typeAlias type="com.kh.ensemble.member.model.vo.Member" alias="Member" />
