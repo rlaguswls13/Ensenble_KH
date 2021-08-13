@@ -33,6 +33,11 @@ public class Board {
 	private String likeStatus;
 	private int likeCNT;
 	
+	//replyCount
+	private int replyCount;
+	
+	//likeCount
+	private int likeCount;
 	
 	public Board() {}
 
@@ -217,6 +222,26 @@ public class Board {
 	}
 
 
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+
+
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardDT=" + boardDT + ", boardMT=" + boardMT + ", boardStatus="
@@ -224,8 +249,11 @@ public class Board {
 				+ boardContent + ", boardTypeNo=" + boardTypeNo + ", boardNm=" + boardNm + ", boardCTNo=" + boardCTNo
 				+ ", boardCTNm=" + boardCTNm + ", memberNo=" + memberNo + ", memberNk=" + memberNk + ", memberImage="
 				+ memberImage + ", atList=" + atList + ", likeNo=" + likeNo + ", likeStatus=" + likeStatus
-				+ ", likeCNT=" + likeCNT + "]";
+				+ ", likeCNT=" + likeCNT + ", replyCount=" + replyCount + ", likeCount=" + likeCount + "]";
 	}
+
+
+
 
 
 	
