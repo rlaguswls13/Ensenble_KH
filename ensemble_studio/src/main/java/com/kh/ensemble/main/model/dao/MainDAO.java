@@ -26,6 +26,10 @@ public class MainDAO {
 	public List<Board> selectNoticeList() {
 		return sqlSession.selectList("mainMapper.selectNoticeList");
 	}
+
+	public List<Board> selectReviewList(String roomName) {
+		return sqlSession.selectList("mainMapper.selectReviewList", roomName);
+	}
 	
 	
 }

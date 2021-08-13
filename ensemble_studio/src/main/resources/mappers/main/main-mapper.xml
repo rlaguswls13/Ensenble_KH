@@ -48,6 +48,32 @@
 		<result property="boardNo" column="BOARD_NO"/>
 	</resultMap>
 	
+	<!-- review resultMap -->
+	<resultMap type="Board" id="review_rm">
+		<id property="boardNo" column="BOARD_NO" />
+
+		<result property="boardDT" column="BOARD_DT" />
+		<result property="boardMT" column="BOARD_MT" />
+		<result property="boardTitle" column="BOARD_TITLE" />
+		<result property="boardReadCount" column="BOARD_READ_COUNT" />
+		<result property="boardContent" column="BOARD_CONTENT" />
+		
+		<result property="boardTypeNo" column="BOARD_TYPE_NO" />
+		<result property="boardNm" column="BOARD_NAME" />
+		<result property="boardCTNo" column="BOARD_CT_NO" />
+		<result property="boardCTNm" column="BOARD_CT_NM" />
+		
+		<result property="memberNk" column="MEMBER_NICK" />
+		<result property="memberImage" column="MEMBER_IMAGE" />
+		
+		<result property="replyCount" column="BOARD_REPLY_COUNT"/>
+		<result property="likeCount" column="BOARD_LIKE_COUNT"/>
+		
+		<collection property="atList" column="BOARD_NO" 
+		javaType="java.util.ArrayList" ofType="Attachment" select="selectAttachment"/>
+
+	</resultMap>
+	
 	<select id="selectAttachment" parameterType="_int" resultMap="attachment_rm">
 		SELECT * FROM BOARD_ATTACHMENT
 		WHERE BOARD_NO = #{boardNo}
@@ -88,5 +114,12 @@
 	    WHERE ROOM_STATUS = 'Y'
 	    AND ROOM_HREF = #{roomHref}
 	</select>
+  
+  	<select id="selectReviewList" parameterType="string" resultMap="review_rm">
+		SELECT*FROM BOARD_LIST
+		WHERE BOARD_CT_NM = #{roomName}
+		AND ROWNUM BETWEEN 1 AND 3
+  	</select>
+  
   
 </mapper>

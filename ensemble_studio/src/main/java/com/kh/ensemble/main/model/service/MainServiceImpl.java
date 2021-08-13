@@ -31,5 +31,11 @@ public class MainServiceImpl implements MainService{
 	public List<Board> selectNoticeList() {
 		return dao.selectNoticeList();
 	}
+
+
+	@Override
+	public List<Board> selectReviewList(String roomName) {
+		return dao.selectReviewList(roomName);
+	}
 	
 }

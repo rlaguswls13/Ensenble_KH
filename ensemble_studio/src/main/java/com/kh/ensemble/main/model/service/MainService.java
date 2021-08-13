@@ -13,4 +13,6 @@ public interface MainService {
 
 	List<Board> selectNoticeList();
 
+	List<Board> selectReviewList(String roomName);
+
 }

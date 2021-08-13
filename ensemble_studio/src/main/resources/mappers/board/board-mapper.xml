@@ -29,12 +29,13 @@
 		
 		<result property="memberNo" column="MEMBER_NO" />
 		<result property="memberNk" column="MEMBER_NICK" />
+		<result property="memberImage" column="MEMBER_IMAGE" />
 		
 		<result property="replyCount" column="BOARD_REPLY_COUNT"/>
 		<result property="likeCount" column="BOARD_LIKE_COUNT"/>
 		
 		<collection property="atList" column="BOARD_NO" 
-		javaType="java.util.ArrayList" ofType="Attachment" select="selectAttachment"/>
+		javaType="java.util.ArrayList" ofType="Attachment" select="selectAttachmentList"/>
 		
 	</resultMap>
 	
