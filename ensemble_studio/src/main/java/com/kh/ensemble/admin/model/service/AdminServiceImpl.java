@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.ensemble.admin.model.dao.AdminDAO;
 import com.kh.ensemble.admin.model.vo.Room;
+import com.kh.ensemble.admin.model.vo.Sales;
 import com.kh.ensemble.admin.model.vo.StudioAttachment;
 import com.kh.ensemble.board.model.vo.Pagination;
 import com.kh.ensemble.member.model.vo.Member;
@@ -265,8 +266,19 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public List<Option> adminSelectOption() {
-		// TODO Auto-generated method stub
 		return dao.adminSelectOption();
 	}
+
+	@Override
+	public List<Sales> selectSalesList() {
+		return dao.selectSalesList();
+	}
+
+	@Override
+	public List<Integer> getSalesByDay(int roomNo) {
+		return dao.getSalesByDay(roomNo);
+	}
+	
+	
 
 }

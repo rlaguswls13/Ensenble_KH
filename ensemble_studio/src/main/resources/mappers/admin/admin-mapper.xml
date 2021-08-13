@@ -44,6 +44,18 @@
 		<result property="roomNo" column="ROOM_NO"/>
 	 </resultMap>
 	 
+	 <resultMap type="Sales" id="sales_rm">
+	 	<id property="roomNo" column="ROOM_NO"/>
+	 	<result property="roomName" column="ROOM_NAME"/>
+	 	<result property="roomSalesCount" column="CNT"/>
+	 </resultMap>
+	 
+	 <resultMap type="Sales" id="salesByDay_rm">
+	 	<id property="roomNo" column="ROOM_NO"/>
+	 	<result property="rvDate" column="RV_DATE"/>
+	 	<result property="roomSalesCount" column="CNT"/>
+	 </resultMap>
+	 
 	<select id="selectStudioAttachment" parameterType="_int" resultMap="studio_attachment_rm">
 		SELECT*FROM STUDIO_ATTACHMENT 
 		WHERE ROOM_NO = #{roomNo}
@@ -152,5 +164,39 @@
   		SELECT COUNT(*) FROM STUDIO_ROOM
 		WHERE ROOM_STATUS = 'Y'
   	</select>
+  	
+  	<select id="selectSalesList" resultMap="sales_rm">
+	SELECT 0 ROOM_NO, 'ALL' ROOM_NAME , COUNT(*) CNT FROM RESERVATION
+	JOIN STUDIO_ROOM USING (ROOM_NO)
+	WHERE ROOM_STATUS = 'Y'
+	UNION ALL
+	SELECT ROOM_NO, ROOM_NAME, COUNT(*) CNT FROM RESERVATION
+	JOIN STUDIO_ROOM USING (ROOM_NO)
+	WHERE ROOM_STATUS = 'Y'
+	GROUP BY ROOM_NO, ROOM_NAME
+	ORDER BY ROOM_NO
+  	</select>
+  	
+  	<select id="getSalesByDay" parameterType="_int" resultType="int">
+	SELECT 
+	            NVL(SUM(A.CNT), 0) CNT
+	FROM 
+	(SELECT ROOM_NAME, TO_CHAR(RV_DATE, 'YYYY-MM-DD') RV_DATE, COUNT(*) CNT 
+	FROM RESERVATION 
+	JOIN STUDIO_ROOM USING (ROOM_NO)
+	WHERE ROOM_STATUS = 'Y'
+	AND ROOM_NO = #{roomNo}
+	AND RV_DATE BETWEEN '2021-08-18'  AND '2021-08-23'
+	GROUP BY ROOM_NAME, RV_DATE ) A,
+	( SELECT TO_DATE('2021-08-18', 'YYYY-MM-DD') + LEVEL - 1 AS DT
+	  FROM DUAL
+	  CONNECT BY LEVEL &lt;= ( TO_DATE('2021-08-23', 'YYYY-MM-DD')
+	                            - TO_DATE('2021-08-18', 'YYYY-MM-DD') + 1)
+	) B
+	WHERE B.DT = RV_DATE(+)
+	GROUP BY ROOM_NAME, B.DT
+	ORDER BY B.DT
+  	</select>
+  	
   	
 </mapper>

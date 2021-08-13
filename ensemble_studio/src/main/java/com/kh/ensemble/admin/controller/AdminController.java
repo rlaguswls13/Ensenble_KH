@@ -1,8 +1,14 @@
 package com.kh.ensemble.admin.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +24,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.kh.ensemble.admin.model.service.AdminService;
 import com.kh.ensemble.admin.model.vo.Room;
+import com.kh.ensemble.admin.model.vo.Sales;
 import com.kh.ensemble.member.controller.MemberController;
 import com.kh.ensemble.member.model.service.MemberService;
 import com.kh.ensemble.member.model.vo.Member;
@@ -184,8 +194,42 @@ public class AdminController {
 		return result;
 	}
 
-	// 게시글 수정 페이지
+	@RequestMapping("admin/sales")
+	public String sales(Model model) {
+		
+		List<Sales> salesList = service.selectSalesList();
+		model.addAttribute("salesList", salesList);
+		
+		return "admin/admin-sales";
+	}
 	
+	@ResponseBody
+	@RequestMapping(value="admin/sales/getSalesByDay", method=RequestMethod.POST)
+	public String getSalesByDay(@ModelAttribute("roomNo1") int roomNo1,@ModelAttribute("roomNo2") int roomNo2, @ModelAttribute("roomNo3") int roomNo3) {
+		
+		System.out.println(roomNo1);
+		System.out.println(roomNo2);
+		System.out.println(roomNo3);
+		
+		List<Integer> salesByDay1 = service.getSalesByDay(roomNo1);
+		List<Integer> salesByDay2 = service.getSalesByDay(roomNo2);
+		List<Integer> salesByDay3 = service.getSalesByDay(roomNo3);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("salesByDay1", salesByDay1);
+		map.put("salesByDay2", salesByDay2);
+		map.put("salesByDay3", salesByDay3);
+		
+		System.out.println(salesByDay1);
+		System.out.println(salesByDay2);
+		System.out.println(salesByDay3);
+
+		return new Gson().toJson(map);
+	}
+	
+	
+	
+	// 게시글 수정 페이지
 	@RequestMapping(value = "admin/{rvNo}", method = RequestMethod.GET)
 	public String modifyRv(@PathVariable("rvNo") int rvNo,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model
