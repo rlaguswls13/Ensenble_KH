@@ -7,6 +7,7 @@ public class Rv {
 
 	private int rvNo;
 	private int memberNo;
+	private String memberNick;
 	private int roomNo;
 	private String rvDate;
 	private String rvTime;
@@ -15,23 +16,41 @@ public class Rv {
 	private int rvAnimals;
 	private String rvPurpose;
 	private String rvEtc;
+	private String rvStatus;
 	
 	private int roomDiscount;
 	private int roomPrice;
 	private String roomName;
-	
-	
-	
 
 	private List<Option> optionList;
-	
-	
-	
-	
-	
-	
-	
+
 	public Rv() {}
+
+	
+	
+	public String getRvStatus() {
+		return rvStatus;
+	}
+
+
+
+	public void setRvStatus(String rvStatus) {
+		this.rvStatus = rvStatus;
+	}
+
+
+
+	public String getMemberNick() {
+		return memberNick;
+	}
+
+
+
+	public void setMemberNick(String memberNick) {
+		this.memberNick = memberNick;
+	}
+
+
 
 	public List<Option> getOptionList() {
 		return optionList;
@@ -149,17 +168,17 @@ public class Rv {
 		this.roomPrice = roomPrice;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Rv [rvNo=" + rvNo + ", memberNo=" + memberNo + ", roomNo=" + roomNo + ", rvDate=" + rvDate + ", rvTime="
-				+ rvTime + ", rvPeople=" + rvPeople + ", rvCars=" + rvCars + ", rvAnimals=" + rvAnimals + ", rvPurpose="
-				+ rvPurpose + ", rvEtc=" + rvEtc + ", roomDiscount=" + roomDiscount + ", roomPrice=" + roomPrice
-				+ ", roomName=" + roomName + ", optionList=" + optionList + "]";
+		return "Rv [rvNo=" + rvNo + ", memberNo=" + memberNo + ", memberNick=" + memberNick + ", roomNo=" + roomNo
+				+ ", rvDate=" + rvDate + ", rvTime=" + rvTime + ", rvPeople=" + rvPeople + ", rvCars=" + rvCars
+				+ ", rvAnimals=" + rvAnimals + ", rvPurpose=" + rvPurpose + ", rvEtc=" + rvEtc + ", rvStatus="
+				+ rvStatus + ", roomDiscount=" + roomDiscount + ", roomPrice=" + roomPrice + ", roomName=" + roomName
+				+ ", optionList=" + optionList + "]";
 	}
-	
-	
-	
-	
-	
+
+
 	
 }

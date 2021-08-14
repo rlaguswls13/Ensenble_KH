@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" scope="application" value="${pageContext.servletContext.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +21,30 @@
 	.page-item .active{
 		background-color : #F9F7EB;
 	}
+	select {
+		width:60px;
+		padding: .2em .8em;
+		font-family: inherit;
+		border-radius: 5px;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		font-size : smaller;
+	}
+	
+	.selectY {
+		border: 1px solid #7DBC8C;
+		background: url('${contextPath}/resources/images/admin/select-green.png')
+			no-repeat 85% 50%;
+		color: #7DBC8C;
+	}
+	
+	.selectN {
+		border: 1px solid #C64242;
+		background: url('${contextPath}/resources/images/admin/select-red.png')
+			no-repeat 85% 50%;
+		color: #C64242;
+	}
 </style>
 <body>
 	
@@ -29,33 +55,49 @@
 
             <table class="table">
                 <thead>
-                  <tr>
-                    <th scope="col" style="text-align: center;">예약번호</th>
-                    <th scope="col" style="text-align: center;">예약자명</th>
-                    <th scope="col" style="text-align: center;">예약일자</th>
-                    <th scope="col" style="text-align: center;">예약상품</th>
-                    <th scope="col" style="text-align: center;">옵션</th>
-                    <th scope="col" style="text-align: center;">비고</th>
-                    <th scope="col" style="text-align: center;">상태</th>
+                  <tr style="text-align: center;">
+                    <th scope="col">예약번호</th>
+                    <th scope="col">예약자명</th>
+                    <th scope="col">예약일자</th>
+                    <th scope="col">예약상품</th>
+                    <th scope="col">옵션</th>
+                    <th scope="col">비고</th>
+                    <th scope="col">상태</th>
                   </tr>
                 </thead>
 
 				<c:forEach items="${totalRvList}" var="reservation">
                 <tbody>
-                  <tr>
-                    <th scope="row" style="text-align: center;"><a href="${reservation.rvNo}?cp=${pagination.currentPage}">${reservation.rvNo}</a></th>
-                    <td  style="text-align: center;">Mark</td>
-                    <td  style="text-align: center;">${reservation.rvDate}<br>
-                            <span style="color: rgb(156, 156, 156);">${reservation.rvTime}</span>
+                  <tr style="text-align: center;">
+                    <th scope="row"><a href="${reservation.rvNo}?cp=${pagination.currentPage}">${reservation.rvNo}</a></th>
+                    <td>${reservation.memberNick }</td>
+                    <td>${fn:substring(reservation.rvDate, 5,7)}월 ${fn:substring(reservation.rvDate, 8,10)}일<br>
+                            <span style="color: #ccc;">${reservation.rvTime}</span>
                     </td>
-                    <td  style="text-align: center;">A Room</td>
-                    <td style="text-align: center;">${reservation.optionList[0].optionName}</td>
-                    <td style="text-align: center;">${reservation.rvEtc}</td>
-                    <td style="text-align: center;">
-                        <select name="selectRvStatus">
-                            <option value="대기">대기</option>
-                            <option value="취소">취소</option>
-                        </select>
+                    <td>${reservation.roomName }</td>
+                    <td>
+                    	<c:if test="${empty reservation.optionList }">없음</c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 1 }">${reservation.optionList[0].optionName}</c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 2 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName}</c:if>
+                    	<c:if test="${fn:length(reservation.optionList) >= 3 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName} ...</c:if>
+                    </td>
+                    <td>
+                    	<c:if test="${fn:length(reservation.rvEtc) < 10}">${reservation.rvEtc}</c:if> 
+                    	<c:if test="${fn:length(reservation.rvEtc) >= 11}">${fn:substring(reservation.rvEtc, 0, 11)}...</c:if> 
+                    </td>
+                    <td>
+                     	<c:if test="${reservation.rvStatus eq 'Y'}">
+	                        <select name="selectRvStatus" class="selectY">
+		                            <option value="Y" selected>대기</option>
+		                            <option value="N">취소</option>
+	                        </select>
+                        </c:if>
+                     	<c:if test="${reservation.rvStatus eq 'N'}">
+	                        <select name="selectRvStatus" class="selectN">
+		                            <option value="Y" >대기</option>
+		                            <option value="N" selected>취소</option>
+	                        </select>
+                        </c:if>
                     </td>
                   </tr>
                   
@@ -119,5 +161,33 @@
 			<%---------------------- Pagination end----------------------%>
         </div>
 	</div>
+	
+	
+	<script>
+	$("select[name=selectRvStatus]").change(function(){
+		var select = $(this);
+		//console.log($(this).parent().prev().prev().prev().prev().text());
+		$.ajax({
+			url : '${contextPath}/admin/reservation/updateRvStatus',
+			data : { 
+					 "rvNo" : $(this).parent().prev().prev().prev().prev().prev().prev().text(),
+				     "rvStatus" : $(this).val()
+				    },
+			type : 'POST',
+			success : function(result){
+				if(result>0){
+					if(select.val()=='N'){
+						select.removeClass().addClass('selectN');
+					}else{
+						select.removeClass().addClass('selectY');
+					}
+				}
+			}
+		})
+		
+	})
+	
+	
+	</script>
 </body>
 </html>
