@@ -39,6 +39,9 @@ public class MainController {
 		Room room = service.selectRoom(roomHref);
 		model.addAttribute("room", room);
 		
+		List<Board> reviewList = service.selectReviewList(room.getRoomName());
+		model.addAttribute("reviewList", reviewList);
+		
 		return "common/studioView";
 	}
 	
