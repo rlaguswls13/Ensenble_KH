@@ -56,6 +56,54 @@
 	 	<result property="roomSalesCount" column="CNT"/>
 	 </resultMap>
 	 
+	<resultMap type="Rv" id="rv_rm">
+		<!-- 기본키(PK)에 해당하는 컬럼, 필드 매핑 -->
+		<id property="rvNo" column="RV_NO" />
+
+		<!-- 기본키 외의 컬럼, 필드 매핑 -->
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="memberNick" column="MEMBER_NICK" />
+		<result property="roomNo" column="ROOM_NO" />
+		<result property="roomName" column="ROOM_NAME" />
+		<result property="rvDate" column="RV_DATE" />
+		<result property="rvTime" column="RV_TIME" />
+		<result property="rvPeople" column="RV_PEOPLE" />
+		<result property="rvCars" column="RV_CARS" />
+		<result property="rvAnimals" column="RV_ANIMALS" />
+		<result property="rvPurpose" column="RV_PURPOSE" />
+		<result property="rvEtc" column="RV_ETC" />
+		<result property="roomName" column="ROOM_NAME" />
+		<result property="roomPrice" column="ROOM_PRICE" />
+		<result property="roomDiscount" column="ROOM_DISCOUNT" />
+		<result property="rvStatus" column="RV_STATUS" />
+
+
+		<collection property="optionList" column="RV_NO"
+			javaType="java.util.List" ofType="Option" select="selectOptionList">
+			<!-- 옵션리스트를 얻어오는데 사용할값 -->
+			<!-- 예약하나에 대한 상품리스트를 만들어서 (rv라는 객체로 나가지고 -->
+
+		</collection>
+	</resultMap>
+
+	<resultMap type="Option" id="option_rm">
+		<!-- 기본키(PK)에 해당하는 컬럼, 필드 매핑 -->
+		<id property="optionNo" column="OPTION_NO" />
+
+		<!-- 기본키 외의 컬럼, 필드 매핑 -->
+		<result property="optionName" column="OPTION_NAME" />
+		<result property="optionType" column="OPTION_TYPE" />
+		<result property="optionPrice" column="OPTION_PRICE" />
+
+	</resultMap>
+	 
+	<select id="selectOptionList" parameterType="_int" resultMap="option_rm">
+		SELECT * FROM RESERVATION_OPTION
+		JOIN STUDIO_OPTION USING
+		(OPTION_NO)
+		WHERE RV_NO = #{rvNo}
+	</select>
+	 
 	<select id="selectStudioAttachment" parameterType="_int" resultMap="studio_attachment_rm">
 		SELECT*FROM STUDIO_ATTACHMENT 
 		WHERE ROOM_NO = #{roomNo}
@@ -198,5 +246,23 @@
 	ORDER BY B.DT
   	</select>
   	
-  	
+	<select id="selectMainRvList" resultMap="rv_rm">
+		SELECT * FROM
+		(SELECT RV_NO, MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, RV_DATE, RV_TIME, RV_PEOPLE, RV_CARS,
+			RV_ANIMALS, RV_PURPOSE,RV_ETC, RV_STATUS
+		FROM RESERVATION
+		JOIN STUDIO_ROOM USING(ROOM_NO)
+		JOIN MEMBER USING (MEMBER_NO)
+		ORDER BY RV_NO DESC)
+		WHERE ROWNUM BETWEEN 1 AND 3
+	</select>
+	
+	<update id="updateRvStatus" parameterType="Rv">
+		UPDATE RESERVATION SET
+		RV_STATUS = #{rvStatus}
+		WHERE RV_NO = #{rvNo}
+	</update>
+
+
+
 </mapper>

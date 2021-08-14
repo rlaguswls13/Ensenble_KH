@@ -2,6 +2,8 @@ package com.kh.ensemble.reservation.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,15 +77,26 @@ public class RvController {
 
 	// 예약 하기 화면 전환용
 	@RequestMapping(value = "reservation", method = RequestMethod.GET)
-	public String reservation(@ModelAttribute("loginMember") Member loginMember, Model model, Rv rv) {
+	public String reservation(HttpSession session, Model model, Rv rv,  RedirectAttributes ra) {
 
-		List<Option> optionList = service.selectOption();
+			
 
-		System.out.println("예약하기 컨트롤러" + optionList);
-
-		model.addAttribute("optionList", optionList);
-
-		return "reservation/reservation";
+			Member loginMember = (Member)session.getAttribute("loginMember");
+			
+			if(loginMember!=null) {
+				List<Option> optionList = service.selectOption();
+				
+				model.addAttribute("optionList", optionList);
+				
+				return "reservation/reservation";
+			}else {
+				swalSetMessage(ra, "error", "로그인 후 이용해주세요", null);
+				
+				return "redirect:/";
+			}
+			
+		
+		
 	}
 
 	// 예약 하기 내용 저장

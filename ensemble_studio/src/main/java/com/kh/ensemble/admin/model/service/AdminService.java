@@ -52,6 +52,10 @@ public interface AdminService {
 
 	List<Integer> getSalesByDay(int roomNo);
 
+	List<Rv> selectMainRvList();
+
+	int updateRvStatus(Rv rv);
+
 
 
 }

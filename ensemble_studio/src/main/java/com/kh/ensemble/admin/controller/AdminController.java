@@ -25,19 +25,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.kh.ensemble.admin.model.service.AdminService;
 import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.admin.model.vo.Sales;
 import com.kh.ensemble.member.controller.MemberController;
-import com.kh.ensemble.member.model.service.MemberService;
 import com.kh.ensemble.member.model.vo.Member;
 import com.kh.ensemble.reservation.model.vo.Option;
 import com.kh.ensemble.reservation.model.vo.Rv;
-import com.kh.ensemble.board.model.service.BoardService;
 import com.kh.ensemble.board.model.vo.Pagination;
-import com.kh.ensemble.main.model.service.MainService;
 
 @Controller
 @SessionAttributes({ "loginMember" })
@@ -47,7 +42,13 @@ public class AdminController {
 	private AdminService service;
 
 	@RequestMapping("/admin")
-	public String admin() {
+	public String admin(Model model) {
+		List<Rv> mainRvList = service.selectMainRvList(); 
+		model.addAttribute("mainRvList", mainRvList);
+		
+		List<Sales> salesList = service.selectSalesList();
+		model.addAttribute("salesList", salesList);
+		
 		return "admin/admin-main";
 	}
 
@@ -205,11 +206,13 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping(value="admin/sales/getSalesByDay", method=RequestMethod.POST)
-	public String getSalesByDay(@ModelAttribute("roomNo1") int roomNo1,@ModelAttribute("roomNo2") int roomNo2, @ModelAttribute("roomNo3") int roomNo3) {
+	public String getSalesByDay(@RequestParam("roomNo1") int roomNo1,
+								@RequestParam("roomNo2") int roomNo2,
+								@RequestParam("roomNo3") int roomNo3) {
 		
-		System.out.println(roomNo1);
-		System.out.println(roomNo2);
-		System.out.println(roomNo3);
+		//System.out.println(roomNo1);
+		//System.out.println(roomNo2);
+		//System.out.println(roomNo3);
 		
 		List<Integer> salesByDay1 = service.getSalesByDay(roomNo1);
 		List<Integer> salesByDay2 = service.getSalesByDay(roomNo2);
@@ -220,9 +223,9 @@ public class AdminController {
 		map.put("salesByDay2", salesByDay2);
 		map.put("salesByDay3", salesByDay3);
 		
-		System.out.println(salesByDay1);
-		System.out.println(salesByDay2);
-		System.out.println(salesByDay3);
+//		System.out.println(salesByDay1);
+//		System.out.println(salesByDay2);
+//		System.out.println(salesByDay3);
 
 		return new Gson().toJson(map);
 	}
@@ -246,4 +249,14 @@ public class AdminController {
 		return "admin/admin-modifyRv";
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "admin/reservation/updateRvStatus", method = RequestMethod.POST)
+	public int updateRvStatus(Rv rv) {
+		//System.out.println(rvNo);
+		//System.out.println(rvStatus);
+		
+		int result = service.updateRvStatus(rv);
+		
+		return result;
+	}
 }
