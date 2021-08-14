@@ -218,7 +218,7 @@ function validate(){
 
 
 
-
+ 
 
 // 회원 가입 버튼 클릭 시 전체 유효성 검사 여부 확인
 function validate(){
