@@ -118,6 +118,14 @@ public class AdminDAO {
 		return sqlSession.selectList("adminMapper.getSalesByDay", roomNo);
 	}
 
+	public List<Rv> selectMainRvList() {
+		return sqlSession.selectList("adminMapper.selectMainRvList");
+	}
+
+	public int updateRvStatus(Rv rv) {
+		return sqlSession.update("adminMapper.updateRvStatus", rv);
+	}
+
 
 
 }

@@ -84,10 +84,10 @@
 			type : 'POST',
 			dataType : 'json',
 			success : function(result){
-				console.log(result);
-				console.log(result.salesByDay1);
-				console.log(result.salesByDay2);
-				console.log(result.salesByDay3);
+				//console.log(result);
+				//console.log(result.salesByDay1);
+				//console.log(result.salesByDay2);
+				//console.log(result.salesByDay3);
 
 				const data2 = {
 			            labels: ['8/18', '8/19', '8/20', '8/21', '8/22', '8/23'],

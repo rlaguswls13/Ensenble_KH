@@ -278,6 +278,17 @@ public class AdminServiceImpl implements AdminService{
 	public List<Integer> getSalesByDay(int roomNo) {
 		return dao.getSalesByDay(roomNo);
 	}
+
+	@Override
+	public List<Rv> selectMainRvList() {
+		return dao.selectMainRvList();
+	}
+
+	@Override
+	public int updateRvStatus(Rv rv) {
+		return dao.updateRvStatus(rv);
+	}
+	
 	
 	
 
