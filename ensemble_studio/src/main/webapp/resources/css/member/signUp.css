@@ -148,7 +148,7 @@ input[type="checkbox"]:checked+label{
 	 float: left;
 	 margin-top: 5px;
 }
-
+ 
 input[type="checkbox"]+label span{
 	position: absolute;
 	top: 0;

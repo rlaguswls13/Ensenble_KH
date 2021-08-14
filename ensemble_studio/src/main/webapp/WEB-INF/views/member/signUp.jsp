@@ -117,7 +117,7 @@
 				</div>
 				<div class="form-group agree-form">
 					<table class="checkbox_group">
-						<tr>
+						<tr> 
 							<td><input type="checkbox" id="check_1" class="normal">
 								<label for="check_1"></label><span style="font-size: 10pt">만 14세 이상입니다. (필수)</span></td>
 						</tr>
