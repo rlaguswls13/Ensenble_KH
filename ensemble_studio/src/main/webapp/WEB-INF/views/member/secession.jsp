@@ -9,7 +9,7 @@
 <title>회원탈퇴</title>
 <!-- CSS -->
 <link rel="stylesheet"
-	href="${contextPath}/resources/css/member/secession.css"
+	href="${contextPath}/resources/css/member/secession.css?ver=123"
 	type="text/css" />
 </head>
 <body>
@@ -42,39 +42,31 @@
 						<tr>
 							<td class="agree-text">[회원탈퇴 약관]<br><br>
 
-회원탈퇴 신청 전 안내 사항을 확인 해 주세요.<br>
+회원탈퇴 신청 전 안내 사항을 확인해 주세요.<br>
 회원탈퇴를 신청하시면 현재 로그인 된 아이디는 사용하실 수 없습니다.<br>
-회원탈퇴를 하더라도, 서비스 약관 및 개인정보 취급방침 동의하에 따라  일정 기간동안 회원 개인정보를 보관합니다.<br><br>
+회원탈퇴를 하더라도, 서비스 약관 및 개인정보 취급방침 동의하에 따라 일정 기간동안 회원 개인정보를 보관합니다.<br><br>
 
  - 회원 정보<br>
- - 상품 구입 및 대금 결제에 관한 기록<br>
- - 상품 배송에 관한 기록<br>
+ - 상품 예약에 관한 기록<br>
  - 소비자 불만 또는 처리 과정에 관한 기록<br>
  - 게시판 작성 및 사용후기에 관한 기록<br><br>
 
-※ 상세한 내용은 사이트 내 개인정보 취급방침을 참고 해 주세요.
+※ 상세한 내용은 사이트 내 개인정보 취급방침을 참고해 주세요.
 
-							</td>
-						</tr>
-
-						<tr>
-							<td>
-								<!--                             <input type="checkbox" id="check_all">
-                            <label for="check_all">탈퇴 약관에 동의하며 이의를 제기하지 않겠습니다.</label> -->
 							</td>
 						</tr>
 					</table>
 
 				</div>
-				<input type="checkbox" id="agree" name="agree"> <label
-					for="check_all">탈퇴 약관에 동의하며 이의를 제기하지 않겠습니다.</label>
+				<input type="checkbox" id="check_all" name="agree"> <label
+					for="check_all"></label><span style="font-size: 10pt; color:black">탈퇴 약관에 동의하며 이의를 제기하지 않겠습니다.</span>
 				<div class="form-group col-md-12 agree-btn">
 					<button type="button"
 						class="btn btn-lg secession-btn cancle col-md-6"
 						onclick="location.href='updateMember'">취소</button>
 					<button type="button"
 						class="btn btn-lg secession-btn secession col-md-6"
-						data-toggle="modal" data-target="#modal_form" id="modal_opne_btn">탈퇴</button>
+						data-toggle="modal" data-target="#modal_form" id="modal_open_btn">탈퇴</button>
 				</div>
 
 				<!-- 모달창 -->

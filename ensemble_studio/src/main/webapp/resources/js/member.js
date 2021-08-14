@@ -47,7 +47,7 @@ $("#id").on("input", function(){
                     checkObj.id = false;
                     
                 } else{ // 아이디가 중복되지 않는 경우
-                    $("#checkId").text("사용 가능한 아이디 입니다.").css("color","green");
+                    $("#checkId").text("사용 가능한 아이디 입니다.").css("color","black");
                     checkObj.id = true;
                 }
 
@@ -82,7 +82,7 @@ $("#nickname").on("input", function(){
 	// 입력된 닉네임이 정규식에 일치하는 경우 == 유효한 값인 경우
 	if(regExp.test(inputNickname)){
 		
-		$("#checkNickname").text("유효한 닉네임입니다.").css("color", "green");
+		$("#checkNickname").text("유효한 닉네임입니다.").css("color", "black");
 		
 		checkObj.nickname = true;
 		
@@ -102,7 +102,7 @@ $("#email").on("input", function(){
     const inputEmail = $(this).val().trim();
 
     if(regExp.test(inputEmail)){
-        $("#checkEmail").text("유효한 이메일 형식입니다.").css("color", "green");
+        $("#checkEmail").text("유효한 이메일 형식입니다.").css("color", "black");
 
         checkObj.email = true;
 
@@ -123,7 +123,7 @@ $("#pwd1").on("input", function () {
     const inputPwd1 = $(this).val().trim();
 
     if(regExp.test(inputPwd1)){
-        $("#checkPwd1").text("유효한 비밀번호 형식입니다.").css("color", "green");
+        $("#checkPwd1").text("유효한 비밀번호 형식입니다.").css("color", "black");
 
         checkObj.pwd1 = true;
     }else{
@@ -146,7 +146,7 @@ $("#pwd1,  #pwd2").on("input", function(){
         checkObj.pwd2 = false;
 
     } else if(  pwd1 == pwd2   ){
-        $("#checkPwd2").text("비밀번호가 일치합니다.").css("color", "green");
+        $("#checkPwd2").text("비밀번호가 일치합니다.").css("color", "black");
 
         checkObj.pwd2 = true;
 
@@ -174,7 +174,7 @@ $(".phone").on("input", function(){
     const ph3 = $("#phone3").val();
 
     if( regExp1.test(ph2)  && regExp2.test(ph3)  ){
-        $("#checkPhone").text("유효한 전화번호 형식입니다.").css("color", "green");
+        $("#checkPhone").text("유효한 전화번호 형식입니다.").css("color", "black");
         
         checkObj.phone2 = true;
 

@@ -119,20 +119,20 @@
 					<table class="checkbox_group">
 						<tr>
 							<td><input type="checkbox" id="check_1" class="normal">
-								<label for="check_1"></label><span>만 14세 이상입니다.</span></td>
+								<label for="check_1"></label><span style="font-size: 10pt">만 14세 이상입니다. (필수)</span></td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" id="check_2" class="normal">
-								<label for="check_2"></label><span>서비스 이용약관에 동의합니다.</span></td>
+								<label for="check_2"></label><span style="font-size: 10pt">서비스 이용약관에 동의합니다. (필수)</span></td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" id="check_3" class="normal">
-								<label for="check_3"></label><span>개인정보 수집·이용에 동의합니다.</span></td>
+								<label for="check_3"></label><span style="font-size: 10pt">개인정보 수집·이용에 동의합니다. (필수)</span></td>
 						</tr>
 						
  						<tr>
 							<td><input type="checkbox" id="check_all"> <label
-								for="check_all"></label><span>모두 동의합니다.</span></td>
+								for="check_all"></label><span style="font-size: 10pt">모두 동의합니다.</span></td>
 						</tr> 
 						
 					</table>
@@ -147,19 +147,7 @@
 	</div>
 
 
-<!--  	Modal
-	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header"></div>
-				<div class="modal-body"></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
-				</div>
-			</div>
-		</div>
-	</div> --> 
+
 	
 		<!-- Modal -->
 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
