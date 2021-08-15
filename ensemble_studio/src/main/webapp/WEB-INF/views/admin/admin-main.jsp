@@ -48,7 +48,8 @@
 	
     <div class="main_bg">
         <div class="main_content">
-<h2 style="display: inline-block;">예약관리</h2>
+		<h2 style="display: inline-block;">예약관리</h2>
+		<a href="admin/reservation" class="btn btn-ensemble" style="color: black;">더보기</a>
            <div style="padding: 5px;"></div>
 
             <table class="table">
