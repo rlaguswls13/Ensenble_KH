@@ -404,7 +404,7 @@ public class MemberController {
 			status.setComplete(); // 세션 만료
 			path += "/"; // 메인 페이지
 		} else {
-			swalSetMessage(ra, "error", "회원 탈퇴 실패", null);
+			swalSetMessage(ra, "error", "회원 탈퇴 실패", "비밀번호를 다시 확인해주세요.");
 			path += "secession";
 		}
 		return path;
