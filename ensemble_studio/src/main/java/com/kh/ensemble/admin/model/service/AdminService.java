@@ -56,6 +56,12 @@ public interface AdminService {
 
 	int updateRvStatus(Rv rv);
 
+	int modifyRv(Rv rv);
+
+	int setOptionNo(int optionNo, int rvNo);
+
+	List<Option> selectedOption(int rvNo);
+
 
 
 }

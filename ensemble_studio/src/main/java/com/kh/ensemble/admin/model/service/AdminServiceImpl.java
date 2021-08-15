@@ -3,7 +3,9 @@ package com.kh.ensemble.admin.model.service;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -287,6 +289,41 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int updateRvStatus(Rv rv) {
 		return dao.updateRvStatus(rv);
+	}
+
+	@Override
+	public int modifyRv(Rv rv) {
+		
+	int result = dao.modifyRv(rv);
+		
+		if(result>0) {
+			
+		 dao.deleteSelectOptionList(rv);
+		
+		return result;
+			
+		}else {
+			return 0;
+		}
+		
+	}
+
+	@Override
+	public int setOptionNo(int optionNo,  int rvNo) {
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("optionNo", optionNo);
+		map.put("rvNo",rvNo);
+		
+		return dao.setOptionNo(map);
+	}
+
+	@Override
+	public List<Option> selectedOption(int rvNo) {
+		// TODO Auto-generated method stub
+		return dao.selectedOption(rvNo);
+		
 	}
 	
 	

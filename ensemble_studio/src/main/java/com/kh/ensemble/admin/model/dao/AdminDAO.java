@@ -1,6 +1,7 @@
 package com.kh.ensemble.admin.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -124,6 +125,26 @@ public class AdminDAO {
 
 	public int updateRvStatus(Rv rv) {
 		return sqlSession.update("adminMapper.updateRvStatus", rv);
+	}
+
+	public int modifyRv(Rv rv) {
+		
+		return sqlSession.update("rvMapper.modifyRv", rv);
+	}
+
+	public int deleteSelectOptionList(Rv rv) {
+		return sqlSession.delete("rvMapper.deleteSelectOptionList", rv);
+		
+	}
+
+	public int setOptionNo(Map<String, Object> map) {
+
+		return sqlSession.insert("rvMapper.setOptionNo", map);
+	}
+
+	public List<Option> selectedOption(int rvNo) {
+		
+		return sqlSession.selectList("rvMapper.selectedOption", rvNo);
 	}
 
 

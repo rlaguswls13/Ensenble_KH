@@ -155,6 +155,9 @@ public class RvController {
 		return new Gson().toJson(rvTimeList);
 	}
 
+	
+	
+	
 	public static void swalSetMessage(RedirectAttributes ra, String icon, String title, String text) {
 		// RediectAttributes : 리다이렉트 시 값을 전달하는 용도의 객체
 

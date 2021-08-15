@@ -81,12 +81,14 @@
 	<!-- 예약 목록 조회 -->
 	<select id="selectRvList" parameterType="_int" resultMap="rv_rm">
 		SELECT
-		RV_NO, MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, RV_DATE, RV_TIME, RV_PEOPLE, RV_CARS,
+		RV_NO, MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, RV_DATE, RV_TIME,
+		RV_PEOPLE, RV_CARS,
 		RV_ANIMALS,ROOM_NAME, ROOM_PRICE, ROOM_DISCOUNT
 		RV_PURPOSE,RV_ETC, RV_STATUS
 		FROM
 		RESERVATION
-		JOIN STUDIO_ROOM USING(ROOM_NO)
+		JOIN STUDIO_ROOM
+		USING(ROOM_NO)
 		JOIN MEMBER USING (MEMBER_NO)
 		WHERE
 		MEMBER_NO =
@@ -96,12 +98,15 @@
 	<select id="selectReservationList" resultMap="rv_rm">
 		SELECT
 		RV_NO,
-		MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, RV_DATE, RV_TIME, RV_PEOPLE, RV_CARS,
+		MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, RV_DATE, RV_TIME,
+		RV_PEOPLE, RV_CARS,
 		RV_ANIMALS,
 		RV_PURPOSE,RV_ETC, RV_STATUS
-		FROM RESERVATION
+		FROM
+		RESERVATION
 		JOIN STUDIO_ROOM USING(ROOM_NO)
-		JOIN MEMBER USING (MEMBER_NO)
+		JOIN MEMBER USING
+		(MEMBER_NO)
 		ORDER BY RV_NO DESC
 	</select>
 
@@ -140,16 +145,20 @@
 	<select id="selectReservation" parameterType="_int"
 		resultMap="rv_rm">
 		SELECT
-		RV_NO, MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, RV_DATE, RV_TIME,
+		RV_NO, MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME,
+		RV_DATE, RV_TIME,
 		RV_PEOPLE, RV_CARS,
-		RV_ANIMALS,ROOM_NAME, ROOM_PRICE, ROOM_DISCOUNT,
+		RV_ANIMALS,ROOM_NAME, ROOM_PRICE,
+		ROOM_DISCOUNT,
 		RV_PURPOSE,RV_ETC, RV_STATUS
 		FROM
 		RESERVATION
-		JOIN STUDIO_ROOM USING(ROOM_NO)
+		JOIN
+		STUDIO_ROOM USING(ROOM_NO)
 		JOIN MEMBER USING (MEMBER_NO)
 		WHERE
-		RV_NO = #{rvNo}
+		RV_NO =
+		#{rvNo}
 	</select>
 
 	<insert id="reservation" parameterType="Rv">
@@ -159,22 +168,51 @@
 			SELECT SEQ_RVNO.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO RESERVATION VALUES(
-		#{rvNo} , #{memberNo}, #{roomNo}, #{rvDate},#{rvTime}, #{rvPeople},
-		#{rvCars},#{rvAnimals}, #{rvPurpose}, #{rvEtc} , DEFAULT  )
+		#{rvNo} , #{memberNo}, #{roomNo},
+		#{rvDate},#{rvTime}, #{rvPeople},
+		#{rvCars},#{rvAnimals}, #{rvPurpose},
+		#{rvEtc} , DEFAULT )
 
 
 	</insert>
-	
+
 	<insert id="setOptionNo" parameterType="map">
-		INSERT 
-		
+		INSERT
+
 		INTO RESERVATION_OPTION VALUES(
-		#{rvNo} , #{optionNo}  )
+		#{rvNo} , #{optionNo} )
 	</insert>
-	
+
 	<select id="adminSelectOption" resultMap="option_rm">
 		SELECT* FROM
 		STUDIO_OPTION
+	</select>
+
+	<update id="modifyRv" parameterType="Rv">
+
+		UPDATE RESERVATION SET
+		ROOM_NO=#{roomNo},
+		RV_DATE=#{rvDate},
+		RV_TIME=#{rvTime},
+		RV_PEOPLE=#{rvPeople},
+		RV_CARS=#{rvCars},
+		RV_ANIMALS= #{rvAnimals},
+		RV_PURPOSE=#{rvPurpose},
+		RV_ETC=#{rvEtc}
+		WHERE RV_NO = #{rvNo} AND RV_STATUS = 'Y'
+
+	</update>
+
+	<delete id="deleteSelectOptionList" parameterType="Rv">
+		DELETE FROM  RESERVATION_OPTION
+		WHERE RV_NO = #{rvNo}
+	</delete>
+
+	<select id="selectedOption" parameterType="_int" resultMap="option_rm">
+		SELECT OPTION_NO
+		FROM RESERVATION_OPTION
+		WHERE RV_NO= #{rvNo}
+
 	</select>
 
 

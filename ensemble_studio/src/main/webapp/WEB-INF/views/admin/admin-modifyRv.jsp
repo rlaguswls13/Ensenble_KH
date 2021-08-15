@@ -10,11 +10,17 @@
 <title>예약 수정</title>
 <jsp:include page="admin-header.jsp"></jsp:include>
 </head>
+
+	<!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <style>
 .container {
 	width: 1000px;
-	height: 1600px;
+	height: 1200px;
 	border: 1px solid gray;
+	margin-top : 100px;
+	margin-bottom: 100px;
 }
 
 /* 촬영정보 선택  */
@@ -117,34 +123,36 @@
 
 	<div class="container">
 
+		<form method="POST" action="${rv.rvNo}" class="needs-validation"
+			name="modifyRvForm" onsubmit="return validate();">
+			<!-- 아이디 -->
+			<div class="row mb-3 form-row">
+				<div class="col-md-2">
+					<h6>아이디</h6>
+				</div>
+				<div class="col-md-5">
+					<h5 id="id"></h5>
+				</div>
+			</div>
 
-		<!-- 아이디 -->
-		<div class="row mb-3 form-row">
-			<div class="col-md-2">
-				<h6>아이디</h6>
+			<!-- 이름 -->
+			<div class="row mb-3 form-row">
+				<div class="col-md-2">
+					<h6>이름</h6>
+				</div>
+				<div class="col-md-5">
+					<h5 id="name"></h5>
+				</div>
 			</div>
-			<div class="col-md-5">
-				<h5 id="id"></h5>
-			</div>
-		</div>
 
-		<!-- 이름 -->
-		<div class="row mb-3 form-row">
-			<div class="col-md-2">
-				<h6>이름</h6>
-			</div>
-			<div class="col-md-5">
-				<h5 id="name"></h5>
-			</div>
-		</div>
-		
 			<!-- 예약 일자 -->
 			<div class="row mb-3 form-row">
 				<div class="col-md-2">
 					<label for="memberEmail">예약 일자</label>
 				</div>
 				<div class="col-md-6">
-					<input type="text" class="form-control" id="rvDate" name="rvDate" value="${rv.rvDate}">
+					<input type="text" class="form-control" id="rvDate" name="rvDate"
+						value="${rv.rvDate}">
 				</div>
 			</div>
 			<!-- 예약 시간 -->
@@ -153,23 +161,32 @@
 					<label for="memberEmail">예약 시간</label>
 				</div>
 				<div class="col-md-6">
-					<input type="text" class="form-control" id="rvTime" name="rvTime"
-						value="${rv.rvTime }">
+				
+				<select name="rvTime" class="rvTime" id="rvTime" name="rvTime">
+					<option value="09:00~12:00">09:00~12:00</option>
+					<option value="12:00~15:00">12:00~15:00</option>
+					<option value="15:00~18:00">15:00~18:00</option>
+					
+					</select>
 				</div>
 			</div>
-		
+
 			<!-- 예약 상품 -->
 			<div class="row mb-3 form-row">
 				<div class="col-md-2">
 					<label for="memberEmail">예약 상품</label>
 				</div>
 				<div class="col-md-6">
-					<input type="text" class="form-control" id="rvProduct"
-						name="rvProduct" value="A Room">
+					<select name="roomNo" class="roomNo">
+					<option value="81">A Room</option>
+					<option value="82">B Room</option>
+					<option value="83">C Room</option>
+					
+					</select>
 				</div>
 			</div>
 			<br>
-		
+
 
 			<div class="reservationOption1">
 				<div class="reservationOption">
@@ -191,7 +208,7 @@
 							<c:forEach items="${optionList}" var="option">
 								<c:if test="${option.optionType == 'A'}">
 									<input type="checkbox" id="${option.optionName}"
-										value="${option.optionNo}" name="option">
+										value="${option.optionNo}" name="option" >
 									<label for="${option.optionName}">${option.optionName})</label>
 									<br>
 								</c:if>
@@ -203,31 +220,29 @@
 					</div>
 
 				</div>
-				<br>
-				<br>
-				<br>
+				<br> <br> <br>
 				<div class="rvDetail2">
-					
-					이용 인원 수 : <input type="text" value="${rv.rvPeople }"><br>
-					<br> 방문 차량 수 : <input type="text" value="${rv.rvCars}"><br>
-					<br> 반려 동물 수 : <input type="text" value="${rv.rvAnimals}"><br>
-					<br> 촬영 내용 &nbsp;&nbsp;&nbsp; : <input type="text" value="${rv.rvPurpose}"><br>
-					<br>
+
+					이용 인원 수 : <input type="text" name="rvPeople" value="${rv.rvPeople }"><br>
+					<br> 방문 차량 수 : <input type="text" name="rvCars" value="${rv.rvCars}"><br>
+					<br> 반려 동물 수 : <input type="text" name="rvAnimals" value="${rv.rvAnimals}"><br>
+					<br> 촬영 내용 &nbsp;&nbsp;&nbsp; : <input type="text" name="rvPurpose"
+						value="${rv.rvPurpose}"><br> <br>
 
 					<div id="etcText">
 						비고 :<br>
 					</div>
 					<div id="etcBoxt">
-						<textarea rows="8" cols="50" name="ta" style="resize: none;">${rv.rvEtc}  </textarea>
+						<textarea rows="5" cols="50"  name="rvEtc" style="resize: none;">${rv.rvEtc}  </textarea>
 					</div>
-					
+
 
 				</div>
-					
+
 				<hr>
 
 
-		
+
 
 
 
@@ -239,6 +254,7 @@
 
 
 			</div>
+		</form>
 	</div>
 </body>
 </html>

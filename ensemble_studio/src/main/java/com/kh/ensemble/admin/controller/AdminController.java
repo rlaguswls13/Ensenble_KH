@@ -43,12 +43,12 @@ public class AdminController {
 
 	@RequestMapping("/admin")
 	public String admin(Model model) {
-		List<Rv> mainRvList = service.selectMainRvList(); 
+		List<Rv> mainRvList = service.selectMainRvList();
 		model.addAttribute("mainRvList", mainRvList);
-		
+
 		List<Sales> salesList = service.selectSalesList();
 		model.addAttribute("salesList", salesList);
-		
+
 		return "admin/admin-main";
 	}
 
@@ -197,66 +197,125 @@ public class AdminController {
 
 	@RequestMapping("admin/sales")
 	public String sales(Model model) {
-		
+
 		List<Sales> salesList = service.selectSalesList();
 		model.addAttribute("salesList", salesList);
-		
+
 		return "admin/admin-sales";
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="admin/sales/getSalesByDay", method=RequestMethod.POST)
-	public String getSalesByDay(@RequestParam("roomNo1") int roomNo1,
-								@RequestParam("roomNo2") int roomNo2,
-								@RequestParam("roomNo3") int roomNo3) {
-		
-		//System.out.println(roomNo1);
-		//System.out.println(roomNo2);
-		//System.out.println(roomNo3);
-		
+	@RequestMapping(value = "admin/sales/getSalesByDay", method = RequestMethod.POST)
+	public String getSalesByDay(@RequestParam("roomNo1") int roomNo1, @RequestParam("roomNo2") int roomNo2,
+			@RequestParam("roomNo3") int roomNo3) {
+
+		// System.out.println(roomNo1);
+		// System.out.println(roomNo2);
+		// System.out.println(roomNo3);
+
 		List<Integer> salesByDay1 = service.getSalesByDay(roomNo1);
 		List<Integer> salesByDay2 = service.getSalesByDay(roomNo2);
 		List<Integer> salesByDay3 = service.getSalesByDay(roomNo3);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("salesByDay1", salesByDay1);
 		map.put("salesByDay2", salesByDay2);
 		map.put("salesByDay3", salesByDay3);
-		
+
 //		System.out.println(salesByDay1);
 //		System.out.println(salesByDay2);
 //		System.out.println(salesByDay3);
 
 		return new Gson().toJson(map);
 	}
-	
-	
-	
+
 	// 게시글 수정 페이지
 	@RequestMapping(value = "admin/{rvNo}", method = RequestMethod.GET)
-	public String modifyRv(@PathVariable("rvNo") int rvNo,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model
-			) {
-		
+	public String modifyRv(@PathVariable("rvNo") int rvNo, Model model) {
+
 		List<Option> optionList = service.adminSelectOption();
+
 		
 		
 		Rv rv = service.selectReservation(rvNo);
 		
+		List<Option> selectedOptionList= service.selectedOption(rvNo);
+		
+		
+		System.out.println("선택된 옵션 목록 " + selectedOptionList);
+		
+
 		model.addAttribute("rv", rv);
 		model.addAttribute("optionList", optionList);
+		model.addAttribute("selectedOptionList",selectedOptionList);
 
 		return "admin/admin-modifyRv";
+	}
+
+	@RequestMapping(value = "admin/{rvNo}", method = RequestMethod.POST)
+	public String modifyRv(@PathVariable("rvNo") int rvNo,
+			@RequestParam("option") String[] option, Option optionNumber, Rv rv, RedirectAttributes ra) {
+		
+	
+		
+		System.out.println(option);
+		
+		rv.setMemberNo(rvNo);
+		System.out.println(rv);
+
+		
+		int result= service.modifyRv(rv);
+		
+	
+		
+	
+		
+		if(result>0) {
+			for (int i = 0; i < option.length; i++) {
+
+				int optionNo = Integer.parseInt(option[i]); 
+			
+			  result= service.setOptionNo(optionNo , rvNo);
+		
+		}
+		
+		if (result > 0) {
+			swalSetMessage(ra, "success", "예약 수정 성공", null);
+
+		} else {
+			swalSetMessage(ra, "error", "예약 수정 실패", null);
+		}
+		}else { //rv 입력 실패 
+			swalSetMessage(ra, "error", "예약 수정 실패", null);
+		}
+
+		// 예약 성공 또는 실패.....
+		
+
+		return "redirect:/";// 메인페이지 재요청 -> / : 메인페이지
+
+
+		
+	
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "admin/reservation/updateRvStatus", method = RequestMethod.POST)
 	public int updateRvStatus(Rv rv) {
-		//System.out.println(rvNo);
-		//System.out.println(rvStatus);
-		
+		// System.out.println(rvNo);
+		// System.out.println(rvStatus);
+
 		int result = service.updateRvStatus(rv);
-		
+
 		return result;
+	}
+	
+	
+	public static void swalSetMessage(RedirectAttributes ra, String icon, String title, String text) {
+		// RediectAttributes : 리다이렉트 시 값을 전달하는 용도의 객체
+
+		ra.addFlashAttribute("icon", icon);
+		ra.addFlashAttribute("title", title);
+		ra.addFlashAttribute("text", text);
 	}
 }
