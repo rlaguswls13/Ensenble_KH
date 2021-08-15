@@ -161,7 +161,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void sendEmail(Member member, String div) throws Exception {
 		//System.out.println(member);
-		String setfrom = "ost0230@naver.com"; // 보내는 사람 이메일
+		String setfrom = "ensemblesto@gmail.com"; // 보내는 사람 이메일
 		String tomail = member.getMemberEmail(); // 받는 사람 이메일
 		String title = "앙상블스튜디오 임시 비밀번호 발송"; // 메일 제목
 		String key = member.getMemberPw();
