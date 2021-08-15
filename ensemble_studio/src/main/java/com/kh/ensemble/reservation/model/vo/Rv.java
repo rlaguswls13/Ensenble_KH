@@ -21,6 +21,8 @@ public class Rv {
 	private int roomDiscount;
 	private int roomPrice;
 	private String roomName;
+	
+	
 
 	private List<Option> optionList;
 

@@ -235,8 +235,6 @@ public class AdminController {
 
 		List<Option> optionList = service.adminSelectOption();
 
-		
-		
 		Rv rv = service.selectReservation(rvNo);
 		
 		List<Option> selectedOptionList= service.selectedOption(rvNo);

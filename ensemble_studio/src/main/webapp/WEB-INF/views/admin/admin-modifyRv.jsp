@@ -125,23 +125,14 @@
 
 		<form method="POST" action="${rv.rvNo}" class="needs-validation"
 			name="modifyRvForm" onsubmit="return validate();">
-			<!-- 아이디 -->
+		
+			<!-- 닉네임 -->
 			<div class="row mb-3 form-row">
 				<div class="col-md-2">
-					<h6>아이디</h6>
+					<h6>닉네임</h6>
 				</div>
 				<div class="col-md-5">
-					<h5 id="id"></h5>
-				</div>
-			</div>
-
-			<!-- 이름 -->
-			<div class="row mb-3 form-row">
-				<div class="col-md-2">
-					<h6>이름</h6>
-				</div>
-				<div class="col-md-5">
-					<h5 id="name"></h5>
+					<h5 id="name">${rv.memberNick }</h5>
 				</div>
 			</div>
 
