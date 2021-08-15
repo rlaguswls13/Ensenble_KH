@@ -130,11 +130,12 @@ public class MemberServiceImpl implements MemberService {
 	// 회원 탈퇴 Service
 	@Override
 	public int secession(String currentPwd, Member loginMember) {
-
+		
 		String savePwd = dao.selectPassword(loginMember.getMemberNo());
 
 		int result = 0;
-
+		
+		// 얻어온 비밀번호와 입력한 비밀번호가 일치하는지
 		if (bCryptPasswordEncoder.matches(currentPwd, savePwd)) {
 
 			result = dao.secession(loginMember);

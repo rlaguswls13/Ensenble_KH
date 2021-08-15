@@ -59,7 +59,7 @@
 
 				</div>
 				<input type="checkbox" id="check_all" name="agree"> <label
-					for="check_all"></label><span style="font-size: 10pt; color:black">탈퇴 약관에 동의하며 이의를 제기하지 않겠습니다.</span>
+					for="check_all"></label><span style="font-size: 10pt; color:black" id="check-mark">탈퇴 약관에 동의하며 이의를 제기하지 않겠습니다.</span>
 				<div class="form-group col-md-12 agree-btn">
 					<button type="button"
 						class="btn btn-lg secession-btn cancle col-md-6"
@@ -95,7 +95,7 @@
 	<script>
 		// 약관 동의가 체크되었을 때 탈퇴 진행
 		function secessionValidate() {
-			if ($("#agree:checked").length == 0) {
+			if ($("#check_all:checked").length == 0) {
 				swal({
 					"icon" : "info",
 					"title" : "탈퇴 약관에 동의해주세요."
@@ -104,6 +104,8 @@
 			}
 		}
 	</script>
+	
+
 
 
 </body>

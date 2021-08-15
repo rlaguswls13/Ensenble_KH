@@ -29,8 +29,10 @@
 	<div class="container">
 		<div class="find_body">
 			<div class="logo col-md-12">
-				<img src="${contextPath}/resources/images/common/logo.png"
-					width="30%" height="30%" onclick="location.href='/ensemble'">
+				<a href="${contextPath}"> <img
+					src="${contextPath}/resources/images/common/logo.png" width="30%"
+					height="30%">
+				</a>
 			</div>
 
 			<div class="find_content">

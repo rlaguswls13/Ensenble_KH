@@ -27,7 +27,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
 	crossorigin="anonymous"></script>
-	
+
 <!-- 스왈창 -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- CSS -->
@@ -40,8 +40,10 @@
 	<div class="container">
 		<div class="login_body row">
 			<div class="logo col-md-12">
-				<img src="${contextPath}/resources/images/common/logo.png"
-					width="30%" height="30%" onclick="location.href='/ensemble'">
+				<a href="${contextPath}"> <img
+					src="${contextPath}/resources/images/common/logo.png" width="30%"
+					height="30%">
+				</a>
 			</div>
 			<form class="row login_Form" action="login" method="POST"
 				onsubmit="return loginValidate();">
@@ -67,7 +69,8 @@
 				<div class="login_line col-md-12">
 					<hr>
 				</div>
-				<div id="naver_id_login"><a href="${naver_url}"><img
+				<div id="naver_id_login">
+					<a href="${naver_url}"><img
 						src="${contextPath}/resources/images/common/naverLogin.png"
 						id="naverimg" class="btn-lg login-btn" width="100%" height="80%"></a>
 				</div>

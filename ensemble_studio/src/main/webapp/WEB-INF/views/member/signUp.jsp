@@ -35,8 +35,10 @@
 	<div class="container">
 		<div class="signup-form">
 			<div class="logo col-md-12">
+			      <a href="${contextPath}">
 				<img src="${contextPath}/resources/images/common/logo.png"
 					width="30%" height="30%">
+					</a>
 			</div>
 			<form action="signUp" name="signUpForm" method="post"
 				onsubmit="return validate();">
@@ -123,11 +125,11 @@
 						</tr>
 						<tr>
 							<td><input type="checkbox" id="check_2" class="normal">
-								<label for="check_2"></label><span style="font-size: 10pt">서비스 이용약관에 동의합니다. (필수)</span></td>
+								<label for="check_2"></label><span style="font-size: 10pt" id="check-mark2">서비스 이용약관에 동의합니다. (필수)</span></td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" id="check_3" class="normal">
-								<label for="check_3"></label><span style="font-size: 10pt">개인정보 수집·이용에 동의합니다. (필수)</span></td>
+								<label for="check_3"></label><span style="font-size: 10pt" id="check-mark3">개인정보 수집·이용에 동의합니다. (필수)</span></td>
 						</tr>
 						
  						<tr>
@@ -139,8 +141,7 @@
 				</div>
 
 				<div class="form-group">
-					<button type="submit" class="btn btn-block btn-lg signUp-btn">회원가입
-						완료</button>
+					<button type="submit" class="btn btn-block btn-lg signUp-btn">가입하기</button>
 				</div>
 			</form>
 		</div>
@@ -314,7 +315,7 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					<button type="button" class="btn btn-default modal-btn" data-dismiss="modal">확인</button>
 				</div>
 			</div>
 		</div>
@@ -441,7 +442,7 @@
 회사는 이용자에게 웹사이트를 통하여 다른 회사의 웹사이트 또는 자료에 대한 링크를 제공할 수 있습니다. 이 경우 회사는 외부사이트 및 자료에 대하여 통제권이 없을 뿐만 아니라 이들이 개인정보를 수집하는 행위에 대하여 회사의 '개인정보처리방침'이 적용되지 않습니다. 따라서, 회사가 포함하고 있는 링크를 클릭하여 타 사이트의 페이지로 이동할 경우에는 새로 방문한 사이트의 개인정보처리방침을 반드시 확인하시기 바랍니다.
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+					<button type="button" class="btn btn-default modal-btn" data-dismiss="modal">확인</button>
 				</div>
 			</div>
 		</div>

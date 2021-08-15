@@ -33,8 +33,10 @@
 	<div class="container">
 		<div class="find_body">
 			<div class="logo col-md-12">
-				<img src="${contextPath}/resources/images/common/logo.png"
-					width="30%" height="30%" onclick="location.href='/ensemble'">
+				<a href="${contextPath}"> <img
+					src="${contextPath}/resources/images/common/logo.png" width="30%"
+					height="30%">
+				</a>
 			</div>
 			<nav>
 				<div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -51,7 +53,7 @@
 					<div class="tab-pane fade show active" id="nav-id" role="tabpanel"
 						aria-labelledby="nav-id-tab">
 						<div class="findId-con findIdPwd">
-							<form action="findId" method="POST" onsubmit="">
+							<form action="findId" method="POST">
 								<div class="find-text1">등록된 이메일로 찾기</div>
 								<div class="find-text2">회원정보 이메일 주소와 입력한 이메일 주소가 같아야 아이디를
 									찾을 수 있습니다.</div>
@@ -79,7 +81,7 @@
 					<div class="tab-pane fade" id="nav-pwd" role="tabpanel"
 						aria-labelledby="nav-pwd-tab">
 						<div class="findPwd-con findIdPwd">
-							<form action="findPwd" method="POST" onsubmit="">
+							<form action="findPwd" method="POST">
 								<div class="find-text1">등록된 이메일로 찾기</div>
 								<div class="find-text2">아래의 본인확인을 통해 임시비밀번호가 이메일로 전송됩니다.</div>
 								<hr>
