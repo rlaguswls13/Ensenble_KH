@@ -70,10 +70,16 @@ public class RvController {
 
 	// 예약 현황 화면 전환용
 	@RequestMapping(value = "rvStatus", method = RequestMethod.GET)
-	public String rvStatus() {
+	public String rvStatus(Rv rv, Model model) {
 
+		List<Rv> rvStatusList = service.rvStatusList();
+		
+	
+		model.addAttribute("rvStatusList", new Gson().toJson(rvStatusList));
+			
 		return "reservation/rvStatus";
 	}
+	
 
 	// 예약 하기 화면 전환용
 	@RequestMapping(value = "reservation", method = RequestMethod.GET)

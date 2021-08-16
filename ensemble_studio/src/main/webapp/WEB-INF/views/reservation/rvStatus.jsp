@@ -35,8 +35,26 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/reservation/rvStatus.css"
 	type="text/css" />
-	
+
 	<script>
+	
+		const rvStatusList = JSON.parse('${rvStatusList}');
+		
+		const eventsArr = [];
+		
+		$.each(rvStatusList, function(){
+			const rv = {};
+			rv.title = this.roomName + "예약불가";
+			rv.start = this.rvDate + "T" + this.rvTime;
+			
+			eventsArr.push(rv);
+			
+		});
+		
+	
+	
+	
+	
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -53,29 +71,7 @@
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2021-09-01'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2021-08-19T12:00:00',
-         
-          
-        }
-       
-      ]
+      events:  eventsArr
     });
 
     calendar.render();

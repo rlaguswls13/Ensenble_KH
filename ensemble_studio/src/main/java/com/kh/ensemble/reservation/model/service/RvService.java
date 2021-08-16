@@ -41,4 +41,6 @@ public interface RvService {
 
 	int setOptionNo(int optionNo,  int rvNo);
 
+	List<Rv> rvStatusList();
+
 }

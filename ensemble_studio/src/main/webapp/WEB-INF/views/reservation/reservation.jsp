@@ -41,7 +41,7 @@
 	<div class="container">
 
 		<form method="POST" action="reservation" class="needs-validation"
-			name="reservationForm" onsubmit="return validate();">
+			name="reservationForm" id="reservationForm" onsubmit="return validate();">
 
 			<h2>Reservation</h2>
 			<div class="studio">
@@ -49,19 +49,19 @@
 				<h5>원하시는 스튜디오를 선택해주세요</h5>
 
 				<div class="aRoom">
-					<input type="radio" id="A Room" value="81" name="roomNo"> <label
+					<input type="radio" id="A Room" value="81" name="roomNo" price="160000"> <label
 						for="A Room">A Room</label><br> <img
 						src="${contextPath}/resources/images/reservation/Aroom.jpg"
 						width="190 px " height="150 px">
 				</div>
 				<div class="bRoom">
-					<input type="radio" id="B Room" value="82" name=roomNo> <label
+					<input type="radio" id="B Room" value="82" name="roomNo" price="180000"> <label
 						for="B Room">B Room</label><br> <img
 						src="${contextPath}/resources/images/reservation/Broom.png"
 						width="190 px " height="150 px">
 				</div>
 				<div class="cRoom">
-					<input type="radio" id="C Room" value="83" name="roomNo"> <label
+					<input type="radio" id="C Room" value="83" name="roomNo" price="100000"> <label
 						for="B Room">C Room</label><br> <img
 						src="${contextPath}/resources/images/reservation/Croom.jpg"
 						width="190 px " height="150 px">
@@ -107,8 +107,8 @@
 							<c:forEach items="${optionList}" var="option">
 								<c:if test="${option.optionType== 'G'}">
 									<input type="checkbox" id="${option.optionName}"
-										value="${option.optionNo}" name="option">
-									<label for="${option.optionName}">${option.optionName})</label>
+										value="${option.optionNo}" name="option" price="${option.optionPrice}">
+									<label for="${option.optionName}" >${option.optionName})</label>
 									<br>
 								</c:if>
 							</c:forEach>
@@ -118,7 +118,7 @@
 							<c:forEach items="${optionList}" var="option">
 								<c:if test="${option.optionType == 'A'}">
 									<input type="checkbox" id="${option.optionName}"
-										value="${option.optionNo}" name="option">
+										value="${option.optionNo}" name="option" price="${option.optionPrice}">
 									<label for="${option.optionName}">${option.optionName})</label>
 									<br>
 								</c:if>
@@ -311,6 +311,37 @@
 			console.log(inputOption)
 
 		}
+		 
+		 $("[name=roomNo]").on("change", function(){
+			 const index = $("[name=roomNo]").index($(this));
+			 const price = Number($(this).attr("price"));
+			 
+			 $("#reservationForm")[0].reset();
+			 
+			 $("[name=roomNo]").eq(index).prop("checked", true);
+			 
+			 // reservationForm
+			 $("#totalPrice").text(price + "원");
+		 })
+		 
+		 // 옵션 값이 변할 때 마다
+		 $("[name=option]").on("change", function(){
+			 let totalPrice = 0;
+			 
+			 $("[name=option]").each(function(){
+				if( $(this).prop("checked") == true){
+					totalPrice += Number($(this).attr("price"));
+				}
+				 
+			 });
+			 
+			 totalPrice += Number( $("[name=roomNo]").attr("price") );
+			 
+			 $("#totalPrice").text(totalPrice + "원");
+		 });
+		 
+		 
+		 
 	</script>
 
 </body>

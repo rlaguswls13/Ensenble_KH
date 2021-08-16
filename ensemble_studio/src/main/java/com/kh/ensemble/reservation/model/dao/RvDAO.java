@@ -60,6 +60,11 @@ public class RvDAO {
 		return sqlSession.insert("rvMapper.setOptionNo", map);
 	}
 
+	public List<Rv> rvStatusList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("rvMapper.rvStatusList");
+	}
+
 	
 
 }

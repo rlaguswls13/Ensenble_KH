@@ -214,6 +214,13 @@
 		WHERE RV_NO= #{rvNo}
 
 	</select>
+	
+	<select id="rvStatusList" resultMap="rv_rm">
+        SELECT TO_CHAR(RV_DATE, 'RRRR-MM-DD') RV_DATE, 
+                SUBSTR( RV_TIME, 0, INSTR( RV_TIME, '~')-1 ) RV_TIME,
+                ROOM_NAME FROM RESERVATION  
+		JOIN STUDIO_ROOM USING(ROOM_NO)
+	</select>
 
 
 </mapper>

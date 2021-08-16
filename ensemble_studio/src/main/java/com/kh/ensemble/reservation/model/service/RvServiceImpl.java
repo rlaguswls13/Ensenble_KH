@@ -81,6 +81,12 @@ public class RvServiceImpl implements RvService{
 		
 		return dao.setOptionNo(map);
 	}
+
+	@Override
+	public List<Rv> rvStatusList() {
+		// TODO Auto-generated method stub
+		return dao.rvStatusList();
+	}
 	
 	
 	
