@@ -21,30 +21,38 @@
     
 <style>
  
-.insert_container{
-
-	margin-left: 20%;
-	margin-right: 20%;
-}
-
-
-.note-editor{
-	width: 90%;
-}
-
-#boardTitle{
-	width: 69%
-}
-
-
+	
+	.note-editor{
+		width: 100%;
+	}
+	
+	#boardTitle{
+		width: 69%
+	}
+    .btn-ensemble{
+        background-color: #FDCDCD;
+        padding-left: 25px; padding-right: 25px;
+        float: right;
+        margin-right: 20px;
+        padding-top : 5px; padding-bottom: 5px;
+    }
+	.btn-grey{
+		background-color : #eee;
+		color :black;
+	}
+	@media (max-width:990px){
+		#boardTitle{
+			width: 50%
+		}
+	}
 </style>
  
 </head>
 <body>
 
-	
-    <div class="insert_container">
-	    <h3 class="my-3">${boardType.boardName} 게시글 작성</h3>
+	<div style="padding:15px"></div>
+    <div class="container">
+	    <h3 class="my-3"><span style="font-family: 'Noto Serif KR', serif; ">${boardType.boardName}</span> 게시글 작성</h3>
 	    
 	    <hr>    
 	
@@ -61,23 +69,23 @@
 	        
 	        
 				<input type="text" class="form-control mr-2" id="boardTitle" name="boardTitle"	placeholder="제목을 입력해주세요.">
-				<button class="btn btn-secondary mr-2" type="submit">글등록</button>		
+				<button class="btn btn-ensemble" type="submit">올리기</button>
 			</div>
 			
-
+			<div style="padding:3px"></div>
 				
 				
  
 	      
 	        <textarea class="summernote" id="summernote" name="boardContent"></textarea>
-	   		 <div class="col-sm-11 my-3">
-	   		 	<a class="btn btn-secondary mr-2 float-right" href="list?type=${param.type}&cp=${param.cp}${searchStr}">목록으로</a>			
-				<button class="btn btn-secondary mr-2 float-right" type="reset"  onclick="return resetSummerNote();">내용삭제</button>
+	   		 <div class="col-sm-12 my-3">
+	   		 	<a class="btn btn-grey mr-2 float-right" href="list?type=${param.type}&cp=${param.cp}${searchStr}">목록으로</a>			
+				<button class="btn btn-grey mr-2 float-right" type="reset"  onclick="return resetSummerNote();">내용삭제</button>
 				
 	         </div>
 	    </form>
     </div>
-    
+    <div style="padding:20px"></div>
  
 	<jsp:include page="../common/footer.jsp"/>
 
@@ -119,7 +127,7 @@
     
     	// summernote 스타일 및 기능변경
          $('#summernote').summernote({
-            placeholder: '<h1>글을 작성해주세요</h1>',
+            placeholder: '<h5>글을 작성해주세요</h5>',
             tabsize: 2,  // 
             height: 600, // 작성칸 높이
             minHeight : null, // 작성칸 최소 높이 

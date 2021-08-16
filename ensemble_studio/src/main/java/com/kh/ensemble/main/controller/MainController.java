@@ -42,6 +42,9 @@ public class MainController {
 		List<Board> reviewList = service.selectReviewList(room.getRoomName());
 		model.addAttribute("reviewList", reviewList);
 		
+		int countReview = service.countReview(room.getRoomName());
+		model.addAttribute("countReview", countReview);
+		
 		return "common/studioView";
 	}
 	

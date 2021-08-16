@@ -1,9 +1,8 @@
 @charset "UTF-8";
 
 
- .container {
+ 		.container {
             width: 1200px;
-            background-color: ivory;
         }
 
         .innerContainer {
@@ -14,25 +13,31 @@
 
         .rvStatus {
             width: 1000px;
-
-
         }
 
         .rvStatusText0 {
-            height: 30px;
+            height: 35px;
         }
 
         .rvStatusText {
             height: 29px;
-            width: 100px;
+            width: 120px;
             float: left;
             font-size: 20px;
         }
 
         .rvStatusText2 {
             height: 29px;
-            width: 800px;
-            float: left;
+            width: 768px;
+            float:left;
             font-size: 15px;
+            line-height: 2;
             color: gray;
         }
+        .btn-ensemble{
+	        background-color: #FDCDCD !important;
+	        padding : 5px 25px 5px 25px !important;
+    	}
+    	
+    	
+    	

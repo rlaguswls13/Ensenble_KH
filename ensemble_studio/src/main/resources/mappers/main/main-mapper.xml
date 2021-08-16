@@ -116,10 +116,18 @@
 	</select>
   
   	<select id="selectReviewList" parameterType="string" resultMap="review_rm">
+		SELECT *FROM (
 		SELECT*FROM BOARD_LIST
 		WHERE BOARD_CT_NM = #{roomName}
-		AND ROWNUM BETWEEN 1 AND 3
+		ORDER BY BOARD_NO DESC
+		)
+		WHERE ROWNUM BETWEEN 1 AND 3
   	</select>
   
+  	<select id="countReview" parameterType="string" resultType="_int">
+  		SELECT COUNT(*) FROM BOARD 
+		JOIN BOARD_TYPE USING (BOARD_CT_NO)
+		WHERE BOARD_CT_NM = #{roomName}
+  	</select>
   
 </mapper>
