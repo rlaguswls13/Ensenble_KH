@@ -11,6 +11,8 @@
 	<!-- External CSS-->
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/normalBoardList.css">
 
+
+
 </head>
 
 <body>

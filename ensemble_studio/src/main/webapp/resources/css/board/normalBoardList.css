@@ -25,7 +25,7 @@
 		border-radius : 100% !important;
 		position:absolute;
 		top:400px;
-		right : 80px;
+		right : 20%;
 	}
 	.btn-category{
 		background-color : white !important;
@@ -51,7 +51,7 @@
 	.category{
 		margin-top : 15px;	
 	}
-	 .pagination {
+	.pagination {
 		justify-content: center;
 	}
 	
