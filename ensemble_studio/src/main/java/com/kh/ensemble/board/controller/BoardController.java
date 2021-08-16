@@ -68,11 +68,15 @@ public class BoardController {
 		typeList = serviceB.selectType(boardTypeNo);
 		
 		if (search.getSk() == null) {
+			if(pg.getBoardTypeNo() == 1) pg.setLimit(6);
 			pagination = serviceB.getPagination(pg);
+			if(pg.getBoardTypeNo() == 1) pagination.setLimit(6);
 			boardList = serviceB.selectBoardList(pagination);
 			
 		} else {
-			pagination = serviceB.getSearchPagination(search, pg);
+			if(pg.getBoardTypeNo() == 1) pg.setLimit(6);
+			pagination = serviceB.getPagination(pg);
+			if(pg.getBoardTypeNo() == 1) pagination.setLimit(6);
 			boardList = serviceB.selectSearchBoardList(search, pagination);
 			
 		}
@@ -83,7 +87,7 @@ public class BoardController {
 		
 		if (boardTypeNo == 1) { // 리뷰 게시판
 			return "board/reviewBoardList";
-		} else if(boardTypeNo == 2){ //공지 게시판
+		}else if(boardTypeNo == 2){ //공지 게시판
 			return "board/noticeList";
 		}else { // 일반 게시판
 			return "board/normalBoardList";
@@ -203,7 +207,6 @@ public class BoardController {
 		
 		if(boardNo > 0) {
 			
-			// attachment에 정보 삽입문제야기는 추후
 			List<Attachment> atList = imgExtract(board);
 			if(!atList.isEmpty()) serviceB.insertAt(atList);
 			

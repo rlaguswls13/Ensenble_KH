@@ -35,6 +35,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		Pagination selectPg;
 		selectPg = dao.getListCount(pg);
+		
 		return new Pagination(pg.getCurrentPage(),selectPg.getListCount(),
 							pg.getBoardTypeNo(), selectPg.getBoardName(),
 							pg.getBoardCTNo(), pg.getBoardCTNm());

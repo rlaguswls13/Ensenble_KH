@@ -1,2 +1,11 @@
-@charset "UTF-8";
 
+#review_detail_context{
+    height: 500px;
+}
+
+#review_detail_reply{
+    height: 120px;
+}
+#replyTitle{
+    font-weight: bold;
+}

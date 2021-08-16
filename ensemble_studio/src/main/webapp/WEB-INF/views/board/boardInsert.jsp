@@ -18,64 +18,65 @@
 	<!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  
+    
+<style>
+ 
+.insert_container{
+
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+
+.note-editor{
+	width: 90%;
+}
+
+#boardTitle{
+	width: 69%
+}
+
+
+</style>
+ 
 </head>
 <body>
 
 	
-    
-    <h3>게시글 작성</h3>
-    
-    <hr>    
-
-    <form action="insert" method="POST" role="form" onsubmit="return boardValidate();">
-        <div class="row-sm-12 d-flex dropdown">
-        	
-			<span class="col-sm-10">${boardType.boardName}</span>
- 			<select class="col-sm-2" id="boardCTNo" name="boardCTNo">
-					<c:forEach items="${typeList}" var="typeList">
-						<option class="dropdown-item" value="${typeList.boardCTNo}">
-							${typeList.boardCTNm}
-						</option>
-					</c:forEach>					
-			</select>			
+    <div class="insert_container">
+	    <h3 class="my-3">${boardType.boardName} 게시글 작성</h3>
+	    
+	    <hr>    
+	
+	    <form action="insert" method="POST" role="form" onsubmit="return boardValidate();">
+	        <div class="form-inline mb-2">
+	        
+		 		<select class="form-control mr-2" id="boardCTNo" name="boardCTNo" >
+							<c:forEach items="${typeList}" var="typeList">
+								<option class="dropdown-item" value="${typeList.boardCTNo}">
+									${typeList.boardCTNm}
+								</option>
+							</c:forEach>					
+			    </select>	
+	        
+	        
+				<input type="text" class="form-control mr-2" id="boardTitle" name="boardTitle"	placeholder="제목을 입력해주세요.">
+				<button class="btn btn-secondary mr-2" type="submit">글등록</button>		
+			</div>
 			
-        </div>
-        
-        <div class="form-inline mb-2">
-			<label class="input-group-addon mr-3 insert-label">제목</label> 
-			<input type="text" class="form-control" id="boardTitle" name="boardTitle"
-					placeholder="제목을 입력해주세요." size="100%">
-		</div>
-		
-		<div class="form-inline mb-2">
-			<label class="input-group-addon mr-3 insert-label">작성일</label>
-			<h5 class="my-0" id="today"></h5>
-		</div>
-		
-		<div class="form-inline mb-2">
-			<label class="input-group-addon mr-3 insert-label">작성자</label>
-			<h5 class="my-0" id="writer">${loginMember.memberNick}</h5>
-		</div>
-      
-        <div class="row-sm-12 d-flex">
-            <div class="col-sm-9">
-            	<input type="text" class="form-control" id="boardTitle" name="boardHashTag" placeholder="해시태그입력" size="100%">
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn-secondary" onclick="return resetHashTag();">등록</button>
-                <button type="button" class="btn-secondary" onclick="return oneResetHashTag();">취소</button>
-                <button type="button" class="btn-secondary" onclick="return allResetHashTag();">삭제</button>
-            </div>
-        </div>
-        <textarea class="summernote" id="summernote" name="boardContent"></textarea>
-   		 <div class="col-sm-12">
-   		 	<a class="btn btn-secondary mr-2 float-right" href="list?type=${param.type}&cp=${param.cp}${searchStr}">목록으로</a>			
-			<button class="btn btn-secondary mr-2 float-right" type="reset"  onclick="return resetSummerNote();">취소</button>
-			<button class="btn btn-secondary mr-2 float-right" type="submit">글등록</button>		
-         </div>
-    
-    </form>
+
+				
+				
+ 
+	      
+	        <textarea class="summernote" id="summernote" name="boardContent"></textarea>
+	   		 <div class="col-sm-11 my-3">
+	   		 	<a class="btn btn-secondary mr-2 float-right" href="list?type=${param.type}&cp=${param.cp}${searchStr}">목록으로</a>			
+				<button class="btn btn-secondary mr-2 float-right" type="reset"  onclick="return resetSummerNote();">내용삭제</button>
+				
+	         </div>
+	    </form>
+    </div>
     
  
 	<jsp:include page="../common/footer.jsp"/>
