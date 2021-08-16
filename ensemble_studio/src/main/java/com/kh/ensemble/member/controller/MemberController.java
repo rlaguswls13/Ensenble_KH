@@ -389,7 +389,7 @@ public class MemberController {
 		return "member/secession";
 	}
 
-	// 회원 탈퇴 화면 전환 Controller
+	// 회원 탈퇴  Controller
 	@RequestMapping(value = "secession", method = RequestMethod.POST)
 	public String secession(@RequestParam("currentPwd") String currentPwd,
 			@ModelAttribute("loginMember") Member loginMember, RedirectAttributes ra, SessionStatus status) {
@@ -428,14 +428,14 @@ public class MemberController {
 		//System.out.println(findMember.getMemberNick());
 		//System.out.println(findMember.getMemberEmail());
 		
-		String path = "redirect:";
+		String path = null;
 		String result = service.findId(findMember);
 		
 
 		// 일치하는 아이디가 없을 때
 		if (result == null) {
 			swalSetMessage(ra, "error", "일치하는 아이디가 없습니다.", null);
-			path += "findIdPwd";
+			path = "redirect:findIdPwd";
 
 		} else { // 일치하는 아이디가 있을 때
 			result = result.replaceAll("(?<=.{3}).", "*");
@@ -444,13 +444,14 @@ public class MemberController {
 			
 			model.addAttribute("findMember", findMember);
 			
-			path += "findIdView";
+			path = "member/findIdView";
 		}
 
 		//System.out.println(findMember);
 		return path;
 
 	}
+	
 
 
 	// 비밀번호 찾기 Controller
