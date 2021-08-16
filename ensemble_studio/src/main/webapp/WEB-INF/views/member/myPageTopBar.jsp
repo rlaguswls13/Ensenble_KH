@@ -4,25 +4,29 @@
         <div class="myPage-navi">
             <ul>
                 <li>
-                    <h5>마이페이지</h5>
+                    <h5 id="myPageText">마이페이지</h5>
                 </li>
-                <li><button type="submit" class="myPage-btn" onclick="location.href='myPage'">전체</button></li>
-                <li><button type="submit" class="myPage-btn" onclick="location.href='updateMember'">회원정보 수정</button></li>
+                <li><a class="myPage-btn-checked" id="btn1" href="${contextPath}/member/myPage">전체</a></li>
+                <li><a class="myPage-btn" id="btn2" href="${contextPath}/member/updateMember">회원정보 수정</a></li>
                 
 
-            	<li>
+            	
                 	<c:if test="${loginMember.memberPath == 'G'}">
-                		<button type="submit" class="myPage-btn" onclick="location.href='changePwd'">비밀번호 변경</button>
+                	<li>
+                		<a class="myPage-btn" id="btn3" href="${contextPath}/member/changePwd">비밀번호 변경</a>
+                	</li>
                 	</c:if>
-                </li>
-                <li>
+               
+                
                 	<c:if test="${loginMember.memberPath == 'S'}">
-                		<button type="submit" class="myPage-btn" onclick="sweetalert()">비밀번호 변경</button>
+                	<li>
+                		<button type="button" id="btn3" class="myPage-btn" onclick="sweetalert()">비밀번호 변경</button>
+                	</li>
                 	</c:if>
-              	</li>
+              	
         
 
-                <li><button type="submit" class="myPage-btn" onclick="">예약 상세 조회</button></li>
+                <li><a class="myPage-btn" id="btn4" href="${contextPath}/reservation/rvList">예약 상세 조회</a></li>
             </ul>
         </div> 
         
@@ -35,4 +39,21 @@ function sweetalert(){
 		  "text": "소셜로그인 회원은 비밀번호를 변경할 수 없습니다."
 		});
 }
+
+$(document).ready(function(){
+	
+	if(location.href.toString().includes("updateMember")){
+		$("#btn1").removeClass("myPage-btn-checked").addClass("myPage-btn");
+		$("#btn2").removeClass("myPage-btn").addClass("myPage-btn-checked");
+	}
+	if(location.href.toString().includes("changePwd")){
+		$("#btn1").removeClass("myPage-btn-checked").addClass("myPage-btn");
+		$("#btn3").removeClass("myPage-btn").addClass("myPage-btn-checked");
+	}
+	if(location.href.toString().includes("rvList")){
+		$("#btn1").removeClass("myPage-btn-checked").addClass("myPage-btny");
+		$("#btn4").removeClass("myPage-btn").addClass("myPage-btn-checked");
+	}
+	
+});
 </script>

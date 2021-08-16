@@ -14,8 +14,8 @@
 <script src="https://kit.fontawesome.com/6584921572.js" crossorigin="anonymous"></script>
 
 <!-- CSS -->
-<link rel="stylesheet" href="${contextPath}/resources/css/member/myPageTopBar.css" type="text/css" />
-<link rel="stylesheet" href="${contextPath}/resources/css/member/myPage.css?ver=345" type="text/css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/member/myPageTopBar.css?ver=345" type="text/css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/member/myPage.css?ver=456" type="text/css" />
 
 </head>
 <style>
