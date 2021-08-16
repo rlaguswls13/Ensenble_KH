@@ -45,7 +45,7 @@
        		<h5 id="replyTitle">답변</h5>
     	</c:when>
     	<c:otherwise>
-       		<h5 id="replyTitle">댓글</h5>
+       		<h5 id="replyTitle">댓글 ${board.replyCount }</h5>
     	</c:otherwise>
     	</c:choose>
     <hr>
@@ -134,9 +134,10 @@
 	                </div>
 	            </div>
             </div>
+            <hr>
          </c:forEach>
          </div>
-
+		
 </body>
 
 <script>

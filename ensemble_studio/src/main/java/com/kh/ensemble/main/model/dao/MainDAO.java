@@ -30,6 +30,10 @@ public class MainDAO {
 	public List<Board> selectReviewList(String roomName) {
 		return sqlSession.selectList("mainMapper.selectReviewList", roomName);
 	}
+
+	public int countReview(String roomName) {
+		return sqlSession.selectOne("mainMapper.countReview",roomName);
+	}
 	
 	
 }

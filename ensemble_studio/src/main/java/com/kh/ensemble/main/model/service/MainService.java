@@ -15,4 +15,6 @@ public interface MainService {
 
 	List<Board> selectReviewList(String roomName);
 
+	int countReview(String roomName);
+
 }

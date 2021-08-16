@@ -37,5 +37,11 @@ public class MainServiceImpl implements MainService{
 	public List<Board> selectReviewList(String roomName) {
 		return dao.selectReviewList(roomName);
 	}
+
+
+	@Override
+	public int countReview(String roomName) {
+		return dao.countReview(roomName);
+	}
 	
 }

@@ -33,7 +33,7 @@
 
 
 <link rel="stylesheet"
-	href="${contextPath}/resources/css/reservation/rvStatus.css"
+	href="${contextPath}/resources/css/reservation/rvStatus.css?ver=123"
 	type="text/css" />
 
 	<script>
@@ -44,7 +44,7 @@
 		
 		$.each(rvStatusList, function(){
 			const rv = {};
-			rv.title = this.roomName + "예약불가";
+			rv.title = this.roomName + " 예약불가";
 			rv.start = this.rvDate + "T" + this.rvTime;
 			
 			eventsArr.push(rv);
@@ -105,20 +105,23 @@
 
 
 
-
+	
 
 
 	<div class="container">
 		<div class="innerContainer">
-			<h2>Before Reservation</h2>
+			<div style="padding:15px"></div>
+			<h3 style="font-family: 'Noto Serif KR', serif; font-weight: 600; display:block;">Before Reservation</h3>
 			<br>
 
 			<div class="rvStatus">
 
 				<div class="rvStatusText0">
-					<div class="rvStatusText">예약 현황</div>
+					<div class="rvStatusText"><b>예약 현황</b></div>
 					<div class="rvStatusText2">예약에 앞서 예약현황을 확인해주세요.</div>
+					<a href="${contextPath}/reservation/reservation" class="btn btn-ensemble">예약하기</a>
 				</div>
+				<div style="padding:10px;"></div>
 				 <div id='calendar'></div>
 			</div>
 
@@ -130,7 +133,7 @@
 	</div>
 
 
-	<a href="${contextPath}/reservation/reservation" class="btn btn-beige">예약하기</a>
+	
 
 
 
