@@ -61,9 +61,9 @@
 					<c:set var="ch" value="checked" />
 				</c:if>
 				<div class="checkbox mb-2">
-					<label> <input type="checkbox" name="save" id="save" ${ch}>ID
-						기억하기
-					</label>
+					<input type="checkbox" name="save" id="save" ${ch}><label for="save"></label>
+					<span>ID 기억하기</span>
+					
 				</div>
 				<button class="btn-lg login-btn" type="submit">로그인</button>
 				<div class="login_line col-md-12">
