@@ -65,6 +65,7 @@
                          <h2 class=" ml-0">${board.boardTitle}</h2>
                          </div>
                     </div>
+                    <c:if test="${board.boardTypeNo!=4 && board.boardTypeNo!=3}">
                     <div class="row-sm-12 d-flex" >
                         <div class="vertival-center ml-0">
                             <img class="rMImage mr-2" src="${contextPath}${board.memberImage}" alt="null" width="50px">
@@ -72,8 +73,10 @@
                         </div>
                         <div class="vertival-center">
                         	<span>
-                            	<c:choose>
-	                            	<c:when test="${board.boardMT}==today">
+                        			<fmt:formatDate var="today" value="<%= new java.util.Date() %>"  pattern="yyyy-MM-dd"/>
+									<fmt:formatDate var="boardMT" value="${board.boardMT}" pattern="yyyy-MM-dd"/>
+                            	<c:choose>                            		
+	                            	<c:when test="${boardMT==today}">
 										<fmt:formatDate value="${board.boardMT}" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
 									</c:when>
 									<c:otherwise>
@@ -88,6 +91,7 @@
                         <div class="col-sm-1 text-center vertival-center">
                             <span>조회수 ${board.boardReadCount}</span>
                         </div>
+                        
                         
                         <c:if test="${loginMember.memberNo != board.memberNo }">
                         	<div class="dropdown  btn_normal_board"></div>
@@ -108,15 +112,19 @@
 	                        </div>  
                         </c:if>             
                     </div>
+                    
+                     </c:if>
                 </div>
-            
+               
             <hr>
             <div class="board_content" id="review_detail_context">${board.boardContent}</div>      
       </form>
       <%-- 댓글 영역 --%>
-			<jsp:include page="reply.jsp"/>
-			<hr>
-            
+      		
+      		<c:if test="${board.boardTypeNo != 3}">
+				<jsp:include page="reply.jsp"/>
+				<hr>
+         	</c:if>
             <a href="list?type=${param.type}&cp=${param.cp}${searchStr}"
             	class="btn btn-secondary float-right mr-2 btn-insert">목록으로</a>  
         

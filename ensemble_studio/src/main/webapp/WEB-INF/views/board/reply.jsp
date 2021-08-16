@@ -41,7 +41,7 @@
 <body>	
 	<hr>
 		<c:choose>
-		<c:when test="${board.boardTypeNo}==4">
+		<c:when test="${board.boardTypeNo==4}">
        		<h5 id="replyTitle">답변</h5>
     	</c:when>
     	<c:otherwise>
@@ -49,9 +49,9 @@
     	</c:otherwise>
     	</c:choose>
     <hr>
-            
-            <c:if test="${!empty loginMember}">      
-	            <div class="row-sm-12 d-flex" id="input-replyArea">
+            <c:choose>
+            	<c:when test="${loginMember.memberGrade eq 'A'}">
+            		<div class="row-sm-12 d-flex" id="input-replyArea">
 	                <div class="col-sm-1">
 	                    <img class="rMImage" src="${contextPath}${loginMember.memberImage}" alt="null" width="50px">
 	                    <br>
@@ -66,8 +66,28 @@
 	                    	
 	                	</div>
 	                </div>
-	            </div>
-            </c:if>
+	            	</div>
+            	</c:when>
+            	<c:when test="${logneMember.memberGrade eq 'G' && board.boardTypeNo != 4}">
+            		<div class="row-sm-12 d-flex" id="input-replyArea">
+	                <div class="col-sm-1">
+	                    <img class="rMImage" src="${contextPath}${loginMember.memberImage}" alt="null" width="50px">
+	                    <br>
+	                    <span>${loginMember.memberNick}</span>
+	                </div>
+	                <div class="col-sm-11">
+	                	<div class="input-reply">
+	                    	<textarea class="py-0 my-0" id="input-reply"></textarea>
+	                    	<button class="btn btn-secondary btn_reply_add" id="addReply" onclick="addReply();">등록</button>
+	                    </div>	
+	                    <div class="input-reply-btn">
+	                    	
+	                	</div>
+	                </div>
+	            </div>            	
+            	</c:when>
+            </c:choose>
+       
         
         <div id=replyListArea>
 		<c:forEach items="${rList}" var="reply">
