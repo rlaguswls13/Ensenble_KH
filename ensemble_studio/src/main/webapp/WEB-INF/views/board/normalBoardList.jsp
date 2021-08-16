@@ -68,7 +68,7 @@
 	<div class="container my-5">
 	
 		<%-- 로그인 되어 있을 경우에만 글쓰기 버튼 노출 --%>
-		<c:if test="${!empty loginMember && pagination.boardTypeNo == 3}">
+		<c:if test="${loginMember.memberGrade eq 'A' && pagination.boardTypeNo == 3}">
 			<a  class="btn btn-insert" id="insertBtn" href='insert'>
 				<img src="${contextPath}/resources/images/common/edit.png" width="30px">
 			</a>
@@ -123,10 +123,11 @@
 									<td colspan="6">게시글이 존재하지 않습니다.</td>
 								</tr>								
 							</c:when>
-							
+							<c:otherwise>
 							<%-- 조회된 게시글 목록이 있을 경우 --%>
-							<c:otherwise>					
-								<c:forEach items="${boardList}" var="board">
+							<c:forEach items="${boardList}" var="board">
+							<c:choose>
+							<c:when test="${board.boardTypeNo == 3}">
 									<tr>
 										<%-- 글 번호 --%>
 										<td> ${board.boardNo} </td>	
@@ -169,10 +170,57 @@
 										</c:if>
 										
 									</tr>
-								</c:forEach>
+							</c:when>
+							<c:when test="${loginMember.memberNo == board.memberNo && board.boardTypeNo == 4}">					
+								
+									<tr>
+										<%-- 글 번호 --%>
+										<td> ${board.boardNo} </td>	
+										
+										<%-- 카테고리 --%>
+										<td> ${board.boardCTNm} </td>
+										
+										<%-- 글 제목 --%>
+										<td class="boardTitle">                                                         
+											<a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
+											${board.boardTitle}
+											</a>
+										</td>
+										
+										<%-- 작성자 --%>
+										<c:if test="${pagination.boardTypeNo == 4}">
+											<td> ${board.memberNk} </td>
+										</c:if>
+										
+										<%-- 작성일 --%>
+										<td> 
+											<fmt:formatDate var="createDate" value="${board.boardDT}"  pattern="yyyy-MM-dd"/>                          
+											<fmt:formatDate var="today" value="<%= new java.util.Date() %>"  pattern="yyyy-MM-dd"/>                          
+											
+											<c:choose>
+												<%-- 글 작성일이 오늘이 아닐 경우 --%>
+												<c:when test="${createDate != today}">
+													${createDate}
+												</c:when>
+												<%-- 글 작성일이 오늘일 경우 --%>
+												<c:otherwise>
+													<fmt:formatDate value="${board.boardDT}"  pattern="HH:mm"/>                          
+												</c:otherwise>
+											</c:choose>
+										</td>	
 							
+										<%-- 글 상태 --%>
+										<c:if test="${pagination.boardTypeNo == 4}">
+											<td> ${board.boardStatus} </td>
+										</c:if>
+										
+									</tr>
+								
+							
+							</c:when>
+							</c:choose>
+							</c:forEach>
 							</c:otherwise>
-						
 						</c:choose>
 
 					

@@ -47,10 +47,14 @@
 	      <c:if test="${!empty boardList}">
 	      <c:forEach items="${boardList}" var="notice">
 	      	<c:if test="${!empty notice.atList }">
-	      	<div class="notice-img" style="background-image:url('${notice.atList[0].atPath}/${notice.atList[0].atName}')"></div>
+	      	<a href="${notice.boardNo}?cp=${pagination.currentPage}">
+	      	<img class="notice-img" style="background-image:url('${notice.atList[0].atPath}/${notice.atList[0].atName}')">
+	      	</a>
 	      	</c:if>
 	      	<c:if test="${empty notice.atList }">
-	      	<div class="notice-img" style="background-image:url('/ensemble/resources/images/common/notice.png')"></div>
+	      	<a href="${notice.boardNo}?cp=${pagination.currentPage}">
+	      	<img class="notice-img" style="background-image:url('/ensemble/resources/images/common/notice.png')">
+	      	</a>
 	      	</c:if>
 		      
 		        <div style="padding-bottom: 20px;">
