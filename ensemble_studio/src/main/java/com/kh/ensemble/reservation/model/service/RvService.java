@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.member.model.vo.Member;
 import com.kh.ensemble.reservation.model.vo.Option;
 import com.kh.ensemble.reservation.model.vo.Rv;
@@ -42,5 +43,7 @@ public interface RvService {
 	int setOptionNo(int optionNo,  int rvNo);
 
 	List<Rv> rvStatusList();
+
+	List<Room> selectRoomList();
 
 }

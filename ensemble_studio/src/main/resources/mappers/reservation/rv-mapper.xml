@@ -32,6 +32,7 @@
 		<result property="roomPrice" column="ROOM_PRICE" />
 		<result property="roomDiscount" column="ROOM_DISCOUNT" />
 		<result property="rvStatus" column="RV_STATUS" />
+		<result property="roomConfig" column="ROOM_CONFIG" />
 
 
 		<collection property="optionList" column="RV_NO"
@@ -81,8 +82,8 @@
 	<!-- 예약 목록 조회 -->
 	<select id="selectRvList" parameterType="_int" resultMap="rv_rm">
 		SELECT
-		RV_NO, MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, RV_DATE, RV_TIME,
-		RV_PEOPLE, RV_CARS,
+		RV_NO, MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, TO_CHAR(RV_DATE, 'RRRR-MM-DD') RV_DATE, RV_TIME,
+		RV_PEOPLE, RV_CARS, ROOM_CONFIG,
 		RV_ANIMALS,ROOM_NAME, ROOM_PRICE, ROOM_DISCOUNT
 		RV_PURPOSE,RV_ETC, RV_STATUS
 		FROM
@@ -98,7 +99,7 @@
 	<select id="selectReservationList" resultMap="rv_rm">
 		SELECT
 		RV_NO,
-		MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, RV_DATE, RV_TIME,
+		MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, TO_CHAR(RV_DATE, 'RRRR-MM-DD') RV_DATE, RV_TIME,
 		RV_PEOPLE, RV_CARS,
 		RV_ANIMALS,
 		RV_PURPOSE,RV_ETC, RV_STATUS
@@ -146,7 +147,7 @@
 		resultMap="rv_rm">
 		SELECT
 		RV_NO, MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME,
-		RV_DATE, RV_TIME,
+		TO_CHAR(RV_DATE, 'RRRR-MM-DD') RV_DATE, RV_TIME,
 		RV_PEOPLE, RV_CARS,
 		RV_ANIMALS,ROOM_NAME, ROOM_PRICE,
 		ROOM_DISCOUNT,

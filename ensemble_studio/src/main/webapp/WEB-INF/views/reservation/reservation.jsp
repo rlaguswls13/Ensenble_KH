@@ -41,31 +41,22 @@
 	<div class="container">
 
 		<form method="POST" action="reservation" class="needs-validation"
-			name="reservationForm" id="reservationForm" onsubmit="return validate();">
+			name="reservationForm" id="reservationForm"
+			onsubmit="return validate();">
 
 			<h2>Reservation</h2>
 			<div class="studio">
 				<h3>스튜디오 선택</h3>
 				<h5>원하시는 스튜디오를 선택해주세요</h5>
-
+				<c:forEach items="${roomList}" var="room">
 				<div class="aRoom">
-					<input type="radio" id="A Room" value="81" name="roomNo" price="160000"> <label
-						for="A Room">A Room</label><br> <img
-						src="${contextPath}/resources/images/reservation/Aroom.jpg"
+					<input type="radio" id="A Room" value="${room.roomNo}" name="roomNo"
+						price="${room.roomDiscountedPrice}"> <label for="${room.roomName}">${room.roomName}</label><br>
+					<img src="${contextPath}/${room.filePath}/${room.fileName}"
 						width="190 px " height="150 px">
 				</div>
-				<div class="bRoom">
-					<input type="radio" id="B Room" value="82" name="roomNo" price="180000"> <label
-						for="B Room">B Room</label><br> <img
-						src="${contextPath}/resources/images/reservation/Broom.png"
-						width="190 px " height="150 px">
-				</div>
-				<div class="cRoom">
-					<input type="radio" id="C Room" value="83" name="roomNo" price="100000"> <label
-						for="B Room">C Room</label><br> <img
-						src="${contextPath}/resources/images/reservation/Croom.jpg"
-						width="190 px " height="150 px">
-				</div>
+				</c:forEach>
+			
 
 
 
@@ -107,8 +98,9 @@
 							<c:forEach items="${optionList}" var="option">
 								<c:if test="${option.optionType== 'G'}">
 									<input type="checkbox" id="${option.optionName}"
-										value="${option.optionNo}" name="option" price="${option.optionPrice}">
-									<label for="${option.optionName}" >${option.optionName})</label>
+										value="${option.optionNo}" name="option"
+										price="${option.optionPrice}">
+									<label for="${option.optionName}">${option.optionName})</label>
 									<br>
 								</c:if>
 							</c:forEach>
@@ -118,7 +110,8 @@
 							<c:forEach items="${optionList}" var="option">
 								<c:if test="${option.optionType == 'A'}">
 									<input type="checkbox" id="${option.optionName}"
-										value="${option.optionNo}" name="option" price="${option.optionPrice}">
+										value="${option.optionNo}" name="option"
+										price="${option.optionPrice}" >
 									<label for="${option.optionName}">${option.optionName})</label>
 									<br>
 								</c:if>
@@ -133,12 +126,12 @@
 				</div>
 				<div class="rvDetail2">
 
-					이용 인원 수 : <input type="text" name="rvPeople"><br> 방문
-					차량 수 : <input type="text" name="rvCars"><br> 반려 동물 수 :
-					<input type="text" name="rvAnimals"><br> 촬영 내용
-					&nbsp;&nbsp;&nbsp; : <input type="text" name="rvPurpose"><br>
+					이용 인원 수 : <input type="text" name="rvPeople" required><br> 방문
+					차량 수 : <input type="text" name="rvCars" required><br> 반려 동물 수 :
+					<input type="text" name="rvAnimals" required><br> 촬영 내용
+					&nbsp;&nbsp;&nbsp; : <input type="text" name="rvPurpose" required><br>
 					비고 :<br>
-					<textarea rows="5" cols="50" name="rvEtc" style="resize: none;"> </textarea>
+					<textarea rows="5" cols="50" name="rvEtc" style="resize: none;" required> </textarea>
 
 				</div>
 
@@ -207,11 +200,11 @@
 
 
 
+	
 	<script>
 		$(function() {
 			$("#datepicker").datepicker();
 		});
-
 		$.datepicker.setDefaults({
 			dateFormat : 'yy-mm-dd', //날짜 포맷이다. 보통 yy-mm-dd 를 많이 사용하는것 같다.
 			prevText : '이전 달', // 마우스 오버시 이전달 텍스트
@@ -232,16 +225,13 @@
 		//	        buttonImage: "images/calendar.gif",	// 조그만한 아이콘 이미지
 		//	        buttonText: "Select date"	// 조그만한 아이콘 툴팁
 		});
-
 		/*--------------------------------------------------------------------------------------------------  */
 		//선택한 날짜 가능 시간 목록 조회
 		function selectRvTimeList() {
-
 			console.log($("#datepicker").val())
 			console.log($("input[name='roomNo']:checked").val())
 			//$.AJAX({}); -> 안의 중괄호는 자바스크립트 객체다!!!
 			$.ajax({
-
 				url : "${contextPath}/reservation/list",
 				data : {
 					"rvDate" : $("#datepicker").val(),
@@ -251,56 +241,42 @@
 				dataType : "JSON", // 응답되는 데이터의 형식이 JSON임을 알려줌 -> JS 객체로 변환됨 (JSON : 자바스크립트 객체 표기법, JSON 형태의 스트링 데이터를 자바스크립트 객체로 만듦...)
 				success : function(rvTimeList) {
 					console.log(rvTimeList);
-
 					$("input[name='rvTime']").each(function() {
 						$(this).prop("disabled", false);
 						$(this).next().removeClass("rvTime-disabled");
-
 					})
-
 					$.each(rvTimeList, function(index, item) {
-
 						$("input[name='rvTime']").each(function() {
 							if ($(this).val() == item.rvTime) { // 이미 예약이 되어있을 때
 								$(this).prop("disabled", true);
 								$(this).next().addClass("rvTime-disabled");
 							}
 						})
-
 					});
-
 				},
 				error : function() {
 					console.log("예약 시간 목록 조회 실패");
 				}
-
 			});
 		}
-
 		/* 	$("#optionlist").ready(function(){
 				var inputValue = $("input[name='optionList']:checked".val();
 			});
 		 */
-
 		/*예약 버튼 클릭시 */
 		function validate() {
 			const roomNo = $("input[name='roomNo']"); //방번호
 			const rvDate = $("input[name='rvDate']"); //예약일 
-
 			const rvPeople = $("input[name='rvPeople']"); //예약시간 
-
 			const rvCars = $("input[name='rvCars']"); //방문차량수 
 			const rvAnimals = $("input[name='rvAnimals']"); //방려 동물 수 
 			const rvPurpose = $("input[name='rvPurpose']"); //촬영 내용
 			const rvTime = $("input[name='rvEtc']"); //비고 
-
 			const inputOption = $("<input>", {
 				type : "checkbox",
 				name : "optionList",
 				value : "input[name='optionList']:checked".val()
-
 			});
-
 			console.log(roomNo)
 			console.log(rvDate)
 			console.log(rvPeople)
@@ -309,7 +285,6 @@
 			console.log(rvPurpose)
 			console.log(rvTime)
 			console.log(inputOption)
-
 		}
 		 
 		 $("[name=roomNo]").on("change", function(){
@@ -343,6 +318,9 @@
 		 
 		 
 	</script>
+
+	
+	
 
 </body>
 

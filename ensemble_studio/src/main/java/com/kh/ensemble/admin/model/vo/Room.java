@@ -15,6 +15,10 @@ public class Room {
 	private List<StudioAttachment> atList;
 	private String roomPrimaryOption;
 	private String roomHref;
+	private String filePath;
+	private String fileName;
+	
+	
 	
 	public Room() {
 	}
@@ -35,12 +39,29 @@ public class Room {
 		return roomName;
 	}
 
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
 	}
 
 	public String getRoomAbout() {
 		return roomAbout;
+	}
+	
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public void setRoomAbout(String roomAbout) {
@@ -118,7 +139,8 @@ public class Room {
 		return "Room [roomNo=" + roomNo + ", roomName=" + roomName + ", roomAbout=" + roomAbout + ", roomConfig="
 				+ roomConfig + ", roomPrice=" + roomPrice + ", roomDiscount=" + roomDiscount + ", roomDiscountedPrice="
 				+ roomDiscountedPrice + ", roomStatus=" + roomStatus + ", atList=" + atList + ", roomPrimaryOption="
-				+ roomPrimaryOption + ", roomHref=" + roomHref + "]";
+				+ roomPrimaryOption + ", roomHref=" + roomHref + ", filePath=" + filePath + ", fileName=" + fileName
+				+ "]";
 	}
 
 	

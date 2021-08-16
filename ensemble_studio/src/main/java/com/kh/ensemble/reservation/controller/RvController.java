@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
+import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.member.model.vo.Member;
+import com.kh.ensemble.reservation.model.dao.RvDAO;
 import com.kh.ensemble.reservation.model.service.RvService;
 import com.kh.ensemble.reservation.model.vo.Option;
 import com.kh.ensemble.reservation.model.vo.Rv;
@@ -29,6 +31,9 @@ public class RvController {
 
 	@Autowired
 	private RvService service;
+	
+	@Autowired
+	private RvDAO dao;
 
 	// @Pathvariable 사용? 시기->? 특정 자원 구분(게시판 상세조회) 구분할 때 사용
 	// 쿼리스트ㄹ링은 언제사용? -> 정렬, 필터링 검색할때 사용
@@ -71,6 +76,8 @@ public class RvController {
 	// 예약 현황 화면 전환용
 	@RequestMapping(value = "rvStatus", method = RequestMethod.GET)
 	public String rvStatus(Rv rv, Model model) {
+		
+		
 
 		List<Rv> rvStatusList = service.rvStatusList();
 		
@@ -92,7 +99,12 @@ public class RvController {
 			if(loginMember!=null) {
 				List<Option> optionList = service.selectOption();
 				
+				List<Room> roomList = service.selectRoomList();
+				
 				model.addAttribute("optionList", optionList);
+				model.addAttribute("roomList", roomList);
+				
+				System.out.println(roomList);
 				
 				return "reservation/reservation";
 			}else {

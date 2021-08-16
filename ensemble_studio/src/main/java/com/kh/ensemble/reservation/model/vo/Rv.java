@@ -18,9 +18,13 @@ public class Rv {
 	private String rvEtc;
 	private String rvStatus;
 	
+	private String roomConfig;
+	
 	private int roomDiscount;
 	private int roomPrice;
 	private String roomName;
+	
+	
 	
 	
 
@@ -30,6 +34,27 @@ public class Rv {
 
 	
 	
+	
+	
+	
+	public String getRoomConfig() {
+		return roomConfig;
+	}
+
+
+
+
+
+
+	public void setRoomConfig(String roomConfig) {
+		this.roomConfig = roomConfig;
+	}
+
+
+
+
+
+
 	public String getRvStatus() {
 		return rvStatus;
 	}
@@ -177,8 +202,8 @@ public class Rv {
 		return "Rv [rvNo=" + rvNo + ", memberNo=" + memberNo + ", memberNick=" + memberNick + ", roomNo=" + roomNo
 				+ ", rvDate=" + rvDate + ", rvTime=" + rvTime + ", rvPeople=" + rvPeople + ", rvCars=" + rvCars
 				+ ", rvAnimals=" + rvAnimals + ", rvPurpose=" + rvPurpose + ", rvEtc=" + rvEtc + ", rvStatus="
-				+ rvStatus + ", roomDiscount=" + roomDiscount + ", roomPrice=" + roomPrice + ", roomName=" + roomName
-				+ ", optionList=" + optionList + "]";
+				+ rvStatus + ", roomConfig=" + roomConfig + ", roomDiscount=" + roomDiscount + ", roomPrice="
+				+ roomPrice + ", roomName=" + roomName + ", optionList=" + optionList + "]";
 	}
 
 

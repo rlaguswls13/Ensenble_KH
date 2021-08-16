@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.member.model.vo.Member;
 import com.kh.ensemble.reservation.model.dao.RvDAO;
 import com.kh.ensemble.reservation.model.vo.Option;
@@ -86,6 +87,12 @@ public class RvServiceImpl implements RvService{
 	public List<Rv> rvStatusList() {
 		// TODO Auto-generated method stub
 		return dao.rvStatusList();
+	}
+
+	@Override
+	public List<Room> selectRoomList() {
+		// TODO Auto-generated method stub
+		return dao.selectRoomList();
 	}
 	
 	

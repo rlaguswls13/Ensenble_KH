@@ -29,6 +29,9 @@
  		<result property="roomStatus" column="ROOM_STATUS"/>	 
  		<result property="roomPrimaryOption" column="ROOM_PRIMARY_OPTION"/>	 
  		<result property="roomHref" column="ROOM_HREF"/>	 
+ 		<result property="filePath" column="FILE_PATH"/>
+ 		<result property="fileName" column="FILE_NAME"/>
+ 		
  		
  		<collection property="atList" column="ROOM_NO" 
 		javaType="java.util.ArrayList" ofType="StudioAttachment" select="selectStudioAttachment"/>
@@ -262,6 +265,15 @@
 		RV_STATUS = #{rvStatus}
 		WHERE RV_NO = #{rvNo}
 	</update>
+	<select id="selectRoomList" resultMap="room_rm">
+	SELECT * FROM STUDIO_ROOM
+	JOIN STUDIO_ATTACHMENT USING (ROOM_NO)
+	WHERE FILE_LEVEL= 0
+	
+
+	
+	
+	</select>
 
 
 

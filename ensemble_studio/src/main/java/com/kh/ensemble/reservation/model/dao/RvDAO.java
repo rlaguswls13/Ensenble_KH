@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.ensemble.admin.model.vo.Room;
 import com.kh.ensemble.member.model.vo.Member;
 import com.kh.ensemble.reservation.model.vo.Option;
 import com.kh.ensemble.reservation.model.vo.Rv;
@@ -63,6 +64,11 @@ public class RvDAO {
 	public List<Rv> rvStatusList() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("rvMapper.rvStatusList");
+	}
+
+	public List<Room> selectRoomList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("adminMapper.selectRoomList");
 	}
 
 	

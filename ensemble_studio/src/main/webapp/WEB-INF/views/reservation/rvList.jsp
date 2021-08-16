@@ -52,10 +52,7 @@
 							<hr>
 
 							<div class="reservationDetail">
-								<div id="roomImg">
-									<img src="sample\images\aRoom.jpg" width="70 px "
-										height="70 px">
-								</div>
+								
 								<div id="reservationPreview">
 									<div class="roomName"> 예약 스튜디오 : ${reservation.roomName} </div>
 									<div class="reservationTime">예약 일정 : ${reservation.rvDate} | ${reservation.rvTime}</div>
@@ -65,14 +62,9 @@
 							</div>
 
 							<div class="reservationDetailList">
-								<div class="detailList1">
-								
-									<div class="detail1-1">구성</div>
-									<div class="detail1-2">기본 카메라 1개, 기본 조명 1개</div>
-								</div>
 								<div class="detailList2">
-									<div class="detail2-1">기본 옵션</div>
-									<div class="detail2-2">반려동물 패드, 물 그릇</div>
+									<div class="detail2-1">기본 구성</div>
+									<div class="detail2-2">${reservation.roomConfig}</div>
 								</div>
 								<div class="detailList3">
 									<div class="detail3-1">추가 옵션</div>

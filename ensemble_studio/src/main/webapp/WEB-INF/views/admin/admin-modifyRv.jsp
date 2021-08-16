@@ -214,11 +214,11 @@
 				<br> <br> <br>
 				<div class="rvDetail2">
 
-					이용 인원 수 : <input type="text" name="rvPeople" value="${rv.rvPeople }"><br>
-					<br> 방문 차량 수 : <input type="text" name="rvCars" value="${rv.rvCars}"><br>
-					<br> 반려 동물 수 : <input type="text" name="rvAnimals" value="${rv.rvAnimals}"><br>
+					이용 인원 수 : <input type="text" name="rvPeople" value="${rv.rvPeople }" required><br>
+					<br> 방문 차량 수 : <input type="text" name="rvCars" value="${rv.rvCars}" required><br>
+					<br> 반려 동물 수 : <input type="text" name="rvAnimals" value="${rv.rvAnimals}"  required><br>
 					<br> 촬영 내용 &nbsp;&nbsp;&nbsp; : <input type="text" name="rvPurpose"
-						value="${rv.rvPurpose}"><br> <br>
+						value="${rv.rvPurpose}" required><br> <br>
 
 					<div id="etcText">
 						비고 :<br>
