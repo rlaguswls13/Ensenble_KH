@@ -80,7 +80,7 @@ public class BoardController {
 			boardList = serviceB.selectSearchBoardList(search, pagination);
 			
 		}
-
+		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pagination", pagination);
 		model.addAttribute("typeList", typeList);
@@ -105,6 +105,7 @@ public class BoardController {
 		
 		int loginMemberNo = 0;
 		Member loginMember = (Member)session.getAttribute("loginMember");
+		
 		if(loginMember != null) {
 			like.setMemberNo(loginMember.getMemberNo());
 			loginMemberNo = loginMember.getMemberNo();

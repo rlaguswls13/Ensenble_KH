@@ -15,6 +15,66 @@
  
  
  <style>
+ 
+.top-box{
+		background-color : #F7F7F7;
+		height:260px;
+	}
+	.searchInput{
+            width: 80%; height:37px;
+            max-width: 600px;
+            background-image: url('https://drive.google.com/uc?id=1ekFsz_P2MZWoMUt0QyvZjPjAm2fx308R');
+            background-repeat: no-repeat;
+            background-size: 20px;
+            background-position: 7px center;
+            border : 1px solid #ccc;
+            border-radius: 5px;
+            padding-left: 40px;
+     }
+	.btn-ensemble {
+		background-color: #FDCDCD !important;
+		padding: 5px 10px 5px 10px !important;
+	}
+	.btn-insert {
+		background-color: #FDCDCD !important;
+		padding: 15px !important;
+		border-radius : 100% !important;
+		position:absolute;
+		top:400px;
+		right : 20%;
+	}
+	.btn-category{
+		background-color : white !important;
+		border : 1px solid #ccc !important;
+		margin-right: 5px !important;
+		padding : 5px 20px 5px 20px !important;
+		border-radius : 20px !important;
+	}
+	.btn-category:hover{
+		background-color : white !important;
+		color : #FF657D !important;
+		border : 1px solid #FF657D !important;
+		
+	}
+	.btn-category-checked{
+		background-color : #FF657D !important;
+		color : white !important;
+		border : 1px solid #FF657D !important;
+		margin-right: 5px !important;
+		padding : 5px 20px 5px 20px !important;
+		border-radius : 20px !important;
+	}
+	.category{
+		margin-top : 15px;	
+	}
+	.pagination {
+		justify-content: center;
+	}
+	
+	.page-link {
+		color: black !important;
+	} 
+
 #board_content{
     box-sizing: border-box;
     width: 500px;
@@ -35,6 +95,27 @@
 #shell{
     width: 100%;
     text-align: center;
+}
+
+.rMImage {
+ 	border-radius: 50%;
+}
+
+.review-writer{
+	margin-left: 10%;
+	margin-bottom: 5px;
+}
+
+.like-content{
+	margin-left:49%;
+}
+
+#title-content{
+	text-align: left;
+	margin-top: 15px;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left: 7%;
 }
 
 </style>
@@ -90,7 +171,7 @@
         </div>
 
         <!-- 리뷰 내용 추가-->
-        <div class="row-sm-12" id="shell">
+        <div class="row-sm-12" id="shell" >
         <c:choose>
 			<%-- 조회된 게시글 목록이 없는 경우 --%>
 			<c:when test="${empty boardList}">
@@ -101,27 +182,28 @@
         
             <div class="row-sm-12 mr-4 my-4" id="board_content">
                 <div class="d-flex row-sm-12">
-                    <div class="col-sm-2"><img src="" alt=""></div>
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">${board.memberNk}</div>
+                    <div class="vertival-center review-writer">
+                    	<img class="rMImage mr-2" src="/ensemble/resources/images/common/profile-img-default.png" alt="null" width="50px">
+                    	<span>${board.memberNk}</span>
+                    </div>
+                    <div class="like-content">
+                        <c:if test="${!empty loginMember}">
+                        	<jsp:include page="like.jsp"/>
+                        </c:if>
+                    </div>
                 </div>
                 <div class="row-sm-12">
                     <div class="col-sm-12" id="board_img_div">
-                        <a href=""><img id="board_img"src="${board.atList[0].atPath}/${board.atList[0].atName}" alt=""></a>
+                        <a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
+                        <img id="board_img"src="${board.atList[0].atPath}/${board.atList[0].atName}" alt="">
+                        </a>
                     </div>
                 </div>
-                <div class="d-flex row-sm-12">
-                    <div class="col-sm-4">
-                        <img src="" alt=""> 댓글
-                    </div>
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4">
-                        <jsp:include page="like.jsp"/>
-                    </div>
-                </div>
-                <div class="row-sm-12">
+                <div class="d-flex row-sm-12 ml-0 pl-0">
                     <div class="col-sm-12" id="title-content">
-                        <a href=""><h5>${board.boardTitle}</h5></a>
+                        <a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
+                        ${board.boardTitle}
+                        </a>
                     </div>
                 </div>
             </div> 

@@ -146,7 +146,7 @@ input::placeholder {
 }
 
 .reserveDate {
-	width: 23%;
+	width: 80px;
 	height: 100%;
 	float: left;
 	font-size: 13px;

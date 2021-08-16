@@ -255,6 +255,7 @@ select {
 			})
 			.then((willDelete) => {
 			  if (willDelete) {
+				console.log("실행");
 			    deleteRooms();
 			  } else {
 			    swal("Your imaginary file is safe!");
