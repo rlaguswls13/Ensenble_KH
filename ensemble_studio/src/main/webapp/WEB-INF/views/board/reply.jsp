@@ -165,11 +165,12 @@
 </body>
 
 <script>
+
 	console.log("${loginMember.memberGrade}");
 	//로그인한 회원 번호. 비로그인 시 "" (빈문자열)
 	const loginMemberNo = "${loginMember.memberNo}";
-	const loginMember = "&{loginMember}";
-	
+	const loginMember = "${loginMember}";
+	const boardTypeNo = "${board.boardTypeNo}";
 	// 현재 게시글 번호
 	const boardNo = ${board.boardNo};
 	// 수정 전 댓글 요소를 저장할 변수 (댓글 수정 시 사용)
@@ -193,6 +194,7 @@ function addReply()	{
 				type : "POST",
 				data : { "memberNo" : loginMemberNo,
 						 "boardNo" : boardNo,
+						 "boardTypeNo" :boardTypeNo,
 						 "replyContent" : replyContent },
 				success : function(result){
 					
@@ -303,6 +305,8 @@ function selectReplyList(){
 function savedata(el) {
 	if(!nowBeforeReplyRowDeactive){
 		nowBeforeReplyRowDeactive = $(el).parent().parent().parent().html();
+	} else if(postBeforeReplyRowDeactive == nowBeforeReplyRowDeactive){
+		nowBeforeReplyRowDeactive = $(el).parent().parent().parent().html();
 	} else{
 		postBeforeReplyRowDeactive = nowBeforeReplyRowDeactive;
 		nowBeforeReplyRowDeactive = $(el).parent().parent().parent().html();
@@ -360,8 +364,6 @@ function showUpdateReply(replyNo, el){
 	$(el).parent().parent().parent().parent().append(updateReply).append(cancelBtn);
 	$(el).parent().parent().remove();
 	
-	// 태그 변경
-	$(".rContent")
 }
 
 

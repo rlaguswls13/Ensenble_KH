@@ -146,6 +146,7 @@ public class BoardServiceImpl implements BoardService {
 	public void updateAt(int boardNo) {
 		dao.deleteAttachment(boardNo);
 	}
+	
 	// 게시글 삭제
 	@Transactional(rollbackFor = Exception.class)
 	@Override
@@ -157,7 +158,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		if(sResult != null) {
 			result = dao.deleteAttachment(boardNo);
-			if(result == 0 ) result = dao.deleteBoard(boardNo);
+			if(result != 0) result = dao.deleteBoard(boardNo);
 		} else result = dao.deleteBoard(boardNo);
 		
 		return result;
