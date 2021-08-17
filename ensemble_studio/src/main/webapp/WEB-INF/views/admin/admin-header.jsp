@@ -39,7 +39,6 @@
                 <li><a href="${contextPath}/admin/studio"><i class="fa fa-edit"></i>상품 관리</a></li>
                 <li><a href="${contextPath}/admin/sales"><i class="fa fa-line-chart"></i>매출현황</a></li>
                 <li><a href="${contextPath}/admin/member"><i class="fa fa-user"></i>회원 관리</a></li>
-                <li><a href="${contextPath}/admin/reply"><i class="fa fa-comment"></i>댓글 관리</a></li>
             </ul>
         </ul>
     </div>
