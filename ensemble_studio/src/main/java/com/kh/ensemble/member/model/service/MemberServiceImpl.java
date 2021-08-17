@@ -197,8 +197,6 @@ public class MemberServiceImpl implements MemberService {
 
 		Member ck = dao.readMember(findMember.getMemberId());
 		
-		//System.out.println("ck : " + ck);
-		
 		PrintWriter out = response.getWriter();
 
 		int result = 0;
@@ -211,8 +209,6 @@ public class MemberServiceImpl implements MemberService {
 		}
 		// 가입된 이메일이 아니면
 		else if (!findMember.getMemberEmail().equals(ck.getMemberEmail())) {
-			// out.print("등록되지 않은 이메일입니다.");
-			// out.close();
 
 			result = 3;
 			
@@ -230,8 +226,6 @@ public class MemberServiceImpl implements MemberService {
 			// 비밀번호 변경 메일 발송
 			findMember.setMemberPw(pw);
 			sendEmail(findMember, "findpw");
-			//out.print("이메일로 임시 비밀번호를 발송하였습니다.");
-			//out.close();
 		}
 		
 		return result;

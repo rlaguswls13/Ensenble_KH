@@ -474,7 +474,7 @@ public class MemberController {
 			path += "findIdPwd";
 
 		} else if (result == 3) {
-			swalSetMessage(ra, "error", "등록되지 않은 이메일입니다.", "다시 확인해주세요.");
+			swalSetMessage(ra, "error", "이메일이 일치하지 않습니다.", "다시 확인해주세요.");
 			path += "findIdPwd";
 
 		} else if (result == 1) {
