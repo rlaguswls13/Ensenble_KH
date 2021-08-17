@@ -119,6 +119,7 @@
 		SELECT *FROM (
 		SELECT*FROM BOARD_LIST
 		WHERE BOARD_CT_NM = #{roomName}
+		AND BOARD_STATUS ='Y'
 		ORDER BY BOARD_NO DESC
 		)
 		WHERE ROWNUM BETWEEN 1 AND 3
@@ -126,8 +127,10 @@
   
   	<select id="countReview" parameterType="string" resultType="_int">
   		SELECT COUNT(*) FROM BOARD 
-		JOIN BOARD_TYPE USING (BOARD_CT_NO)
-		WHERE BOARD_CT_NM = #{roomName}
+		JOIN BOARD_TYPE USING (BOARD_TYPE_NO, BOARD_CT_NO)
+		WHERE BOARD_CT_NM = 'A ROOM'
+        AND BOARD_TYPE_NO = 1
+		AND BOARD_STATUS ='Y'
   	</select>
   
 </mapper>
