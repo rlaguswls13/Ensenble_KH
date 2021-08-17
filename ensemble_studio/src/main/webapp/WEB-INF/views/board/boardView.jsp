@@ -65,6 +65,13 @@
 		position:relative;
 		right:5%;
 	}
+	.rMImage{
+		width:50px; height: 50px;
+		border-radius : 100px;
+		background-repeat: no-repeat; 
+        background-size:cover; 
+        background-position: center;
+	}
 </style>
 </head>
 <body>
@@ -76,6 +83,7 @@
                     <div class="row-sm-12">
                         <div class="col-sm-2 board_category">${board.boardCTNm}</div>
                     </div>
+                    <div style="padding:10px;"></div>
                     <div class="row-sm-12 ml-0">
                         <div class="col-sm-12 ml-0 pl-0">
                          <h2 class=" ml-0">${board.boardTitle}</h2>
@@ -85,7 +93,7 @@
                     <c:if test="${board.boardTypeNo!=4 && board.boardTypeNo!=3}">
                     <div class="row-sm-12 d-flex" >
                         <div class="vertical-center ml-0">
-                            <img class="rMImage mr-2" src="${contextPath}${board.memberImage}" alt="null" width="50px"><br>
+                            <img class="rMImage mr-2" style="background-image:url('${contextPath}${board.memberImage}')" ><br>
                             <span style="line-height:2">${board.memberNk}</span>                                                 
                         </div>
                         <div class="vertical-center">

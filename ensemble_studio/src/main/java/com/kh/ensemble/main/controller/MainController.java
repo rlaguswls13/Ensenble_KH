@@ -40,6 +40,12 @@ public class MainController {
 		model.addAttribute("room", room);
 		
 		List<Board> reviewList = service.selectReviewList(room.getRoomName());
+		
+		for(Board b : reviewList) {
+			b.setBoardContent(b.getBoardContent().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""));
+			b.setBoardContent(b.getBoardContent().replaceAll("&nbsp;", " "));
+		}
+		
 		model.addAttribute("reviewList", reviewList);
 		
 		int countReview = service.countReview(room.getRoomName());
