@@ -38,8 +38,8 @@
     * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
    	a { color: black; }
    	a:hover{
-			text-decoration: none;
-			color:#FF657D;
+		text-decoration: none !important;
+		color:#FF657D !important;
 	}
     .header-navbar-border{
         padding-top: 15px;

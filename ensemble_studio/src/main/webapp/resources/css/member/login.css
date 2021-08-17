@@ -12,6 +12,7 @@
 
 .login_body {
 	width: 40%;
+	min-width : 500px;
 	text-align: center;
 	margin: auto;
 }
@@ -27,9 +28,26 @@
 	color: black;
 	width: 70%;
 	margin: auto;
-	box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.3);
 	padding-top: 10px;
 	padding-bottom: 10px;
+}
+
+.naver-login-btn {
+	background-color: #1DC121;
+	border-style: none;
+	color: white;
+	width: 350px;
+	margin-top : 10px;
+	margin-left : 77px;
+	text-align : left;
+	padding : 3px 0px 3px 0px;
+}
+.naver-login-btn>img{
+	width : 60px;
+	padding : 0px 5px 0px 5px;
+}
+.naver-login-btn>span{
+	padding-left : 10px;
 }
 
 .login-btn:active {

@@ -32,7 +32,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- CSS -->
 <link rel="stylesheet"
-	href="${contextPath}/resources/css/member/login.css" type="text/css" />
+	href="${contextPath}/resources/css/member/login.css?ver=123" type="text/css" />
 </head>
 
 
@@ -45,6 +45,7 @@
 					height="30%">
 				</a>
 			</div>
+			<div style="padding:10px;"></div>
 			<form class="row login_Form" action="login" method="POST"
 				onsubmit="return loginValidate();">
 				<div class="form-floating col-md-12">
@@ -65,14 +66,22 @@
 					<span>ID 기억하기</span>
 					
 				</div>
+				<br>
+				
 				<button class="btn-lg login-btn" type="submit">로그인</button>
-				<div class="login_line col-md-12">
-					<hr>
+				<br>
+				
+				<div class="col-md-12">
 				</div>
 				<div id="naver_id_login">
-					<a href="${naver_url}"><img
-						src="${contextPath}/resources/images/common/naverLogin.png"
-						id="naverimg" class="btn-lg login-btn" width="100%" height="80%"></a>
+					<a href="${naver_url}">
+						<button type="button" class="btn-lg naver-login-btn">
+							<img src="${contextPath}/resources/images/common/naver.png" style="border-right:1px solid #68D66B">
+							<span>네이버 아이디로 로그인</span>
+						</button>
+					
+					
+					</a>
 				</div>
 				<div class="login_line col-md-12">
 					<hr>
