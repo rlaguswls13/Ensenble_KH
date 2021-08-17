@@ -223,7 +223,8 @@
 			</div>
 			<hr>
 			<div class="price">
-				<div id="totalPrice"><input type="hidden" name="wholePrice" id="wholePrice" value="">140,000원</div>
+				<div id="totalPrice">140,000원</div>
+				<input type="hidden" name="wholePrice" id="wholePrice" value="">
 				<div id="priceText">총 금액</div>
 			</div>
 			<hr>
@@ -371,6 +372,7 @@
 			 
 			 // reservationForm
 			 $("#totalPrice").text(price + "원");
+			 $("#wholePrice").val(price);
 		 })
 		  
 		 // 옵션 값이 변할 때 마다

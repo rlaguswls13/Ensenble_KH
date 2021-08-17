@@ -33,6 +33,7 @@
 		<result property="roomDiscount" column="ROOM_DISCOUNT" />
 		<result property="rvStatus" column="RV_STATUS" />
 		<result property="roomConfig" column="ROOM_CONFIG" />
+		<result property="wholePrice" column="WHOLE_PRICE" />
 
 
 		<collection property="optionList" column="RV_NO"
@@ -83,7 +84,7 @@
 	<select id="selectRvList" parameterType="_int" resultMap="rv_rm">
 		SELECT
 		RV_NO, MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, TO_CHAR(RV_DATE, 'RRRR-MM-DD') RV_DATE, RV_TIME,
-		RV_PEOPLE, RV_CARS, ROOM_CONFIG,
+		RV_PEOPLE, RV_CARS, ROOM_CONFIG, WHOLE_PRICE,
 		RV_ANIMALS,ROOM_NAME, ROOM_PRICE, ROOM_DISCOUNT
 		RV_PURPOSE,RV_ETC, RV_STATUS
 		FROM
@@ -100,7 +101,7 @@
 		SELECT
 		RV_NO,
 		MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, TO_CHAR(RV_DATE, 'RRRR-MM-DD') RV_DATE, RV_TIME,
-		RV_PEOPLE, RV_CARS,
+		RV_PEOPLE, RV_CARS, WHOLE_PRICE,
 		RV_ANIMALS,
 		RV_PURPOSE,RV_ETC, RV_STATUS
 		FROM
@@ -146,7 +147,7 @@
 	<select id="selectReservation" parameterType="_int"
 		resultMap="rv_rm">
 		SELECT
-		RV_NO, MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME,
+		RV_NO, MEMBER_NO, MEMBER_NICK, ROOM_NO, ROOM_NAME, WHOLE_PRICE,
 		TO_CHAR(RV_DATE, 'RRRR-MM-DD') RV_DATE, RV_TIME,
 		RV_PEOPLE, RV_CARS,
 		RV_ANIMALS,ROOM_NAME, ROOM_PRICE,
@@ -172,7 +173,7 @@
 		#{rvNo} , #{memberNo}, #{roomNo},
 		#{rvDate},#{rvTime}, #{rvPeople},
 		#{rvCars},#{rvAnimals}, #{rvPurpose},
-		#{rvEtc} , DEFAULT )
+		#{rvEtc} , DEFAULT, #{wholePrice} )
 
 
 	</insert>
@@ -199,7 +200,8 @@
 		RV_CARS=#{rvCars},
 		RV_ANIMALS= #{rvAnimals},
 		RV_PURPOSE=#{rvPurpose},
-		RV_ETC=#{rvEtc}
+		RV_ETC=#{rvEtc},
+		WHOLE_PRICE=#{wholePrice}
 		WHERE RV_NO = #{rvNo} AND RV_STATUS = 'Y'
 
 	</update>
@@ -217,7 +219,7 @@
 	</select>
 	
 	<select id="rvStatusList" resultMap="rv_rm">
-        SELECT TO_CHAR(RV_DATE, 'RRRR-MM-DD') RV_DATE, 
+        SELECT TO_CHAR(RV_DATE, 'RRRR-MM-DD') RV_DATE, WHOLE_PRICE,
                 SUBSTR( RV_TIME, 0, INSTR( RV_TIME, '~')-1 ) RV_TIME,
                 ROOM_NAME FROM RESERVATION  
 		JOIN STUDIO_ROOM USING(ROOM_NO)

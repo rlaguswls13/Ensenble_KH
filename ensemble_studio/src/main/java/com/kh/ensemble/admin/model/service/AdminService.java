@@ -62,6 +62,8 @@ public interface AdminService {
 
 	List<Option> selectedOption(int rvNo);
 
+	List<Room> selectRoomList();
+
 
 
 }

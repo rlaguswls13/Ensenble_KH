@@ -239,10 +239,14 @@ public class AdminController {
 		
 		List<Option> selectedOptionList= service.selectedOption(rvNo);
 		
+		List<Room> roomList = service.selectRoomList();
 		
-		System.out.println("선택된 옵션 목록 " + selectedOptionList);
 		
-
+		System.out.println(roomList);
+		
+		System.out.println("선택된 옵션 목록 " + selectedOptionList +roomList);
+		
+		model.addAttribute("roomList", roomList);
 		model.addAttribute("rv", rv);
 		model.addAttribute("optionList", optionList);
 		model.addAttribute("selectedOptionList",selectedOptionList);

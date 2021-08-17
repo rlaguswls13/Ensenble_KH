@@ -87,7 +87,7 @@
 									<div class="detail3-2">성인 : ${reservation.rvPeople} , 동물 : ${reservation.rvAnimals}</div>
 								</div>
 								<hr>
-								<div class="totalPrice">가격 ${reservation.roomPrice}원</div>
+								<div class="totalPrice">가격 ${reservation.wholePrice}원</div>
 
 
 

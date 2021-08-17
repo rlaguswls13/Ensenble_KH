@@ -325,6 +325,12 @@ public class AdminServiceImpl implements AdminService{
 		return dao.selectedOption(rvNo);
 		
 	}
+
+	@Override
+	public List<Room> selectRoomList() {
+		// TODO Auto-generated method stub
+		return dao.selectRoomList();
+	}
 	
 	
 	

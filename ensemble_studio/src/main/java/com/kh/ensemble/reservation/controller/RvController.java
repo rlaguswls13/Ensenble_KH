@@ -60,12 +60,11 @@ public class RvController {
 		pagination.setMemberNo(loginMember.getMemberNo());
 
 		
-		System.out.println(pagination);
-		
+	
 		// 3)생성된 페이지네이션을 이용하여 현재 목록페이지에 보여질 게시글 목록 조회
 		List<Rv> rvList = service.selectRvList(pagination);
 
-	
+			
 
 		/*
 		 * //조회결과 임시 확인 for( Board b : boardList) { System.out.println(b); }
@@ -110,7 +109,7 @@ public class RvController {
 				model.addAttribute("optionList", optionList);
 				model.addAttribute("roomList", roomList);
 				
-				System.out.println(roomList);
+				
 				
 				return "reservation/reservation";
 			}else {

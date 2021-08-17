@@ -147,6 +147,11 @@ public class AdminDAO {
 		return sqlSession.selectList("rvMapper.selectedOption", rvNo);
 	}
 
+	public List<Room> selectRoomList() {
+		
+		return sqlSession.selectList("adminMapper.selectRoomList");
+	}
+
 
 
 }
