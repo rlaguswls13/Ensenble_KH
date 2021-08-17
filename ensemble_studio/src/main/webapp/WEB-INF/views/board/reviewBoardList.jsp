@@ -213,6 +213,21 @@
 	                        </a>
 	                    </div>
 	                </div>
+		            <div class="row-sm-12 d-flex">
+		                <div class="col-sm-4 mt-2">
+		                	<img src="${contextPath}/resources/images/common/edit.png" width="30px">
+		                	${board.replyCount}
+		                </div>
+		                <div class="col-sm-4 mt-2">
+		                	<img src="${contextPath}/resources/images/common/edit.png" width="30px">
+		                	${board.boardReadCount}
+		                </div>
+		                <div class="col-sm-4 mt-2">
+		                	<img src="${contextPath}/resources/images/common/edit.png" width="30px">
+		           			${board.likeCount}
+		                </div>
+	                </div>
+	                
 	                <div class="d-flex row-sm-12 ml-0 pl-0">
 	                    <div class="col-sm-12" id="title-content">
 	                        <a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">

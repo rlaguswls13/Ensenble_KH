@@ -68,15 +68,15 @@ public class BoardController {
 		typeList = serviceB.selectType(boardTypeNo);
 		
 		if (search.getSk() == null) {
-			if(pg.getBoardTypeNo() == 1) pg.setLimit(6);
 			pagination = serviceB.getPagination(pg);
 			if(pg.getBoardTypeNo() == 1) pagination.setLimit(6);
+			if(pg.getBoardTypeNo() == 2) pagination.setLimit(3);
 			boardList = serviceB.selectBoardList(pagination);
 			
 		} else {
-			if(pg.getBoardTypeNo() == 1) pg.setLimit(6);
 			pagination = serviceB.getPagination(pg);
 			if(pg.getBoardTypeNo() == 1) pagination.setLimit(6);
+			if(pg.getBoardTypeNo() == 2) pagination.setLimit(3);
 			boardList = serviceB.selectSearchBoardList(search, pagination);
 			
 		}

@@ -43,6 +43,8 @@ public interface BoardService {
 	// 게시글 삭제
 	int deleteBoard(int boardNo);
 	
+	// 게시글 답변
+	int answerCS(int boardNo);
 	
 
 	

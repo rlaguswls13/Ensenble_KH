@@ -163,6 +163,11 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 	
+	// 게시글 답변	
+	@Override
+	public int answerCS(int boardNo) {
+		return dao.answerCS(boardNo);
+	}
 	
 	// 파일명 변경 메소드
 	private String rename(String originFileName) {

@@ -120,6 +120,14 @@ public class boardDAO {
 	public int deleteBoard(int boardNo) {
 		return sqlSession.update("boardMapper.deleteBoard", boardNo);
 	}
+	
+	/** 특정 게시글 답변
+	 * @param boardNo
+	 * @return result
+	 */
+	public int answerCS(int boardNo) {
+		return sqlSession.update("boardMapper.answerCS", boardNo);
+	}
 
 	/** 특정 게시글 첨부 파일 갯수 조회
 	 * @param boardNo
@@ -158,6 +166,8 @@ public class boardDAO {
 	public void deleteAt(List<Attachment> atList) {
 		sqlSession.delete("boardMapper.deleteAt", atList);
 	}
+
+
 
 
 
