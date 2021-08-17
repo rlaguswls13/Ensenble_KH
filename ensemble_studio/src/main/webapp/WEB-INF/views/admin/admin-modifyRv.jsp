@@ -227,16 +227,16 @@ background-color: #FDCDCD;
 
 						<div class="col-3 reservationCalender">
 							<input type="text" id="datepicker" name="rvDate"
-								placeholder="날짜선택" onchange="selectRvTimeList()">
+								placeholder="날짜선택" value="${rv.rvDate}" onchange="selectRvTimeList()">
 						</div>
 						<div class="col-5 reservationTime" style="display: inline-block;">
 
 							<input type="radio" id="rv1" name="rvTime" value="09:00~12:00"
-								name="rvTime"> <label for="rv1">09:00 ~ 12:00</label><br>
+								name="rvTime" ${rv.rvTime == "09:00~12:00" ? "checked" : " " }> <label for="rv1">09:00 ~ 12:00</label><br>
 							<br> <input type="radio" id="rv2" name="rvTime"
-								value="12:00~15:00" name="rvTime"> <label for="rv2">12:00
+								value="12:00~15:00" name="rvTime" ${rv.rvTime == "12:00~15:00" ? "checked" : " " }> <label for="rv2">12:00
 								~ 15:00</label><br> <br> <input type="radio" id="rv3"
-								name="rvTime" value="15:00~18:00" name="rvTime"> <label
+								name="rvTime" value="15:00~18:00" name="rvTime" ${rv.rvTime == "15:00~18:00" ? "checked" : " " }> <label
 								for="rv3">15:00 ~ 18:00</label>
 
 
