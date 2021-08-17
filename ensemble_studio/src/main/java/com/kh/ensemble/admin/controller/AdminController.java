@@ -231,21 +231,26 @@ public class AdminController {
 
 	// 게시글 수정 페이지
 	@RequestMapping(value = "admin/{rvNo}", method = RequestMethod.GET)
-	public String modifyRv(@PathVariable("rvNo") int rvNo, Model model) {
+	public String modifyRv(@PathVariable("rvNo") int rvNo, Model model
+			
+			) {
 
 		List<Option> optionList = service.adminSelectOption();
 
 		Rv rv = service.selectReservation(rvNo);
 		
+		
+		
 		List<Option> selectedOptionList= service.selectedOption(rvNo);
 		
-		List<Room> roomList = service.selectRoomList();
+		List<Room> roomList = service.selectRoomList(); //그냥 방정보 
 		
+		Member rvMember = service.selectMember(rv);
 		
-		System.out.println(roomList);
-		
+			
 		System.out.println("선택된 옵션 목록 " + selectedOptionList +roomList);
 		
+		model.addAttribute("rvMember", rvMember);
 		model.addAttribute("roomList", roomList);
 		model.addAttribute("rv", rv);
 		model.addAttribute("optionList", optionList);
@@ -260,10 +265,10 @@ public class AdminController {
 		
 	
 		
-		System.out.println(option);
+	
 		
 		rv.setMemberNo(rvNo);
-		System.out.println(rv);
+		
 
 		
 		int result= service.modifyRv(rv);

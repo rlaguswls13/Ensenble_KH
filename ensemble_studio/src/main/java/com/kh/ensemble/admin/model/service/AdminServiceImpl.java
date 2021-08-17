@@ -331,6 +331,16 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return dao.selectRoomList();
 	}
+
+	@Override
+	public Member selectMember(Rv rv) {
+		// TODO Auto-generated method stub
+		return dao.selectMember(rv);
+	}
+
+	
+
+	
 	
 	
 	

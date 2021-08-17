@@ -64,6 +64,10 @@ public interface AdminService {
 
 	List<Room> selectRoomList();
 
+	
+
+	Member selectMember(Rv rv);
+
 
 
 }

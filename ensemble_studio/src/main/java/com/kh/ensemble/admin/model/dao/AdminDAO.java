@@ -152,6 +152,13 @@ public class AdminDAO {
 		return sqlSession.selectList("adminMapper.selectRoomList");
 	}
 
+	
+
+	public Member selectMember(Rv rv) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("memberMapper.selectMember", rv.getMemberNo());
+	}
+
 
 
 }

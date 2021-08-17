@@ -230,4 +230,15 @@
 		#{memberEmail}, #{memberNick}, DEFAULT, #{memberPhone}, DEFAULT,
 		DEFAULT, 'S', DEFAULT) 
 	</insert>
+	
+		<select id="selectMember" parameterType="_int" resultMap="member_rm">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBER_STATUS = 'Y'
+		AND MEMBER_NO
+		= #{memberNo}
+	</select>
+	
+	
+	
 </mapper>

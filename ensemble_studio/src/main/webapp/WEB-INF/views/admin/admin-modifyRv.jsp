@@ -32,82 +32,125 @@
 <script src="//code.jquery.com/jquery-1.12.4.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<link rel="stylesheet"
-	href="${contextPath}/resources/css/reservation/reservation.css?ver=234"
-	type="text/css">
+
 <style>
-.container {
-	width: 1000px;
-	height: 1600px;
-	border: 1px solid gray;
-	margin-top: 100px;
-	margin-bottom: 100px;
+.reservationTime input[type=radio] {
+	display: none;
 }
 
-/* 촬영정보 선택  */
-.reservationOption {
-	height: 200px;
+.reservationTime input[type=radio]+label {
+	height: 100px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: lightgray;
+	font-weight: 300;
+	font-size: 14px;
+	border-radius: 10px;
+	margin-right: 5px;
 }
 
-.optionDetail {
-	float: left;
-	width: 200px;
-	height: 210px;
-	font-size: 20px;
+.reservationTime input[type=radio]:checked+label {
+	height: 100px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: ivory;
 	font-weight: bold;
+	font-size: 14px;
+	border-radius: 10px;
+	margin-right: 5px;
 }
 
-.optionRadio {
-	float: left;
-	width: 600px;
-	height: 210px;
+.carousel-img {
+	width: 100%;
+	height: 50vw;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 }
 
-.optionListA {
-	float: left;
-	width: 250px;
-	height: 200px;
+.carousel-indicators>li {
+	width: 7px !important;
+	height: 7px !important;
+	margin-right: 20px !important;
+	border-radius: 50% !important;
 }
 
-.optionListB {
-	float: left;
-	width: 250px;
-	height: 200px;
+.studio-view-cards {
+	width: 90%;
+	height: auto;
+	padding-bottom: 20px;
+	border: 1px solid rgb(182, 182, 182);
+	margin: auto;
+	margin-bottom: 20px;
 }
 
-.rvDetail2 {
-	width: 800px;
-	font-size: 20px;
-	font-weight: bold;
+.row {
+	padding-bottom: 1%;
 }
 
-.reservationOption1 {
-	height: 600px;
-	width: 1000px;
+.card-img {
+	width: 90%;
+	height: 300px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	margin: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
-.price {
-	height: 40px;
-	width: 800px;
+.card-text1 {
+	font-family: 'Noto Serif KR', serif;
+	font-weight: 600;
+	font-size: larger;
+	width: auto;
+	display: inline-block;
 }
 
-#totalPrice {
-	width: 150px;
-	height: 30px;
+.btn-beige {
+	background-color: #F9F7EB;
+	padding-left: 25px;
+	padding-right: 25px;
 	float: right;
-	font-size: 30px;
+	margin-right: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
-#priceText {
-	margin-top: 10px;
-	width: 100px;
-	height: 30px;
-	float: right;
-	font-size: 15px;
+.card-text2 {
+	font-family: 'cafe24 oneprettynight';
+	height: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.notice-img {
+	width: 100%;
+	height: 200px;
+	border: 1px solid rgb(182, 182, 182);
+	margin-bottom: 10px;
+}
+
+.rvTime-disabled {
+	background-color: black !important;
+}
+.contentContainer{
+	padding-left : 10px;
+}
+.ensemble{
+background-color: #FDCDCD;
+        padding-left: 25px; padding-right: 25px;
+        margin-right: 20px;
+        padding-top : 5px; padding-bottom: 5px;
+		margin-left : 30%;
+
 }
 
 .userInfo {
-	height: 200px;
 	width: 800px;
 }
 
@@ -130,193 +173,226 @@
 	color: gray;
 }
 
-#etcText {
-	width: 100px;
-	float: left;
-}
-
-#etcBox {
-	width: 60px;
-	float: left;
-}
+/* 촬영정보 선택  */
 </style>
 <body>
 
-	<div class="container">
 
-		<form method="POST" action="${rv.rvNo}" class="needs-validation"
-			name="modifyRvForm" onsubmit="return validate();">
+	<div class="main_bg">
+		<div class="main_content">
 
-			<!-- 닉네임 -->
-			<div class="row mb-3 form-row">
-				<div class="col-md-2">
-					<h6>닉네임</h6>
-				</div>
-				<div class="col-md-5">
-					<h5 id="name">${rv.memberNick }</h5>
-				</div>
-			</div>
+			<div class="contentContainer">
 
-			<div class="studio">
+				<form method="POST" action="${rv.rvNo}" class="needs-validation"
+					id="modifyRvForm" name="modifyRvForm" onsubmit="return validate();">
 
-				<div style="padding: 5px;"></div>
-
-				<c:forEach items="${roomList}" var="room">
-					<div class="aRoom">
-						<input type="radio" id="roomNo" value="${room.roomNo}"
-							name="roomNo" price="${room.roomDiscountedPrice}"> <label
-							for="${room.roomName}">${room.roomName}</label><br> <img
-							class="room-img"
-							style="background-image:url('${contextPath}/${room.filePath}/${room.fileName}')">
+					<!-- 닉네임 -->
+					<div class="row mb-3 form-row">
+						<div class="col-md-2">
+							<h4>예약번호</h4>
+						</div>
+						<div class="col-md-5">
+							<span id="name">${rv.rvNo}</span>
+						</div>
 					</div>
-				</c:forEach>
 
-			</div>
+					<div class="row mb-3 form-row">
+						<div class="col-md-2">
+							<h4>닉네임</h4>
+						</div>
+						<div class="col-md-5">
+							<span id="name">${rv.memberNick}</span>
+						</div>
+					</div>
 
-			<div class="reservationDate">
-
-				<div style="padding: 5px;"></div>
-
-				<div class="reservationCalender">
-					<input type="text" id="datepicker" name="rvDate" placeholder="날짜선택"
-						onchange="selectRvTimeList()">
-				</div>
-				<div class="reservationTime" style="display: inline-block;">
-					<input type="radio" id="rv1" name="rvTime" value="09:00~12:00"
-						name="rvTime"> <label for="rv1">09:00 ~ 12:00</label><br>
-					<br> <input type="radio" id="rv2" name="rvTime"
-						value="12:00~15:00" name="rvTime"> <label for="rv2">12:00
-						~ 15:00</label><br> <br> <input type="radio" id="rv3"
-						name="rvTime" value="15:00~18:00" name="rvTime"> <label
-						for="rv3">15:00 ~ 18:00</label>
+					<div class="row studio">
 
 
+						<c:forEach items="${roomList}" var="room">
+							<div class="col-2 aRoom">
+																
+								<input type="radio" id="${room.roomName}" value="${room.roomNo}" name="roomNo" price="${room.roomDiscountedPrice}"
+								 ${rv.roomNo == room.roomNo ? "checked" : " " }>
+								<label for="${room.roomName}" >${room.roomName}</label>
+								
+							</div>
+					
+						</c:forEach>
+
+					</div>
+
+					<div class="row reservationDate">
+
+
+
+						<div class="col-3 reservationCalender">
+							<input type="text" id="datepicker" name="rvDate"
+								placeholder="날짜선택" onchange="selectRvTimeList()">
+						</div>
+						<div class="col-5 reservationTime" style="display: inline-block;">
+
+							<input type="radio" id="rv1" name="rvTime" value="09:00~12:00"
+								name="rvTime"> <label for="rv1">09:00 ~ 12:00</label><br>
+							<br> <input type="radio" id="rv2" name="rvTime"
+								value="12:00~15:00" name="rvTime"> <label for="rv2">12:00
+								~ 15:00</label><br> <br> <input type="radio" id="rv3"
+								name="rvTime" value="15:00~18:00" name="rvTime"> <label
+								for="rv3">15:00 ~ 18:00</label>
+
+
+						</div>
+					</div>
+
+					<div class="row reservationOption">
 
 
 
 
-				</div>
-			</div>
-			<div class="reservationOption1">
-				<div class="reservationOption">
+						<div class="col-1 optionDetail">옵션 내용</div>
+						<div class="col-8 optionRadio">
+							<div class="row">
+								<div class="col-5 optionListA">
+									<c:forEach items="${optionList}" var="option">
+										<c:if test="${option.optionType== 'G'}">
+
+											<c:set var="flag" value=" " />
+											<c:forEach items="${rv.optionList}" var="rvOption">
+												<c:if test="${rvOption.optionNo == option.optionNo }">
+													<c:set var="flag" value="checked" />
+												</c:if>
+											</c:forEach>
 
 
-					<div style="padding: 10px;"></div>
+											<input type="checkbox" id="${option.optionName}"
+												value="${option.optionNo}" price="${option.optionPrice}"
+												name="option" ${flag}>
 
-					<div class="optionDetail">옵션 내용</div>
-					<div class="optionRadio">
 
-						<div class="optionListA">
-							<c:forEach items="${optionList}" var="option">
-								<c:if test="${option.optionType== 'G'}">
-
-									<c:set var="flag" value=" " />
-									<c:forEach items="${rv.optionList}" var="rvOption">
-										<c:if test="${rvOption.optionNo == option.optionNo }">
-											<c:set var="flag" value="checked" />
+											<label for="${option.optionName}">${option.optionName}</label>
+											<br>
 										</c:if>
 									</c:forEach>
+								</div>
 
 
-									<input type="checkbox" id="${option.optionName}"
-										value="${option.optionNo}" price="${option.optionPrice}"
-										name="option" ${flag}>
+								<div class="col-5 optionListB">
+									<c:forEach items="${optionList}" var="option">
+										<c:if test="${option.optionType == 'A'}">
+
+											<c:set var="flag" value=" " />
+											<c:forEach items="${rv.optionList }" var="rvOption">
+												<c:if test="${rvOption.optionNo == option.optionNo }">
+													<c:set var="flag" value="checked" />
+												</c:if>
+											</c:forEach>
+
+											<input type="checkbox" id="${option.optionName}"
+												value="${option.optionNo}" price="${option.optionPrice}"
+												name="option" ${flag}>
+											<label for="${option.optionName}">${option.optionName}</label>
+											<br>
+										</c:if>
+									</c:forEach>
+								</div>
+							</div>
 
 
-									<label for="${option.optionName}">${option.optionName})</label>
-									<br>
-								</c:if>
-							</c:forEach>
 						</div>
 
 
-						<div class="optionListB">
-							<c:forEach items="${optionList}" var="option">
-								<c:if test="${option.optionType == 'A'}">
+					</div>
+					<div class="row">
+						<div class="col-2">이용 인원 수</div>
+						<div class="col-2">
+							<input type="number" class="form-control" name="rvPeople"
+								required>
+						</div>
+					</div>
 
-									<c:set var="flag" value=" " />
-									<c:forEach items="${rv.optionList }" var="rvOption">
-										<c:if test="${rvOption.optionNo == option.optionNo }">
-											<c:set var="flag" value="checked" />
-										</c:if>
-									</c:forEach>
+					<div class="row">
+						<div class="col-2">방문 차량 수</div>
+						<div class="col-2">
+							<input type="number" class="form-control" name="rvCars" required>
+						</div>
+					</div>
 
-									<input type="checkbox" id="${option.optionName}"
-										value="${option.optionNo}" price="${option.optionPrice}"
-										name="option" ${flag}>
-									<label for="${option.optionName}">${option.optionName})</label>
-									<br>
-								</c:if>
-							</c:forEach>
+					<div class="row">
+						<div class="col-2">반려 동물 수</div>
+						<div class="col-2">
+							<input type="number" class="form-control" name="rvAnimals"
+								required>
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-2">촬영 내용</div>
+						<div class="col-7">
+							<input type="text" class="form-control" name="rvPurpose" required>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-2">비고</div>
+						<div class="col-7">
+							<textarea rows="5" class="form-control" cols="50" name="rvEtc"
+								style="resize: none;" required> </textarea>
 						</div>
 
-
-
 					</div>
 
 
-				</div>
-				<div class="row">
-					<div class="col-2">이용 인원 수</div>
-					<div class="col-2">
-						<input type="number" class="form-control" name="rvPeople" required>
-					</div>
-				</div>
-				<div style="padding: 10px"></div>
-				<div class="row">
-					<div class="col-2">방문 차량 수</div>
-					<div class="col-2">
-						<input type="number" class="form-control" name="rvCars" required>
-					</div>
-				</div>
-				<div style="padding: 10px"></div>
-				<div class="row">
-					<div class="col-2">반려 동물 수</div>
-					<div class="col-2">
-						<input type="number" class="form-control" name="rvAnimals"
-							required>
-					</div>
-				</div>
-				<div style="padding: 10px"></div>
 
-				<div class="row">
-					<div class="col-2">촬영 내용</div>
-					<div class="col-7">
-						<input type="text" class="form-control" name="rvPurpose" required>
-					</div>
-				</div>
-				<div style="padding: 10px"></div>
-				<div class="row">
-					<div class="col-2">비고</div>
-					<div class="col-7">
-						<textarea rows="5" class="form-control" cols="50" name="rvEtc"
-							style="resize: none;" required> </textarea>
+					<div class="row price">
+						<div id="priceText" class="col-8">총 금액</div>
+						<div id="totalPrice" class="col-2">0원</div>
+						<input type="hidden" name="wholePrice" id="wholePrice" value="">
 					</div>
 
-				</div>
-			</div>
+					<hr>
+					<h4>예약 회원 정보</h4>
+					<div class="userInfo">
+						<div class="info">
+							<div class="text">아이디</div>
+							<div class="infodt">${rvMember.memberId}</div>
+						</div>
+						<div class="info">
+							<div class="text">이메일</div>
+							<div class="infodt">${rvMember.memberEmail}</div>
+						</div>
+						<div class="info">
+							<div class="text">닉네임</div>
+							<div class="infodt">${rvMember.memberNick}</div>
+						</div>
+						<div class="info">
+							<div class="text">휴대폰</div>
+							<div class="infodt">${rvMember.memberPhone}</div>
+						</div>
+						<div class="info">
+							<div class="text">반려동물</div>
+							<c:forEach items="${rvMember.aniList}" var="ani">
+							<div class="infodt">${ani.aniName}/${ani.aniGender }/${ani.aniType }/${ani.aniAge }살/${ani.aniKg }kg</div>
+							</c:forEach>	
+						</div>
+						<div style="padding: 10px;"></div>
+
+					</div>
+			
 
 
-			<div class="price">
-				<div id="totalPrice">140,000원</div>
-				<input type="hidden" name="wholePrice" id="wholePrice" value="">
-				<div id="priceText">총 금액</div>
-			</div>
 
 
 
-
-			<hr>
 
 			<div class="row4">
-				<button class="btn btn-primary btn-lg button0" type="submit"
+				<button class="btn ensemble btn-lg button0" type="submit"
 					style="width: 200px;">수정하기</button>
 			</div>
-
-		</form>
-
+	
+			</form>
+			</div>
+		</div>
 	</div>
-
 
 	<script>
 		$(function() {
@@ -381,7 +457,7 @@
 			const index = $("[name=roomNo]").index($(this));
 			const price = Number($(this).attr("price"));
 
-			$("#reservationForm")[0].reset();
+			$("#modifyRvForm")[0].reset();
 
 			$("[name=roomNo]").eq(index).prop("checked", true);
 
@@ -414,6 +490,5 @@
 
 		});
 	</script>
-
 </body>
 </html>
