@@ -57,17 +57,11 @@ h5 {
 	background: #FDCDCD;
 	border: none;
 	min-width: 140px;
-	box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.3);
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
  
-.change-form .change-btn:active {
-	border-color: none;
-	box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.3);
-	top: 2px;
-	position: relative;
-}
+
 
 .change-form a {
 	color: #fff;

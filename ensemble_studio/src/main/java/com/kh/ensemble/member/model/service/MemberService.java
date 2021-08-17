@@ -68,7 +68,6 @@ public interface MemberService {
 	 * @return result
 	 */
 	
-	
 	public abstract int secession(String currentPwd, Member loginMember);
 
 	/** 이메일 발송 Service

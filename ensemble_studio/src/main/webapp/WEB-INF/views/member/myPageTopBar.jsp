@@ -20,7 +20,7 @@
                 
                 	<c:if test="${loginMember.memberPath == 'S'}">
                 	<li>
-                		<a id="btn3" class="myPage-btn social-btn" href="">비밀번호 변경</a>
+                		<span id="btn3" class="myPage-btn social-btn">비밀번호 변경</span>
                 	</li>
                 	</c:if>
               	
