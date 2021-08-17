@@ -235,7 +235,7 @@
   		UPDATE BOARD SET
 	  		BOARD_STATUS = 'N'
   		WHERE BOARD_NO = #{boardNo}
-  		AND BOARD_STATUS NOT IN('N','R') 
+  		AND BOARD_STATUS NOT IN('N','R','F') 
   	</update>
   	
   	<!-- 게시글 답변 -->

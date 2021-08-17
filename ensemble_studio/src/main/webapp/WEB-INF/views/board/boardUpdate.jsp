@@ -182,9 +182,7 @@
          }
      	
         // hashTag
-        function resetHashTag(){}
-        function oneResetHashTag(){}
-        function allResetHashTag(){}
+        $(".modal-title").remove();
     </script>
 
 

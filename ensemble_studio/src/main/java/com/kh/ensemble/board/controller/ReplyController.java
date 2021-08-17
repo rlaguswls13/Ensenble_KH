@@ -38,10 +38,11 @@ public class ReplyController {
 	// 댓글 삽입
 	@RequestMapping(value="insertReply", method=RequestMethod.POST)
 	public int insertReply(Reply reply, @ModelAttribute("loginMember") Member loginMember,
-							@RequestParam("boardNo") int boardNo) {
+							@RequestParam("boardNo") int boardNo,
+							@RequestParam("boardTypeNo") int boardTypeNo) {
 		String grade = loginMember.getMemberGrade();
 		int result = serviceR.insertReply(reply);
-		if(result==1 && grade.equals("A"))
+		if(result==1 && grade.equals("A") && boardTypeNo == 4)
 			result = serviceB.answerCS(boardNo);
 		return result;
 	}

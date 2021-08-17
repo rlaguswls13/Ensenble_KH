@@ -45,6 +45,8 @@
 			width: 50%
 		}
 	}
+
+	
 </style>
  
 </head>
@@ -212,9 +214,8 @@
          
          
          // hashTag
-         function resetHashTag(){}
-         function oneResetHashTag(){}
-         function allResetHashTag(){}
+         $(".modal-title").remove();
+
     </script>
 
 
