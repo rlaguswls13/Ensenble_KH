@@ -73,7 +73,7 @@
 				<img src="${contextPath}/resources/images/common/edit.png" width="30px">
 			</a>
 		</c:if>
-		<c:if test="${!empty loginMember && pagination.boardTypeNo == 4}">
+		<c:if test="${loginMember.memberGrade eq 'G' && pagination.boardTypeNo == 4}">
 			<div style="float:right; margin-bottom:10px; display:inline-block;">
 				<a  class="btn btn-ensemble" id="insertBtn" href='insert'>
 					<img src="${contextPath}/resources/images/common/edit.png" width="20px" style="margin-right:5px;">
@@ -141,12 +141,7 @@
 											${board.boardTitle}
 											</a>
 										</td>
-										
-										<%-- 작성자 --%>
-										<c:if test="${pagination.boardTypeNo == 4}">
-											<td> ${board.memberNk} </td>
-										</c:if>
-										
+									
 										<%-- 작성일 --%>
 										<td> 
 											<fmt:formatDate var="createDate" value="${board.boardDT}"  pattern="yyyy-MM-dd"/>                          
@@ -188,9 +183,7 @@
 										</td>
 										
 										<%-- 작성자 --%>
-										<c:if test="${pagination.boardTypeNo == 4}">
-											<td> ${board.memberNk} </td>
-										</c:if>
+										<td> ${board.memberNk} </td>
 										
 										<%-- 작성일 --%>
 										<td> 
@@ -215,8 +208,49 @@
 										</c:if>
 										
 									</tr>
+							</c:when>
+							<c:when test="${loginMember.memberGrade eq 'A' && board.boardTypeNo == 4}">					
 								
+									<tr>
+										<%-- 글 번호 --%>
+										<td> ${board.boardNo} </td>	
+										
+										<%-- 카테고리 --%>
+										<td> ${board.boardCTNm} </td>
+										
+										<%-- 글 제목 --%>
+										<td class="boardTitle">                                                         
+											<a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
+											${board.boardTitle}
+											</a>
+										</td>
+										
+										<%-- 작성자 --%>
+										<td> ${board.memberNk} </td>
+										
+										<%-- 작성일 --%>
+										<td> 
+											<fmt:formatDate var="createDate" value="${board.boardDT}"  pattern="yyyy-MM-dd"/>                          
+											<fmt:formatDate var="today" value="<%= new java.util.Date() %>"  pattern="yyyy-MM-dd"/>                          
+											
+											<c:choose>
+												<%-- 글 작성일이 오늘이 아닐 경우 --%>
+												<c:when test="${createDate != today}">
+													${createDate}
+												</c:when>
+												<%-- 글 작성일이 오늘일 경우 --%>
+												<c:otherwise>
+													<fmt:formatDate value="${board.boardDT}"  pattern="HH:mm"/>                          
+												</c:otherwise>
+											</c:choose>
+										</td>	
 							
+										<%-- 글 상태 --%>
+										<c:if test="${pagination.boardTypeNo == 4}">
+											<td> ${board.boardStatus} </td>
+										</c:if>
+										
+									</tr>
 							</c:when>
 							</c:choose>
 							</c:forEach>
