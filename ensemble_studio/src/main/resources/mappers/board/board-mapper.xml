@@ -37,6 +37,28 @@
 		<collection property="atList" column="BOARD_NO" 
 		javaType="java.util.ArrayList" ofType="Attachment" select="selectAttachmentList"/>
 		
+		
+		<collection property="likeList" column="BOARD_NO" 
+		javaType="java.util.ArrayList" ofType="Like" select="selectLikeList"/>
+	
+	</resultMap>
+	
+	<!-- 게시글의 like 정보 조회 -->
+	<select id="selectLikeList" parameterType="_int" resultType="int">
+		SELECT MEMBER_NO FROM BOARD_LIKE
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<!-- LIKE resultMap -->
+	<resultMap type="Like" id="like_rm">
+		<id property="likeNo" column="LIKE_NO" />
+		
+		<result property="likeStatus" column="LIKE_STATUS" />
+		
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="boardNo" column="BOARD_NO"/>	
+		
+		<result property="likeCNT" column="LIKE_CNT" />
 	</resultMap>
 	
 	<!-- 파일 정보 resultMap -->
@@ -55,6 +77,8 @@
  		<result property="listCount"  column="CNT"/>
  		<result property="boardName"  column="BOARD_NAME"/>
  	</resultMap>
+	
+
 	
 	<!-- 게시글 전체 게시글 수 조회 -->
 	<select id="getListCount" parameterType="Pagination" resultMap="pg_rm">

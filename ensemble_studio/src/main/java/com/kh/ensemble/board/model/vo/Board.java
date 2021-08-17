@@ -28,6 +28,9 @@ public class Board {
 	// attachment
 	private List<Attachment> atList;
 	
+	// likeList
+	private List<Integer> likeList;
+	
 	// boardLike
 	private int likeNo;
 	private String likeStatus;
@@ -40,6 +43,19 @@ public class Board {
 	private int likeCount;
 	
 	public Board() {}
+
+	
+	
+	public List<Integer> getLikeList() {
+		return likeList;
+	}
+
+
+
+	public void setLikeList(List<Integer> likeList) {
+		this.likeList = likeList;
+	}
+
 
 
 	public int getBoardNo() {
@@ -242,15 +258,19 @@ public class Board {
 	}
 
 
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardDT=" + boardDT + ", boardMT=" + boardMT + ", boardStatus="
 				+ boardStatus + ", boardTitle=" + boardTitle + ", boardReadCount=" + boardReadCount + ", boardContent="
 				+ boardContent + ", boardTypeNo=" + boardTypeNo + ", boardNm=" + boardNm + ", boardCTNo=" + boardCTNo
 				+ ", boardCTNm=" + boardCTNm + ", memberNo=" + memberNo + ", memberNk=" + memberNk + ", memberImage="
-				+ memberImage + ", atList=" + atList + ", likeNo=" + likeNo + ", likeStatus=" + likeStatus
-				+ ", likeCNT=" + likeCNT + ", replyCount=" + replyCount + ", likeCount=" + likeCount + "]";
+				+ memberImage + ", atList=" + atList + ", likeList=" + likeList + ", likeNo=" + likeNo + ", likeStatus="
+				+ likeStatus + ", likeCNT=" + likeCNT + ", replyCount=" + replyCount + ", likeCount=" + likeCount + "]";
 	}
+
+
+	
 
 
 

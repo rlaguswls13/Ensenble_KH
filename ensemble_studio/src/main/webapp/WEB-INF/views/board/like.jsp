@@ -11,8 +11,8 @@
     <title>boardView</title>
 
     <!-- External CSS-->
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common/heart2.css">
+    
 </head>
 <body>		
 
