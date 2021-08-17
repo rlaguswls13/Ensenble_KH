@@ -51,7 +51,7 @@ $(document).ready(function(){
 		$("#btn3").removeClass("myPage-btn").addClass("myPage-btn-checked");
 	}
 	if(location.href.toString().includes("rvList")){
-		$("#btn1").removeClass("myPage-btn-checked").addClass("myPage-btny");
+		$("#btn1").removeClass("myPage-btn-checked").addClass("myPage-btn");
 		$("#btn4").removeClass("myPage-btn").addClass("myPage-btn-checked");
 	}
 	
