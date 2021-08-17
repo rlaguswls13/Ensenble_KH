@@ -17,6 +17,8 @@ public class Rv {
 	private String rvPurpose;
 	private String rvEtc;
 	private String rvStatus;
+	private int wholePrice;
+	
 	
 	private String roomConfig;
 	
@@ -37,6 +39,72 @@ public class Rv {
 	
 	
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public int getWholePrice() {
+		return wholePrice;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setWholePrice(int wholePrice) {
+		this.wholePrice = wholePrice;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public String getRoomConfig() {
 		return roomConfig;
 	}
@@ -202,8 +270,9 @@ public class Rv {
 		return "Rv [rvNo=" + rvNo + ", memberNo=" + memberNo + ", memberNick=" + memberNick + ", roomNo=" + roomNo
 				+ ", rvDate=" + rvDate + ", rvTime=" + rvTime + ", rvPeople=" + rvPeople + ", rvCars=" + rvCars
 				+ ", rvAnimals=" + rvAnimals + ", rvPurpose=" + rvPurpose + ", rvEtc=" + rvEtc + ", rvStatus="
-				+ rvStatus + ", roomConfig=" + roomConfig + ", roomDiscount=" + roomDiscount + ", roomPrice="
-				+ roomPrice + ", roomName=" + roomName + ", optionList=" + optionList + "]";
+				+ rvStatus + ", wholePrice=" + wholePrice + ", roomConfig=" + roomConfig + ", roomDiscount="
+				+ roomDiscount + ", roomPrice=" + roomPrice + ", roomName=" + roomName + ", optionList=" + optionList
+				+ "]";
 	}
 
 
