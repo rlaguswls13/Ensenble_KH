@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,30 +48,43 @@
 					<div class="innerContainer">
 						<div class="reservationList">
 							<div id="reservationNo">예약번호 : ${reservation.rvNo} </div>
-							<hr>
-
+							
 							<div class="reservationDetail">
 								
 								<div id="reservationPreview">
 									<div class="roomName"> 예약 스튜디오 : ${reservation.roomName} </div>
 									<div class="reservationTime">예약 일정 : ${reservation.rvDate} | ${reservation.rvTime}</div>
 								</div>
-								<hr>
-
+								
 							</div>
 
 							<div class="reservationDetailList">
+								<div class="detailList1">
+									<div class="detail1-1">기본 구성</div>
+									<div class="detail1-2">${reservation.roomConfig}</div>
+								</div>
 								<div class="detailList2">
-									<div class="detail2-1">기본 구성</div>
-									<div class="detail2-2">${reservation.roomConfig}</div>
+									<div class="detail2-1">추가 옵션</div>
+									<div class="detail2-2">
+									<c:if test="${empty reservation.optionList }">없음</c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 1 }">${reservation.optionList[0].optionName}</c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 2 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName}</c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 3 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName},<br> ${reservation.optionList[2].optionName} </c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 4 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName},<br> ${reservation.optionList[2].optionName},<br> ${reservation.optionList[3].optionName},</c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 5 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName},<br> ${reservation.optionList[2].optionName},<br> ${reservation.optionList[3].optionName},<br> ${reservation.optionList[4].optionName}, </c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 6 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName},<br> ${reservation.optionList[2].optionName},<br> ${reservation.optionList[3].optionName},<br> ${reservation.optionList[4].optionName}, <br> ${reservation.optionList[5].optionName}</c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 7 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName}, <br> ${reservation.optionList[2].optionName},<br> ${reservation.optionList[3].optionName},<br> ${reservation.optionList[4].optionName}, <br> ${reservation.optionList[5].optionName},<br> ${reservation.optionList[6].optionName}</c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 8 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName}, <br> ${reservation.optionList[2].optionName},<br> ${reservation.optionList[3].optionName},<br> ${reservation.optionList[4].optionName}, <br> ${reservation.optionList[5].optionName},<br> ${reservation.optionList[6].optionName},<br> ${reservation.optionList[7].optionName}</c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 9 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName} , <br> ${reservation.optionList[2].optionName},<br> ${reservation.optionList[3].optionName},<br> ${reservation.optionList[4].optionName}, <br> ${reservation.optionList[5].optionName},<br> ${reservation.optionList[6].optionName},<br> ${reservation.optionList[7].optionName},<br> ${reservation.optionList[8].optionName}</c:if>
+                    	<c:if test="${fn:length(reservation.optionList) == 10 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName} , <br> ${reservation.optionList[2].optionName},<br> ${reservation.optionList[3].optionName},<br> ${reservation.optionList[4].optionName}, <br> ${reservation.optionList[5].optionName},<br> ${reservation.optionList[6].optionName},<br> ${reservation.optionList[7].optionName},<br> ${reservation.optionList[8].optionName},<br> ${reservation.optionList[9].optionName}</c:if>
+                    	
+									
+																	
+									</div>
 								</div>
 								<div class="detailList3">
-									<div class="detail3-1">추가 옵션</div>
-									<div class="detail3-2">카메라, 조명, 간식, 액자</div>
-								</div>
-								<div class="detailList4">
-									<div class="detail4-1">비고</div>
-									<div class="detail4-2">성인 : ${reservation.rvPeople} , 동물 : ${reservation.rvAnimals}</div>
+									<div class="detail3-1">비고</div>
+									<div class="detail3-2">성인 : ${reservation.rvPeople} , 동물 : ${reservation.rvAnimals}</div>
 								</div>
 								<hr>
 								<div class="totalPrice">가격 ${reservation.roomPrice}원</div>

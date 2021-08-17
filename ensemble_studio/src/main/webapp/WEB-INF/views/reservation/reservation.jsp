@@ -73,7 +73,7 @@
 				
 				<c:forEach items="${roomList}" var="room">
 				<div class="aRoom">
-					<input type="radio" id="A Room" value="${room.roomNo}" name="roomNo"
+					<input type="radio" id="roomNo" value="${room.roomNo}" name="roomNo"
 						price="${room.roomDiscountedPrice}"> <label for="${room.roomName}">${room.roomName}</label><br>
 					<img class="room-img" style="background-image:url('${contextPath}/${room.filePath}/${room.fileName}')">
 				</div>
@@ -223,7 +223,7 @@
 			</div>
 			<hr>
 			<div class="price">
-				<div id="totalPrice">140,000원</div>
+				<div id="totalPrice"><input type="hidden" name="wholePrice" id="wholePrice" value="">140,000원</div>
 				<div id="priceText">총 금액</div>
 			</div>
 			<hr>
@@ -338,7 +338,7 @@
 			});
 		 */
 		/*예약 버튼 클릭시 */
-		function validate() {
+		/* function validate() {
 			const roomNo = $("input[name='roomNo']"); //방번호
 			const rvDate = $("input[name='rvDate']"); //예약일 
 			const rvPeople = $("input[name='rvPeople']"); //예약시간 
@@ -359,7 +359,7 @@
 			console.log(rvPurpose)
 			console.log(rvTime)
 			console.log(inputOption)
-		}
+		} */
 		 
 		 $("[name=roomNo]").on("change", function(){
 			 const index = $("[name=roomNo]").index($(this));
@@ -372,22 +372,37 @@
 			 // reservationForm
 			 $("#totalPrice").text(price + "원");
 		 })
-		 
+		  
 		 // 옵션 값이 변할 때 마다
+			 
 		 $("[name=option]").on("change", function(){
+			 
 			 let totalPrice = 0;
 			 
 			 $("[name=option]").each(function(){
+				
 				if( $(this).prop("checked") == true){
 					totalPrice += Number($(this).attr("price"));
 				}
-				 
+				
+			
+				
 			 });
 			 
 			 totalPrice += Number( $("[name=roomNo]").attr("price") );
 			 
 			 $("#totalPrice").text(totalPrice + "원");
+			
+			 
+			 $("#wholePrice").val(totalPrice);
+			 
+			 console.log($("#wholePrice").val())
+			 
 		 });
+		
+		 
+		 
+		 
 		 
 		 
 		 

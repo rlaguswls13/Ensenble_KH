@@ -48,6 +48,11 @@ public class RvController {
 
 		pg.setMemberNo(loginMember.getMemberNo());
 		pg.setCurrentPage(cp);
+		
+		
+	
+		
+		
 
 		// 2) 전체 게시글 수를 조회하여 Pagination 관련 내용을 계산하고 값을 저장한 객체 반환받기
 		RvPagination pagination = service.getPagination(pg);
