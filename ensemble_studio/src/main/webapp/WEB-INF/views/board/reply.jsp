@@ -52,11 +52,11 @@
 }
 
 .replyUpdateContent{
-	width: 100% !important;
+	width: 100% !important;	
 }
 
 .update_btn_m{
-	margin-left: 75% !important;
+	margin-left: 70% !important;
 }
 
 </style>
@@ -69,19 +69,19 @@
        		<h5 id="replyTitle">답변</h5>
     	</c:when>
     	<c:otherwise>
-       		<h5 id="replyTitle">댓글 ${board.replyCount}</h5>
+       		<h5 id="replyTitle">댓글</h5>
     	</c:otherwise>
     	</c:choose>
     <hr>
             <c:choose>
             	<c:when test="${loginMember.memberGrade eq 'A'}">
             		<div class="row-sm-12 d-flex" id="input-replyArea">
-	                <div class="col-sm-1">
+	                <div class="col-sm-2">
 	                    <img class="rMImage" src="${contextPath}${loginMember.memberImage}" alt="null" width="50px">
 	                    <br>
 	                    <span>${loginMember.memberNick}</span>
 	                </div>
-	                <div class="col-sm-11">
+	                <div class="col-sm-10">
 	                	<div class="input-reply">
 	                    	<textarea class="py-0 my-0" id="input-reply"></textarea>
 	                    	<button class="btn btn-secondary btn_reply_add" id="addReply" onclick="addReply();">등록</button>
@@ -94,12 +94,12 @@
             	</c:when>
             	<c:when test="${loginMember.memberGrade eq 'G' && board.boardTypeNo != 4}">
             		<div class="row-sm-12 d-flex" id="input-replyArea">
-	                <div class="col-sm-1">
+	                <div class="col-sm-2">
 	                    <img class="rMImage" src="${contextPath}${loginMember.memberImage}" alt="null" width="50px">
 	                    <br>
 	                    <span>${loginMember.memberNick}</span>
 	                </div>
-	                <div class="col-sm-11">
+	                <div class="col-sm-10">
 	                	<div class="input-reply">
 	                    	<textarea class="py-0 my-0" id="input-reply"></textarea>
 	                    	<button class="btn btn-secondary btn_reply_add" id="addReply" onclick="addReply();">등록</button>
@@ -117,12 +117,12 @@
 		<c:forEach items="${rList}" var="reply">
 			<div class="reply-row">
 	            <div class="row-sm-12 d-flex" id="detail-replyArea">
-	                <div class="col-sm-1">
+	                <div class="col-sm-2">
 	                    <img class="rMImage" src="${contextPath}${reply.memberImage}" alt="null" width="50px">
 	                    <br>
 	                    <span class="rWriter">${reply.memberNk}</span>
 	                </div>
-	                <div class="col-sm-11">
+	                <div class="col-sm-10">
 	                    <div class="row-sm-12 d-flex">
 	                        <div class="col-sm-11 rContent">${reply.replyContent}</div>
 		                        <c:if test="${!empty loginMember}">
@@ -234,7 +234,7 @@ function selectReplyList(){
 		  var detailReplyArea = $("<div>").addClass("row-sm-12 d-flex").attr("id", "detail-replyArea");
 		  
 		  // 작성자 (왼쪽 영역)
-		  var cdivCol1 = $("<div>").addClass("col-sm-1");
+		  var cdivCol1 = $("<div>").addClass("col-sm-2");
 	      var replyArea 
 	      var rMImage = $("<img>").attr("src", "${contextPath}"+item.memberImage).attr("alt", "null").attr("width","50px").addClass("rMImage");
 	      var br = $("<br>")
@@ -243,7 +243,7 @@ function selectReplyList(){
 	      var rSpace = cdivCol1.append(rMImage).append(br).append(rWriter);
 	      
 	      // 작성 내용 오른쪽 영역
-	      var cdivCol2 = $("<div>").addClass("col-sm-11");
+	      var cdivCol2 = $("<div>").addClass("col-sm-10");
 	      
 	      // 첫 번째 row
 	      var cdivRow1 = $("<div>").addClass("row-sm-12 d-flex");
@@ -256,7 +256,7 @@ function selectReplyList(){
 	          var dropdownBtn = $("<button>").addClass("btn btn-secondary dropdown-toggle reply-btn")
 	          					.attr("id","dropdownMenu").attr("type","button")
 	          					.attr("data-toggle","dropdown").attr("aria-haspopup", "true")
-	          					.attr("aria-expanded", "false").attr("data-offset", "10,20").text(":");
+	          					.attr("aria-expanded", "false").attr("data-offset", "10,20").text(":").attr("onclick", "savedata(this)");
 	          // 신고, 수정, 삭제 btn 영역
 	          var replyBtnArea = $("<div>").addClass("dropdown-menu replyBtnArea").attr("aria-labelledby", "dropdownMenu");
 	          
