@@ -43,7 +43,11 @@
       <h3 style="text-align: center; font-family: 'Noto Serif KR', serif; font-weight: 600;">Notice</h3>
       <div style="padding:10px"></div>
       <div class="container">
-      
+      	<c:if test="${empty boardList}">
+      		<hr>
+      		게시글이 존재하지 않습니다.
+      		<hr>
+      	</c:if>
 	      <c:if test="${!empty boardList}">
 	      <c:forEach items="${boardList}" var="notice">
 	      	<c:if test="${!empty notice.atList }">
