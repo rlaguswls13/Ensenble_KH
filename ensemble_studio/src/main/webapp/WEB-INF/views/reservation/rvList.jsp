@@ -109,12 +109,12 @@
 	<%---------------------- Pagination start----------------------%>
 	<%-- 페이징 처리 시 주소를 쉽게 작성할 수 있도록 필요한 변수를 미리 선언 --%>
 
-	<c:set var="pageURL" value="list" />
+	<c:set var="pageURL" value="rvList" />
 
 	<c:set var="prev"
-		value="${pageURL}?cp=${pagination.prevPage}${searchStr}" />
+		value="${pageURL}?cp=${pagination.prevPage}" />
 	<c:set var="next"
-		value="${pageURL}?cp=${pagination.nextPage}${searchStr}" />
+		value="${pageURL}?cp=${pagination.nextPage}" />
 
 
 	<div class="my-5">
@@ -128,7 +128,7 @@
 			<%-- 현재 페이지가 2페이지 초과인 경우 --%>
 			<c:if test="${pagination.currentPage > 2 }">
 				<li><a class="page-link"
-					href="${pageURL}?cp=${pagination.currentPage - 1}${searchStr}">&lt;</a></li>
+					href="${pageURL}?cp=${pagination.currentPage - 1}">&lt;</a></li>
 			</c:if>
 
 
@@ -144,7 +144,7 @@
 
 					<c:otherwise>
 						<li><a class="page-link"
-							href="${pageURL}?cp=${p}${searchStr}">${p}</a></li>
+							href="${pageURL}?cp=${p}">${p}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -152,7 +152,7 @@
 			<%-- 현재 페이지가 마지막 페이지 미만인 경우 --%>
 			<c:if test="${pagination.currentPage < pagination.maxPage }">
 				<li><a class="page-link"
-					href="${pageURL}?cp=${pagination.currentPage + 1}${searchStr}">&gt;</a></li>
+					href="${pageURL}?cp=${pagination.currentPage + 1}">&gt;</a></li>
 			</c:if>
 
 			<%-- 현재 페이지가 마지막 페이지가 아닌 경우 --%>
