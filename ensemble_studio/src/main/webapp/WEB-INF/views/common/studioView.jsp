@@ -250,7 +250,7 @@
                     <div class="opt-text2">캐논 5D Mark II , 캐논 5D Mark  IV,  <br>70-200mm f 렌즈, 소프트박스 2개, <br>컬러필터,  반사판, 건조간식, 저키 </div>
                 </div>
                 <div style="padding: 60px;"></div>
-                <a href="#" style="color: black; font-weight: 500;">이용 후기 20건 전체 보기 &nbsp;&nbsp;<span style="color:#888">></span></a>
+                <a href="#" style="color: black; font-weight: 500;">이용 후기 ${countReview}건 전체 보기 &nbsp;&nbsp;<span style="color:#888">></span></a>
             </div>
             <div class="col-12 col-md-6 box1" >
                 <div class="pr-box" >
@@ -298,11 +298,11 @@
 	        <div class="width65">
 	            <h6><a href="../board/1/${review.boardNo }?cp=1">${review.boardTitle }</a></h6>
 	            <p style="font-size: 12px; line-height: 1.4; display:block; height:30px">
-	               ${review.boardContent }
+	               <c:out value='${fn:substring(review.boardContent.replaceAll("\\\<.*?\\\>",""),0, 10)}' />...
 	            </p>
 	            <div class="user-profile" style="background-image: url('${contextPath}${review.memberImage }');"></div>
 	            <div class="user-name">${review.memberNk }</div>
-	            <div class="time">${review.boardDT }</div>
+	            <div class="time">${fn:substring (review.boardDT,0,11) }</div>
 	            <div class="comments">댓글 ${review.replyCount }</div>
 	            <a href="#">
 	                <img src="https://drive.google.com/uc?id=1e719tW6BVTrSPiZQIxJZ8LUWWuNsx0Lc" height="15px">
@@ -311,7 +311,7 @@
 	                
 	        </div>
 	        <c:if test="${!empty review.atList }">
-	        <div class="q-img" style="background-image: url('${review.atList[0].atPath}${review.atList[0].atName}');"></div>
+	        <div class="q-img" style="background-image: url(${review.atList[0].atPath}/${review.atList[0].atName});"></div>
 	        </c:if>
 	        <div style="padding:5px"></div>
 	        <hr>

@@ -23,19 +23,20 @@
     float: right;
     }
     
-    .vertival-center{
+    .vertical-center{
     margin: auto;
     }
     
     .board_category{
     width: 110px;
-    border: 3px solid black;
-    background: grey;
-    margin-bottom: 2%;
-    border-radius: 10px;
+    border: 1px solid #FF657D;
+    background: white;
+    margin-bottom: 10px;
+    padding : 5px 10px 5px 10px;
+    border-radius: 15px;
     text-align: center;
     font-weight: bold;
-    color: white;
+    color: #FF657D;
     }
 	
 	.board_view_container{
@@ -47,8 +48,23 @@
 	  display: none;
 	}
 	
-	
-	
+	.date{
+		color :#888;
+		margin-left : 20px;
+		font-weight : 300;
+		width: 400px;
+	}
+	.btn-dropdown{
+		border : 1px solid #ddd;
+		border-radius : 100px;
+		width:40px; height: 40px;
+		position:absolute;
+		top:7px;
+	}
+	.dropdown-box{
+		position:relative;
+		right:5%;
+	}
 </style>
 </head>
 <body>
@@ -65,14 +81,15 @@
                          <h2 class=" ml-0">${board.boardTitle}</h2>
                          </div>
                     </div>
+                    <div style="padding:5px"></div>
                     <c:if test="${board.boardTypeNo!=4 && board.boardTypeNo!=3}">
                     <div class="row-sm-12 d-flex" >
-                        <div class="vertival-center ml-0">
-                            <img class="rMImage mr-2" src="${contextPath}${board.memberImage}" alt="null" width="50px">
-                            <span>${board.memberNk}</span>                                                 
+                        <div class="vertical-center ml-0">
+                            <img class="rMImage mr-2" src="${contextPath}${board.memberImage}" alt="null" width="50px"><br>
+                            <span style="line-height:2">${board.memberNk}</span>                                                 
                         </div>
-                        <div class="vertival-center">
-                        	<span>
+                        <div class="vertical-center">
+                        	<div class="date">
                         			<fmt:formatDate var="today" value="<%= new java.util.Date() %>"  pattern="yyyy-MM-dd"/>
 									<fmt:formatDate var="boardMT" value="${board.boardMT}" pattern="yyyy-MM-dd"/>
                             	<c:choose>                            		
@@ -83,23 +100,16 @@
 										<fmt:formatDate value="${board.boardMT}" pattern="HH:mm:ss"/>
 									</c:otherwise>
 								</c:choose>
-							</span>
+							</div>
                         </div>
-                        <div class="col-sm-1 text-center vertival-center">
+                     
+                        <div class="col-sm-2 text-center vertical-center">
                         	<jsp:include page="like.jsp"/>
                         </div>
-                        <div class="col-sm-1 text-center vertival-center">
-                            <span>조회수 ${board.boardReadCount}</span>
-                        </div>
-                        
-                        
-                        <c:if test="${loginMember.memberNo != board.memberNo }">
-                        	<div class="dropdown  btn_normal_board"></div>
-                        </c:if>
                         
                         <c:if test="${loginMember.memberNo == board.memberNo }">
-	                        <div class="dropdown btn_normal_board">	                        
-		                            <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenu"
+	                        <div class="dropdown-box">	                        
+		                            <button type="button" class="btn btn-dropdown dropdown-toggle" id="dropdownMenu"
 		                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
 		                                :
 		                            </button>
@@ -117,13 +127,15 @@
                 </div>
                
             <hr>
-            <div class="board_content" id="review_detail_context">${board.boardContent}</div>      
+            <div class="board_content" id="review_detail_context">${board.boardContent}</div>     
+            <div style="padding:20px"></div> 
+            <span style="color:#888">조회수 ${board.boardReadCount}</span>
       </form>
       <%-- 댓글 영역 --%>
       		
       		<c:if test="${board.boardTypeNo != 3}">
 				<jsp:include page="reply.jsp"/>
-				<hr>
+				
          	</c:if>
             <a href="list?type=${param.type}&cp=${param.cp}${searchStr}"
             	class="btn btn-secondary float-right mr-2 btn-insert">목록으로</a>  

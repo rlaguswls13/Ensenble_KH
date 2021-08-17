@@ -56,8 +56,6 @@ h5 {
 	float: left;
 	width: 200px;
 	height: 210px;
-	font-size: 20px;
-	font-weight: bold;
 }
 
 .optionRadio {
@@ -111,11 +109,11 @@ h5 {
 }
 
 .reservationAttentionSentence {
-	border: 1px solid gray;
+	border: 1px solid #ccc;
 	width: 800px;
-	height: 300px;
 	color: black;
 	font-size: 15px;
+	padding: 20px;
 }
 
 /* 가격 */
@@ -141,7 +139,6 @@ h5 {
 
 /* 회원정보 */
 .userInfo {
-	height: 200px;
 	width: 800px;
 }
 

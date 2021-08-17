@@ -83,13 +83,17 @@
     display: inline-block;
 }
 
-#board_img_div{
 
-}
-
-#board_img{
+.board_img{
 	width: 400px;
     height: 500px;
+    background-repeat: no-repeat; 
+    background-size:cover; 
+    background-position: center;
+}
+
+.board_img:hover{
+	opacity : 0.8;
 }
 
 #shell{
@@ -103,7 +107,6 @@
 
 .review-writer{
 	margin-left: 10%;
-	margin-bottom: 5px;
 }
 
 .like-content{
@@ -117,7 +120,24 @@
     font-weight: bold;
     margin-left: 7%;
 }
-
+.memberImage{
+	width:50px;
+	height: 50px;
+	border-radius : 100px;	
+	display: inline-block;
+	background-repeat: no-repeat; 
+    background-size:cover; 
+    background-position: center;
+}
+.memberNick{
+	position: relative;
+	bottom: 20px;
+	height: 30px;
+	vertical-align:middle;
+	display : inline-block;
+	font-weight: 500;
+	font-size : 24px;
+}
 </style>
 </head>
 <body>
@@ -161,14 +181,11 @@
 		</div>
 	</div>
         </div>
-
-        <div class="row-sm-12 d-flex justify-content-end text-center">
             <c:if test="${!empty loginMember}">
 			<a  class="btn btn-insert" id="insertBtn" href='insert'>
 				<img src="${contextPath}/resources/images/common/edit.png" width="30px">
 			</a>
-		</c:if>
-        </div>
+			</c:if>
 
         <!-- 리뷰 내용 추가-->
         <div class="row-sm-12" id="shell" >
@@ -179,35 +196,31 @@
 			</c:when>
 		<c:otherwise>					
 			<c:forEach items="${boardList}" var="board">
-        
-            <div class="row-sm-12 mr-4 my-4" id="board_content">
-                <div class="d-flex row-sm-12">
-                    <div class="vertival-center review-writer">
-                    	<img class="rMImage mr-2" src="/ensemble/resources/images/common/profile-img-default.png" alt="null" width="50px">
-                    	<span>${board.memberNk}</span>
-                    </div>
-                    <div class="like-content">
-                        <c:if test="${!empty loginMember}">
-                        	<jsp:include page="like.jsp"/>
-                        </c:if>
-                    </div>
-                </div>
-                <div class="row-sm-12">
-                    <div class="col-sm-12" id="board_img_div">
-                        <a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
-                        <img id="board_img"src="${board.atList[0].atPath}/${board.atList[0].atName}" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div class="d-flex row-sm-12 ml-0 pl-0">
-                    <div class="col-sm-12" id="title-content">
-                        <a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
-                        ${board.boardTitle}
-                        </a>
-                    </div>
-                </div>
-            </div> 
-       
+	            <div class="row-sm-12 mr-4 my-4" id="board_content">
+	                <div class="d-flex row-sm-12">
+	                    <div class="review-writer">
+	                    	<div class="memberImage mr-2" style="background-image:url('${contextPath}/${board.memberImage}')"></div>
+	                    	<div class="memberNick">${board.memberNk}</div>
+	                    </div>
+	                    <div class="like-content">
+	                        
+	                    </div>
+	                </div>
+	                <div class="row-sm-12">
+	                    <div class="col-sm-12" id="board_img_div">
+	                        <a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
+	                        <img class="board_img" style="background-image:url('${board.atList[0].atPath}/${board.atList[0].atName}')">
+	                        </a>
+	                    </div>
+	                </div>
+	                <div class="d-flex row-sm-12 ml-0 pl-0">
+	                    <div class="col-sm-12" id="title-content">
+	                        <a href="${board.boardNo}?cp=${pagination.currentPage}${searchStr}">
+	                        ${board.boardTitle}
+	                        </a>
+	                    </div>
+	                </div>
+	            </div> 
     			</c:forEach>
 			
 			</c:otherwise>
@@ -260,11 +273,26 @@
 				</ul>
 			</div>
 			<%---------------------- Pagination end----------------------%>
-    
 	<jsp:include page="../common/footer.jsp"/>
 	
     <script>
-
+    $(document).ready(function(){
+		if(location.href.toString().includes("bctN=1")){
+			$("#ct-btn0").removeClass("btn-category-checked").addClass("btn-category");
+			$("#ct-btn1").removeClass("btn-category").addClass("btn-category-checked");
+		}
+		if(location.href.toString().includes("bctN=2")){
+			$("#ct-btn0").removeClass("btn-category-checked").addClass("btn-category");
+			$("#ct-btn2").removeClass("btn-category").addClass("btn-category-checked");
+		}
+		if(location.href.toString().includes("bctN=3")){
+			$("#ct-btn0").removeClass("btn-category-checked").addClass("btn-category");
+			$("#ct-btn3").removeClass("btn-category").addClass("btn-category-checked");
+		}
+		
+		
+	})
+	
     </script>
 
 </body>

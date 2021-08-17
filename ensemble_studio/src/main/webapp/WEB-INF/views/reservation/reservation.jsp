@@ -33,40 +33,59 @@
 <script src="//code.jquery.com/jquery-1.12.4.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
-	href="${contextPath}/resources/css/reservation/reservation.css"
+	href="${contextPath}/resources/css/reservation/reservation.css?ver=234"
 	type="text/css">
-
+<style>
+.bold-text{
+	display:inline-block;
+	width : 200px;
+	color: black;
+}
+.room-img{
+	width : 180px; height:150px;
+	 background-repeat: no-repeat; 
+     background-size:cover; 
+     background-position: center;
+}
+    .btn-ensemble{
+        background-color: #FDCDCD;
+        padding-left: 25px; padding-right: 25px;
+        float: right;
+        margin-right: 20px;
+        padding-top : 5px; padding-bottom: 5px;
+    }
+</style>
 <body>
 
 	<div class="container">
-
+		<div style="padding:10px"></div>
+		
 		<form method="POST" action="reservation" class="needs-validation"
 			name="reservationForm" id="reservationForm"
 			onsubmit="return validate();">
 
-			<h2>Reservation</h2>
+			<h3 style="font-family: 'Noto Serif KR', serif; font-weight: 600; display:block; line-height:3">Reservation</h3>
+			
 			<div class="studio">
-				<h3>스튜디오 선택</h3>
-				<h5>원하시는 스튜디오를 선택해주세요</h5>
+				<h5 class="bold-text">1. 스튜디오 선택</h5>
+				<span style="color:#888">원하시는 스튜디오를 선택해주세요</span>
+				<div style="padding:5px;"></div>
+				
 				<c:forEach items="${roomList}" var="room">
 				<div class="aRoom">
 					<input type="radio" id="roomNo" value="${room.roomNo}" name="roomNo"
 						price="${room.roomDiscountedPrice}"> <label for="${room.roomName}">${room.roomName}</label><br>
-					<img src="${contextPath}/${room.filePath}/${room.fileName}"
-						width="190 px " height="150 px">
+					<img class="room-img" style="background-image:url('${contextPath}/${room.filePath}/${room.fileName}')">
 				</div>
 				</c:forEach>
 			
-
-
-
-
-
-
 			</div>
+			
 			<div class="reservationDate">
-				<h3>예약 일자 및 시간</h3>
-				<h5>예약을 원하시는 일자와 시간을 선택해주세요</h5>
+				<h5 class="bold-text">2. 예약 일자 및 시간</h5>
+				<span style="color:#888">예약을 원하시는 일자와 시간을 선택해주세요</span>
+				<div style="padding:5px;"></div>
+
 				<div class="reservationCalender">
 					<input type="text" id="datepicker" name="rvDate" placeholder="날짜선택"
 						onchange="selectRvTimeList()">
@@ -89,6 +108,11 @@
 			</div>
 			<div class="reservationOption1">
 				<div class="reservationOption">
+				
+				<h5 class="bold-text">3. 촬영 정보 선택</h5>
+				<span style="color:#888">옵션을 선택해주시고 기타 내용을 작성해주세요.</span>
+				<div style="padding:10px;"></div>
+				
 					<div class="optionDetail">옵션 내용</div>
 
 
@@ -100,7 +124,7 @@
 									<input type="checkbox" id="${option.optionName}"
 										value="${option.optionNo}" name="option"
 										price="${option.optionPrice}">
-									<label for="${option.optionName}">${option.optionName})</label>
+									<label for="${option.optionName}">${option.optionName}</label>
 									<br>
 								</c:if>
 							</c:forEach>
@@ -124,24 +148,62 @@
 
 
 				</div>
-				<div class="rvDetail2">
-
-					이용 인원 수 : <input type="text" name="rvPeople" required><br> 방문
-					차량 수 : <input type="text" name="rvCars" required><br> 반려 동물 수 :
-					<input type="text" name="rvAnimals" required><br> 촬영 내용
-					&nbsp;&nbsp;&nbsp; : <input type="text" name="rvPurpose" required><br>
-					비고 :<br>
-					<textarea rows="5" cols="50" name="rvEtc" style="resize: none;" required> </textarea>
-
+				<div class="row">
+					<div class="col-2">
+						이용 인원 수 
+					</div>
+					<div class="col-2">
+						<input type="number" class="form-control" name="rvPeople" required>
+					</div>
 				</div>
-
+				<div style="padding:10px"></div>
+				<div class="row">
+					<div class="col-2">
+						방문 차량 수 
+					</div>
+					<div class="col-2">
+						<input type="number" class="form-control" name="rvCars" required>
+					</div>
+				</div>
+				<div style="padding:10px"></div>
+				<div class="row">
+					<div class="col-2">
+						반려 동물 수 
+					</div>
+					<div class="col-2">
+						<input type="number" class="form-control" name="rvAnimals" required>
+					</div>
+				</div>
+				<div style="padding:10px"></div>
+				
+				<div class="row">
+					<div class="col-2">
+						촬영 내용
+					</div>
+					<div class="col-7"><input type="text" class="form-control" name="rvPurpose" required></div>
+				</div>
+				<div style="padding:10px"></div>
+				<div class="row">
+					<div class="col-2">
+						비고
+					</div>
+					<div class="col-7">
+						<textarea rows="5" class="form-control" cols="50" name="rvEtc" style="resize: none;" required> </textarea>
+					</div>
+					
+				</div>
 			</div>
+			
+			<div style="padding:40px"></div>
 
 			<div class="reservationAttention">
 				<div id="reservationAttentionText">
-					<div id="reservationAttentionText1">예약시 주의사항</div>
-					<div id="reservationAttentionText2">주의사항을 필독해주세요</div>
+									
+				<h5 class="bold-text">4. 예약시 주의사항</h5>
+				<span style="color:#888">주의사항을 필독해주세요</span>
 				</div>
+				<div style="padding:5px;"></div>
+				
 				<div class="reservationAttentionSentence">
 					예약 시 꼭 알아두세요!<br> 예약 가능한 스튜디오 및 시간을 확인하신 후 예약을 진행해주세요.<br>
 					세트장 예약은 사이트를 통해서만 가능합니다. 유선 예약은 불가합니다.<br> 이용시간은 촬영시간이 아닌
@@ -165,8 +227,13 @@
 				<div id="priceText">총 금액</div>
 			</div>
 			<hr>
-
+			
+			<div style="padding:10px"></div>
+			
 			<h3>회원정보</h3>
+			
+			<div style="padding:10px"></div>
+				
 			<div class="userInfo">
 				<div class="info">
 					<div class="text">아이디</div>
@@ -184,14 +251,21 @@
 					<div class="text">휴대폰</div>
 					<div class="infodt">${loginMember.memberPhone}</div>
 				</div>
-
+				<div class="info">
+					<div class="text">반려동물 </div>
+					<div class="infodt">
+						<c:forEach items="${loginMember.aniList}" var="ani">
+						${ani.aniName}/${ani.aniGender }/${ani.aniType }/${ani.aniAge }살/${ani.aniKg }kg<br>				
+						</c:forEach> 
+					</div>
+				</div>
+				<div style="padding:10px;"></div>
 
 			</div>
 			<hr>
 
 			<div class="row4">
-				<button class="btn btn-primary btn-lg button1 " type="submit"
-					style="width: 130px;">예약하기</button>
+				<button class="btn btn-ensemble btn-lg button1 " type="submit">예약하기</button>
 			</div>
 		</form>
 	</div>
