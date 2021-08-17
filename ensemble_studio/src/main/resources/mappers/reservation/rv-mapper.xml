@@ -95,6 +95,7 @@
 		WHERE
 		MEMBER_NO =
 		#{pagination.getMemberNo()}
+		AND RV_STATUS = 'Y'
 		ORDER BY RV_NO DESC
 	</select>
 	<select id="selectReservationList" resultMap="rv_rm">

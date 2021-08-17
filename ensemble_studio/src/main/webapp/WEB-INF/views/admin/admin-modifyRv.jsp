@@ -304,7 +304,7 @@ background-color: #FDCDCD;
 					<div class="row">
 						<div class="col-2">이용 인원 수</div>
 						<div class="col-2">
-							<input type="number" class="form-control" name="rvPeople"
+							<input type="number" class="form-control" name="rvPeople" value="${rv.rvPeople}"
 								required>
 						</div>
 					</div>
@@ -312,14 +312,14 @@ background-color: #FDCDCD;
 					<div class="row">
 						<div class="col-2">방문 차량 수</div>
 						<div class="col-2">
-							<input type="number" class="form-control" name="rvCars" required>
+							<input type="number" class="form-control" name="rvCars"  value="${rv.rvCars}"  required>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-2">반려 동물 수</div>
 						<div class="col-2">
-							<input type="number" class="form-control" name="rvAnimals"
+							<input type="number" class="form-control" name="rvAnimals" value="${rv.rvAnimals}" 
 								required>
 						</div>
 					</div>
@@ -328,7 +328,7 @@ background-color: #FDCDCD;
 					<div class="row">
 						<div class="col-2">촬영 내용</div>
 						<div class="col-7">
-							<input type="text" class="form-control" name="rvPurpose" required>
+							<input type="text" class="form-control" name="rvPurpose" value="${rv.rvPurpose}" required>
 						</div>
 					</div>
 
@@ -336,7 +336,7 @@ background-color: #FDCDCD;
 						<div class="col-2">비고</div>
 						<div class="col-7">
 							<textarea rows="5" class="form-control" cols="50" name="rvEtc"
-								style="resize: none;" required> </textarea>
+								style="resize: none;" required>${rv.rvEtc} </textarea>
 						</div>
 
 					</div>
@@ -346,6 +346,7 @@ background-color: #FDCDCD;
 					<div class="row price">
 						<div id="priceText" class="col-8">총 금액</div>
 						<div id="totalPrice" class="col-2">0원</div>
+					
 						<input type="hidden" name="wholePrice" id="wholePrice" value="">
 					</div>
 

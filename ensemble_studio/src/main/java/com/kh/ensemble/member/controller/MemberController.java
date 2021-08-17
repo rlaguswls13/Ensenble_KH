@@ -53,6 +53,7 @@ public class MemberController {
 	public String snsLoginCallback(Model model, @RequestParam("code") String code, HttpSession session,
 								HttpServletRequest request, HttpServletResponse response,
 								RedirectAttributes ra) throws Exception {
+		
 		System.out.println(code);
 
 		SnsValue sns = null;
@@ -102,19 +103,6 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// 로그인 화면 전환 Controller
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login(Model model) {
@@ -173,9 +161,7 @@ public class MemberController {
 		return path;
 	}
 
-	
-	
-	
+
 	// 로그아웃 Controller
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout(SessionStatus status, @RequestHeader("referer") String referer) {
@@ -216,7 +202,8 @@ public class MemberController {
 		return result;
 	}
 	
-	//------------------------------------------------------------------------
+
+	
 
 	// 마이페이지 화면 전환 Controller
 	@RequestMapping(value = "myPage", method = RequestMethod.GET)
@@ -234,6 +221,7 @@ public class MemberController {
 	public String insertAnimal() {
 		return "member/insertPet";
 	}
+	
 	
 	//반려동물 정보 추가하기
 	@RequestMapping(value = "insertAnimal", method = RequestMethod.POST)

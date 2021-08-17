@@ -148,12 +148,13 @@
 
 
 				</div>
+				<c:forEach items="${rv}" var="reservation"></c:forEach>
 				<div class="row">
 					<div class="col-2">
 						이용 인원 수 
 					</div>
 					<div class="col-2">
-						<input type="number" class="form-control" name="rvPeople" required>
+						<input type="number" class="form-control" name="rvPeople" value="${rv.rvPeople}"  required>
 					</div>
 				</div>
 				<div style="padding:10px"></div>
@@ -162,7 +163,7 @@
 						방문 차량 수 
 					</div>
 					<div class="col-2">
-						<input type="number" class="form-control" name="rvCars" required>
+						<input type="number" class="form-control" name="rvCars" value="${rv.rvCars}" required>
 					</div>
 				</div>
 				<div style="padding:10px"></div>
@@ -171,7 +172,7 @@
 						반려 동물 수 
 					</div>
 					<div class="col-2">
-						<input type="number" class="form-control" name="rvAnimals" required>
+						<input type="number" class="form-control" name="rvAnimals" value="${rv.rvAnimals}" required>
 					</div>
 				</div>
 				<div style="padding:10px"></div>
@@ -180,7 +181,7 @@
 					<div class="col-2">
 						촬영 내용
 					</div>
-					<div class="col-7"><input type="text" class="form-control" name="rvPurpose" required></div>
+					<div class="col-7"><input type="text" class="form-control" name="rvPurpose" value="${rv.rvPurpose}" required></div>
 				</div>
 				<div style="padding:10px"></div>
 				<div class="row">
@@ -188,7 +189,7 @@
 						비고
 					</div>
 					<div class="col-7">
-						<textarea rows="5" class="form-control" cols="50" name="rvEtc" style="resize: none;" required> </textarea>
+						<textarea rows="5" class="form-control" cols="50" name="rvEtc" style="resize: none;" required>${rv.rvEtc}</textarea>
 					</div>
 					
 				</div>
@@ -223,7 +224,7 @@
 			</div>
 			<hr>
 			<div class="price">
-				<div id="totalPrice">140,000원</div>
+				<div id="totalPrice">0원</div>
 				<input type="hidden" name="wholePrice" id="wholePrice" value="">
 				<div id="priceText">총 금액</div>
 			</div>

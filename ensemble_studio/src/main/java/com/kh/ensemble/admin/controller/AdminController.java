@@ -41,6 +41,8 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 
+	
+	
 	@RequestMapping("/admin")
 	public String admin(Model model) {
 		List<Rv> mainRvList = service.selectMainRvList();
@@ -243,7 +245,7 @@ public class AdminController {
 		
 		List<Option> selectedOptionList= service.selectedOption(rvNo);
 		
-		List<Room> roomList = service.selectRoomList(); //그냥 방정보 
+		List<Room> roomList = service.selectRoomList(); //아무것도 어
 		
 		Member rvMember = service.selectMember(rv);
 		
