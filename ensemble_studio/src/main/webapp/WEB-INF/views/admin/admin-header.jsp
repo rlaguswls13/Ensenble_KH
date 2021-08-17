@@ -20,7 +20,7 @@
 	<!-- 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<link rel="stylesheet" href="${contextPath}/resources/css/admin/admin-header.css?ver=234">
+<link rel="stylesheet" href="${contextPath}/resources/css/admin/admin-header.css?ver=345">
 <body>
     <div class="wrapper">
         <div class="sidebar">
@@ -40,7 +40,7 @@
                 <li><a href="${contextPath}/admin/sales"><i class="fa fa-line-chart"></i>매출현황</a></li>
                 <li><a href="${contextPath}/admin/member"><i class="fa fa-user"></i>회원 관리</a></li>
             </ul>
-        </ul>
+        </div>	
     </div>
     <c:if test="${!empty title }">
     	<script>
