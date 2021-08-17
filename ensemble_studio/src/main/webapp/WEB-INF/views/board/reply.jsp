@@ -33,6 +33,30 @@
 
 .reply-btn{
 	margin-left: 10px;
+	border: 1px solid #ddd;
+    border-radius: 100px;
+    background-color: #FFF5F5;
+    width: 40px;
+    height: 40px;
+    color: black;
+}
+
+.reply-btn:hover{
+	background-color: #ff657d;	
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active, 
+.btn-secondary:not(:disabled):not(.disabled):active,
+.show>.btn-secondary.dropdown-toggle{
+	background-color: #ff657d;	
+}
+
+.replyUpdateContent{
+	width: 100% !important;
+}
+
+.update_btn_m{
+	margin-left: 75% !important;
 }
 
 </style>
@@ -45,7 +69,7 @@
        		<h5 id="replyTitle">답변</h5>
     	</c:when>
     	<c:otherwise>
-       		<h5 id="replyTitle">댓글 ${board.replyCount }</h5>
+       		<h5 id="replyTitle">댓글 ${board.replyCount}</h5>
     	</c:otherwise>
     	</c:choose>
     <hr>
@@ -68,7 +92,7 @@
 	                </div>
 	            	</div>
             	</c:when>
-            	<c:when test="${logneMember.memberGrade eq 'G' && board.boardTypeNo != 4}">
+            	<c:when test="${loginMember.memberGrade eq 'G' && board.boardTypeNo != 4}">
             		<div class="row-sm-12 d-flex" id="input-replyArea">
 	                <div class="col-sm-1">
 	                    <img class="rMImage" src="${contextPath}${loginMember.memberImage}" alt="null" width="50px">
@@ -85,7 +109,7 @@
 	                	</div>
 	                </div>
 	            </div>            	
-            	</c:when>
+            	</c:when>              
             </c:choose>
        
         
@@ -141,7 +165,7 @@
 </body>
 
 <script>
-
+	console.log("${loginMember.memberGrade}");
 	//로그인한 회원 번호. 비로그인 시 "" (빈문자열)
 	const loginMemberNo = "${loginMember.memberNo}";
 	const loginMember = "&{loginMember}";
@@ -262,7 +286,7 @@ function selectReplyList(){
 	      
 	      // 댓글 요소 하나로 합치기
 	      detailReplyArea.append(rSpace).append(lSpace);
-	      li.append(detailReplyArea)
+	      li.append(detailReplyArea).append($("<hr>"));
 	      
 	      // 합쳐진 댓글을 화면에 배치
 	      $("#replyListArea").append(li);
@@ -316,7 +340,7 @@ function showUpdateReply(replyNo, el){
 	// 기존 댓글 영역
 	var replyArea = $(el).parent().parent().parent().parent();
 	
-
+	
 	
 	// 기존 댓글 영역 삭제
 	$(el).parent().parent().parent().children().eq(0).empty();
@@ -325,24 +349,26 @@ function showUpdateReply(replyNo, el){
 	// 기존 버튼 영역 삭제
 	
 	// 작성 영역
-	var inputText = $("<textarea>").addClass("replyUpdateContent").attr("rows", "auto").attr("cols", "100").val(beforeContent);
+	var inputText = $("<textarea>").addClass("py-0 my-0 replyUpdateContent").attr("id", "input-reply").val(beforeContent);
 		
 	// 수정, 취소 btn 영역
-	var updateReply = $("<button>").addClass("btn btn-primary ml-1 mb-4 my-2").text("댓글수정").attr("onclick", "updateReply(" + replyNo + ", this)");
-	var cancelBtn = $("<button>").addClass("btn btn-primary ml-1 mb-4 my-2").text("취소").attr("type", "button").attr("onclick", "updateCancel(this)");
+	var updateReply = $("<button>").addClass("btn btn-secondary ml-1 mb-4 my-2 update_btn_m").text("댓글수정").attr("onclick", "updateReply(" + replyNo + ", this)");
+	var cancelBtn = $("<button>").addClass("btn btn-secondary ml-1 mb-4 my-2").text("취소").attr("type", "button").attr("onclick", "updateCancel(this)");
 	
 	// 통합
 	$(el).parent().parent().parent().children().eq(0).append(inputText);
-	$(el).parent().parent().parent().append(updateReply).append(cancelBtn);
+	$(el).parent().parent().parent().parent().append(updateReply).append(cancelBtn);
 	$(el).parent().parent().remove();
-
+	
+	// 태그 변경
+	$(".rContent")
 }
 
 
 //댓글 수정
 function updateReply(replyNo, el){
 	
-	const replyContent = $(el).prev().children().eq(0).val();
+	const replyContent = $(el).prev().children().children().eq(0).val();
 
 	$.ajax({
 		url : "${contextPath}/reply/updateReply",
