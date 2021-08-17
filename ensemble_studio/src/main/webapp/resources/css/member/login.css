@@ -50,12 +50,7 @@
 	padding-left : 10px;
 }
 
-.login-btn:active {
-	border-color: none;
-	box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.3);
-	top: 2px;
-	position: relative;
-}
+
 
 .login_Form {
 	width: 100%;

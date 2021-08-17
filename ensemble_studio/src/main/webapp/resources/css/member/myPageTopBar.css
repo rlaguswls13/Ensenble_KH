@@ -32,9 +32,9 @@
 }
 
 .myPage-btn:hover {
-	background-color : white;
-	color : #FF657D;
-	border : 1px solid #FF657D;
+	background-color : white !important;
+	color : #FF657D !important;
+	border : 1px solid #FF657D !important;
 }
 
 .myPage-btn-checked {
@@ -49,4 +49,8 @@
 	background-color : white;
 	color : #FF657D;
 	border : 1px solid #FF657D;
+}
+
+.social-btn:hover {
+	cursor: pointer;
 }

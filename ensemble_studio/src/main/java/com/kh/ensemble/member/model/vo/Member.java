@@ -18,6 +18,7 @@ public class Member {
 	private String memberGrade;
 	
 	private List<Animal> aniList;
+
 	
 	public Member() {}
 

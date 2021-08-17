@@ -130,15 +130,23 @@ public class MemberServiceImpl implements MemberService {
 	// 회원 탈퇴 Service
 	@Override
 	public int secession(String currentPwd, Member loginMember) {
-		
-		String savePwd = dao.selectPassword(loginMember.getMemberNo());
 
 		int result = 0;
-		
-		// 얻어온 비밀번호와 입력한 비밀번호가 일치하는지
-		if (bCryptPasswordEncoder.matches(currentPwd, savePwd)) {
+
+		if (loginMember.getMemberPath().equals("S")) { // 소셜회원인 경우 바로 탈퇴
 
 			result = dao.secession(loginMember);
+
+		} else { // 일반회원인 경우 비밀번호 암호화 후 탈퇴 
+
+			String savePwd = dao.selectPassword(loginMember.getMemberNo());
+
+			// 얻어온 비밀번호와 입력한 비밀번호가 일치하는지
+			if (bCryptPasswordEncoder.matches(currentPwd, savePwd)) {
+
+				result = dao.secession(loginMember);
+
+			}
 		}
 		return result;
 	}
@@ -160,16 +168,15 @@ public class MemberServiceImpl implements MemberService {
 	// 메일 발송 메소드
 	@Override
 	public void sendEmail(Member member, String div) throws Exception {
-		//System.out.println(member);
+		// System.out.println(member);
 		String setfrom = "ensemblesto@gmail.com"; // 보내는 사람 이메일
 		String tomail = member.getMemberEmail(); // 받는 사람 이메일
 		String title = "앙상블스튜디오 임시 비밀번호 발송"; // 메일 제목
 		String key = member.getMemberPw();
 
-		String content = member.getMemberId() + " 님의 임시 비밀번호입니다. <br>"
-				+ "비밀번호를 변경하여 사용해주세요.<br>"
-				+ "임시비밀번호 : <span style=\"color:blueviolet\">" + key +"</span>"; // 내용
-		
+		String content = member.getMemberId() + " 님의 임시 비밀번호입니다. <br>" + "비밀번호를 변경하여 사용해주세요.<br>"
+				+ "임시비밀번호 : <span style=\"color:blueviolet\">" + key + "</span>"; // 내용
+
 		try {
 
 			MimeMessage message = mailSender.createMimeMessage();
@@ -179,8 +186,7 @@ public class MemberServiceImpl implements MemberService {
 			messageHelper.setTo(tomail); // 받는사람 이메일
 			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
 			messageHelper.setText(content, true); // 메일 내용
-			
-		
+
 			mailSender.send(message);
 		} catch (Exception e) {
 			System.out.println(e);
@@ -188,30 +194,28 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
-	
-
 	// 비밀번호 찾기 메소드
 	@Override
 	public int findPwd(HttpServletResponse response, Member findMember) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 
 		Member ck = dao.readMember(findMember.getMemberId());
-		
+
 		PrintWriter out = response.getWriter();
 
 		int result = 0;
-		
+
 		// 가입된 아이디가 없으면
 		if (dao.idDupCheck(findMember.getMemberId()) == 0) {
-			//out.print("등록되지 않은 아이디입니다.");
-			//out.close();
+			// out.print("등록되지 않은 아이디입니다.");
+			// out.close();
 			result = 2;
 		}
 		// 가입된 이메일이 아니면
 		else if (!findMember.getMemberEmail().equals(ck.getMemberEmail())) {
 
 			result = 3;
-			
+
 		} else {
 			// 임시 비밀번호 생성
 			String pw = "";
@@ -219,100 +223,95 @@ public class MemberServiceImpl implements MemberService {
 				pw += (char) ((Math.random() * 26) + 97);
 			}
 			findMember.setMemberPw(bCryptPasswordEncoder.encode(pw));
-			
+
 			// 비밀번호 변경
 			result = dao.updatePwd(findMember);
-			
+
 			// 비밀번호 변경 메일 발송
 			findMember.setMemberPw(pw);
 			sendEmail(findMember, "findpw");
 		}
-		
+
 		return result;
 	}
 
 	// 아이디 찾기 메소드
 	@Override
 	public String findId(Member findMember) throws Exception {
-		
+
 		String result = "";
 		try {
 			result = dao.findId(findMember);
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 
 	// 네이버 로그인 메소드
 	@Override
 	public Member naverLogin(Member navermember) {
-		
+
 		return dao.naverLogin(navermember);
 	}
-	
-	
 
 	// 네이버 DB에 저장 메소드
 	@Override
 	public int naverSingUp(Member navermember) {
-		
+
 		int idCheck = dao.idDupCheck(navermember.getMemberId());
 		int result = 0;
-		
-		// 이미 가입된 아이디가 아니면 
-		if(idCheck == 0) {
-			
+
+		// 이미 가입된 아이디가 아니면
+		if (idCheck == 0) {
+
 			result = dao.naverSignUp(navermember); // 가입 시키고 DB에 저장되면 result 1 반환
-			
-		} else if(idCheck == 1) { // 이미 가입된 아이디면
-			
+
+		} else if (idCheck == 1) { // 이미 가입된 아이디면
+
 			result = 1;
 		}
-		
+
 		return result;
 	}
-	
 
-	//--------------------------------------------------------------------
-	
-	//반려동물 정보 추가
+	// --------------------------------------------------------------------
+
+	// 반려동물 정보 추가
 	@Override
 	public int insertAnimal(Animal animal) {
 		return dao.insertAnimal(animal);
 	}
 
-	//반려동물 정보 삭제
+	// 반려동물 정보 삭제
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public int deleteAnimal(int aniNo) {
 		return dao.deleteAnimal(aniNo);
 	}
-	
-	//반려동물 정보 수정화면을 위한 조회
+
+	// 반려동물 정보 수정화면을 위한 조회
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Animal selectAnimal(int aniNo) {
 		return dao.selectAnimal(aniNo);
 	}
 
-	//반려동물 정보 수정
+	// 반려동물 정보 수정
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public int updateAnimal(Animal animal) {
 		return dao.updateAnimal(animal);
 	}
 
-	//로그인멤버 예약리스트 조회
+	// 로그인멤버 예약리스트 조회
 	@Override
 	public List<Rv> selectRvList(int memberNo) {
 		return dao.selectRvList(memberNo);
 	}
-	
-	
-	//--------------------------------------------------------------------
-	
-	
+
+	// --------------------------------------------------------------------
+
 }
