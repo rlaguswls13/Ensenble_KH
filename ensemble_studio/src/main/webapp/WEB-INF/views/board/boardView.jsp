@@ -90,7 +90,8 @@
                          </div>
                     </div>
                     <div style="padding:5px"></div>
-                    <c:if test="${board.boardTypeNo!=4 && board.boardTypeNo!=3}">
+                    
+                    <c:if test="${board.boardTypeNo!=3}">
                     <div class="row-sm-12 d-flex" >
                         <div class="vertical-center ml-0">
                             <img class="rMImage mr-2" style="background-image:url('${contextPath}${board.memberImage}')" ><br>
@@ -110,10 +111,14 @@
 								</c:choose>
 							</div>
                         </div>
-                     
+                        
+                     	
                         <div class="col-sm-2 text-center vertical-center">
+                        	<c:if test="${board.boardTypeNo!=4}">
                         	<jsp:include page="like.jsp"/>
+                        	</c:if>
                         </div>
+                       
                         
                         <c:if test="${loginMember.memberNo == board.memberNo }">
 	                        <div class="dropdown-box">	                        
