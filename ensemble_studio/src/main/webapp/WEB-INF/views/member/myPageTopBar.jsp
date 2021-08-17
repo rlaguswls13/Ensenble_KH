@@ -20,7 +20,7 @@
                 
                 	<c:if test="${loginMember.memberPath == 'S'}">
                 	<li>
-                		<button type="button" id="btn3" class="myPage-btn" onclick="sweetalert()">비밀번호 변경</button>
+                		<a id="btn3" class="myPage-btn social-btn" href="">비밀번호 변경</a>
                 	</li>
                 	</c:if>
               	
@@ -54,6 +54,10 @@ $(document).ready(function(){
 		$("#btn1").removeClass("myPage-btn-checked").addClass("myPage-btny");
 		$("#btn4").removeClass("myPage-btn").addClass("myPage-btn-checked");
 	}
+	
+	$(".social-btn").on("click", function(){
+		sweetalert();
+	})
 	
 });
 </script>
