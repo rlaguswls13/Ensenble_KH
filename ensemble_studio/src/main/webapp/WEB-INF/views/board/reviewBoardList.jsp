@@ -276,7 +276,23 @@
 	<jsp:include page="../common/footer.jsp"/>
 	
     <script>
-
+    $(document).ready(function(){
+		if(location.href.toString().includes("bctN=1")){
+			$("#ct-btn0").removeClass("btn-category-checked").addClass("btn-category");
+			$("#ct-btn1").removeClass("btn-category").addClass("btn-category-checked");
+		}
+		if(location.href.toString().includes("bctN=2")){
+			$("#ct-btn0").removeClass("btn-category-checked").addClass("btn-category");
+			$("#ct-btn2").removeClass("btn-category").addClass("btn-category-checked");
+		}
+		if(location.href.toString().includes("bctN=3")){
+			$("#ct-btn0").removeClass("btn-category-checked").addClass("btn-category");
+			$("#ct-btn3").removeClass("btn-category").addClass("btn-category-checked");
+		}
+		
+		
+	})
+	
     </script>
 
 </body>
