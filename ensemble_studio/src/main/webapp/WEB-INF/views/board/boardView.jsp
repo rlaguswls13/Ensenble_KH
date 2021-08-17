@@ -115,7 +115,7 @@
                      	
                         <div class="col-sm-2 text-center vertical-center">
                         	<c:if test="${board.boardTypeNo!=4}">
-                        	<jsp:include page="like.jsp"/>
+                        		<jsp:include page="like.jsp"/>
                         	</c:if>
                         </div>
                        
