@@ -25,10 +25,10 @@
 }
  
 .myPage-btn {
-	padding : 5px 10px 5px 10px;
-	border: none;
-	border-radius: 10px;
-	background-color : #eee;
+	padding : 5px 10px 5px 10px !important;
+	border: none !important;
+	border-radius: 10px !important;
+	background-color : #eee !important;
 }
 
 .myPage-btn:hover {

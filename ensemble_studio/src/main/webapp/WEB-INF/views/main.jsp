@@ -83,7 +83,7 @@
 	      <c:if test="${!empty noticeList}">
 	      <c:forEach items="${noticeList}" var="notice">
 	      	<c:if test="${!empty notice.atList }">
-	      	<div class="notice-img" style="background-image:url('${contextPath}/${notice.atList[0].atPath}${notice.atList[0].atName}')"></div>
+	      	<div class="notice-img" style="background-image:url('${notice.atList[0].atPath}/${notice.atList[0].atName}')"></div>
 	      	</c:if>
 	      	<c:if test="${empty notice.atList }">
 	      	<div class="notice-img" style="background-image:url('${contextPath}/resources/images/common/notice.png')"></div>

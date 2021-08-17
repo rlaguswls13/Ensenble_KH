@@ -14,25 +14,21 @@
 
 <!-- CSS -->
 <link rel="stylesheet"
-	href="${contextPath}/resources/css/reservation/rvList.css"
-	type="text/css" />
+	href="${contextPath}/resources/css/member/myPageTopBar.css?ver=123" type="text/css" />
 <link rel="stylesheet"
-	href="${contextPath}/resources/css/member/myPageTopBar.css" type="text/css" />
+	href="${contextPath}/resources/css/reservation/rvList.css?ver=123"
+	type="text/css" />
+
 </head>
+
 <body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
-
-	+
-
+	<jsp:include page="../member/myPageTopBar.jsp"></jsp:include>
 
 
-
-
-
+	
 	<div class="outterContainer">
-
-		<jsp:include page="../member/myPageTopBar.jsp"></jsp:include>
-
+	<div class="top-text">* 예약 변경/취소는 1:1 상담으로 문의 부탁드립니다.</div>
 		<c:choose>
 
 			<%-- 조회된 주문내역 목록이 없는 경우 --%>
@@ -43,29 +39,28 @@
 			</c:when>
 			<%-- 조회된 주문내역 목록이 있을 경우 --%>
 			<c:otherwise>
-
+				
 				<c:forEach items="${rvList}" var="reservation">
 					<div class="innerContainer">
-						<div class="reservationList">
+						<div>
 							<div id="reservationNo">예약번호 : ${reservation.rvNo} </div>
 							
-							<div class="reservationDetail">
-								
-								<div id="reservationPreview">
-									<div class="roomName"> 예약 스튜디오 : ${reservation.roomName} </div>
-									<div class="reservationTime">예약 일정 : ${reservation.rvDate} | ${reservation.rvTime}</div>
-								</div>
-								
+							<div class="roomDateTime">
+								<div class="roomName"> ${reservation.roomName} </div>
+								<div class="date">${reservation.rvDate}</div> 
+								<div class="time">${reservation.rvTime}</div>
 							</div>
 
-							<div class="reservationDetailList">
-								<div class="detailList1">
-									<div class="detail1-1">기본 구성</div>
-									<div class="detail1-2">${reservation.roomConfig}</div>
+							<div>
+							
+								<div>
+									<div class="detail1">기본 구성</div>
+									<div class="detail2">${reservation.roomConfig}</div>
 								</div>
-								<div class="detailList2">
-									<div class="detail2-1">추가 옵션</div>
-									<div class="detail2-2">
+								
+								<div>
+									<div class="detail1">추가 옵션</div>
+									<div class="detail2">
 									<c:if test="${empty reservation.optionList }">없음</c:if>
                     	<c:if test="${fn:length(reservation.optionList) == 1 }">${reservation.optionList[0].optionName}</c:if>
                     	<c:if test="${fn:length(reservation.optionList) == 2 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName}</c:if>
@@ -77,15 +72,27 @@
                     	<c:if test="${fn:length(reservation.optionList) == 8 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName}, <br> ${reservation.optionList[2].optionName},<br> ${reservation.optionList[3].optionName},<br> ${reservation.optionList[4].optionName}, <br> ${reservation.optionList[5].optionName},<br> ${reservation.optionList[6].optionName},<br> ${reservation.optionList[7].optionName}</c:if>
                     	<c:if test="${fn:length(reservation.optionList) == 9 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName} , <br> ${reservation.optionList[2].optionName},<br> ${reservation.optionList[3].optionName},<br> ${reservation.optionList[4].optionName}, <br> ${reservation.optionList[5].optionName},<br> ${reservation.optionList[6].optionName},<br> ${reservation.optionList[7].optionName},<br> ${reservation.optionList[8].optionName}</c:if>
                     	<c:if test="${fn:length(reservation.optionList) == 10 }">${reservation.optionList[0].optionName},<br> ${reservation.optionList[1].optionName} , <br> ${reservation.optionList[2].optionName},<br> ${reservation.optionList[3].optionName},<br> ${reservation.optionList[4].optionName}, <br> ${reservation.optionList[5].optionName},<br> ${reservation.optionList[6].optionName},<br> ${reservation.optionList[7].optionName},<br> ${reservation.optionList[8].optionName},<br> ${reservation.optionList[9].optionName}</c:if>
-                    	
-									
-																	
 									</div>
 								</div>
-								<div class="detailList3">
-									<div class="detail3-1">비고</div>
-									<div class="detail3-2">성인 : ${reservation.rvPeople} , 동물 : ${reservation.rvAnimals}</div>
+								<div>
+									<div class="detail1">기타 내용</div>
+									<div class="detail2">
+									이용인원 수 : ${reservation.rvPeople}명, <br> 
+									반려동물 : ${reservation.rvAnimals}마리, <br>
+									방문 차량 수 : ${reservation.rvCars}대 
+									</div>
 								</div>
+								
+								<c:if test="${! reservation.rvEtc eq ''}">
+								<div>
+									<div class="detail1">비고</div>
+									<div class="detail2">
+									${reservation.rvEtc }
+									</div>
+								</div>
+								</c:if>
+								
+								
 								<hr>
 								<div class="totalPrice">가격 ${reservation.wholePrice}원</div>
 
@@ -95,9 +102,9 @@
 
 
 						</div>
-
+					<div style="padding: 20px;"></div>
 					</div>
-
+					
 					<br>
 				</c:forEach>
 
@@ -139,7 +146,7 @@
 
 				<c:choose>
 					<c:when test="${p == pagination.currentPage }">
-						<li class="page-item active"><a class="page-link">${p}</a></li>
+						<a class="page-link" style="background-color: #FDCDCD; color: black; border-color: #ddd;">${p}</a>
 					</c:when>
 
 					<c:otherwise>
