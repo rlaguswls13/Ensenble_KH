@@ -36,32 +36,44 @@
 <style>
 .reservationTime input[type=radio] {
 	display: none;
+	border : 1px solid gray;
+	
 }
 
 .reservationTime input[type=radio]+label {
-	height: 100px;
-	padding-left: 20px;
-	padding-right: 20px;
+	height: 50px;
+	
 	padding-top: 10px;
 	padding-bottom: 10px;
-	background-color: lightgray;
+	background-color: white;
+	border : 1px solid gray;
+	color : black !important;
 	font-weight: 300;
 	font-size: 14px;
+	text-align : center;
 	border-radius: 10px;
+	font-weight: bold;
 	margin-right: 5px;
+	width : 130px;
 }
-
+.time {
+    margin-bottom: -2%;
+    
+    }
+    
 .reservationTime input[type=radio]:checked+label {
-	height: 100px;
-	padding-left: 20px;
-	padding-right: 20px;
+	height: 50px;
+	border : none;
+	text-align : center;
+	width : 130px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	background-color: ivory;
+	background-color: #FF657D;
 	font-weight: bold;
 	font-size: 14px;
 	border-radius: 10px;
 	margin-right: 5px;
+	color : white !important;
 }
 
 .carousel-img {
@@ -135,8 +147,11 @@
 	margin-bottom: 10px;
 }
 
+
+
 .rvTime-disabled {
-	background-color: black !important;
+	background-color: lightgray !important;
+	color : #888 !important;
 }
 .contentContainer{
 	padding-left : 10px;
@@ -172,6 +187,9 @@ background-color: #FDCDCD;
 	width: 200px;
 	color: gray;
 }
+#name{
+	font-size: 17px;
+}
 
 /* 촬영정보 선택  */
 </style>
@@ -185,29 +203,16 @@ background-color: #FDCDCD;
 
 				<form method="POST" action="${rv.rvNo}" class="needs-validation"
 					id="modifyRvForm" name="modifyRvForm" onsubmit="return validate();">
+					
+					<h1> 예약 수정 </h1><br>
 
-					<!-- 닉네임 -->
-					<div class="row mb-3 form-row">
-						<div class="col-md-2">
-							<h4>예약번호</h4>
-						</div>
-						<div class="col-md-5">
-							<span id="name">${rv.rvNo}</span>
-						</div>
-					</div>
+					
 
-					<div class="row mb-3 form-row">
-						<div class="col-md-2">
-							<h4>닉네임</h4>
-						</div>
-						<div class="col-md-5">
-							<span id="name">${rv.memberNick}</span>
-						</div>
-					</div>
 
+					<span style="color:#888">변경을 원하시는 스튜디오를 선택해주세요</span><br><br>
 					<div class="row studio">
 
-
+					
 						<c:forEach items="${roomList}" var="room">
 							<div class="col-2 aRoom">
 																
@@ -221,34 +226,38 @@ background-color: #FDCDCD;
 
 					</div>
 
+					<span style="color:#888">예약을 원하시는 일자와 시간을 선택해주세요</span><br><br>
 					<div class="row reservationDate">
 
 
-
+					
 						<div class="col-3 reservationCalender">
 							<input type="text" id="datepicker" name="rvDate"
 								placeholder="날짜선택" value="${rv.rvDate}" onchange="selectRvTimeList()">
 						</div>
+						
 						<div class="col-5 reservationTime" style="display: inline-block;">
 
-							<input type="radio" id="rv1" name="rvTime" value="09:00~12:00"
-								name="rvTime" ${rv.rvTime == "09:00~12:00" ? "checked" : " " }> <label for="rv1">09:00 ~ 12:00</label><br>
-							<br> <input type="radio" id="rv2" name="rvTime"
-								value="12:00~15:00" name="rvTime" ${rv.rvTime == "12:00~15:00" ? "checked" : " " }> <label for="rv2">12:00
-								~ 15:00</label><br> <br> <input type="radio" id="rv3"
-								name="rvTime" value="15:00~18:00" name="rvTime" ${rv.rvTime == "15:00~18:00" ? "checked" : " " }> <label
-								for="rv3">15:00 ~ 18:00</label>
+							<input type="radio" id="rv1"  value="09:00~12:00" name="rvTime" ${rv.rvTime == "09:00~12:00" ? "checked" : " " }> 
+								<label class ="time" for="rv1">09:00 ~ 12:00</label><br><br> 
+								
+							<input type="radio" id="rv2" value="12:00~15:00" name="rvTime" ${rv.rvTime == "12:00~15:00" ? "checked" : " " }> 
+							<label  class ="time" for="rv2">12:00~ 15:00</label><br> <br>
+							
+							 <input type="radio" id="rv3"  value="15:00~18:00" name="rvTime" ${rv.rvTime == "15:00~18:00" ? "checked" : " " }>
+							  <label class ="time" for="rv3">15:00 ~ 18:00</label>
 
 
 						</div>
-					</div>
+					</div><br>
 
 					<div class="row reservationOption">
 
 
 
 
-						<div class="col-1 optionDetail">옵션 내용</div>
+						<div class="col-2 optionDetail">옵션 내용</div><br>
+						<span style="color:#888">옵션을 선택해주시고 기타 내용을 작성해주세요.</span><br><br>
 						<div class="col-8 optionRadio">
 							<div class="row">
 								<div class="col-5 optionListA">
@@ -353,6 +362,10 @@ background-color: #FDCDCD;
 					<hr>
 					<h4>예약 회원 정보</h4>
 					<div class="userInfo">
+						<div class="info">
+							<div class="text">예약번호</div>
+							<div class="infodt">${rv.rvNo}</div>
+							</div>
 						<div class="info">
 							<div class="text">아이디</div>
 							<div class="infodt">${rvMember.memberId}</div>
