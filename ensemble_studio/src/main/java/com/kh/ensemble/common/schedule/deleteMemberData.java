@@ -36,9 +36,7 @@ public class deleteMemberData {
 	@Scheduled(cron = "* * * * * */10")
 	public void blindData() {
 		
-		List<Integer> secessionMemberList = serviceM.selectSecessionMember();
-		int result = 0;
-		
+		List<Integer> secessionMemberList = serviceM.selectSecessionMember();		
 		for(Integer secessionMemberNo : secessionMemberList) {
 			
 			serviceR.deleteSecessionReply(secessionMemberNo);
