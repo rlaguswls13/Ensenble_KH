@@ -71,18 +71,12 @@ h5 {
 	background: #FDCDCD;
 	border: none;
 	min-width: 120px;
-	box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.3);
 	padding-top: 10px;
 	padding-bottom: 10px;
 	margin-left: 2px;
 }
 
-.secession-form .secession-btn:active {
-	border-color: none;
-	box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.3);
-	top: 2px;
-	position: relative;
-}
+
 
 .secession-form .cancle {
 	width: 50px;
@@ -91,7 +85,6 @@ h5 {
 	background: #f7f7f7;
 	border: none;
 	min-width: 120px;
-	box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.3);
 	padding-top: 10px;
 	padding-bottom: 10px;
 	margin-right: 2px;
