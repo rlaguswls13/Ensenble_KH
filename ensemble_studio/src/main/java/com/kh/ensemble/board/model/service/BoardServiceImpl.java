@@ -234,4 +234,13 @@ public class BoardServiceImpl implements BoardService {
 			if (out != null) out.close();
 		}
 	}
+	
+	// board 파일 경로 조회
+	@Override
+	public List<String> selectDBList(String standard) {
+		return dao.selectDBList(standard);
+	}
+	
+	
+	
 }
