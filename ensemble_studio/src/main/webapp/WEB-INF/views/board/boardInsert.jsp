@@ -93,8 +93,7 @@
 
     <script>
     
-	    // 불필요 modal-tilte 제거
-	    $(".modal-title").remove();
+	    
 	    
 		// 오늘 날짜 출력 
 		(function printToday() {
@@ -166,6 +165,9 @@
                    
             }
         });
+    	
+      // 불필요 modal-tilte 제거
+ 	    $(".modal-title").remove();
         
         // 이미지 파일 업로드
         function sendBoardFile(file, el) {
@@ -214,6 +216,8 @@
              	}
            	});
          } 
+     	
+     
     </script>
 
 
