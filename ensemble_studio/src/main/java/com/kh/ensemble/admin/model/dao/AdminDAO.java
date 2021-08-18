@@ -25,15 +25,15 @@ public class AdminDAO {
 	public Member login(String memberId) {
 		return sqlSession.selectOne("adminMapper.login", memberId);
 	}
-	
+
 	public Pagination getMemberListCount() {
 		return sqlSession.selectOne("adminMapper.getMemberListCount");
 	}
 
 	public List<Member> memberList(Pagination pg) {
-		int offset = (pg.getCurrentPage()-1) * pg.getLimit() ;
+		int offset = (pg.getCurrentPage() - 1) * pg.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pg.getLimit());
-		
+
 		return sqlSession.selectList("adminMapper.memberList", pg, rowBounds);
 	}
 
@@ -42,15 +42,15 @@ public class AdminDAO {
 	}
 
 	public List<Room> roomList(Pagination pg) {
-		int offset = (pg.getCurrentPage()-1) * pg.getLimit() ;
+		int offset = (pg.getCurrentPage() - 1) * pg.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pg.getLimit());
-		
+
 		return sqlSession.selectList("adminMapper.roomList", pg, rowBounds);
 	}
 
 	public int insertRoom(Room room) {
 		int result = sqlSession.insert("adminMapper.insertRoom", room);
-		if(result>0) {
+		if (result > 0) {
 			return room.getRoomNo();
 		}
 		return 0;
@@ -82,7 +82,7 @@ public class AdminDAO {
 
 	public int deleteRooms(String rooms) {
 		int result = sqlSession.delete("adminMapper.deleteStudioAttachments", rooms);
-		if(result>=0) {
+		if (result >= 0) {
 			result = sqlSession.delete("adminMapper.deleteRooms", rooms);
 		}
 		return result;
@@ -97,17 +97,21 @@ public class AdminDAO {
 	}
 
 	public List<Rv> selectReservationList(Pagination pagination) {
-		
-		return sqlSession.selectList("rvMapper.selectReservationList");
+
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("rvMapper.selectReservationList" ,pagination, rowBounds);
 	}
 
 	public Rv selectReservation(int rvNo) {
-		
+
 		return sqlSession.selectOne("rvMapper.selectReservation", rvNo);
 	}
 
 	public List<Option> adminSelectOption() {
-		
+
 		return sqlSession.selectList("rvMapper.adminSelectOption");
 	}
 
@@ -128,13 +132,13 @@ public class AdminDAO {
 	}
 
 	public int modifyRv(Rv rv) {
-		
+
 		return sqlSession.update("rvMapper.modifyRv", rv);
 	}
 
 	public int deleteSelectOptionList(Rv rv) {
 		return sqlSession.delete("rvMapper.deleteSelectOptionList", rv);
-		
+
 	}
 
 	public int setOptionNo(Map<String, Object> map) {
@@ -143,22 +147,18 @@ public class AdminDAO {
 	}
 
 	public List<Option> selectedOption(int rvNo) {
-		
+
 		return sqlSession.selectList("rvMapper.selectedOption", rvNo);
 	}
 
 	public List<Room> selectRoomList() {
-		
+
 		return sqlSession.selectList("adminMapper.selectRoomList");
 	}
-
-	
 
 	public Member selectMember(Rv rv) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("memberMapper.selectMember", rv.getMemberNo());
 	}
-
-
 
 }

@@ -47,7 +47,7 @@
 	padding-bottom: 10px;
 	background-color: white;
 	border : 1px solid gray;
-	color : black !important;
+	color : black ;
 	font-weight: 300;
 	font-size: 14px;
 	text-align : center;
@@ -151,7 +151,7 @@
 
 .rvTime-disabled {
 	background-color: lightgray !important;
-	color : #888 !important;
+	color:#888 !important;
 }
 .contentContainer{
 	padding-left : 10px;
@@ -468,10 +468,15 @@ background-color: #FDCDCD;
 		}
 
 		$("[name=roomNo]").on("change", function() {
+			
+			$('input[name="rvTime"]').removeAttr('checked');
+			
 			const index = $("[name=roomNo]").index($(this));
 			const price = Number($(this).attr("price"));
 
 			$("#modifyRvForm")[0].reset();
+			
+
 
 			$("[name=roomNo]").eq(index).prop("checked", true);
 

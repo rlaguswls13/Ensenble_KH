@@ -301,7 +301,7 @@ public class AdminController {
 		// 예약 성공 또는 실패.....
 		
 
-		return "redirect:/";// 메인페이지 재요청 -> / : 메인페이지
+		return "redirect:/admin/reservation";
 
 
 		

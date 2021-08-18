@@ -109,56 +109,63 @@
               <div style="padding: 5px;"></div>
               
            	<%---------------------- Pagination start----------------------%>
-			<%-- 페이징 처리 시 주소를 쉽게 작성할 수 있도록 필요한 변수를 미리 선언 --%>
-			
-			<c:set var="prev" value="?cp=${pagination.prevPage}" />
-			<c:set var="next" value="?cp=${pagination.nextPage}" />
-			
-			
-			<div class="my-5">
-				<ul class="pagination">
-				
-					<%-- 현재 페이지가 10페이지 초과인 경우 --%>
-					<c:if test="${pagination.currentPage > pagination.pageSize }">
-						<li><a class="page-link" href="${prev}">&lt;&lt;</a></li>
-					</c:if>
-					
-					<%-- 현재 페이지가 2페이지 초과인 경우 --%>
-					<c:if test="${pagination.currentPage > 2 }">
-						<li><a class="page-link" href="?cp=${pagination.currentPage - 1}">&lt;</a></li>
-					</c:if>
-				
-					<%-- 페이지 목록 --%>
-					<c:forEach var="p" begin="${pagination.startPage}" end="${pagination.endPage}">
-						
-							<c:choose>
-								<c:when test="${p == pagination.currentPage }">
-									<li class="page-item active">
-										<a class="page-link" style="background-color:#FDCDCD; color:black;	border-color:#ddd;">
-											${p}
-										</a>
-									</li>
-								</c:when>
-								
-								<c:otherwise>
-									<li><a class="page-link" href="?cp=${p}">${p}</a></li>
-								</c:otherwise>
-							</c:choose>						
-					</c:forEach>
-					
-					<%-- 현재 페이지가 마지막 페이지 미만인 경우 --%>
-					<c:if test="${pagination.currentPage < pagination.maxPage }">
-						<li><a class="page-link" href="?cp=${pagination.currentPage + 1}">&gt;</a></li>
-					</c:if>
-					
-					<%-- 현재 페이지가 마지막 페이지가 아닌 경우 --%>
-					<c:if test="${pagination.currentPage - pagination.maxPage + pagination.pageSize < 0}">
-						<li><a class="page-link" href="${next}">&gt;&gt;</a></li>
-					</c:if>
+	<%-- 페이징 처리 시 주소를 쉽게 작성할 수 있도록 필요한 변수를 미리 선언 --%>
 
-				</ul>
-			</div>
-			<%---------------------- Pagination end----------------------%>
+	<c:set var="pageURL" value="reservation" />
+
+	<c:set var="prev"
+		value="${pageURL}?cp=${pagination.prevPage}" />
+	<c:set var="next"
+		value="${pageURL}?cp=${pagination.nextPage}" />
+
+
+	<div class="my-5">
+		<ul class="pagination">
+
+			<%-- 현재 페이지가 10페이지 초과인 경우 --%>
+			<c:if test="${pagination.currentPage > pagination.pageSize }">
+				<li><a class="page-link" href="${prev}">&lt;&lt;</a></li>
+			</c:if>
+
+			<%-- 현재 페이지가 2페이지 초과인 경우 --%>
+			<c:if test="${pagination.currentPage > 2 }">
+				<li><a class="page-link"
+					href="${pageURL}?cp=${pagination.currentPage - 1}">&lt;</a></li>
+			</c:if>
+
+
+
+			<%-- 페이지 목록 --%>
+			<c:forEach var="p" begin="${pagination.startPage}"
+				end="${pagination.endPage}">
+
+				<c:choose>
+					<c:when test="${p == pagination.currentPage }">
+						<a class="page-link" style="background-color: #FDCDCD; color: black; border-color: #ddd;">${p}</a>
+					</c:when>
+
+					<c:otherwise>
+						<li><a class="page-link"
+							href="${pageURL}?cp=${p}">${p}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<%-- 현재 페이지가 마지막 페이지 미만인 경우 --%>
+			<c:if test="${pagination.currentPage < pagination.maxPage }">
+				<li><a class="page-link"
+					href="${pageURL}?cp=${pagination.currentPage + 1}">&gt;</a></li>
+			</c:if>
+
+			<%-- 현재 페이지가 마지막 페이지가 아닌 경우 --%>
+			<c:if
+				test="${pagination.currentPage - pagination.maxPage + pagination.pageSize < 0}">
+				<li><a class="page-link" href="${next}">&gt;&gt;</a></li>
+			</c:if>
+
+		</ul>
+	</div>
+	<%---------------------- Pagination end----------------------%>
         </div>
 	</div>
 	
