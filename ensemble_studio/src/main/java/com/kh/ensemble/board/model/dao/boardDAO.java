@@ -167,6 +167,14 @@ public class boardDAO {
 		sqlSession.delete("boardMapper.deleteAt", atList);
 	}
 
+	/**
+	 * @param standard
+	 * @return dbList
+	 */
+	public List<String> selectDBList(String standard) {
+		return sqlSession.selectList("boardMapper.selectDBList",standard);
+	}
+
 
 
 

@@ -93,33 +93,36 @@
 
     <script>
     
-    
-			(function printToday() {
-				// 오늘 날짜 출력 
-				var today = new Date();
-				var month = (today.getMonth() + 1);
-				var date = today.getDate();
-		
-				var str = today.getFullYear() + "-"
-						+ (month < 10 ? "0" + month : month) + "-"
-						+ (date < 10 ? "0" + date : date);
-				$("#today").html(str);
-			})();
-		
-			// 유효성 검사 
-			function boardValidate() {
-				if ($("#boardTitle").val().trim().length == 0) {
-					alert("제목을 입력해 주세요.");
-					$("#title").focus();
-					return false;
-				}
-		
-				if ($("#summernote").val().trim().length == 0) {
-					alert("내용을 입력해 주세요.");
-					$('#summernote').summernote('focus');
-					return false;
-				}
-			}    
+	    // 불필요 modal-tilte 제거
+	    $(".modal-title").remove();
+	    
+		// 오늘 날짜 출력 
+		(function printToday() {
+			
+			var today = new Date();
+			var month = (today.getMonth() + 1);
+			var date = today.getDate();
+	
+			var str = today.getFullYear() + "-"
+					+ (month < 10 ? "0" + month : month) + "-"
+					+ (date < 10 ? "0" + date : date);
+			$("#today").html(str);
+		})();
+	
+		// 게시글 작성 유효성 검사 
+		function boardValidate() {
+			if ($("#boardTitle").val().trim().length == 0) {
+				alert("제목을 입력해 주세요.");
+				$("#title").focus();
+				return false;
+			}
+	
+			if ($("#summernote").val().trim().length == 0) {
+				alert("내용을 입력해 주세요.");
+				$('#summernote').summernote('focus');
+				return false;
+			}
+		}    
 			
 		// summernote 초기화
 		function resetSummerNote(){
@@ -210,12 +213,7 @@
              		});             		
              	}
            	});
-         }
-         
-         
-         // hashTag
-         $(".modal-title").remove();
-
+         } 
     </script>
 
 

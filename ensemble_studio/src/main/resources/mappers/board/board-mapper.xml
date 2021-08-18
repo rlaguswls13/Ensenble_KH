@@ -261,4 +261,10 @@
 		) A
 	</insert>
 	
+	<!-- 24시간 전 파일명 조회 -->
+	<select id="selectDBList" parameterType="string" resultType="string">
+  		SELECT BOARD_AT_NM FROM BOARD_ATTACHMENT
+		<![CDATA[  WHERE SUBSTR(BOARD_AT_NM, 0, 10) < #{standard}   ]]>
+  	</select>
+	
 </mapper>

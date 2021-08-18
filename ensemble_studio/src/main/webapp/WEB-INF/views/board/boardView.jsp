@@ -91,7 +91,7 @@
                     </div>
                     <div style="padding:5px"></div>
                     
-                    <c:if test="${board.boardTypeNo!=3}">
+                    <c:if test="${board.boardTypeNo!=3 or loginMember.memberGrade=='A'}">
                     <div class="row-sm-12 d-flex" >
                         <div class="vertical-center ml-0">
                             <img class="rMImage mr-2" style="background-image:url('${contextPath}${board.memberImage}')" ><br>
@@ -114,7 +114,7 @@
                         
                      	
                         <div class="col-sm-2 text-center vertical-center">
-                        	<c:if test="${board.boardTypeNo!=4}">
+                        	<c:if test="${board.boardTypeNo!=4 and board.boardTypeNo!=3}">
                         		<jsp:include page="like.jsp"/>
                         	</c:if>
                         </div>
@@ -147,8 +147,7 @@
       <%-- 댓글 영역 --%>
       		
       		<c:if test="${board.boardTypeNo != 3}">
-				<jsp:include page="reply.jsp"/>
-				
+				<%@include file="reply.jsp"%>	
          	</c:if>
             <a href="list?type=${param.type}&cp=${param.cp}${searchStr}"
             	class="btn btn-secondary float-right mr-2 btn-insert">목록으로</a>  

@@ -46,6 +46,9 @@ public interface BoardService {
 	// 게시글 답변
 	int answerCS(int boardNo);
 	
+	// board 파일 경로 조회
+	List<String> selectDBList(String standard);
+	
 
 	
 	
