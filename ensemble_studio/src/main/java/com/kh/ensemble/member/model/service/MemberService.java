@@ -145,6 +145,14 @@ public interface MemberService {
 	public abstract List<Rv> selectRvList(int memberNo);
 
 
+	/** 
+	 * 탈퇴회원 멤버 조회
+	 * @return
+	 * @author rlagu
+	 */
+	public abstract List<Integer> selectSecessionMember();
+
+
 
 
 

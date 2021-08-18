@@ -239,6 +239,10 @@
 		= #{memberNo}
 	</select>
 	
+	<!-- 탈퇴 회원 조회 -->
+	<select id="selectSecessionMember" resultType="int">
+		SELECT MEMBER_NO FROM MEMBER WHERE MEMBER_STATUS = 'N'
+	</select>
 	
 	
 </mapper>

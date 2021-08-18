@@ -161,7 +161,7 @@
 							
 										<%-- 글 상태 --%>
 										<c:if test="${pagination.boardTypeNo == 4}">
-											<td> ${board.boardStatus} </td>
+											<td> ${board.boardStatus eq 'Y' ? '문의중' : '답변완료'} </td>
 										</c:if>
 										
 									</tr>
@@ -204,7 +204,7 @@
 							
 										<%-- 글 상태 --%>
 										<c:if test="${pagination.boardTypeNo == 4}">
-											<td> ${board.boardStatus} </td>
+											<td> ${board.boardStatus eq 'Y' ? '문의중' : '답변완료'} </td>
 										</c:if>
 										
 									</tr>

@@ -145,6 +145,15 @@ public class boardDAO {
 		return sqlSession.delete("boardMapper.deleteAttachment", boardNo);
 	}
 
+	/**
+	 * @param standard
+	 * @return dbList
+	 */
+	public List<String> selectDBList(String standard) {
+		return sqlSession.selectList("boardMapper.selectDBList",standard);
+	}
+	
+	
 	
 	
 	
@@ -167,13 +176,15 @@ public class boardDAO {
 		sqlSession.delete("boardMapper.deleteAt", atList);
 	}
 
-	/**
-	 * @param standard
-	 * @return dbList
+	/** 탈퇴회원 board 삭제
+	 * @param secessionMemberNo
+	 * @return result
 	 */
-	public List<String> selectDBList(String standard) {
-		return sqlSession.selectList("boardMapper.selectDBList",standard);
+	public int deleteSecessionBoard(Integer secessionMemberNo) {
+		return sqlSession.update("boardMapper.deleteSecessionBoard", secessionMemberNo);
 	}
+
+
 
 
 
