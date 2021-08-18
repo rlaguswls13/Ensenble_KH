@@ -49,6 +49,9 @@ public interface BoardService {
 	// board 파일 경로 조회
 	List<String> selectDBList(String standard);
 	
+	// 탈퇴회원 board 삭제
+	int deleteSecessionBoard(Integer secessionMemberNo);
+	
 
 	
 	

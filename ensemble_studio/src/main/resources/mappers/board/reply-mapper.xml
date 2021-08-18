@@ -68,6 +68,13 @@
 		WHERE BOARD_REPLY_NO = #{replyNo}
 	</update>
 	
+	<!-- 댓글 삭제(탈퇴회원)-->
+	<update id="deleteSecessionReply" parameterType="int">
+		UPDATE BOARD_REPLY SET
+		BOARD_REPLY_ST = 'N'
+		WHERE MEMBER_NO = #{secessionMemberNo}
+	</update>
+	
 	<!-- 댓글 신고 -->
 	<update id="reportReply" parameterType="_int">
 		UPDATE BOARD_REPLY SET

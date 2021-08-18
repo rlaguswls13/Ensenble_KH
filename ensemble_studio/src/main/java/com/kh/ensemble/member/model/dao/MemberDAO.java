@@ -175,4 +175,8 @@ public class MemberDAO {
 	
 	//--------------------------------------------------------------------
 
+	// 탈퇴회원 멤버
+	public List<Integer> selectSecessionMember() {
+		return sqlSession.selectList("memberMapper.selectSecessionMember");
+	}
 }

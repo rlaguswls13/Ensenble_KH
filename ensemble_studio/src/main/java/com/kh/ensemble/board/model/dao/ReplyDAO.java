@@ -53,6 +53,14 @@ public class ReplyDAO {
 	public int deleteReply(int replyNo) {
 		return sqlSession.update("replyMapper.deleteReply", replyNo);
 	}
+	
+	/** 댓글 삭제(탈퇴회원)
+	 * @param replyNo
+	 * @return result
+	 */
+	public int deleteSecessionReply(Integer secessionMemberNo) {
+		return sqlSession.update("replyMapper.deleteSecessionReply", secessionMemberNo);
+	}
 
 	/** 댓글 신고
 	 * @param reply

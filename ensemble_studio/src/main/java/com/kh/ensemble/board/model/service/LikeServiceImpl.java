@@ -30,5 +30,12 @@ public class LikeServiceImpl implements LikeService {
 		return dao.deleteLike(like);
 	}
 	
+	// 탈퇴회원 좋아요 삭제
+	@Override
+	public int deleteSecessionLike(Integer secessionMemberNo) {
+		return dao.deleteSecessionLike(secessionMemberNo);
+	}
+	
+	
 	
 }

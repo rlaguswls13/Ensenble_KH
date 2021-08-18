@@ -17,10 +17,13 @@ public interface ReplyService {
 
 	// 댓글 수정
 	int updateReply(Reply reply);
-
+	
 	// 댓글 삭제
 	int deleteReply(int replyNo);
 
+	// 댓글 삭제(탈퇴회원)
+	int deleteSecessionReply(Integer secessionMemberNo);
+	
 	// 댓글 신고
 	int reportReply(int replyNo);
 
