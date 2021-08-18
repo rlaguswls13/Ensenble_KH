@@ -241,6 +241,14 @@ public class BoardServiceImpl implements BoardService {
 		return dao.selectDBList(standard);
 	}
 	
+	// 탈퇴회원 board 삭제
+	@Override
+	public int deleteSecessionBoard(Integer secessionMemberNo) {
+		return dao.deleteSecessionBoard(secessionMemberNo);
+	}
+	
+	
+	
 	
 	
 }

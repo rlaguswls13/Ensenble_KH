@@ -24,7 +24,7 @@ public class ImageDeleteScheduler {
 	@Autowired
 	private ServletContext servletContext;
 
-	@Scheduled(cron = "* */10 * * * *")
+	@Scheduled(cron = "* * * * * */10")
 	public void deleteImage() {
 
 		String savePathNormalCS = servletContext.getRealPath("/resources/images/board/normalCS");

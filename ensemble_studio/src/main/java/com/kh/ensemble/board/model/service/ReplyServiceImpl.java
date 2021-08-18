@@ -50,6 +50,13 @@ public class ReplyServiceImpl implements ReplyService {
 		return dao.deleteReply(replyNo);
 	}
 	
+	// 댓글 삭제(탈퇴회원)
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteSecessionReply(Integer secessionMemberNo) {
+		return dao.deleteSecessionReply(secessionMemberNo);
+	}
+	
 	
 	// 댓글 신고
 	@Transactional(rollbackFor = Exception.class)

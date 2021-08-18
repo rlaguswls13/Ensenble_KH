@@ -9,6 +9,8 @@ public interface LikeService {
 	int addLike(Like like);
 	
 	int deleteLike(Like like);
+
+	int deleteSecessionLike(Integer secessionMemberNo);
 	
 
 }

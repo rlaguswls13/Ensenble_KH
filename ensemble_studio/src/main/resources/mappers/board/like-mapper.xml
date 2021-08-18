@@ -37,4 +37,11 @@
    		AND LIKE_STATUS = 'Y'
 	</delete>
 	
+	<!-- 탈퇴회원 좋아요 삭제 -->
+	<delete id="deleteSecessionLike" parameterType="int">
+		DELETE FROM BOARD_LIKE
+   		WHERE MEMBER_NO = #{secessionMemberNo}
+   		AND LIKE_STATUS = 'Y'
+	</delete>
+	
 </mapper>

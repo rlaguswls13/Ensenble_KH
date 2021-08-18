@@ -26,4 +26,9 @@ public class LikeDAO {
 	public int deleteLike(Like like) {
 		return sqlSession.delete("likeMapper.deleteLike", like);
 	}
+
+	// 탈퇴회원 좋아요 삭제
+	public int deleteSecessionLike(Integer secessionMemberNo) {
+		return sqlSession.delete("likeMapper.deleteSecessionLike", secessionMemberNo);
+	}
 }

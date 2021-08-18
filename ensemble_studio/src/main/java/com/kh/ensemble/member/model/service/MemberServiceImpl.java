@@ -311,7 +311,13 @@ public class MemberServiceImpl implements MemberService {
 	public List<Rv> selectRvList(int memberNo) {
 		return dao.selectRvList(memberNo);
 	}
-
 	// --------------------------------------------------------------------
+	
+	// 탈퇴회원 멤버 조회
+	@Override
+	public List<Integer> selectSecessionMember() {
+		return dao.selectSecessionMember();
+	}
 
+	
 }

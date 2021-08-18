@@ -266,5 +266,14 @@
   		SELECT BOARD_AT_NM FROM BOARD_ATTACHMENT
 		<![CDATA[  WHERE SUBSTR(BOARD_AT_NM, 0, 10) < #{standard}   ]]>
   	</select>
+  	
+  	
+	
+	<!-- 탈퇴회원 게시글 삭제 -->
+	<select id="deleteSecessionBoard" parameterType="int">
+  		UPDATE BOARD SET
+		BOARD_STATUS = 'N'
+		WHERE MEMBER_NO = #{secessionMemberNo}
+  	</select>
 	
 </mapper>
