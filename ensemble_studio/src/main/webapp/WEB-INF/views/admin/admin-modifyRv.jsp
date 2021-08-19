@@ -354,7 +354,7 @@ background-color: #FDCDCD;
 
 					<div class="row price">
 						<div id="priceText" class="col-8">총 금액</div>
-						<div id="totalPrice" class="col-2">0원</div>
+						<div id="totalPrice" class="col-2">${rv.wholePrice} 원</div>
 					
 						<input type="hidden" name="wholePrice" id="wholePrice" value="">
 					</div>

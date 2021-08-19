@@ -58,7 +58,10 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-
+	
+    let today = new Date();
+    
+    
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
         left: 'prevYear,prev,next,nextYear today',
@@ -66,7 +69,10 @@
         right: 'dayGridMonth,dayGridWeek',
         
       },
-      initialDate: '2021-08-10',
+    	
+      
+      
+      initialDate: today,
       locale: 'ko',
       navLinks: true, // can click day/week names to navigate views
       editable: true,
