@@ -273,7 +273,7 @@ function validate() {
 			"title": "약관 동의에 체크해주세요."
 		})
 		return false;
-
+ 
 	}
 
 	// name 속성값이 phone인 요소를 모두 얻어와 배열로 만들기
