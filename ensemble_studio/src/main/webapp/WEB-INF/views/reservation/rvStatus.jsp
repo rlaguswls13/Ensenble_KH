@@ -75,7 +75,6 @@
       initialDate: today,
       locale: 'ko',
       navLinks: true, // can click day/week names to navigate views
-      editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
       events:  eventsArr
     });
