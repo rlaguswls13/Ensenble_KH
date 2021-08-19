@@ -10,8 +10,6 @@
     <title>boardInsert</title>   
     
     <!-- External CSS-->
-    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/html_checking_div.css">
-    <%-- <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/board/normalBoard.css"> --%>
     
     <jsp:include page="../common/header.jsp"/>
 
@@ -20,10 +18,10 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     
 <style>
- 
+ 	
 	
 	.note-editor{
-		width: 100%;
+		width: 90%;
 	}
 	
 	#boardTitle{
@@ -44,6 +42,14 @@
 		#boardTitle{
 			width: 50%
 		}
+	}
+	
+	.dropdown-toggle:after{
+		display: none !important;
+	}
+	
+	.note-toolbar{
+		background-color: #eee;
 	}
 
 	
@@ -80,7 +86,7 @@
  
 	      
 	        <textarea class="summernote" id="summernote" name="boardContent"></textarea>
-	   		 <div class="col-sm-12 my-3">
+	   		 <div class="col-sm-11 my-3">
 	   		 	<a class="btn btn-grey mr-2 float-right" href="list?type=${param.type}&cp=${param.cp}${searchStr}">목록으로</a>			
 				<button class="btn btn-grey mr-2 float-right" type="reset"  onclick="return resetSummerNote();">내용삭제</button>
 				
@@ -139,7 +145,6 @@
             lang: 'ko-KR',    // 작성칸 초기 언어
             tabDisable: true, // tab 기능 여부
             spellCheck: true, // 맞춤법 체크
-
             toolbar: [
                     // [설정 그룹], [해당 속성 버튼]]
                     ['fontname', ['fontname']],
@@ -149,7 +154,7 @@
                     ['table', ['table']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['height', ['height']],
-                    ['insert',['picture','link','video']],
+                    ['insert',['picture','video']],
                     ['view', ['fullscreen', 'help']]
                     ],
             fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
@@ -166,8 +171,13 @@
             }
         });
     	
-      // 불필요 modal-tilte 제거
+         $('#summernote').summernote('backColor', 'white');
+    	
+      	// summernote 추가 수정
  	    $(".modal-title").remove();
+        $(".note-editable").css("background-color",'white');
+        $(".dropdown-toggle:after").css("display","none !important");
+        
         
         // 이미지 파일 업로드
         function sendBoardFile(file, el) {
