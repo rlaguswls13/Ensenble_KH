@@ -260,10 +260,20 @@ function validate() {
 				// 유효하지 않은 값을 입력한 부분으로 포커스 이동
 			});
 
-//			return false;  // submit 이벤트 제거(회원가입 실행 X)
+			return false;  // submit 이벤트 제거(회원가입 실행 X)
 
 		}
 		
+	}
+	
+		// 약관 동의 체크 여부 확인
+	if ($("#check_all:checked").length == 0) {
+		swal({
+			"icon": "info",
+			"title": "약관 동의에 체크해주세요."
+		})
+		return false;
+
 	}
 
 	// name 속성값이 phone인 요소를 모두 얻어와 배열로 만들기
@@ -278,15 +288,7 @@ function validate() {
 	// append() :  선택된 요소의 마지막 자식으로 추가
 	$("form[name='signUpForm']").append(inputPhone);
 
-	// 약관 동의 체크 여부 확인
-	if ($("#check_all:checked").length == 0) {
-		swal({
-			"icon": "info",
-			"title": "약관 동의에 체크해주세요."
-		})
-		return false;
 
-	}
 }
 
 // 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
