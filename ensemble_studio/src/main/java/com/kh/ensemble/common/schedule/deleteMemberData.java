@@ -33,7 +33,7 @@ public class deleteMemberData {
 	private MemberService serviceM;
 
 	
-	@Scheduled(cron = "* * * * * */10")
+	@Scheduled(cron = "* * * */7 * *")
 	public void blindData() {
 		
 		List<Integer> secessionMemberList = serviceM.selectSecessionMember();		
