@@ -99,11 +99,6 @@
 						name="rvTime" value="15:00~18:00" name="rvTime"> <label
 						for="rv3">15:00 ~ 18:00</label>
 
-
-
-
-
-
 				</div>
 			</div>
 			<div class="reservationOption1">
@@ -364,6 +359,9 @@
 		} */
 		 
 		 $("[name=roomNo]").on("change", function(){
+			 
+			 $('input[name="rvTime"]').removeAttr('checked');
+			 
 			 const index = $("[name=roomNo]").index($(this));
 			 const price = Number($(this).attr("price"));
 			 
